@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">APNAOPD</string>
+
+    <string-array name="login_as">
+        <item>Doctor</item>
+        <item>Patient</item>
+        <item>Pathologist</item>
+        <item>Pharmasuticals</item>
+        <item>Admin</item>
+    </string-array>
+</resources>
