@@ -25,6 +25,7 @@
             android:id="@+id/login"
             android:clickable="true"
             android:contextClickable="true"
+            android:background="#ffff"
 
             >
 
