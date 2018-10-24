@@ -15,6 +15,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import static com.knstech.apnaopd.R.string.server_client_id;
 
@@ -23,8 +27,7 @@ public class LoginActivity extends AppCompatActivity{
     private static final int RC_SIGN_IN = 1;
     private GoogleSignInClient mGoogleSignInClient;
     private String TAG="SIGN_IN";
-    private Button google;
-
+    private RelativeLayout google;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
