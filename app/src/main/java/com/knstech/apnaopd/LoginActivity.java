@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity{
     protected void onStart() {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        mGoogleSignInClient.signOut();
     }
 
     private void setUpGoogle() {
@@ -84,7 +83,8 @@ public class LoginActivity extends AppCompatActivity{
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            Toast.makeText(this, "Naya Khul gya!!", Toast.LENGTH_SHORT).show();
+            
+
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
