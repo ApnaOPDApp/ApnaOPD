@@ -88,6 +88,7 @@ public class PatientActivity extends AppCompatActivity
             Intent i=new Intent(PatientActivity.this,LoginActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(i);
+            finish();
 
             return true;
         }
