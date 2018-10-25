@@ -1,6 +1,8 @@
 package com.knstech.apnaopd;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,6 +26,12 @@ public class UserAuth {
 
     private static User mUser;
 
+    private interface SignInCompleteListener{
+
+        void onComplete();
+
+    }
+
 
     public UserAuth(){}
 
@@ -39,7 +47,8 @@ public class UserAuth {
     public void signInGoogle(final Context context, final GoogleSignInAccount gAcc){
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url ="http://www.google.com/api/users/"+gAcc.getId();
+//        String url ="https://google.com";
+        String url ="http://192.168.43.193:3000/api/users/"+gAcc.getId();
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -49,10 +58,18 @@ public class UserAuth {
 
                         Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
 
-                        if(response==null){
+                        if(response.equals("null")){
                            signUpGoogle(context,gAcc);
                         }else{
 
+                            //opens patient activity
+                            Intent i=new Intent(context,PatientActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+
+                            context.startActivity(i);
+                            AppCompatActivity activity=(AppCompatActivity)context;
+                            activity.finish();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -68,7 +85,7 @@ public class UserAuth {
 
     private void signUpGoogle(final Context context, final GoogleSignInAccount gAcc){
 
-        String url ="http://www.google.com/api/users";
+        String url ="http://192.168.43.193:3000/api/users";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

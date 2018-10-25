@@ -46,9 +46,6 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-        //opens patient activity
-        i=new Intent(LoginActivity.this,PatientActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
         setUpGoogle();
     }
@@ -60,8 +57,7 @@ public class LoginActivity extends AppCompatActivity{
 
         //if user is already logged in
         if(account!=null&&account.getId()!=null) {
-            startActivity(i);
-            finish();
+            loadPatient(account);
         }
     }
 
@@ -79,6 +75,7 @@ public class LoginActivity extends AppCompatActivity{
 
 
     private void signIn() {
+
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
 
@@ -100,15 +97,25 @@ public class LoginActivity extends AppCompatActivity{
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
-            // Signed in successfully, show authenticated UI.
-            startActivity(i);
-            finish();
+            // Signed in successfully
+            loadPatient(account);
 
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
         }
+    }
+
+    private void loadPatient(GoogleSignInAccount account) {
+
+        // register to APNAOPD if not registered
+        // else load APNAOPD account
+
+        UserAuth auth=new UserAuth();
+        auth.signInGoogle(this,account);
+
+
     }
 
 
