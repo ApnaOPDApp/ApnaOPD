@@ -27,9 +27,7 @@ public class UserAuth {
     private static User mUser;
 
     private interface SignInCompleteListener{
-
         void onComplete();
-
     }
 
 
@@ -44,7 +42,7 @@ public class UserAuth {
     }
 
 
-    public void signInGoogle(final Context context, final GoogleSignInAccount gAcc){
+    public void signInGoogle(final Context context, final GoogleSignInAccount gAcc, final SignInCompleteListener listener){
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
 //        String url ="https://google.com";
@@ -59,17 +57,9 @@ public class UserAuth {
                         Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
 
                         if(response.equals("null")){
-                           signUpGoogle(context,gAcc);
+                           signUpGoogle(context,gAcc, listener);
                         }else{
-
-                            //opens patient activity
-                            Intent i=new Intent(context,PatientActivity.class);
-                            i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
-
-                            context.startActivity(i);
-                            AppCompatActivity activity=(AppCompatActivity)context;
-                            activity.finish();
+                            listener.onComplete();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -83,7 +73,7 @@ public class UserAuth {
         queue.add(stringRequest);
     }
 
-    private void signUpGoogle(final Context context, final GoogleSignInAccount gAcc){
+    private void signUpGoogle(final Context context, final GoogleSignInAccount gAcc, final SignInCompleteListener listener){
 
         String url ="http://192.168.43.193:3000/api/users";
 
@@ -92,6 +82,7 @@ public class UserAuth {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(context,response,Toast.LENGTH_LONG).show();
+                        listener.onComplete();
                     }
                 },
                 new Response.ErrorListener() {
