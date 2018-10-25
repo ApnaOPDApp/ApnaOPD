@@ -26,14 +26,13 @@ public class UserAuth {
 
     private static User mUser;
 
-    private interface SignInCompleteListener{
+    public interface SignInCompleteListener{
         void onComplete();
     }
 
-
     public UserAuth(){}
 
-    public UserAuth getInstance(){
+    public static UserAuth getInstance(){
          return ApnaOPDApp.getUserAuth();
     }
 
@@ -46,7 +45,7 @@ public class UserAuth {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
 //        String url ="https://google.com";
-        String url ="http://192.168.43.193:3000/api/users/"+gAcc.getId();
+        String url =AppUtils.HOST_ADDRESS+"/api/users/"+gAcc.getId();
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -59,6 +58,7 @@ public class UserAuth {
                         if(response.equals("null")){
                            signUpGoogle(context,gAcc, listener);
                         }else{
+                            mUser = User.parseFromJson(response);
                             listener.onComplete();
                         }
                     }
@@ -75,7 +75,7 @@ public class UserAuth {
 
     private void signUpGoogle(final Context context, final GoogleSignInAccount gAcc, final SignInCompleteListener listener){
 
-        String url ="http://192.168.43.193:3000/api/users";
+        String url = AppUtils.HOST_ADDRESS+"/api/users";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
