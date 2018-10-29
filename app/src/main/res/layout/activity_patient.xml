@@ -22,4 +22,5 @@
         app:headerLayout="@layout/nav_header_patient"
         app:menu="@menu/activity_patient_drawer" />
 
+
 </android.support.v4.widget.DrawerLayout>

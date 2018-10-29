@@ -30,7 +30,7 @@ public class User {
             user.setGid(json.getString("gid"));
             user.setDoctor(json.getBoolean("isSupplier"));
             user.setRetailer(json.getBoolean("isRetailer"));
-            user.setWholeseller(json.getBoolean("isWholeseller"));
+            user.setWholeseller(json.getBoolean("isWholesaler"));
             user.setManufacturer(json.getBoolean("isManufacturer"));
             user.setSupplier(json.getBoolean("isSupplier"));
 

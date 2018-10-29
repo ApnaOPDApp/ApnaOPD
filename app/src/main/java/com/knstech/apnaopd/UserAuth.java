@@ -55,7 +55,7 @@ public class UserAuth {
 
                         Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
 
-                        if(response.equals("null")){
+                        if(response.equals("null") || response.equals("")){
                            signUpGoogle(context,gAcc, listener);
                         }else{
                             mUser = User.parseFromJson(response);
