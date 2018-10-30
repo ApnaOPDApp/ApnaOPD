@@ -1,7 +1,9 @@
-package com.knstech.apnaopd;
+package com.knstech.apnaopd.Patient;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.knstech.apnaopd.R;
 
 public class DoctorViewerActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.knstech.apnaopd;
+package com.knstech.apnaopd.Patient;
 
 
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.knstech.apnaopd.R;
 
 
 /**

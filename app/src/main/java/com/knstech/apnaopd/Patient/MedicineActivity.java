@@ -119,6 +119,8 @@ public class MedicineActivity extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(MedicineActivity.this,error.toString(), Toast.LENGTH_SHORT).show();
+
                             progressDialog.hide();
                         }
                     }
@@ -129,7 +131,7 @@ public class MedicineActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() throws AuthFailureError {
 
                     Map<String,String> params = new HashMap<>();
-                    params.put("Prescription","NAME OF PRESCRIPTION OF USER");
+                    params.put("Name","NAME OF PRESCRIPTION OF USER");
                     params.put("IMAGE OF PRESCRIPTION",new BitmapToString().imageToString(bitmap));
 
 

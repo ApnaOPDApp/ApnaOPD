@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.knstech.apnaopd.DoctorAppointmentActivity;
 import com.knstech.apnaopd.R;
 
 public class UIUpdater {

@@ -1,4 +1,4 @@
-package com.knstech.apnaopd;
+package com.knstech.apnaopd.Patient;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
+import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.AdapterUtil;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.UIUpdater;
