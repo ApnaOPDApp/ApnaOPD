@@ -11,6 +11,7 @@ import android.widget.Spinner;
 
 import com.knstech.apnaopd.Utils.AdapterUtil;
 import com.knstech.apnaopd.Utils.C;
+import com.knstech.apnaopd.Utils.UIUpdater;
 
 public class DoctorAppointmentActivity extends AppCompatActivity {
     private int choice;
@@ -30,71 +31,26 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
         switch (choice)
         {
             case C.CARDIO:
-                updateCardio();
+                UIUpdater.updateCardio(this,rootLayout,selectedCS);
                 break;
-            /*case C.EAR:
-                updateEar();
+            case C.EAR:
+                UIUpdater.updateEar(this,rootLayout,selectedCS);
                 break;
             case C.EYE:
-                updateEye();
+                UIUpdater.updateEye(this,rootLayout,selectedCS);
                 break;
             case C.GENITO:
-                updateGenito():
+                UIUpdater.updateGenito(this,rootLayout,selectedCS);
                 break;
             case C.NEURO:
-                updateNeuro();
+                UIUpdater.updateNeuro(this,rootLayout,selectedCS);
 
             default:
-                updateGeneral();*/
+                UIUpdater.updateGeneral(this,rootLayout,selectedCS);
 
         }
     }
 
-    private void updateCardio() {
-        EditText pulse;
-        Spinner neckVeins,chestPain,respiration,rhythm,bleeding,condition;
-        Button fileUpload,submit;
 
-        //update view
-        rootLayout.removeView(selectedCS);
-        selectedCS= LayoutInflater.from(this).inflate(R.layout.cardio_cs,null);
-        rootLayout.addView(selectedCS);
-
-        //init editText
-        pulse=selectedCS.findViewById(R.id.pulse);
-
-        //init spinners
-        neckVeins=selectedCS.findViewById(R.id.neckVeins);
-        chestPain=selectedCS.findViewById(R.id.chestPain);
-        respiration=selectedCS.findViewById(R.id.respiration);
-        rhythm=selectedCS.findViewById(R.id.rhythm);
-        bleeding=selectedCS.findViewById(R.id.bleeding);
-        condition=selectedCS.findViewById(R.id.condition);
-
-        //init buttons
-        fileUpload=selectedCS.findViewById(R.id.upload);
-        submit=selectedCS.findViewById(R.id.submit);
-
-        String bleedAr[]=getResources().getStringArray(R.array.bleed_cardio);
-        String rhythmAr[]=getResources().getStringArray(R.array.rhythm_cardio);
-        String chestPainAr[]=getResources().getStringArray(R.array.chest_cardio);
-        String respAr[]=getResources().getStringArray(R.array.resp_cardio);
-        String neckAr[]=getResources().getStringArray(R.array.neck_cardio);
-        String conditionAr[]=getResources().getStringArray(R.array.condition_cardio);
-        //setAdapters
-        AdapterUtil.setSpinnerAdapter(neckVeins,neckAr,this);
-        AdapterUtil.setSpinnerAdapter(chestPain,chestPainAr,this);
-        AdapterUtil.setSpinnerAdapter(respiration,respAr,this);
-        AdapterUtil.setSpinnerAdapter(rhythm,rhythmAr,this);
-        AdapterUtil.setSpinnerAdapter(bleeding,bleedAr,this);
-        AdapterUtil.setSpinnerAdapter(condition,conditionAr,this);
-
-        //init buttons
-        submit=findViewById(R.id.submit);
-        fileUpload=findViewById(R.id.upload);
-
-
-
-    }
 
 }

@@ -51,5 +51,6 @@
     <string name="pain">Pain :</string>
     <string name="vomitting">Vomitting :</string>
     <string name="site_of_problem">Site of Problem :</string>
+    <string name="comment">Comment :</string>
 
 </resources>
