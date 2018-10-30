@@ -24,7 +24,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import static com.knstech.apnaopd.R.string.server_client_id;
-
+/**
+ * Created by Shubham Kumar on 25-10-2018.
+ */
 public class LoginActivity extends AppCompatActivity{
 
     private static final int RC_SIGN_IN = 1;
@@ -45,7 +47,6 @@ public class LoginActivity extends AppCompatActivity{
                 signIn();
             }
         });
-
 
         setUpGoogle();
     }
@@ -112,8 +113,15 @@ public class LoginActivity extends AppCompatActivity{
         // register to APNAOPD if not registered
         // else load APNAOPD account
 
-        UserAuth auth=new UserAuth();
-        auth.signInGoogle(this,account);
+        UserAuth auth=UserAuth.getInstance();
+        auth.signInGoogle(this, account, new UserAuth.SignInCompleteListener() {
+            @Override
+            public void onComplete() {
+                i=new Intent(LoginActivity.this,PatientActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
 
     }

@@ -26,14 +26,13 @@ public class UserAuth {
 
     private static User mUser;
 
-    private interface SignInCompleteListener{
+    public interface SignInCompleteListener{
         void onComplete();
     }
 
-
     public UserAuth(){}
 
-    public UserAuth getInstance(){
+    public static UserAuth getInstance(){
          return ApnaOPDApp.getUserAuth();
     }
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rhythm_cardio">
+        <item>Rhythm</item>
+        <item>Fast</item>
+        <item>Slow</item>
+        <item>Normal</item>
+    </string-array>
+    <string-array name="neck_cardio">
+        <item>Neck veins</item>
+        <item>Normal</item>
+        <item>Engorged</item>
+    </string-array>
+    <string-array name="chest_cardio">
+        <item>Chest pain</item>
+        <item>No</item>
+        <item>Slight</item>
+        <item>Pulsating</item>
+    </string-array>
+    <string-array name="resp_cardio">
+        <item>Respiration</item>
+        <item>Normal</item>
+        <item>Deep Breath</item>
+        <item>Difficulty/Fast</item>
+    </string-array>
+    <string-array name="bleed_cardio">
+        <item>Bleeding</item>
+        <item>Nose</item>
+        <item>Mouth</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="condition_cardio">
+        <item>Condition</item>
+        <item>Normal</item>
+        <item>Faint</item>
+        <item>Weakness</item>
+    </string-array>
+</resources>
