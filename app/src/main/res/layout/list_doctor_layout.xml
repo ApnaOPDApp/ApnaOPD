@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_launcher_background"
+            android:src="@drawable/ic_launcher_foreground" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/doctorName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/doctor_name" />
+
+            <TextView
+                android:id="@+id/availability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/availability" />
+
+            <TextView
+                android:id="@+id/fee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fee" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

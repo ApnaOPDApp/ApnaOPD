@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--cardio -->
+
+    <string-array name="rhythm_cardio">
+        <item>Rhythm</item>
+        <item>Fast</item>
+        <item>Slow</item>
+        <item>Normal</item>
+    </string-array>
+    <string-array name="neck_cardio">
+        <item>Neck veins</item>
+        <item>Normal</item>
+        <item>Engorged</item>
+    </string-array>
+    <string-array name="chest_cardio">
+        <item>Chest pain</item>
+        <item>No</item>
+        <item>Slight</item>
+        <item>Pulsating</item>
+    </string-array>
+    <string-array name="resp_cardio">
+        <item>Respiration</item>
+        <item>Normal</item>
+        <item>Deep Breath</item>
+        <item>Difficulty/Fast</item>
+    </string-array>
+    <string-array name="bleed_cardio">
+        <item>Bleeding</item>
+        <item>Nose</item>
+        <item>Mouth</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="condition_cardio">
+        <item>Condition</item>
+        <item>Normal</item>
+        <item>Faint</item>
+        <item>Weakness</item>
+    </string-array>
+
+
+    <!-- ear -->
+
+    <string-array name="condition_ear">
+        <item>Condition</item>
+        <item>Itching</item>
+        <item>Pain</item>
+        <item>Pus Formation</item>
+        <item>Water Discharge</item>
+        <item>Normal</item>
+    </string-array>
+    <string-array name="other_ear">
+        <item>Other</item>
+        <item>Buzzing Sounds</item>
+        <item>Dizziness</item>
+        <item>Injury</item>
+        <item>Normal</item>
+    </string-array>
+    <string-array name="misc_ear">
+        <item>Miscellaneous</item>
+        <item>Hearing Loss</item>
+        <item>Abnormal Walking</item>
+        <item>Normal</item>
+    </string-array>
+
+    <!-- eye -->
+
+
+    <string-array name="condition_eye">
+        <item>Condition</item>
+        <item>Pain</item>
+        <item>Burning</item>
+        <item>Itching</item>
+        <item>Water Discharge</item>
+        <item>Normal</item>
+    </string-array>
+
+    <string-array name="other_eye">
+        <item>Other</item>
+        <item>Redness</item>
+        <item>Injury</item>
+        <item>Swelling</item>
+
+    </string-array>
+    <string-array name="misc_eye">
+        <item>Miscellaneous</item>
+        <item>Blindness</item>
+        <item>Loss of Peripheral Vision</item>
+        <item>Dark Spot in Vision</item>
+    </string-array>
+
+    <!-- genitourinary -->
+
+    <string-array name="general_genito">
+        <item>General Survey</item>
+        <item>Face Puffiness</item>
+        <item>Oedema</item>
+        <item>Scabbies</item>
+        <item>N.A.</item>
+    </string-array>
+
+    <string-array name="genito_genito">
+        <item>Genitourinary</item>
+        <item>Pain in Testis</item>
+        <item>Scrotal Oedema</item>
+        <item>Pain and Burning in Urination</item>
+        <item>N.A.</item>
+    </string-array>
+
+    <string-array name="other_genito">
+        <item>Other</item>
+        <item>Fever</item>
+        <item>Tenderness</item>
+    </string-array>
+
+    <!-- neuro -->
+
+    <string-array name="condition_neuro">
+        <item>Condition</item>
+        <item>Consious</item>
+        <item>Sub-concious</item>
+        <item>Normal</item>
+    </string-array>
+    <string-array name="behavioural_neuro">
+        <item>Behavioural Abnormality</item>
+        <item>Speech Deject</item>
+        <item>Anxiety</item>
+        <item>Depression</item>
+    </string-array>
+    <string-array name="sensation_neuro">
+        <item>Sensational Abnormality</item>
+        <item>Abnormal Smell</item>
+        <item>Visual Abnormality</item>
+        <item>Deviation of Angle of Mouth</item>
+        <item>Loss of Taste</item>
+        <item>Deafness</item>
+        <item>Hoarseness of Voice</item>
+        <item>Normal</item>
+    </string-array>
+    <string-array name="other_neuro">
+        <item>Other Abnormality</item>
+        <item>Weakness</item>
+        <item>Pain in Muscle</item>
+        <item>Swelling of Muscle</item>
+        <item>Headache</item>
+        <item>Inco-ordination</item>
+    </string-array>
+    <string-array name="misc_neuro">
+        <item>Miscellaneous</item>
+        <item>Fever</item>
+        <item>Pain in Neck</item>
+    </string-array>
+
+    <!--general -->
+    <string-array name="habit_gen">
+        <item>Select</item>
+        <item>Tobacco Chewing</item>
+        <item>Alcoholic</item>
+        <item>Nail Biting</item>
+        <item>Late Night Sleep</item>
+        <item>Fast Food Eaters</item>
+        <item>Smoking</item>
+    </string-array>
+    <string-array name="habitat_gen">
+        <item>Select</item>
+        <item>Hot</item>
+        <item>Cold</item>
+        <item>Humid</item>
+        <item>Dusty</item>
+        <item>Polluted</item>
+    </string-array>
+    <string-array name="emotional_gen">
+        <item>Select</item>
+        <item>Happy</item>
+        <item>Normal</item>
+        <item>Excited</item>
+        <item>Depressed</item>
+    </string-array>
+    <string-array name="pain_gen">
+        <item>Select</item>
+        <item>Mild</item>
+        <item>Moderate</item>
+        <item>Severe</item>
+        <item>Burning</item>
+        <item>Pulsating</item>
+    </string-array>
+    <string-array name="site_gen">
+        <item>Select</item>
+        <item>Front Head</item>
+        <item>Back Head</item>
+        <item>Left Shoulder</item>
+        <item>Left Hand Upper</item>
+        <item>Left Hand Lower</item>
+        <item>Right Hand Upper</item>
+        <item>Right Hand Lower</item>
+        <item>Left Chest</item>
+        <item>Right Chest</item>
+        <item>Left Back Chest</item>
+        <item>Right Back Chest</item>
+    </string-array>
+    <string-array name="vomit_gen">
+        <item>Select</item>
+        <item>Yes</item>
+        <item>No</item>
+        <item>Nausea</item>
+    </string-array>
+
+</resources>

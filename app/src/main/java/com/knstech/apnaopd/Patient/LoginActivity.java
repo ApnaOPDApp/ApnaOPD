@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -13,8 +14,10 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.knstech.apnaopd.R;
 
-import android.widget.RelativeLayout;
-
+import static com.knstech.apnaopd.R.string.server_client_id;
+/**
+ * Created by Shubham Kumar on 25-10-2018.
+ */
 public class LoginActivity extends AppCompatActivity{
 
     private static final int RC_SIGN_IN = 1;
@@ -36,12 +39,14 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
+<<<<<<< HEAD:app/src/main/java/com/knstech/apnaopd/Patient/LoginActivity.java
 
         setUpGoogle();*/
 
         //Debug code
         Intent i=new Intent(LoginActivity.this,HomeActivity.class);
         startActivity(i);
+        setUpGoogle();
     }
 
     @Override
