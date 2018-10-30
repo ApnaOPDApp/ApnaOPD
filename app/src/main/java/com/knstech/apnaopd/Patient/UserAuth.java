@@ -1,8 +1,6 @@
-package com.knstech.apnaopd;
+package com.knstech.apnaopd.Patient;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -12,9 +10,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.knstech.apnaopd.ApnaOPDApp;
+import com.knstech.apnaopd.AppUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +42,7 @@ public class UserAuth {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
 //        String url ="https://google.com";
-        String url =AppUtils.HOST_ADDRESS+"/api/users/"+gAcc.getId();
+        String url = AppUtils.HOST_ADDRESS+"/api/users/"+gAcc.getId();
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

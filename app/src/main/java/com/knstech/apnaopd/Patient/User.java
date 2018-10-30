@@ -1,4 +1,4 @@
-package com.knstech.apnaopd;
+package com.knstech.apnaopd.Patient;
 
 import org.json.JSONException;
 import org.json.JSONObject;

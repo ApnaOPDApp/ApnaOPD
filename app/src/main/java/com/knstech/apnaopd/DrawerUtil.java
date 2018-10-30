@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
+import com.knstech.apnaopd.Patient.HomeActivity;
+import com.knstech.apnaopd.Retailer.RetailerActivity;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -21,17 +24,41 @@ public class DrawerUtil {
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
-                .withHeaderBackground(R.color.apple_red)
+                .withHeaderBackground(R.drawable.m1)
                 .addProfiles(
-                        new ProfileDrawerItem().withName("Doctor").withEmail("patient@gmail.com").withIcon(R.drawable.ic_launcher_foreground))
+                        new ProfileDrawerItem()
+                                .withName("Doctor")
+                                .withEmail("doctor@gmail.com")
+                                .withIcon(R.drawable.ic_launcher_foreground)
+                                .withIdentifier(101)   )
                 .addProfiles(
-                        new ProfileDrawerItem().withName("PATIENT").withEmail("patient@gmail.com").withIcon(R.drawable.google))
+                        new ProfileDrawerItem()
+                                .withName("Retailer")
+                                .withEmail("retailer@gmail.com")
+                                .withIcon(R.drawable.ic_launcher_foreground)
+                                .withIdentifier(102)    )
+
                 .addProfiles(
-                        new ProfileDrawerItem().withName("Pathologists").withEmail("patient@gmail.com").withIcon(R.drawable.google))
+                        new ProfileDrawerItem()
+                                .withName("Patient")
+                                .withEmail("patient@gmail.com")
+                                .withIdentifier(103)
+                                .withIcon(R.drawable.m1))
+                .addProfiles(
+                        new ProfileDrawerItem()
+                                .withName("Pathologists")
+                                .withEmail("pathologist@gmail.com")
+                                .withIdentifier(104)
+                                .withIcon(R.drawable.google))
 
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+
+                        if(profile.getIdentifier()==102)
+                            activity.startActivity(new Intent(activity,RetailerActivity.class));
+                        else
+                            Toast.makeText(activity, profile.toString(), Toast.LENGTH_SHORT).show();
                         return false;
                     }
                 })
