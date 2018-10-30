@@ -65,7 +65,7 @@ public class DrawerUtil {
         Drawer result = new DrawerBuilder()
                 .withActivity(activity)
                 .withAccountHeader(headerResult)
-                .withToolbar(toolbar)
+                
                 .withActionBarDrawerToggle(true)
                 .withActionBarDrawerToggleAnimated(true)
                 .withCloseOnClick(true)
