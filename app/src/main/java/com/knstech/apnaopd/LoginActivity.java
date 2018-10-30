@@ -113,12 +113,11 @@ public class LoginActivity extends AppCompatActivity{
         // register to APNAOPD if not registered
         // else load APNAOPD account
 
-        UserAuth auth=UserAuth.getInstance();
+        UserAuth auth=new UserAuth();
         auth.signInGoogle(this, account, new UserAuth.SignInCompleteListener() {
             @Override
             public void onComplete() {
-                i=new Intent(LoginActivity.this,PatientActivity.class);
-                startActivity(i);
+                startActivity(new Intent(LoginActivity.this,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
                 finish();
             }
         });
