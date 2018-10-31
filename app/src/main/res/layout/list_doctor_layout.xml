@@ -9,10 +9,9 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher_background"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_width="112dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/google" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,5 +37,16 @@
                 android:text="@string/fee" />
         </LinearLayout>
 
+
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="63dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/black_app"/>
 </RelativeLayout>

@@ -106,7 +106,7 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
                 break;
             case C.NEURO:
                 UIUpdater.updateNeuro(this,rootLayout,selectedCS);
-
+                break;
             default:
                 UIUpdater.updateGeneral(this,rootLayout,selectedCS);
 

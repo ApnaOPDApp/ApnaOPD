@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.knstech.apnaopd.Patient.DoctorListActivity;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
 
@@ -360,7 +362,7 @@ public class UIUpdater {
         final Spinner habit,habitat,emotional,pain,site,vomit;
         Button upload,submit;
 
-        AppCompatActivity activity=(AppCompatActivity)mContext;
+        final AppCompatActivity activity=(AppCompatActivity)mContext;
 
         //update view
         rootLayout.removeView(selectedCS);
@@ -403,7 +405,7 @@ public class UIUpdater {
             @Override
             public void onClick(View v) {
                 //collect data
-                String habitResp,habitatResp,emotionalResp,painResp,vomitResp;
+                /*String habitResp,habitatResp,emotionalResp,painResp,vomitResp;
                 String commentResp,problemResp,accResp,feverResp;
 
                 habitResp=habit.getSelectedItem().toString();
@@ -429,7 +431,8 @@ public class UIUpdater {
                 map.put("Accident",accResp);
                 map.put("Fever",feverResp);
 
-                sendResponse(map,mContext);
+                sendResponse(map,mContext);*/
+                activity.startActivity(new Intent(activity,DoctorListActivity.class));
             }
         });
 
