@@ -1,32 +1,43 @@
-package com.knstech.apnaopd;
+package com.knstech.apnaopd.Patient;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.knstech.apnaopd.DrawerUtil;
+import com.knstech.apnaopd.R;
 
 import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private CardView medicine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        toolbar = (Toolbar)findViewById(R.id.p_toolbar);
+        toolbar.setTitle("ApnaOpd Home");
 
         DrawerUtil.getDrawer(this,toolbar);
+
+        medicine =(CardView)findViewById(R.id.cv_3);
+        medicine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,MedicineActivity.class));
+            }
+        });
+
+
 
     }
 
@@ -41,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.signout) {
+        /*if (id == R.id.signout) {
 
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.server_client_id))
@@ -56,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
             finish();
 
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }

@@ -5,30 +5,36 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="com.knstech.apnaopd.Volley.VolleySingleton"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Patient.LoginActivity">
         </activity>
-        <activity
-            android:name=".PatientActivity"
-            android:label="@string/title_activity_patient"
-            android:theme="@style/AppTheme" />
 
-        <activity android:name=".DoctorViewerActivity" />
-        <activity android:name=".DoctorListActivity" />
-        <activity android:name=".DoctorAppointmentActivity">
+        <activity android:name=".Patient.DoctorViewerActivity" />
+        <activity android:name=".Patient.DoctorListActivity" />
+        <activity android:name=".Patient.DoctorAppointmentActivity">
+        </activity>
+
+        <activity android:name=".Patient.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Patient.MedicineActivity"
+            android:parentActivityName=".Patient.HomeActivity" />
+        <activity
+            android:name=".Retailer.RetailerActivity"
+            android:parentActivityName=".Patient.HomeActivity" />
+        <activity android:name=".Retailer.ListOfPrescriptionActivity"></activity>
 
-        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.knstech.apnaopd;
+package com.knstech.apnaopd.Patient;
 
 public class Doctor {
     public Doctor()

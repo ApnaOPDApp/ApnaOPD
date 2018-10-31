@@ -1,5 +1,7 @@
 package com.knstech.apnaopd;
 
+import com.knstech.apnaopd.Patient.UserAuth;
+
 /**
  * Created by Pankaj Vaghela on 25-10-2018.
  */

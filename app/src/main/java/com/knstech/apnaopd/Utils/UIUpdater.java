@@ -11,9 +11,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.knstech.apnaopd.DoctorAppointmentActivity;
-import com.knstech.apnaopd.DoctorListActivity;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
 

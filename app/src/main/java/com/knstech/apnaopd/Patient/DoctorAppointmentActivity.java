@@ -1,4 +1,4 @@
-package com.knstech.apnaopd;
+package com.knstech.apnaopd.Patient;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -10,8 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.AdapterUtil;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
