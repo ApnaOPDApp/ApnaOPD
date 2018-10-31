@@ -2,90 +2,113 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/condition"/>
-            <Spinner
-                android:id="@+id/condition"
-                android:layout_width="match_parent"
-                android:layout_height="35dp">
+                    android:text="@string/condition" />
 
-            </Spinner>
+                <Spinner
+                    android:id="@+id/condition"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp">
+
+                </Spinner>
             </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/other"/>
-            <Spinner
-                android:id="@+id/other"
-                android:layout_width="match_parent"
-                android:layout_height="34dp">
 
-            </Spinner>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/miscellaneous"/>
-            <Spinner
-                android:id="@+id/misc"
-                android:layout_width="match_parent"
-                android:layout_height="34dp">
-
-            </Spinner>
-        </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/upload_picture"/>
+                    android:text="@string/other" />
+
+                <Spinner
+                    android:id="@+id/other"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp">
+
+                </Spinner>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/miscellaneous" />
+
+                <Spinner
+                    android:id="@+id/misc"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp">
+
+                </Spinner>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upload_picture" />
+
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/upload"
-                    android:text="@string/file_upload"/>
+                    android:layout_width="291dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/file_upload" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/comment"/>
+                    android:text="@string/comment" />
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <EditText
+                    android:id="@+id/comment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/comment"/>
+                    android:layout_height="wrap_content" />
+                </ScrollView>
             </LinearLayout>
+
             <Button
+                android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/submit"
-                android:text="@string/submit"/>
+                android:text="@string/submit" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

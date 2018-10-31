@@ -49,8 +49,12 @@
     <string name="habitat">Habitat :</string>
     <string name="emotional_status">Emotional Status :</string>
     <string name="pain">Pain :</string>
-    <string name="vomitting">Vomitting :</string>
+    <string name="vomiting">Vomiting :</string>
     <string name="site_of_problem">Site of Problem :</string>
-    <string name="comment">Comment :</string>
+    <string name="comment">Complain in words :</string>
+    <string name="select_department">Select Department :</string>
+    <string name="submit_report_message">Please wait while your report is being submitted.</string>
+    <string name="dialog_wait">Please wait</string>
+    <string name="send_error">There was an Error submitting your response!</string>
 
 </resources>

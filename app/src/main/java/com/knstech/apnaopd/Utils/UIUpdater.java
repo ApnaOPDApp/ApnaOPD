@@ -1,6 +1,8 @@
 package com.knstech.apnaopd.Utils;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +10,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.knstech.apnaopd.DoctorAppointmentActivity;
+import com.knstech.apnaopd.DoctorListActivity;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.Connections.RequestPost;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UIUpdater {
-    public static void updateCardio(Context mContext, RelativeLayout rootLayout,View selectedCS) {
-        EditText pulse,comment;
-        Spinner neckVeins,chestPain,respiration,rhythm,bleeding,condition;
+    public static final int IMG = 1;
+    private static String url;
+
+    public static void updateCardio(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
+        final EditText pulse,comment;
+        final Spinner neckVeins,chestPain,respiration,rhythm,bleeding,condition;
         Button fileUpload,submit;
 
         AppCompatActivity activity=(AppCompatActivity)mContext;
@@ -60,15 +71,46 @@ public class UIUpdater {
         submit=activity.findViewById(R.id.submit);
         fileUpload=activity.findViewById(R.id.upload);
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //collect response
+                String bleedResp,rhythmResp,chestResp,respResp,neckResp,condResp;
+                String pulseResp,commentResp;
+
+                bleedResp=bleeding.getSelectedItem().toString();
+                rhythmResp=rhythm.getSelectedItem().toString();
+                chestResp=chestPain.getSelectedItem().toString();
+                respResp=respiration.getSelectedItem().toString();
+                neckResp=neckVeins.getSelectedItem().toString();
+                condResp=condition.getSelectedItem().toString();
+
+                pulseResp=pulse.getText().toString();
+                commentResp=comment.getText().toString();
+
+                //put response in map
+                Map<String,String> map=new HashMap<>();
+                map.put("Bleeding",bleedResp);
+                map.put("Chest Pain",chestResp);
+                map.put("Rhythm",rhythmResp);
+                map.put("Respiration",respResp);
+                map.put("Neck Pain",neckResp);
+                map.put("Condition",condResp);
+                map.put("Pulse",pulseResp);
+                map.put("Comment",commentResp);
+
+                sendResponse(map,mContext);
+            }
+        });
 
 
     }
 
-    public static void updateEar(Context mContext,RelativeLayout rootLayout,View selectedCS) {
+    public static void updateEar(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
 
-        Spinner condition,other,misc;
+        final Spinner condition,other,misc;
         Button upload,submit;
-        EditText comment;
+        final EditText comment;
 
         AppCompatActivity activity=(AppCompatActivity)mContext;
 
@@ -98,14 +140,37 @@ public class UIUpdater {
         AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
         AdapterUtil.setSpinnerAdapter(misc,miscAr,activity);
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //collect Response
+                String condResp,otherResp,miscResp;
+                String commentResp;
+
+                condResp=condition.getSelectedItem().toString();
+                otherResp=other.getSelectedItem().toString();
+                miscResp=misc.getSelectedItem().toString();
+
+                commentResp=comment.getText().toString();
+
+                //put in map
+                Map<String,String> map=new HashMap<>();
+                map.put("Condition",condResp);
+                map.put("Other",otherResp);
+                map.put("Miscellaneous",miscResp);
+                map.put("Comment",commentResp);
+                
+                sendResponse(map,mContext);
+            }
+        });
 
 
     }
 
-    public static void updateEye(Context mContext, RelativeLayout rootLayout, View selectedCS) {
+    public static void updateEye(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
 
-        Spinner condition,other,misc;
-        EditText comment;
+        final Spinner condition,other,misc;
+        final EditText comment;
         Button upload,submit;
 
         AppCompatActivity activity=(AppCompatActivity)mContext;
@@ -136,13 +201,36 @@ public class UIUpdater {
         AdapterUtil.setSpinnerAdapter(condition,conditionAr,activity);
         AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
         AdapterUtil.setSpinnerAdapter(misc,miscAr,activity);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //collect Response
+                String condResp,otherResp,miscResp;
+                String commentResp;
+
+                condResp=condition.getSelectedItem().toString();
+                otherResp=other.getSelectedItem().toString();
+                miscResp=misc.getSelectedItem().toString();
+
+                commentResp=comment.getText().toString();
+
+                Map<String,String> map=new HashMap<>();
+                map.put("Condition",condResp);
+                map.put("Other",otherResp);
+                map.put("Miscellaneous",miscResp);
+                map.put("Comment",commentResp);
+
+                sendResponse(map,mContext);
+            }
+        });
     }
 
-    public static void updateGenito(Context mContext, RelativeLayout rootLayout, View selectedCS) {
+    public static void updateGenito(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
 
-        Spinner survey,genito,other;
+        final Spinner survey,genito,other;
         Button upload,submit;
-        EditText comment;
+        final EditText comment;
 
         AppCompatActivity activity=(AppCompatActivity)mContext;
 
@@ -174,13 +262,35 @@ public class UIUpdater {
         AdapterUtil.setSpinnerAdapter(genito,genitoAr,activity);
         AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //collect response
+                String surveyResp,genitoResp,otherResp;
+                String commentResp;
+
+                surveyResp=survey.getSelectedItem().toString();
+                genitoResp=genito.getSelectedItem().toString();
+                otherResp=other.getSelectedItem().toString();
+
+                commentResp=comment.getText().toString();
+
+                Map<String,String> map=new HashMap<>();
+                map.put("General Survey",surveyResp);
+                map.put("Genitourinary",genitoResp);
+                map.put("Other",otherResp);
+                map.put("Comment",commentResp);
+
+                sendResponse(map,mContext);
+            }
+        });
     }
 
-    public static void updateNeuro(Context mContext, RelativeLayout rootLayout, View selectedCS) {
+    public static void updateNeuro(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
 
-        Spinner sensation,behavioural,condition,other,misc;
+        final Spinner sensation,behavioural,condition,other,misc;
         Button submit;
-        EditText comment;
+        final EditText comment;
 
         AppCompatActivity activity=(AppCompatActivity)mContext;
 
@@ -214,13 +324,43 @@ public class UIUpdater {
         AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
         AdapterUtil.setSpinnerAdapter(misc,miscAr,activity);
 
+        //init button
+        submit=selectedCS.findViewById(R.id.submit);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Collect Response
+                String sensationResp,behaviouralResp,condResp,otherResp,miscResp;
+                String commentResp;
+
+                sensationResp=sensation.getSelectedItem().toString();
+                behaviouralResp=behavioural.getSelectedItem().toString();
+                condResp=condition.getSelectedItem().toString();
+                otherResp=other.getSelectedItem().toString();
+                miscResp=misc.getSelectedItem().toString();
+
+                commentResp=comment.getText().toString();
+
+                Map<String,String> map=new HashMap<>();
+                map.put("Sensational Abnormality",sensationResp);
+                map.put("Conditional Abnormality",condResp);
+                map.put("Behavioural Abnormality",behaviouralResp);
+                map.put("Other",otherResp);
+                map.put("Miscellaneous",miscResp);
+                map.put("Comment",commentResp);
+
+                sendResponse(map,mContext);
+            }
+        });
+
 
     }
 
-    public static void updateGeneral(Context mContext, RelativeLayout rootLayout, View selectedCS) {
+    public static void updateGeneral(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
 
-        EditText problem,accident,fever,comment;
-        Spinner habit,habitat,emotional,pain,site,vomit;
+        final EditText problem,accident,fever,comment;
+        final Spinner habit,habitat,emotional,pain,site,vomit;
         Button upload,submit;
 
         AppCompatActivity activity=(AppCompatActivity)mContext;
@@ -262,6 +402,77 @@ public class UIUpdater {
         AdapterUtil.setSpinnerAdapter(pain,painAr,activity);
         AdapterUtil.setSpinnerAdapter(vomit,vomitAr,activity);
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //collect data
+                String habitResp,habitatResp,emotionalResp,painResp,vomitResp;
+                String commentResp,problemResp,accResp,feverResp;
+
+                habitResp=habit.getSelectedItem().toString();
+                habitatResp=habitat.getSelectedItem().toString();
+                emotionalResp=emotional.getSelectedItem().toString();
+                painResp=pain.getSelectedItem().toString();
+                vomitResp=vomit.getSelectedItem().toString();
+
+                commentResp=comment.getText().toString();
+                problemResp=problem.getText().toString();
+                accResp=accident.getText().toString();
+                feverResp=fever.getText().toString();
+
+                //put in map
+                Map<String,String> map=new HashMap<>();
+                map.put("Habit",habitResp);
+                map.put("Habitat",habitatResp);
+                map.put("Emotional Status",emotionalResp);
+                map.put("Pain",painResp);
+                map.put("Vomiting",vomitResp);
+                map.put("Comment",commentResp);
+                map.put("Problem",problemResp);
+                map.put("Accident",accResp);
+                map.put("Fever",feverResp);
+
+                sendResponse(map,mContext);
+            }
+        });
+
 
     }
+    public void uploadReport(Button upload, final AppCompatActivity activity)
+    {
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent();
+                i.setAction(Intent.ACTION_GET_CONTENT);
+                i.setType("image/*");
+                activity.startActivityForResult(i,IMG);
+            }
+        });
+    }
+    private static void sendResponse(final Map map, final Context mContext) {
+
+        RequestPost post=new RequestPost(mContext);
+        final ProgressDialog mProgress=new ProgressDialog(mContext);
+        mProgress.setMessage(mContext.getResources().getString(R.string.dialog_wait));
+
+
+        post.sendJSON(url, map, new RequestPost.PostResponseListener() {
+            @Override
+            public void onResponse() {
+                mProgress.dismiss();
+                AppCompatActivity activity = (AppCompatActivity) mContext;
+                Intent i = new Intent(activity, DoctorListActivity.class);
+                activity.startActivity(i);
+                activity.finish();
+            }
+        }, new RequestPost.PostErrorListener() {
+            @Override
+            public void onError() {
+                mProgress.dismiss();
+                Toast.makeText(mContext, mContext.getString(R.string.send_error), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
