@@ -16,9 +16,6 @@ import com.knstech.apnaopd.AppUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Pankaj Vaghela on 25-10-2018.
- */
 public class UserAuth {
 
     private static User mUser;

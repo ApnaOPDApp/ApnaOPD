@@ -12,10 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".Patient.LoginActivity"></activity>
         <activity android:name=".Patient.DoctorViewerActivity" />
         <activity android:name=".Patient.DoctorListActivity" />
         <activity android:name=".Patient.DoctorAppointmentActivity">
+=======
+        <activity android:name=".Patient.LoginActivity" />
+        <activity android:name=".Patient.DoctorViewerActivity" />
+        <activity android:name=".Patient.DoctorListActivity" />
+        <activity android:name=".Patient.DoctorAppointmentActivity" />
+        <activity android:name=".Patient.HomeActivity">
+>>>>>>> shubham
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +38,13 @@
             android:name=".Retailer.RetailerActivity"
             android:parentActivityName=".Patient.HomeActivity" />
         <activity android:name=".Retailer.ListOfPrescriptionActivity" />
+<<<<<<< HEAD
         <activity android:name=".Doctor.DAppointmentViewerActivity"></activity>
+=======
+        <activity android:name=".Patient.ListOfQuotationsActivity" />
+        <activity android:name=".Retailer.RetailerOfferSendActivity" />
+        <activity android:name=".Patient.PatientFinalDrugAcceptActivity"></activity>
+>>>>>>> shubham
     </application>
 
 </manifest>
