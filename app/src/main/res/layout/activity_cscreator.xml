@@ -75,6 +75,7 @@
                 android:id="@+id/fever"
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
+                android:inputType="numberDecimal"
                 android:hint="@string/fever" />
         <LinearLayout
             android:layout_width="match_parent"

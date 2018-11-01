@@ -1,6 +1,14 @@
 
 package com.knstech.apnaopd.GenModalClasses.Doctor;
 
+import android.view.View;
+
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,6 +48,55 @@ public class Doctor {
 
     public String getName() {
         return name;
+    }
+
+    public Doctor parseFromJson(String json)
+    {
+        try {
+            JSONObject object=new JSONObject(json);
+            setName(object.getString("name"));
+            if(object.has("degree"))
+                setDegree(object.getString("degree"));
+            if(object.has("certi_link"))
+                setCertiLink(object.getString("certi_link"));
+            if(object.has("department"))
+                setDepartment(object.getString("department"));
+            if(object.has("fee"))
+                setFee(object.getString("fee"));
+            setRegNumber(object.getString("reg_number"));
+            if(object.has("speciality"))
+                setSpeciality(object.getString("speciality"));
+            if(object.has("phone_number"))
+                setPhoneNumber(object.getString("phone_number"));
+            setEmail(object.getString("email"));
+            setGid(object.getString("gid"));
+            if(object.has("office_number"))
+                setOfficeNumber(object.getString("office_number"));
+
+            List<History> histories=new ArrayList<>();
+            if(object.has("history"))
+                histories=History.parsefromJson(object.getString("history"));
+            List<TimeSlab> timeSlabs=new ArrayList<>();
+            if(object.has("office_number"))
+                timeSlabs=TimeSlab.parsefromJson(object.getString("time_slab"));
+            List<Visiting> visitings=new ArrayList<>();
+            if(object.has("office_number"))
+                visitings= Visiting.parsefromJson(object.getString("visiting"));
+            Address address=new Address();
+            if(object.has("office_number"))
+                address=address.parseFromString(object.getString("address"));
+
+            setAddress(address);
+            setHistory(histories);
+            setTimeSlab(timeSlabs);
+            setVisiting(visitings);
+
+            return this;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void setName(String name) {

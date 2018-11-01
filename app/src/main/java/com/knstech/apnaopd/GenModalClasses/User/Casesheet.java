@@ -1,6 +1,14 @@
 
 package com.knstech.apnaopd.GenModalClasses.User;
 
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Casesheet {
 
 
@@ -50,6 +58,25 @@ public class Casesheet {
 
     private String comment;
 
+    public static List<Casesheet> parseFromJson(String json)
+    {
+        List<Casesheet> list=new ArrayList<>();
+        try {
+            Gson gson=new Gson();
+            JSONArray array=new JSONArray(json);
+            for(int i=0;i<array.length();i++)
+            {
+                Casesheet casesheet=gson.fromJson(array.get(i).toString(),Casesheet.class);
+                list.add(casesheet);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+
+    }
+    
     public String getDepartment() {
         return department;
     }

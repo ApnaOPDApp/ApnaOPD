@@ -37,4 +37,5 @@ public class RequestSingleton {
     {
         getQueue().add(request);
     }
+
 }

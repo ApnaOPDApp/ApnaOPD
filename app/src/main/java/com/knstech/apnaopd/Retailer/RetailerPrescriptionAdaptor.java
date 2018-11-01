@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.knstech.apnaopd.Patient.User;
+import com.knstech.apnaopd.GenModalClasses.User.User;
 import com.knstech.apnaopd.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;

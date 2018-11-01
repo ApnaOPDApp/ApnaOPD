@@ -8,8 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.knstech.apnaopd.GenModalClasses.Doctor.Doctor;
 import com.knstech.apnaopd.R;
-import com.knstech.apnaopd.Utils.DoctorItemClickedListener;
+import com.knstech.apnaopd.Utils.Listeners.DoctorItemClickedListener;
 
 import java.util.List;
 
@@ -54,14 +55,13 @@ public class DoctorAdapter extends RecyclerView.Adapter{
         }
         public void bind(final Doctor doctor)
         {
-            /*
             name.setText(doctor.getName());
-            availability.setText(doctor.getAvailability());
-            fee.setText(doctor.getFee());*/
+            //availability.setText(doctor.getAvailability());
+            fee.setText(doctor.getFee());
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onDoctorItemClick(doctor.getUid());
+                    listener.onDoctorItemClick(doctor.getGid());
                 }
             });
         }
