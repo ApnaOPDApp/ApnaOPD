@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.DoctorItemClickedListener;
 
 import java.util.List;
 
@@ -16,10 +17,12 @@ public class DoctorAdapter extends RecyclerView.Adapter{
 
     private Context mContext;
     private List<Doctor> mList;
+    private DoctorItemClickedListener listener;
 
-    public DoctorAdapter(Context mContext,List<Doctor> mList) {
+    public DoctorAdapter(Context mContext, List<Doctor> mList,DoctorItemClickedListener  listener) {
         this.mContext = mContext;
         this.mList = mList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -39,36 +42,32 @@ public class DoctorAdapter extends RecyclerView.Adapter{
     public int getItemCount() {
         return mList.size();
     }
-    public class DoctorHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class DoctorHolder extends RecyclerView.ViewHolder {
         private View view;
-        private TextView name,fee,availibility;
+        private TextView name,fee,availability;
         public DoctorHolder(@NonNull View itemView) {
             super(itemView);
             view=itemView;
             name=view.findViewById(R.id.doctorName);
             fee=view.findViewById(R.id.fee);
-            availibility=view.findViewById(R.id.availability);
+            availability=view.findViewById(R.id.availability);
         }
-        public void bind(Doctor doctor)
+        public void bind(final Doctor doctor)
         {
+            /*
             name.setText(doctor.getName());
-            availibility.setText(doctor.getAvailability());
-            fee.setText(doctor.getFee());
+            availability.setText(doctor.getAvailability());
+            fee.setText(doctor.getFee());*/
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDoctorItemClick(doctor.getUid());
+                }
+            });
         }
 
-        @Override
-        public void onClick(View v) {
-            mListener.onDoctorItemClick(v,getAdapterPosition());
-        }
+
     }
 
-    private DoctorClickListener mListener;
 
-    public void setmListener(DoctorClickListener mListener) {
-        this.mListener = mListener;
-    }
-
-    interface DoctorClickListener {
-        void onDoctorItemClick(View view, int position);
-    }
 }

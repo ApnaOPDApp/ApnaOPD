@@ -1,9 +1,11 @@
 package com.knstech.apnaopd.Patient;
 
 public class Doctor {
-    public Doctor()
-    {
+    private String uid;
 
+    public Doctor(String id)
+    {
+        setUid(id);
     }
 
     public String getName() {
@@ -38,14 +40,6 @@ public class Doctor {
         this.registrationNo = registrationNo;
     }
 
-    public Doctor(String name, String fee, String speciality, String registrationNo,String availability) {
-        this.name = name;
-        this.fee = fee;
-        this.speciality = speciality;
-        this.registrationNo = registrationNo;
-        this.availability = availability;
-    }
-
     private String name;
     private String fee;
     private String speciality;
@@ -61,4 +55,20 @@ public class Doctor {
 
     private String availability;
 
+    public Doctor(String uid, String name, String fee, String speciality, String registrationNo, String availability) {
+        this.uid = uid;
+        this.name = name;
+        this.fee = fee;
+        this.speciality = speciality;
+        this.registrationNo = registrationNo;
+        this.availability = availability;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getUid() {
+        return uid;
+    }
 }
