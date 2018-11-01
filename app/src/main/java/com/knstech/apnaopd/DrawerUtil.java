@@ -2,11 +2,13 @@ package com.knstech.apnaopd;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
 import com.knstech.apnaopd.Patient.HomeActivity;
+import com.knstech.apnaopd.Patient.ListOfQuotationsActivity;
 import com.knstech.apnaopd.Retailer.RetailerActivity;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -24,7 +26,7 @@ public class DrawerUtil {
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
-                .withHeaderBackground(R.drawable.m1)
+                .withHeaderBackground(R.color.apple_orange)
                 .addProfiles(
                         new ProfileDrawerItem()
                                 .withName("Doctor")
@@ -69,10 +71,36 @@ public class DrawerUtil {
         PrimaryDrawerItem drawerEmptyItem= new PrimaryDrawerItem().withIdentifier(0).withName("");
         drawerEmptyItem.withEnabled(false);
 
-        PrimaryDrawerItem drawerItemManagePlayers = new PrimaryDrawerItem().withIdentifier(1)
-                .withName("Home").withIcon(R.drawable.google);
+        PrimaryDrawerItem drawerHome = new PrimaryDrawerItem()
+                .withIdentifier(1)
+                .withName("Home")
+                .withIcon(R.drawable.google);
+
+        PrimaryDrawerItem drawerProfile = new PrimaryDrawerItem()
+                .withIdentifier(2)
+                .withName("Profile")
+                .withIcon(R.drawable.google);
+
+        PrimaryDrawerItem drawerQuotations = new PrimaryDrawerItem()
+                .withIdentifier(3)
+                .withName("Quotations")
+                .withIcon(R.drawable.google)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        if(drawerItem.getIdentifier() == 3){
+                            activity.startActivity(new Intent(activity,ListOfQuotationsActivity.class));
+                        }
+
+                        return false;
+                    }
+                })
+                ;
+
         PrimaryDrawerItem drawerItemManagePlayersTournaments = new PrimaryDrawerItem()
-                .withIdentifier(2).withName("Profile").withIcon(R.drawable.google);
+                .withIdentifier(4)
+                .withName("Checkout")
+                .withIcon(R.drawable.google);
 
 
         SecondaryDrawerItem drawerItemSettings = new SecondaryDrawerItem().withIdentifier(3)
@@ -91,14 +119,18 @@ public class DrawerUtil {
         //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
                 .withActivity(activity)
+                .withHasStableIds(true)
+                .withActionBarDrawerToggle(true)
+                .withStickyHeaderShadow(true)
                 .withAccountHeader(headerResult)
-                
                 .withActionBarDrawerToggle(true)
                 .withActionBarDrawerToggleAnimated(true)
                 .withCloseOnClick(true)
                 .withSelectedItem(-1)
                 .addDrawerItems(
-                        drawerItemManagePlayers,
+                        drawerHome,
+                        drawerProfile,
+                        drawerQuotations,
                         drawerItemManagePlayersTournaments,
                         new DividerDrawerItem(),
                         drawerItemAbout,
@@ -118,5 +150,6 @@ public class DrawerUtil {
                     }
                 })
                 .build();
+
     }
 }

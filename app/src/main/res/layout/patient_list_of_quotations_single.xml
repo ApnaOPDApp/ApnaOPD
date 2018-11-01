@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edit_text_background"
+    android:id="@+id/patient_quoat_list_layout"
+    android:padding="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/m1"
+        android:id="@+id/patient_quoat_list_retailer_pic"
+        />
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="18dp"
+        android:layout_toRightOf="@id/patient_quoat_list_retailer_pic"
+        android:layout_marginLeft="10dp"
+        android:text="Retailer Name"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:id="@+id/patient_quoat_list_retailer_name"
+        />
+    <TextView
+        android:layout_marginTop="2dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/patient_quoat_list_retailer_name"
+        android:layout_toRightOf="@id/patient_quoat_list_retailer_pic"
+        android:layout_marginLeft="10dp"
+        android:inputType="datetime"
+        android:id="@+id/patient_quoat_list_delivertime"
+        android:text="Delivery Time"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:layout_toRightOf="@id/patient_quoat_list_delivertime"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Discount "
+            android:id="@+id/retailer_list_prescr_offer"
+            android:background="@color/apple_green"
+            />
+        <TextView
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Price"
+            android:id="@+id/retailer_list_prescr_decline"
+            android:background="@color/apple_red"
+            />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
