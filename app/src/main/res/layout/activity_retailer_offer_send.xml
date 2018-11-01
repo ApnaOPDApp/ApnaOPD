@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Retailer.RetailerOfferSendActivity">
+
+    <include layout="@layout/app_bar_patient"
+        android:id="@+id/pat_lis_quot_app_bar"
+        />
+    <ImageView
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@color/apple_green"
+        android:id="@+id/ret_offer_patient_presc"
+        />
+
+    <LinearLayout
+        android:layout_below="@id/ret_offer_patient_presc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:id="@+id/ll"
+        >
+        <EditText
+            android:gravity="center"
+            android:hint="Drug Name"
+            android:id="@+id/drug_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <EditText
+            android:gravity="center"
+            android:hint="Price"
+           android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            />
+        <EditText
+            android:hint="offerPrice"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:id="@+id/offer_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ret_scroll_view"
+        android:layout_below="@id/ll"
+        >
+        <HorizontalScrollView
+            android:id="@+id/table_horizontal_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/table"
+                    android:layout_centerHorizontal="true"
+                    ></TableLayout>
+
+            </RelativeLayout>
+
+        </HorizontalScrollView>
+
+
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/google"
+        android:id="@+id/send_offer_btn"/>
+
+    <Button
+        android:id="@+id/set_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ret_offer_patient_presc"
+        android:layout_alignParentEnd="true"
+        android:text="Set" />
+
+
+</RelativeLayout>
