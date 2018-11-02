@@ -22,7 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Patient.HomeActivity"></activity>
+        <activity android:name=".Patient.HomeActivity">
+        </activity>
         <activity
             android:name=".Patient.MedicineActivity"
             android:parentActivityName=".Patient.HomeActivity" />
@@ -30,10 +31,13 @@
             android:name=".Retailer.RetailerActivity"
             android:parentActivityName=".Patient.HomeActivity" />
         <activity android:name=".Retailer.ListOfPrescriptionActivity" />
-        <activity android:name=".Doctor.DAppointmentViewerActivity"></activity>
+
+        <activity android:name=".Doctor.DAppointmentViewerActivity" />
         <activity android:name=".Patient.ListOfQuotationsActivity" />
         <activity android:name=".Retailer.RetailerOfferSendActivity" />
-        <activity android:name=".Patient.PatientFinalDrugAcceptActivity"></activity>
+        <activity android:name=".Patient.PatientFinalDrugAcceptActivity" />
+        <activity android:name=".SplashActivity">
+        </activity>
     </application>
 
 </manifest>

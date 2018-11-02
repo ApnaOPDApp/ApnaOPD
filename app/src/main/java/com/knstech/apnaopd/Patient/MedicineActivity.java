@@ -24,6 +24,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.BitmapToString;
 import com.knstech.apnaopd.R;
@@ -45,16 +49,19 @@ public class MedicineActivity extends AppCompatActivity {
     private LinearLayout uploadPrescription;
     private final int IMG_REQUEST =1;
     private Bitmap bitmap;
-    private  String url = AppUtils.HOST_ADDRESS+"/api/users";
+    private  String url = AppUtils.HOST_ADDRESS+"/api/prescription";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicine);
+
         med_activity_layout=(RelativeLayout)findViewById(R.id.med_activity_layout);
+
 
         toolbar = (Toolbar)findViewById(R.id.p_toolbar);
         toolbar.setTitle("Pharmacy");
+
         btn_submit=(CardView)findViewById(R.id.med_btn_submit);
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +90,7 @@ public class MedicineActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if(requestCode == IMG_REQUEST && resultCode == RESULT_OK && data!=null){
             Uri path = data.getData();
             try {
@@ -93,18 +101,19 @@ public class MedicineActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             // UPLOAD THE IMAGE
-            final ProgressDialog progressDialog = new ProgressDialog(getApplicationContext());
+           /* final ProgressDialog progressDialog = new ProgressDialog(getApplicationContext());
             progressDialog.setMessage("Uploading...");
-            progressDialog.show();
+            progressDialog.show();*/
             StringRequest stringRequest = new StringRequest(Request.Method.POST,
                     url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            progressDialog.hide();
+                          //  progressDialog.hide();
 
                             // JASON OBJECT RESPONSE
                             try {
+
                                 JSONObject jsonObject = new JSONObject(response);
                                 String res = jsonObject.getString("response");
                                 Toast.makeText(MedicineActivity.this, res, Toast.LENGTH_SHORT).show();
@@ -121,18 +130,20 @@ public class MedicineActivity extends AppCompatActivity {
                         public void onErrorResponse(VolleyError error) {
                             Toast.makeText(MedicineActivity.this,error.toString(), Toast.LENGTH_SHORT).show();
 
-                            progressDialog.hide();
+                           // progressDialog.hide();
                         }
                     }
 
             )
             {
+
+
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
 
                     Map<String,String> params = new HashMap<>();
-                    params.put("Name","NAME OF PRESCRIPTION OF USER");
-                    params.put("IMAGE OF PRESCRIPTION",new BitmapToString().imageToString(bitmap));
+                    params.put("address_id","2");
+                    params.put("prescription_link",new BitmapToString().imageToString(bitmap));
 
 
                     return params;

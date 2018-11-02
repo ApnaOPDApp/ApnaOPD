@@ -45,24 +45,13 @@
             android:layout_below="@id/upload_prescription"
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
-
+            android:padding="5dp"
             android:weightSum="2"
             >
-            <EditText
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/edit_text_background"
-                android:hint="  CITY NAME"/>
-            <EditText
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/edit_text_background"
-                android:hint="  PINCODE"
-                />
+          <android.support.v7.widget.AppCompatSpinner
+              android:layout_width="match_parent"
+              android:layout_height="40dp"
+              ></android.support.v7.widget.AppCompatSpinner>
         </LinearLayout>
 
 

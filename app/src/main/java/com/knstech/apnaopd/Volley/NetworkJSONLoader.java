@@ -5,29 +5,28 @@ package com.knstech.apnaopd.Volley;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
 public class NetworkJSONLoader {
     Context context;
-    TextView display;
+    JSONObject res;
 
-    public NetworkJSONLoader(Context context, TextView display) {
+    public NetworkJSONLoader(Context context) {
         this.context = context;
-        this.display = display;
     }
 
-    public void requestJSON(String url){
+    public JSONObject requestJSON(String url){
         // TAG IS USED TO CANCEL THE REQUEST
         String tag_json_obj = "json_obj_req";
-        final ProgressDialog progressDialog=new ProgressDialog(context);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET, url,
@@ -35,15 +34,15 @@ public class NetworkJSONLoader {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        display.setText(response.toString());
-                        progressDialog.hide();
+                        res= response;
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        display.setText(error.toString());
-                        progressDialog.hide();
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+
                     }
                 }
 
@@ -51,5 +50,7 @@ public class NetworkJSONLoader {
 
         //Adding request to request queue;
         VolleySingleton.getmInstance().addToRequestQueue(jsonObjectRequest,tag_json_obj);
+
+        return res;
     }
 }
