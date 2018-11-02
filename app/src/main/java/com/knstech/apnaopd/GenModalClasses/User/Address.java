@@ -3,25 +3,35 @@ package com.knstech.apnaopd.GenModalClasses.User;
 
 public class Address {
 
-    private String houseLane;
+
+    private String full_name;
+
+    private String house_no;
     private String locality;
 
     private String city;
-
-    private String district;
+    private String landmark;
 
     private String state;
 
     private String pincode;
 
-    private String phoneNumber;
+    private String phone_number;
 
-    public String getHouseLane() {
-        return houseLane;
+    public String getFull_name() {
+        return full_name;
     }
 
-    public void setHouseLane(String houseLane) {
-        this.houseLane = houseLane;
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
+
+    public String getHouse_no() {
+        return house_no;
+    }
+
+    public void setHouse_no(String house_no) {
+        this.house_no = house_no;
     }
 
     public String getLocality() {
@@ -40,12 +50,12 @@ public class Address {
         this.city = city;
     }
 
-    public String getDistrict() {
-        return district;
+    public String getLandmark() {
+        return landmark;
     }
 
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setLandmark(String landmark) {
+        this.landmark = landmark;
     }
 
     public String getState() {
@@ -64,12 +74,11 @@ public class Address {
         this.pincode = pincode;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
-
 }

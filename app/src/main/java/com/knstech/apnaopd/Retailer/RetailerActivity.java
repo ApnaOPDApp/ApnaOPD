@@ -17,6 +17,13 @@ public class RetailerActivity extends AppCompatActivity {
 
     private CardView list_of_prescription,confirmed_orders;
 
+
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +44,7 @@ public class RetailerActivity extends AppCompatActivity {
        list_of_prescription.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               startActivity(new Intent(RetailerActivity.this,RetailerOfferSendActivity.class));
+               startActivity(new Intent(RetailerActivity.this,ListOfPrescriptionActivity.class));
            }
        });
 
