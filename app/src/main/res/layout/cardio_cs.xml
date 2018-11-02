@@ -26,6 +26,7 @@
                     android:id="@+id/pulse"
                     android:layout_width="337dp"
                     android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
                     android:hint="Enter Pulse..." />
             </LinearLayout>
         <LinearLayout

@@ -2,6 +2,7 @@
 package com.knstech.apnaopd.GenModalClasses.Doctor;
 
 
+import com.google.gson.Gson;
 
 public class Address {
 
@@ -19,6 +20,12 @@ public class Address {
     private String pincode;
 
     private String phoneNumber;
+
+    public static Address parseFromString(String json)
+    {
+        Gson gson=new Gson();
+        return gson.fromJson(json,Address.class);
+    }
 
     public String getHouseLane() {
         return houseLane;

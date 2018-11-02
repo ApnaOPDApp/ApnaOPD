@@ -1,6 +1,15 @@
 
 package com.knstech.apnaopd.GenModalClasses.User;
 
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Address {
 
 
@@ -29,6 +38,25 @@ public class Address {
     public String getHouse_no() {
         return house_no;
     }
+    public static List<Address> parseFromJson(String json)
+    {
+        List<Address> list=new ArrayList<>();
+        try {
+            Gson gson=new Gson();
+            JSONArray array=new JSONArray(json);
+            for(int i=0;i<array.length();i++)
+            {
+                Address address=gson.fromJson(array.get(i).toString(),Address.class);
+                list.add(address);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+
+    }
+
 
     public void setHouse_no(String house_no) {
         this.house_no = house_no;

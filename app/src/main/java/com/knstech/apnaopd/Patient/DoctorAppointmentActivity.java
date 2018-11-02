@@ -32,6 +32,8 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
     public static int state=1;
     private String[] deptAr;
     private View deptView;
+    private EditText fee;
+    private String feeStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
         rootLayout.addView(deptView);
         submit=deptView.findViewById(R.id.submit);
         deptSpinner=deptView.findViewById(R.id.deptSpinner);
+        fee=deptView.findViewById(R.id.fees);
         getArrayFromServer();
 
         //set submit functionality
@@ -50,6 +53,7 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setChoice();
+                feeStr=fee.getText().toString();
                 toggle();
             }
         });
@@ -57,7 +61,10 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
 
 
     }
-
+    public String getFeeStr()
+    {
+        return feeStr;
+    }
     private void toggle() {
         if(state==1)
         {
@@ -149,5 +156,9 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    public String getDepartment() {
+        return String.valueOf(deptSpinner.getSelectedItemPosition());
     }
 }

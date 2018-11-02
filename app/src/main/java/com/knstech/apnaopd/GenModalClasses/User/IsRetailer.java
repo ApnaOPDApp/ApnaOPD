@@ -2,6 +2,7 @@
 package com.knstech.apnaopd.GenModalClasses.User;
 
 
+import com.google.gson.Gson;
 
 public class IsRetailer {
 
@@ -10,6 +11,12 @@ public class IsRetailer {
 
     private String _default;
 
+    public static IsRetailer parseFromJson(String json)
+    {
+        Gson gson=new Gson();
+        return gson.fromJson(json,IsRetailer.class);
+    }
+    
     public String getType() {
         return type;
     }

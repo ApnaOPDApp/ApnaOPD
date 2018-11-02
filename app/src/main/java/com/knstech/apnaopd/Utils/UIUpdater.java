@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.knstech.apnaopd.Patient.DoctorAppointmentActivity;
 import com.knstech.apnaopd.Patient.DoctorListActivity;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
@@ -98,7 +99,7 @@ public class UIUpdater {
                 map.put("Pulse",pulseResp);
                 map.put("Comment",commentResp);
 
-                sendResponse(map,mContext);
+                sendResponse(mContext);
             }
         });
 
@@ -159,7 +160,7 @@ public class UIUpdater {
                 map.put("Miscellaneous",miscResp);
                 map.put("Comment",commentResp);
                 
-                sendResponse(map,mContext);
+                sendResponse(mContext);
             }
         });
 
@@ -220,7 +221,7 @@ public class UIUpdater {
                 map.put("Miscellaneous",miscResp);
                 map.put("Comment",commentResp);
 
-                sendResponse(map,mContext);
+                sendResponse(mContext);
             }
         });
     }
@@ -280,7 +281,7 @@ public class UIUpdater {
                 map.put("Other",otherResp);
                 map.put("Comment",commentResp);
 
-                sendResponse(map,mContext);
+                sendResponse(mContext);
             }
         });
     }
@@ -349,7 +350,7 @@ public class UIUpdater {
                 map.put("Miscellaneous",miscResp);
                 map.put("Comment",commentResp);
 
-                sendResponse(map,mContext);
+                sendResponse(mContext);
             }
         });
 
@@ -432,7 +433,8 @@ public class UIUpdater {
                 map.put("Fever",feverResp);
 
                 sendResponse(map,mContext);*/
-                activity.startActivity(new Intent(activity,DoctorListActivity.class));
+                //activity.startActivity(new Intent(activity,DoctorListActivity.class));
+                sendResponse(mContext);
             }
         });
 
@@ -450,29 +452,22 @@ public class UIUpdater {
             }
         });
     }
-    private static void sendResponse(final Map map, final Context mContext) {
+    private static void sendResponse( final Context mContext) {
 
-        RequestPost post=new RequestPost(mContext);
-        final ProgressDialog mProgress=new ProgressDialog(mContext);
-        mProgress.setMessage(mContext.getResources().getString(R.string.dialog_wait));
+        final String fee,dept;
+        final DoctorAppointmentActivity activity = (DoctorAppointmentActivity) mContext;
 
+        //get filters
+        fee=activity.getFeeStr();
+        dept=activity.getDepartment();
 
-        post.sendJSON(url, map, new RequestPost.PostResponseListener() {
-            @Override
-            public void onResponse() {
-                mProgress.dismiss();
-                AppCompatActivity activity = (AppCompatActivity) mContext;
-                Intent i = new Intent(activity, DoctorListActivity.class);
-                activity.startActivity(i);
-                activity.finish();
-            }
-        }, new RequestPost.PostErrorListener() {
-            @Override
-            public void onError() {
-                mProgress.dismiss();
-                Toast.makeText(mContext, mContext.getString(R.string.send_error), Toast.LENGTH_SHORT).show();
-            }
-        });
+        //start list activity
+        Intent i = new Intent(activity, DoctorListActivity.class);
+        i.putExtra("Fee",fee);
+        i.putExtra("Department",dept);
+        activity.startActivity(i);
+        activity.finish();
+
     }
 
 }

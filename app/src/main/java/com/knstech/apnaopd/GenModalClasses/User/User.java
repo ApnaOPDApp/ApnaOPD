@@ -1,6 +1,12 @@
 
 package com.knstech.apnaopd.GenModalClasses.User;
 
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -27,6 +33,42 @@ public class User {
     private IsManufacturer isManufacturer;
 
     private IsSupplier isSupplier;
+
+    public User parseFromJson(String json)
+    {
+        try {
+
+            JSONObject object=new JSONObject(json);
+
+            setName(object.getString("name"));
+            setImageUrl(object.getString("image_url"));
+            setEmail(object.getString("email"));
+            if(object.has("gid"))
+                setGid(object.getString("gid"));
+
+            List<Address> addresses=Address.parseFromJson(object.getString("address"));
+            List<Casesheet> casesheets=Casesheet.parseFromJson(object.getString("casesheet"));
+            IsDoctor isDoctor=IsDoctor.parseFromJson(object.getString("is_doctor"));
+            IsManufacturer isManufacturer=IsManufacturer.parseFromJson(object.getString("is_manufacturer"));
+            IsRetailer isRetailer=IsRetailer.parseFromJson(object.getString("is_retailer"));
+            IsSupplier isSupplier=IsSupplier.parseFromJson(object.getString("is_supplier"));
+            IsWholesaler isWholesaler=IsWholesaler.parseFromJson(object.getString("is_wholesaler"));
+
+            setAddress(addresses);
+            setCasesheet(casesheets);
+            setIsDoctor(isDoctor);
+            setIsManufacturer(isManufacturer);
+            setIsRetailer(isRetailer);
+            setIsSupplier(isSupplier);
+            setIsWholesaler(isWholesaler);
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
 
     public String getName() {
         return name;

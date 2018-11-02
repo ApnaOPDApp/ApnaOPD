@@ -26,7 +26,28 @@
                 android:layout_alignParentTop="true"
                 android:background="@drawable/ic_launcher_background"
                 android:src="@drawable/ic_launcher_foreground" />
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/doctorName"
+                android:text="@string/doctor_name"
+                android:textSize="19dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fees"
+                android:text="Fees :"
+                android:textSize="19dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/time_slab"/>
+            <!--TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/city"
+                android:text="City :"/-->
             <Button
                 android:id="@+id/book"
                 android:layout_width="match_parent"
