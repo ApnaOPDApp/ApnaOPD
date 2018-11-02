@@ -57,11 +57,13 @@
     <string name="dialog_wait">Please wait</string>
     <string name="send_error">There was an Error submitting your response!</string>
     <string name="book_appointment">Book Appointment</string>
-    <string name="time">Time</string>
     <string name="fees">Fees</string>
     <string name="date">Date</string>
     <string name="city">City</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="name">Name</string>
+    <string name="time">Time</string>
+    <string name="info">Touch For more Info</string>
 
 </resources>

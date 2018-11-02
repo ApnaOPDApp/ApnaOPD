@@ -153,13 +153,13 @@ public class UIUpdater {
 
                 commentResp=comment.getText().toString();
 
-                //put in map
+
                 Map<String,String> map=new HashMap<>();
                 map.put("Condition",condResp);
                 map.put("Other",otherResp);
                 map.put("Miscellaneous",miscResp);
                 map.put("Comment",commentResp);
-                
+
                 sendResponse(mContext);
             }
         });
@@ -466,7 +466,6 @@ public class UIUpdater {
         i.putExtra("Fee",fee);
         i.putExtra("Department",dept);
         activity.startActivity(i);
-        activity.finish();
 
     }
 
