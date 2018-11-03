@@ -1,5 +1,6 @@
 package com.knstech.apnaopd;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import com.knstech.apnaopd.Patient.HomeActivity;
 import com.knstech.apnaopd.Patient.ListOfQuotationsActivity;
+import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.Retailer.RetailerActivity;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -26,7 +28,7 @@ public class DrawerUtil {
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
-                .withHeaderBackground(R.color.apple_orange)
+                .withHeaderBackground(R.color.colorPrimary)
                 .addProfiles(
                         new ProfileDrawerItem()
                                 .withName("Doctor")
@@ -79,7 +81,19 @@ public class DrawerUtil {
         PrimaryDrawerItem drawerProfile = new PrimaryDrawerItem()
                 .withIdentifier(2)
                 .withName("Profile")
-                .withIcon(R.drawable.google);
+                .withIcon(R.drawable.google)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        if(drawerItem.getIdentifier() == 2){
+                            activity.startActivity(new Intent(activity, AddressActivity.class));
+                            activity.finish();
+                        }
+
+                        return true;
+                    }
+                })
+                ;
 
         PrimaryDrawerItem drawerQuotations = new PrimaryDrawerItem()
                 .withIdentifier(3)
@@ -90,6 +104,7 @@ public class DrawerUtil {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem.getIdentifier() == 3){
                             activity.startActivity(new Intent(activity,ListOfQuotationsActivity.class));
+                            activity.finish();
                         }
 
                         return false;
@@ -99,7 +114,7 @@ public class DrawerUtil {
 
         PrimaryDrawerItem drawerItemManagePlayersTournaments = new PrimaryDrawerItem()
                 .withIdentifier(4)
-                .withName("Checkout")
+                .withName("Add Address")
                 .withIcon(R.drawable.google);
 
 
@@ -138,17 +153,6 @@ public class DrawerUtil {
                         drawerItemHelp,
                         drawerItemDonate
                 )
-                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if (drawerItem.getIdentifier() == 2 && !(activity instanceof HomeActivity)) {
-                            // load tournament screen
-                            Intent intent = new Intent(activity, HomeActivity.class);
-                            view.getContext().startActivity(intent);
-                        }
-                        return true;
-                    }
-                })
                 .build();
 
     }

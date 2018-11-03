@@ -27,7 +27,7 @@ public class ListOfPrescriptionActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter mAdaptor;
     private List<PojoUploadPrescription> data;
-    String url= AppUtils.HOST_ADDRESS+"/api/prescription";
+    String url= AppUtils.HOST_ADDRESS+"/api/presc_list/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

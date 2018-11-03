@@ -39,47 +39,30 @@
                 />
         </LinearLayout>
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/upload_prescription"
+            android:layout_height="300dp"
             android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="2"
+            android:id="@+id/med_scroll"
+            android:layout_below="@id/upload_prescription"
             >
-          <android.support.v7.widget.AppCompatSpinner
-              android:layout_width="match_parent"
-              android:layout_height="40dp"
-              ></android.support.v7.widget.AppCompatSpinner>
-        </LinearLayout>
+
+        </android.support.v7.widget.RecyclerView>
+
+
 
 
         <EditText
-
+            android:hint="Short comment"
             android:padding="5dp"
             android:gravity="top"
             android:background="@drawable/edit_text_background"
             android:id="@+id/editText"
             android:layout_width="367dp"
-            android:layout_height="262dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="151dp"
-            android:ems="10"
+            android:layout_height="62dp"
+            android:maxLines="3"
+            android:layout_below="@id/med_scroll"
             android:inputType="textMultiLine"
-            />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/upload_prescription"
-            android:layout_marginTop="127dp"
-            android:text="Comments: "
-            android:textColor="#000"
-            android:textStyle="bold"
             />
 
         <android.support.v7.widget.CardView
@@ -93,15 +76,38 @@
             android:id="@+id/med_btn_submit"
             app:cardCornerRadius="5dp">
 
-                <TextView
-                    android:id="@+id/tv_med_submit"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textColor="#000"
-                    android:textStyle="bold"
-                    android:textSize="18dp"
-                    android:text=" SUBMIT" />
+            <TextView
+                android:id="@+id/tv_med_submit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=" SUBMIT"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="141dp"
+            android:layout_height="45dp"
+            android:layout_alignStart="@+id/upload_prescription"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="21dp"
+            android:elevation="15dp"
+            app:cardBackgroundColor="@color/apple_green"
+            android:id="@+id/med_btn_add_add"
+            app:cardCornerRadius="5dp">
+
+            <TextView
+                android:id="@+id/tv_med_add_add"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=" Add Address"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
         </android.support.v7.widget.CardView>
 

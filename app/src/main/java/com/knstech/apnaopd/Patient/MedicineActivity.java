@@ -2,14 +2,18 @@ package com.knstech.apnaopd.Patient;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,16 +32,22 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.gson.JsonObject;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.BitmapToString;
+import com.knstech.apnaopd.GenModalClasses.User.Address;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.Connections.RequestGet;
+import com.knstech.apnaopd.Utils.Listeners.AddressClickedListener;
 import com.knstech.apnaopd.Volley.VolleySingleton;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MedicineActivity extends AppCompatActivity {
@@ -49,6 +59,12 @@ public class MedicineActivity extends AppCompatActivity {
     private LinearLayout uploadPrescription;
     private final int IMG_REQUEST =1;
     private Bitmap bitmap;
+    private RecyclerView addressView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter mAdaptor;
+    private List<Address> addressPojoList;
+    private Address selectedAddress;
+
     private  String url = AppUtils.HOST_ADDRESS+"/api/prescription";
 
     @Override
@@ -57,10 +73,16 @@ public class MedicineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medicine);
 
         med_activity_layout=(RelativeLayout)findViewById(R.id.med_activity_layout);
+        addressView =(RecyclerView)findViewById(R.id.med_scroll);
+
 
 
         toolbar = (Toolbar)findViewById(R.id.p_toolbar);
         toolbar.setTitle("Pharmacy");
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowCustomEnabled(true);
 
         btn_submit=(CardView)findViewById(R.id.med_btn_submit);
         btn_submit.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +106,44 @@ public class MedicineActivity extends AppCompatActivity {
         });
 
 
+        populateRecyclerView();
+
+
+    }
+
+    private void populateRecyclerView() {
+
+        addressView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        addressView.setLayoutManager(layoutManager);
+        mAdaptor = new AddressGetAdaptor(addressPojoList, getApplicationContext(), new AddressClickedListener() {
+            @Override
+            public void onAddressChecked(Address address) {
+                selectedAddress=address;
+            }
+        });
+        addressView.setAdapter(mAdaptor);
+
+        RequestGet getRequest=new RequestGet(this);
+        getRequest.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                for(int i=0;i<jsonArray.length();i++)
+                {
+
+                    try {
+                        JSONObject object= (JSONObject) jsonArray.get(i);
+                        Address address= (Address) Address.parseFromJson(object.getJSONObject("address").toString());
+                        addressPojoList.add(address);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                mAdaptor.notifyDataSetChanged();
+            }
+        });
 
     }
 

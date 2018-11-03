@@ -1,6 +1,7 @@
 package com.knstech.apnaopd.Patient;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -26,6 +27,10 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         toolbar = (Toolbar)findViewById(R.id.p_toolbar);
         toolbar.setTitle("ApnaOpd Home");
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowCustomEnabled(true);
 
         DrawerUtil.getDrawer(this,toolbar);
 

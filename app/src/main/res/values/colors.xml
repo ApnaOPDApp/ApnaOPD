@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#37474f</color>
-    <color name="colorPrimaryDark">#102027</color>
-    <color name="colorAccent">#62717b</color>
+    <color name="colorPrimary">#1b5e20</color>
+    <color name="colorPrimaryDark">#003300</color>
+    <color name="colorAccent">#4c8c4a</color>
 
-    <color name="colorSecondary">#b6b6b6</color>
-    <color name="colorSecondaryDark">#868686</color>
-    <color name="colorSecondaryAccent">#e8e8e8</color>
+    <color name="colorSecondary">#00e676</color>
+    <color name="colorSecondaryDark">#00b248</color>
+    <color name="colorSecondaryAccent">#66ffa6</color>
 
     <color name="text_colorSecondary">#000000</color>
     <color name="text_color_primary">#ffffff</color>
@@ -17,11 +17,24 @@
     <color name="apple_red">#FF3B30</color>
     <color name="apple_orange">#FF9500</color>
     <color name="apple_yellow">#FFCC00</color>
-    <color name="apple_green">#4CD964</color>
+    <color name="apple_green">#71B238</color>
     <color name="apple_tealBlue">#5AC8FA</color>
     <color name="apple_blue">#007AFF</color>
     <color name="apple_purple">#5856D6</color>
     <color name="apple_pink">#FF2D55</color>
     <color name="black_app">#c7000000</color>
+
+    <color name="apple_red_trans">#62ff3b30</color>
+    <color name="apple_orange_trans">#44ff9500</color>
+    <color name="apple_yellow_trans">#85ffcc00</color>
+    <color name="apple_green_trans">#5a76e118</color>
+    <color name="apple_tealBlue_trans">#865ac8fa</color>
+    <color name="apple_blue_trans">#7b007aff</color>
+    <color name="apple_purple_trans">#855856d6</color>
+    <color name="apple_pink_trans">#88ff2d34</color>
+    <color name="apple_white_trans">#84ffffff</color>
+
+    <color name="grey_material">#e8e8e8</color>
+
 
 </resources>

@@ -12,13 +12,14 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.knstech.apnaopd.ApnaOPDApp;
 import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.GenModalClasses.User.User;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserAuth {
 
-    private static User mUser;
+    private  User mUser;
 
     public interface SignInCompleteListener{
         void onComplete();
@@ -26,7 +27,7 @@ public class UserAuth {
 
     public UserAuth(){}
 
-    public static UserAuth getInstance(){
+    public com.knstech.apnaopd.GenModalClasses.User.UserAuth getInstance(){
          return ApnaOPDApp.getUserAuth();
     }
 
@@ -36,6 +37,8 @@ public class UserAuth {
 
 
     public void signInGoogle(final Context context, final GoogleSignInAccount gAcc, final SignInCompleteListener listener){
+
+        final User user=new User();
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
 //        String url ="https://google.com";
@@ -52,7 +55,7 @@ public class UserAuth {
                         if(response.equals("null") || response.equals("")){
                            signUpGoogle(context,gAcc, listener);
                         }else{
-                            mUser = User.parseFromJson(response);
+                            mUser = user.parseFromJson(response);
                             listener.onComplete();
                         }
                     }
