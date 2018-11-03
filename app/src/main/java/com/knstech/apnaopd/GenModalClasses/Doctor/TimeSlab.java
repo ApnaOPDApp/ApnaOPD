@@ -15,11 +15,9 @@ public class TimeSlab {
 
     private String available;
 
-    private String start;
+    private String sl;
 
-    private String end;
-
-    private String timePer;
+    private String Persons;
 
     public static List<TimeSlab> parsefromJson(String json) {
         List<TimeSlab> list = new ArrayList<>();
@@ -45,28 +43,20 @@ public class TimeSlab {
         this.available = available;
     }
 
-    public String getStart() {
-        return start;
+
+    public String getSl() {
+        return sl;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setSl(String sl) {
+        this.sl = sl;
     }
 
-    public String getEnd() {
-        return end;
+    public String getPersons() {
+        return Persons;
     }
 
-    public void setEnd(String end) {
-        this.end = end;
+    public void setPersons(String persons) {
+        Persons = persons;
     }
-
-    public String getTimePer() {
-        return timePer;
-    }
-
-    public void setTimePer(String timePer) {
-        this.timePer = timePer;
-    }
-
 }

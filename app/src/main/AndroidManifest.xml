@@ -37,6 +37,9 @@
         </activity>
         <activity android:name=".Profile.AddressActivity" />
         <activity android:name=".Profile.ProfileActivity"></activity>
+
+        <activity android:name=".Doctor.DoctorHomeActivity" />
+        <activity android:name=".Doctor.TimeSlotActivity"></activity>
     </application>
 
 </manifest>

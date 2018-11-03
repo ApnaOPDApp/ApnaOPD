@@ -9,7 +9,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.knstech.apnaopd.Utils.Connections.RequestGet;
+import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.Utils.Connections.RequestSingleton;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,11 +32,11 @@ public class UserAuth {
     }
     public void signInGoogle(final Context mContext, final GoogleSignInAccount account, final SignInCompleteListener listener)
     {
-        String url="shubham";
+        String url= AppUtils.HOST_ADDRESS+"/api/users/"+account.getId();
         StringRequest request=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if(response.equals("null"))
+                if(response.equals(""))
                 {
                     signUpGoogle(mContext,account,listener);
                 }
@@ -51,13 +52,15 @@ public class UserAuth {
                 Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+        RequestSingleton.getInstance(mContext).addToQueue(request);
     }
     public void signUpGoogle(final Context mContext, final GoogleSignInAccount account, final SignInCompleteListener listener)
     {
-        String url="Shubham";
+        String url=AppUtils.HOST_ADDRESS+"/api/users/";
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                mUser.parseFromJson(response);
                 listener.onComplete();
             }
         }, new Response.ErrorListener() {
@@ -77,5 +80,6 @@ public class UserAuth {
                 return map;
             }
         };
+        RequestSingleton.getInstance(mContext).addToQueue(request);
     }
 }

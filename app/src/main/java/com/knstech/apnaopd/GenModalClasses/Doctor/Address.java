@@ -7,13 +7,32 @@ import com.google.gson.Gson;
 public class Address {
 
 
-    private String houseLane;
+
+    private String house_no;
+
+    public String getFull_name() {
+        return full_name;
+    }
+
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
+
+    public String getLandmark() {
+        return landmark;
+    }
+
+    public void setLandmark(String landmark) {
+        this.landmark = landmark;
+    }
+
+    private String full_name;
+
+    private String landmark;
 
     private String locality;
 
     private String city;
-
-    private String district;
 
     private String state;
 
@@ -28,11 +47,11 @@ public class Address {
     }
 
     public String getHouseLane() {
-        return houseLane;
+        return house_no;
     }
 
     public void setHouseLane(String houseLane) {
-        this.houseLane = houseLane;
+        this.house_no = houseLane;
     }
 
     public String getLocality() {
@@ -49,14 +68,6 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
     }
 
     public String getState() {

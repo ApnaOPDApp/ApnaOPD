@@ -1,6 +1,5 @@
 package com.knstech.apnaopd.Utils;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,410 +9,494 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
 import com.knstech.apnaopd.Patient.DoctorAppointmentActivity;
 import com.knstech.apnaopd.Patient.DoctorListActivity;
 import com.knstech.apnaopd.R;
-import com.knstech.apnaopd.Utils.Connections.RequestPost;
+import com.knstech.apnaopd.Utils.Connections.RequestPut;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class UIUpdater {
     public static final int IMG = 1;
-    private static String url;
+    private static String url= AppUtils.HOST_ADDRESS+"/api/casesheets/"+ UserAuth.getmUser().getGid();
 
-    public static void updateCardio(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
+    public static void updateCardio(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
         final EditText pulse,comment;
         final Spinner neckVeins,chestPain,respiration,rhythm,bleeding,condition;
         Button fileUpload,submit;
 
-        AppCompatActivity activity=(AppCompatActivity)mContext;
+        try {
 
-        //update view
-        rootLayout.removeView(selectedCS);
-        selectedCS= LayoutInflater.from(activity).inflate(R.layout.cardio_cs,null);
-        rootLayout.addView(selectedCS);
+            AppCompatActivity activity=(AppCompatActivity)mContext;
 
-        //init editText
-        pulse=selectedCS.findViewById(R.id.pulse);
-        comment=selectedCS.findViewById(R.id.comment);
+            //update view
+            rootLayout.removeView(selectedCS);
+            selectedCS= LayoutInflater.from(activity).inflate(R.layout.cardio_cs,null);
+            rootLayout.addView(selectedCS);
 
-        //init spinners
-        neckVeins=selectedCS.findViewById(R.id.neckVeins);
-        chestPain=selectedCS.findViewById(R.id.chestPain);
-        respiration=selectedCS.findViewById(R.id.respiration);
-        rhythm=selectedCS.findViewById(R.id.rhythm);
-        bleeding=selectedCS.findViewById(R.id.bleeding);
-        condition=selectedCS.findViewById(R.id.condition);
+            //init editText
+            pulse=selectedCS.findViewById(R.id.pulse);
+            comment=selectedCS.findViewById(R.id.comment);
 
-        //init buttons
-        fileUpload=selectedCS.findViewById(R.id.upload);
-        submit=selectedCS.findViewById(R.id.submit);
+            //init spinners
+            neckVeins=selectedCS.findViewById(R.id.neckVeins);
+            chestPain=selectedCS.findViewById(R.id.chestPain);
+            respiration=selectedCS.findViewById(R.id.respiration);
+            rhythm=selectedCS.findViewById(R.id.rhythm);
+            bleeding=selectedCS.findViewById(R.id.bleeding);
+            condition=selectedCS.findViewById(R.id.condition);
 
-        String bleedAr[]=mContext.getResources().getStringArray(R.array.bleed_cardio);
-        String rhythmAr[]=mContext.getResources().getStringArray(R.array.rhythm_cardio);
-        String chestPainAr[]=mContext.getResources().getStringArray(R.array.chest_cardio);
-        String respAr[]=mContext.getResources().getStringArray(R.array.resp_cardio);
-        String neckAr[]=mContext.getResources().getStringArray(R.array.neck_cardio);
-        String conditionAr[]=mContext.getResources().getStringArray(R.array.condition_cardio);
-        //setAdapters
-        AdapterUtil.setSpinnerAdapter(neckVeins,neckAr,activity);
-        AdapterUtil.setSpinnerAdapter(chestPain,chestPainAr,activity);
-        AdapterUtil.setSpinnerAdapter(respiration,respAr,activity);
-        AdapterUtil.setSpinnerAdapter(rhythm,rhythmAr,activity);
-        AdapterUtil.setSpinnerAdapter(bleeding,bleedAr,activity);
-        AdapterUtil.setSpinnerAdapter(condition,conditionAr,activity);
+            //init buttons
+            fileUpload=selectedCS.findViewById(R.id.upload);
+            submit=selectedCS.findViewById(R.id.submit);
+
+            String bleedAr[]=getArrayFromJSON(object.getJSONArray("bleed_cardio"));
+            String rhythmAr[]=getArrayFromJSON(object.getJSONArray("rhythm_cardio"));
+            String chestPainAr[]=getArrayFromJSON(object.getJSONArray("chest_cardio"));
+            String respAr[]=getArrayFromJSON(object.getJSONArray("resp_cardio"));
+            String neckAr[]=getArrayFromJSON(object.getJSONArray("neck_cardio"));
+            String conditionAr[]=getArrayFromJSON(object.getJSONArray("condition_cardio"));
+            //setAdapters
+            AdapterUtil.setSpinnerAdapter(neckVeins,neckAr,activity);
+            AdapterUtil.setSpinnerAdapter(chestPain,chestPainAr,activity);
+            AdapterUtil.setSpinnerAdapter(respiration,respAr,activity);
+            AdapterUtil.setSpinnerAdapter(rhythm,rhythmAr,activity);
+            AdapterUtil.setSpinnerAdapter(bleeding,bleedAr,activity);
+            AdapterUtil.setSpinnerAdapter(condition,conditionAr,activity);
 
 
-        //init buttons
-        submit=activity.findViewById(R.id.submit);
-        fileUpload=activity.findViewById(R.id.upload);
+            //init buttons
+            submit=activity.findViewById(R.id.submit);
+            fileUpload=activity.findViewById(R.id.upload);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //collect response
-                String bleedResp,rhythmResp,chestResp,respResp,neckResp,condResp;
-                String pulseResp,commentResp;
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //collect response
+                    String bleedResp,rhythmResp,chestResp,respResp,neckResp,condResp;
+                    String pulseResp,commentResp;
 
-                bleedResp=bleeding.getSelectedItem().toString();
-                rhythmResp=rhythm.getSelectedItem().toString();
-                chestResp=chestPain.getSelectedItem().toString();
-                respResp=respiration.getSelectedItem().toString();
-                neckResp=neckVeins.getSelectedItem().toString();
-                condResp=condition.getSelectedItem().toString();
+                    bleedResp=""+bleeding.getSelectedItemPosition();
+                    rhythmResp=""+rhythm.getSelectedItemPosition();
+                    chestResp=""+chestPain.getSelectedItemPosition();
+                    respResp=""+respiration.getSelectedItemPosition();
+                    neckResp=""+neckVeins.getSelectedItemPosition();
+                    condResp=""+condition.getSelectedItemPosition();
 
-                pulseResp=pulse.getText().toString();
-                commentResp=comment.getText().toString();
+                    pulseResp=pulse.getText().toString();
+                    commentResp=comment.getText().toString();
 
-                //put response in map
-                Map<String,String> map=new HashMap<>();
-                map.put("Bleeding",bleedResp);
-                map.put("Chest Pain",chestResp);
-                map.put("Rhythm",rhythmResp);
-                map.put("Respiration",respResp);
-                map.put("Neck Pain",neckResp);
-                map.put("Condition",condResp);
-                map.put("Pulse",pulseResp);
-                map.put("Comment",commentResp);
+                    //put response in map
+                    Map<String,String> map=new HashMap<>();
+                    map.put("bleeding",bleedResp);
+                    map.put("chestpain",chestResp);
+                    map.put("rhythm",rhythmResp);
+                    map.put("respiration",respResp);
+                    map.put("neckveins",neckResp);
+                    map.put("cardio_condition",condResp);
+                    map.put("pulse",pulseResp);
+                    map.put("comment",commentResp);
 
-                sendResponse(mContext);
-            }
-        });
+                    sendResponse(map, mContext);
+                }
+            });
+
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
 
     }
 
-    public static void updateEar(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
+    private static String[] getArrayFromJSON(JSONArray array) {
+        String ar[]=new String[array.length()];
+
+        for(int i=0;i<ar.length;i++)
+        {
+            try {
+                JSONObject obj=array.getJSONObject(i);
+                ar[i]=obj.getString("title");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        return ar;
+    }
+
+    public static void updateEar(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
 
         final Spinner condition,other,misc;
         Button upload,submit;
         final EditText comment;
 
-        AppCompatActivity activity=(AppCompatActivity)mContext;
+        try {
 
-        //update view
-        rootLayout.removeView(selectedCS);
-        selectedCS= LayoutInflater.from(activity).inflate(R.layout.ear_cs,null);
-        rootLayout.addView(selectedCS);
 
-        //init editText
-        comment=selectedCS.findViewById(R.id.comment);
 
-        //init spinner
-        condition=selectedCS.findViewById(R.id.condition);
-        other=selectedCS.findViewById(R.id.other);
-        misc=selectedCS.findViewById(R.id.misc);
+            AppCompatActivity activity=(AppCompatActivity)mContext;
 
-        //init button
-        upload=selectedCS.findViewById(R.id.upload);
-        submit=selectedCS.findViewById(R.id.submit);
+            //update view
+            rootLayout.removeView(selectedCS);
+            selectedCS= LayoutInflater.from(activity).inflate(R.layout.ear_cs,null);
+            rootLayout.addView(selectedCS);
 
-        //init string arrays
-        String conditionAr[]=mContext.getResources().getStringArray(R.array.condition_ear);
-        String otherAr[]=mContext.getResources().getStringArray(R.array.other_ear);
-        String miscAr[]=mContext.getResources().getStringArray(R.array.misc_ear);
+            //init editText
+            comment=selectedCS.findViewById(R.id.comment);
 
-        AdapterUtil.setSpinnerAdapter(condition,conditionAr,activity);
-        AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
-        AdapterUtil.setSpinnerAdapter(misc,miscAr,activity);
+            //init spinner
+            condition=selectedCS.findViewById(R.id.condition);
+            other=selectedCS.findViewById(R.id.other);
+            misc=selectedCS.findViewById(R.id.misc);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //collect Response
-                String condResp,otherResp,miscResp;
-                String commentResp;
+            //init button
+            upload=selectedCS.findViewById(R.id.upload);
+            submit=selectedCS.findViewById(R.id.submit);
 
-                condResp=condition.getSelectedItem().toString();
-                otherResp=other.getSelectedItem().toString();
-                miscResp=misc.getSelectedItem().toString();
+            //init string arrays
+            String conditionAr[]=getArrayFromJSON(object.getJSONArray("condition_ear"));
+            String otherAr[]=getArrayFromJSON(object.getJSONArray("other_ear"));
+            String miscAr[]=getArrayFromJSON(object.getJSONArray("misc_ear"));
 
-                commentResp=comment.getText().toString();
+            AdapterUtil.setSpinnerAdapter(condition,conditionAr,activity);
+            AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
+            AdapterUtil.setSpinnerAdapter(misc,miscAr,activity);
 
-                //put in map
-                Map<String,String> map=new HashMap<>();
-                map.put("Condition",condResp);
-                map.put("Other",otherResp);
-                map.put("Miscellaneous",miscResp);
-                map.put("Comment",commentResp);
-                
-                sendResponse(mContext);
-            }
-        });
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //collect Response
+                    String condResp,otherResp,miscResp;
+                    String commentResp;
+
+                    condResp=""+condition.getSelectedItemPosition();
+                    otherResp=""+other.getSelectedItemPosition();
+                    miscResp=""+misc.getSelectedItemPosition();
+
+                    commentResp=comment.getText().toString();
+
+
+                    Map<String,String> map=new HashMap<>();
+                    map.put("ear_condition",condResp);
+                    map.put("ear_other",otherResp);
+                    map.put("ear_misc",miscResp);
+                    map.put("comment",commentResp);
+
+                    sendResponse(map, mContext);
+                }
+            });
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
     }
 
-    public static void updateEye(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
+    public static void updateEye(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
 
         final Spinner condition,other,misc;
         final EditText comment;
         Button upload,submit;
 
-        AppCompatActivity activity=(AppCompatActivity)mContext;
 
-        //update view
-        rootLayout.removeView(selectedCS);
-        selectedCS= LayoutInflater.from(activity).inflate(R.layout.eye_cs,null);
-        rootLayout.addView(selectedCS);
+        try {
 
-        //init editText
-        comment=selectedCS.findViewById(R.id.comment);
 
-        //init spinner
-        condition=selectedCS.findViewById(R.id.condition);
-        other=selectedCS.findViewById(R.id.other);
-        misc=selectedCS.findViewById(R.id.misc);
+            AppCompatActivity activity=(AppCompatActivity)mContext;
 
-        //init button
-        upload=selectedCS.findViewById(R.id.upload);
-        submit=selectedCS.findViewById(R.id.submit);
+            //update view
+            rootLayout.removeView(selectedCS);
+            selectedCS= LayoutInflater.from(activity).inflate(R.layout.eye_cs,null);
+            rootLayout.addView(selectedCS);
 
-        //init arrays
-        String conditionAr[]=mContext.getResources().getStringArray(R.array.condition_eye);
-        String otherAr[]=mContext.getResources().getStringArray(R.array.other_eye);
-        String miscAr[]=mContext.getResources().getStringArray(R.array.misc_eye);
+            //init editText
+            comment=selectedCS.findViewById(R.id.comment);
 
-        //set adapter
-        AdapterUtil.setSpinnerAdapter(condition,conditionAr,activity);
-        AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
-        AdapterUtil.setSpinnerAdapter(misc,miscAr,activity);
+            //init spinner
+            condition=selectedCS.findViewById(R.id.condition);
+            other=selectedCS.findViewById(R.id.other);
+            misc=selectedCS.findViewById(R.id.misc);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //collect Response
-                String condResp,otherResp,miscResp;
-                String commentResp;
+            //init button
+            upload=selectedCS.findViewById(R.id.upload);
+            submit=selectedCS.findViewById(R.id.submit);
 
-                condResp=condition.getSelectedItem().toString();
-                otherResp=other.getSelectedItem().toString();
-                miscResp=misc.getSelectedItem().toString();
+            //init arrays
+            String conditionAr[]=getArrayFromJSON(object.getJSONArray("condition_eye"));
+            String otherAr[]=getArrayFromJSON(object.getJSONArray("other_eye"));
+            String miscAr[]=getArrayFromJSON(object.getJSONArray("misc_eye"));
 
-                commentResp=comment.getText().toString();
+            //set adapter
+            AdapterUtil.setSpinnerAdapter(condition,conditionAr,activity);
+            AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
+            AdapterUtil.setSpinnerAdapter(misc,miscAr,activity);
 
-                Map<String,String> map=new HashMap<>();
-                map.put("Condition",condResp);
-                map.put("Other",otherResp);
-                map.put("Miscellaneous",miscResp);
-                map.put("Comment",commentResp);
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //collect Response
+                    String condResp,otherResp,miscResp;
+                    String commentResp;
 
-                sendResponse(mContext);
-            }
-        });
+                    condResp=""+condition.getSelectedItemPosition();
+                    otherResp=""+other.getSelectedItemPosition();
+                    miscResp=""+misc.getSelectedItemPosition();
+
+                    commentResp=comment.getText().toString();
+
+                    Map<String,String> map=new HashMap<>();
+                    map.put("eye_condition",condResp);
+                    map.put("eye_other",otherResp);
+                    map.put("eye_misc",miscResp);
+                    map.put("comment",commentResp);
+
+                    sendResponse(map, mContext);
+                }
+            });
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
-    public static void updateGenito(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
+    public static void updateGenito(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
 
         final Spinner survey,genito,other;
         Button upload,submit;
         final EditText comment;
 
-        AppCompatActivity activity=(AppCompatActivity)mContext;
-
-        //update view
-        rootLayout.removeView(selectedCS);
-        selectedCS= LayoutInflater.from(activity).inflate(R.layout.genito_cs,null);
-        rootLayout.addView(selectedCS);
+        try {
 
 
-        //init editText
-        comment=selectedCS.findViewById(R.id.comment);
+            AppCompatActivity activity=(AppCompatActivity)mContext;
 
-        //init spinner
-        survey=selectedCS.findViewById(R.id.survey);
-        genito=selectedCS.findViewById(R.id.genitourinary);
-        other=selectedCS.findViewById(R.id.other);
+            //update view
+            rootLayout.removeView(selectedCS);
+            selectedCS= LayoutInflater.from(activity).inflate(R.layout.genito_cs,null);
+            rootLayout.addView(selectedCS);
 
-        //init button
-        upload=selectedCS.findViewById(R.id.upload);
-        submit=selectedCS.findViewById(R.id.submit);
 
-        //init array
-        String surveyAr[]=mContext.getResources().getStringArray(R.array.general_genito);
-        String genitoAr[]=mContext.getResources().getStringArray(R.array.genito_genito);
-        String otherAr[]=mContext.getResources().getStringArray(R.array.other_genito);
+            //init editText
+            comment=selectedCS.findViewById(R.id.comment);
 
-        //set adapter
-        AdapterUtil.setSpinnerAdapter(survey,surveyAr,activity);
-        AdapterUtil.setSpinnerAdapter(genito,genitoAr,activity);
-        AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
+            //init spinner
+            survey=selectedCS.findViewById(R.id.survey);
+            genito=selectedCS.findViewById(R.id.genitourinary);
+            other=selectedCS.findViewById(R.id.other);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //collect response
-                String surveyResp,genitoResp,otherResp;
-                String commentResp;
+            //init button
+            upload=selectedCS.findViewById(R.id.upload);
+            submit=selectedCS.findViewById(R.id.submit);
 
-                surveyResp=survey.getSelectedItem().toString();
-                genitoResp=genito.getSelectedItem().toString();
-                otherResp=other.getSelectedItem().toString();
+            //init array
+            String surveyAr[]=getArrayFromJSON(object.getJSONArray("general_genito"));
+            String genitoAr[]=getArrayFromJSON(object.getJSONArray("genito_genito"));
+            String otherAr[]=getArrayFromJSON(object.getJSONArray("other_genito"));
 
-                commentResp=comment.getText().toString();
+            //set adapter
+            AdapterUtil.setSpinnerAdapter(survey,surveyAr,activity);
+            AdapterUtil.setSpinnerAdapter(genito,genitoAr,activity);
+            AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
 
-                Map<String,String> map=new HashMap<>();
-                map.put("General Survey",surveyResp);
-                map.put("Genitourinary",genitoResp);
-                map.put("Other",otherResp);
-                map.put("Comment",commentResp);
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //collect response
+                    String surveyResp,genitoResp,otherResp;
+                    String commentResp;
 
-                sendResponse(mContext);
-            }
-        });
+                    surveyResp=""+survey.getSelectedItemPosition();
+                    genitoResp=""+genito.getSelectedItemPosition();
+                    otherResp=""+other.getSelectedItemPosition();
+
+                    commentResp=comment.getText().toString();
+
+                    Map<String,String> map=new HashMap<>();
+                    map.put("general_survey",surveyResp);
+                    map.put("genito_urinary",genitoResp);
+                    map.put("genito_other",otherResp);
+                    map.put("comment",commentResp);
+
+                    sendResponse(map, mContext);
+                }
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
-    public static void updateNeuro(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
+    public static void updateNeuro(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
 
         final Spinner sensation,behavioural,condition,other,misc;
         Button submit;
         final EditText comment;
 
-        AppCompatActivity activity=(AppCompatActivity)mContext;
 
-        //update view
-        rootLayout.removeView(selectedCS);
-        selectedCS= LayoutInflater.from(activity).inflate(R.layout.neuro_cs,null);
-        rootLayout.addView(selectedCS);
+        try {
 
 
-        //init editText
-        comment=selectedCS.findViewById(R.id.comment);
 
-        //init spinner
-        sensation=selectedCS.findViewById(R.id.sensation);
-        condition=selectedCS.findViewById(R.id.condition);
-        behavioural=selectedCS.findViewById(R.id.behavioural);
-        other=selectedCS.findViewById(R.id.other);
-        misc=selectedCS.findViewById(R.id.misc);
+            AppCompatActivity activity=(AppCompatActivity)mContext;
 
-        //init array
-        String sensationAr[]=mContext.getResources().getStringArray(R.array.sensation_neuro);
-        String behaviouralAr[]=mContext.getResources().getStringArray(R.array.behavioural_neuro);
-        String conditionAr[]=mContext.getResources().getStringArray(R.array.condition_neuro);
-        String otherAr[]=mContext.getResources().getStringArray(R.array.other_neuro);
-        String miscAr[]=mContext.getResources().getStringArray(R.array.misc_neuro);
+            //update view
+            rootLayout.removeView(selectedCS);
+            selectedCS= LayoutInflater.from(activity).inflate(R.layout.neuro_cs,null);
+            rootLayout.addView(selectedCS);
 
-        //set Adapter
-        AdapterUtil.setSpinnerAdapter(sensation,sensationAr,activity);
-        AdapterUtil.setSpinnerAdapter(behavioural,behaviouralAr,activity);
-        AdapterUtil.setSpinnerAdapter(condition,conditionAr,activity);
-        AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
-        AdapterUtil.setSpinnerAdapter(misc,miscAr,activity);
 
-        //init button
-        submit=selectedCS.findViewById(R.id.submit);
+            //init editText
+            comment=selectedCS.findViewById(R.id.comment);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Collect Response
-                String sensationResp,behaviouralResp,condResp,otherResp,miscResp;
-                String commentResp;
+            //init spinner
+            sensation=selectedCS.findViewById(R.id.sensation);
+            condition=selectedCS.findViewById(R.id.condition);
+            behavioural=selectedCS.findViewById(R.id.behavioural);
+            other=selectedCS.findViewById(R.id.other);
+            misc=selectedCS.findViewById(R.id.misc);
 
-                sensationResp=sensation.getSelectedItem().toString();
-                behaviouralResp=behavioural.getSelectedItem().toString();
-                condResp=condition.getSelectedItem().toString();
-                otherResp=other.getSelectedItem().toString();
-                miscResp=misc.getSelectedItem().toString();
+            //init array
+            String sensationAr[]=getArrayFromJSON(object.getJSONArray("sensation_neuro"));
+            String behaviouralAr[]=getArrayFromJSON(object.getJSONArray("behavioural_neuro"));
+            String conditionAr[]=getArrayFromJSON(object.getJSONArray("condition_neuro"));
+            String otherAr[]=getArrayFromJSON(object.getJSONArray("other_neuro"));
+            String miscAr[]=getArrayFromJSON(object.getJSONArray("misc_neuro"));
 
-                commentResp=comment.getText().toString();
+            //set Adapter
+            AdapterUtil.setSpinnerAdapter(sensation,sensationAr,activity);
+            AdapterUtil.setSpinnerAdapter(behavioural,behaviouralAr,activity);
+            AdapterUtil.setSpinnerAdapter(condition,conditionAr,activity);
+            AdapterUtil.setSpinnerAdapter(other,otherAr,activity);
+            AdapterUtil.setSpinnerAdapter(misc,miscAr,activity);
 
-                Map<String,String> map=new HashMap<>();
-                map.put("Sensational Abnormality",sensationResp);
-                map.put("Conditional Abnormality",condResp);
-                map.put("Behavioural Abnormality",behaviouralResp);
-                map.put("Other",otherResp);
-                map.put("Miscellaneous",miscResp);
-                map.put("Comment",commentResp);
+            //init button
+            submit=selectedCS.findViewById(R.id.submit);
 
-                sendResponse(mContext);
-            }
-        });
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Collect Response
+                    String sensationResp,behaviouralResp,condResp,otherResp,miscResp;
+                    String commentResp;
+
+                    sensationResp=""+sensation.getSelectedItemPosition();
+                    behaviouralResp=""+behavioural.getSelectedItemPosition();
+                    condResp=""+condition.getSelectedItemPosition();
+                    otherResp=""+other.getSelectedItemPosition();
+                    miscResp=""+misc.getSelectedItemPosition();
+
+                    commentResp=comment.getText().toString();
+
+                    Map<String,String> map=new HashMap<>();
+                    map.put("sensation_abnormality",sensationResp);
+                    map.put("neuro_conditional",condResp);
+                    map.put("behaviour",behaviouralResp);
+                    map.put("neuro_other",otherResp);
+                    map.put("neuro_misc",miscResp);
+                    map.put("comment",commentResp);
+
+                    sendResponse(map, mContext);
+                }
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
 
     }
 
-    public static void updateGeneral(final Context mContext, RelativeLayout rootLayout, View selectedCS) {
+    public static void updateGeneral(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
 
         final EditText problem,accident,fever,comment;
         final Spinner habit,habitat,emotional,pain,site,vomit;
         Button upload,submit;
 
-        final AppCompatActivity activity=(AppCompatActivity)mContext;
-
-        //update view
-        rootLayout.removeView(selectedCS);
-        selectedCS= LayoutInflater.from(activity).inflate(R.layout.activity_cscreator,null);
-        rootLayout.addView(selectedCS);
+        try {
 
 
-        //init editText
-        comment=selectedCS.findViewById(R.id.comment);
-        problem=selectedCS.findViewById(R.id.problem);
-        accident=selectedCS.findViewById(R.id.accident);
-        fever=selectedCS.findViewById(R.id.fever);
 
-        //init button
-        upload=selectedCS.findViewById(R.id.upload);
-        submit=selectedCS.findViewById(R.id.submit);
+            final AppCompatActivity activity=(AppCompatActivity)mContext;
 
-        //init spinner
-        habit=selectedCS.findViewById(R.id.habit);
-        habitat=selectedCS.findViewById(R.id.habitat);
-        emotional=selectedCS.findViewById(R.id.emotional);
-        pain=selectedCS.findViewById(R.id.pain);
-        vomit=selectedCS.findViewById(R.id.vomit);
+            //update view
+            rootLayout.removeView(selectedCS);
+            selectedCS= LayoutInflater.from(activity).inflate(R.layout.activity_cscreator,null);
+            rootLayout.addView(selectedCS);
 
-        //init array
-        String habitAr[]=mContext.getResources().getStringArray(R.array.habit_gen);
-        String habitatAr[]=mContext.getResources().getStringArray(R.array.habitat_gen);
-        String emotionalAr[]=mContext.getResources().getStringArray(R.array.emotional_gen);
-        String painAr[]=mContext.getResources().getStringArray(R.array.pain_gen);
-        String vomitAr[]=mContext.getResources().getStringArray(R.array.vomit_gen);
 
-        //set adapter
-        AdapterUtil.setSpinnerAdapter(habit,habitAr,activity);
-        AdapterUtil.setSpinnerAdapter(habitat,habitatAr,activity);
-        AdapterUtil.setSpinnerAdapter(emotional,emotionalAr,activity);
-        AdapterUtil.setSpinnerAdapter(pain,painAr,activity);
-        AdapterUtil.setSpinnerAdapter(vomit,vomitAr,activity);
+            //init editText
+            comment=selectedCS.findViewById(R.id.comment);
+            problem=selectedCS.findViewById(R.id.problem);
+            accident=selectedCS.findViewById(R.id.accident);
+            fever=selectedCS.findViewById(R.id.fever);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //collect data
-                /*String habitResp,habitatResp,emotionalResp,painResp,vomitResp;
+            //init button
+            upload=selectedCS.findViewById(R.id.upload);
+            submit=selectedCS.findViewById(R.id.submit);
+
+            //init spinner
+            habit=selectedCS.findViewById(R.id.habit);
+            habitat=selectedCS.findViewById(R.id.habitat);
+            emotional=selectedCS.findViewById(R.id.emotional);
+            pain=selectedCS.findViewById(R.id.pain);
+            vomit=selectedCS.findViewById(R.id.vomit);
+            site=selectedCS.findViewById(R.id.site);
+
+            //init array
+            String habitAr[]=getArrayFromJSON(object.getJSONArray("habit_gen"));
+            String habitatAr[]=getArrayFromJSON(object.getJSONArray("habitat_gen"));
+            String emotionalAr[]=getArrayFromJSON(object.getJSONArray("emotional_gen"));
+            String painAr[]=getArrayFromJSON(object.getJSONArray("pain_gen"));
+            String vomitAr[]=getArrayFromJSON(object.getJSONArray("vomit_gen"));
+            String siteAr[]=getArrayFromJSON(object.getJSONArray("site_gen"));
+
+            //set adapter
+            AdapterUtil.setSpinnerAdapter(habit,habitAr,activity);
+            AdapterUtil.setSpinnerAdapter(habitat,habitatAr,activity);
+            AdapterUtil.setSpinnerAdapter(emotional,emotionalAr,activity);
+            AdapterUtil.setSpinnerAdapter(pain,painAr,activity);
+            AdapterUtil.setSpinnerAdapter(vomit,vomitAr,activity);
+            AdapterUtil.setSpinnerAdapter(site,siteAr,activity);
+
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //collect data
+                String habitResp,habitatResp,emotionalResp,painResp,vomitResp,siteResp;
                 String commentResp,problemResp,accResp,feverResp;
 
-                habitResp=habit.getSelectedItem().toString();
-                habitatResp=habitat.getSelectedItem().toString();
-                emotionalResp=emotional.getSelectedItem().toString();
-                painResp=pain.getSelectedItem().toString();
-                vomitResp=vomit.getSelectedItem().toString();
+                habitResp=""+habit.getSelectedItemPosition();
+                habitatResp=""+habitat.getSelectedItemPosition();
+                emotionalResp=""+emotional.getSelectedItemPosition();
+                painResp=""+pain.getSelectedItemPosition();
+                vomitResp=""+vomit.getSelectedItemPosition();
+                siteResp=""+site.getSelectedItemPosition();
 
                 commentResp=comment.getText().toString();
                 problemResp=problem.getText().toString();
@@ -422,21 +505,26 @@ public class UIUpdater {
 
                 //put in map
                 Map<String,String> map=new HashMap<>();
-                map.put("Habit",habitResp);
-                map.put("Habitat",habitatResp);
-                map.put("Emotional Status",emotionalResp);
-                map.put("Pain",painResp);
-                map.put("Vomiting",vomitResp);
-                map.put("Comment",commentResp);
-                map.put("Problem",problemResp);
-                map.put("Accident",accResp);
-                map.put("Fever",feverResp);
+                map.put("habit",habitResp);
+                map.put("habitat",habitatResp);
+                map.put("emotional_status",emotionalResp);
+                map.put("pain",painResp);
+                map.put("vomiting",vomitResp);
+                map.put("comment",commentResp);
+                map.put("problem_string",problemResp);
+                map.put("site_of_problem",siteResp);
+                map.put("accident",accResp);
+                map.put("fever",feverResp);
 
-                sendResponse(map,mContext);*/
-                //activity.startActivity(new Intent(activity,DoctorListActivity.class));
-                sendResponse(mContext);
-            }
-        });
+                sendResponse(map,mContext);
+                }
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
 
     }
@@ -452,10 +540,22 @@ public class UIUpdater {
             }
         });
     }
-    private static void sendResponse( final Context mContext) {
+    private static void sendResponse(Map<String, String> map, final Context mContext) {
 
         final String fee,dept;
         final DoctorAppointmentActivity activity = (DoctorAppointmentActivity) mContext;
+        map.put("department",""+activity.getChoice());
+        RequestPut requestPost=new RequestPut(mContext);
+        Map map1=new HashMap();
+        map1.put("casesheet",map);
+        JSONObject jsonObject=new JSONObject(map1);
+        requestPost.putJSONObject(url, jsonObject, new RequestPut.JSONObjectResponseListener() {
+            @Override
+            public void onResponse(JSONObject object) {
+
+            }
+        });
+
 
         //get filters
         fee=activity.getFeeStr();
@@ -466,7 +566,6 @@ public class UIUpdater {
         i.putExtra("Fee",fee);
         i.putExtra("Department",dept);
         activity.startActivity(i);
-        activity.finish();
 
     }
 

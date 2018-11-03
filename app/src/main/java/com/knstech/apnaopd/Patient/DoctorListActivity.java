@@ -125,10 +125,11 @@ public class DoctorListActivity extends AppCompatActivity {
         View view=LayoutInflater.from(this).inflate(R.layout.date_dialog,null);
         dialog.setView(view);
         final DatePicker datePicker=view.findViewById(R.id.date);
+        datePicker.setMinDate(System.currentTimeMillis());
         dialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                setDate(""+datePicker.getMaxDate());
+                setDate(""+datePicker.getDayOfMonth()+"/"+datePicker.getMonth()+"/"+datePicker.getYear());
                 initRecyclerView();
             }
         }).setNegativeButton(R.string.cancel,null);
@@ -173,7 +174,6 @@ public class DoctorListActivity extends AppCompatActivity {
                 final AutoCompleteTextView city=view.findViewById(R.id.city);
                 ArrayAdapter<String> adapter=new ArrayAdapter<>(DoctorListActivity.this,R.layout.simple_text,ar);
                 city.setAdapter(adapter);
-                dialog.show();
                 dialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -187,6 +187,8 @@ public class DoctorListActivity extends AppCompatActivity {
 
                     }
                 });
+                dialog.show();
+
             }
         });
     }

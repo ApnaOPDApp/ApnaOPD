@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -28,7 +29,7 @@ public class LoginActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login);
 
         google=findViewById(R.id.google);
         google.setOnClickListener(new View.OnClickListener() {
@@ -38,25 +39,18 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-<<<<<<< HEAD:app/src/main/java/com/knstech/apnaopd/Patient/LoginActivity.java
-
-        setUpGoogle();*/
-
-        //Debug code
-        Intent i=new Intent(LoginActivity.this,HomeActivity.class);
-        startActivity(i);
         setUpGoogle();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        /*GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
         //if user is already logged in
         if(account!=null&&account.getId()!=null) {
             loadPatient(account);
-        }*/
+        }
     }
 
     private void setUpGoogle() {

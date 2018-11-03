@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserAuth {
-
-    private  User mUser;
+    
+    private static User mUser=new User();
 
     public interface SignInCompleteListener{
         void onComplete();
@@ -27,11 +27,14 @@ public class UserAuth {
 
     public UserAuth(){}
 
+
     public com.knstech.apnaopd.GenModalClasses.User.UserAuth getInstance(){
          return ApnaOPDApp.getUserAuth();
     }
 
-    public User getCurrentUser() {
+
+
+    public static User getCurrentUser() {
         return mUser;
     }
 
@@ -55,7 +58,7 @@ public class UserAuth {
                         if(response.equals("null") || response.equals("")){
                            signUpGoogle(context,gAcc, listener);
                         }else{
-                            mUser = user.parseFromJson(response);
+                            mUser.parseFromJson(response);
                             listener.onComplete();
                         }
                     }

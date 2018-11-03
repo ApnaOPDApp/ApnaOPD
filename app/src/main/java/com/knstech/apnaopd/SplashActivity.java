@@ -3,15 +3,13 @@ package com.knstech.apnaopd;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 
-import com.knstech.apnaopd.Patient.HomeActivity;
+import com.knstech.apnaopd.Patient.LoginActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -48,7 +46,7 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
     @Override
     public void onAnimationEnd(Animation animation) {
 
-        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
         this.finish();
     }
 
