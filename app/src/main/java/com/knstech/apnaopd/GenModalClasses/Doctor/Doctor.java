@@ -1,10 +1,6 @@
 
 package com.knstech.apnaopd.GenModalClasses.Doctor;
 
-import android.view.View;
-
-import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,13 +59,16 @@ public class Doctor {
                 setDepartment(object.getString("department"));
             if(object.has("fee"))
                 setFee(object.getString("fee"));
-            setRegNumber(object.getString("reg_number"));
+            if(object.has("reg_number"))
+                setRegNumber(object.getString("reg_number"));
             if(object.has("speciality"))
                 setSpeciality(object.getString("speciality"));
             if(object.has("phone_number"))
                 setPhoneNumber(object.getString("phone_number"));
-            setEmail(object.getString("email"));
-            setGid(object.getString("gid"));
+            if(object.has("email"))
+                setEmail(object.getString("email"));
+            if(object.has("gid"))
+                setGid(object.getString("gid"));
             if(object.has("office_number"))
                 setOfficeNumber(object.getString("office_number"));
 

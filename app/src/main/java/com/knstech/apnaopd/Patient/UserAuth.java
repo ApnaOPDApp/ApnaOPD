@@ -10,7 +10,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.knstech.apnaopd.ApnaOPDApp;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModalClasses.User.User;
 
@@ -29,7 +28,7 @@ public class UserAuth {
 
 
 
-    public User getCurrentUser() {
+    public static User getCurrentUser() {
         return mUser;
     }
 

@@ -2,11 +2,11 @@ package com.knstech.apnaopd;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
+import com.knstech.apnaopd.Doctor.DoctorHomeActivity;
 import com.knstech.apnaopd.Patient.HomeActivity;
 import com.knstech.apnaopd.Patient.ListOfQuotationsActivity;
 import com.knstech.apnaopd.Retailer.RetailerActivity;
@@ -57,8 +57,14 @@ public class DrawerUtil {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
 
-                        if(profile.getIdentifier()==102)
-                            activity.startActivity(new Intent(activity,RetailerActivity.class));
+                        if(profile.getIdentifier()==102) {
+                            activity.startActivity(new Intent(activity, RetailerActivity.class));
+                            activity.finish();
+                        }
+                        else if(profile.getIdentifier()==101)
+                        {
+                            activity.startActivity(new Intent(activity,DoctorHomeActivity.class));
+                        }
                         else
                             Toast.makeText(activity, profile.toString(), Toast.LENGTH_SHORT).show();
                         return false;
@@ -146,6 +152,7 @@ public class DrawerUtil {
                             Intent intent = new Intent(activity, HomeActivity.class);
                             view.getContext().startActivity(intent);
                         }
+
                         return true;
                     }
                 })

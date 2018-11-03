@@ -1,12 +1,9 @@
 
 package com.knstech.apnaopd.GenModalClasses.User;
 
-import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -41,8 +38,10 @@ public class User {
             JSONObject object=new JSONObject(json);
 
             setName(object.getString("name"));
-            setImageUrl(object.getString("image_url"));
-            setEmail(object.getString("email"));
+            if(object.has("image_url"))
+                setImageUrl(object.getString("image_url"));
+            if(object.has("email"))
+                setEmail(object.getString("email"));
             if(object.has("gid"))
                 setGid(object.getString("gid"));
 

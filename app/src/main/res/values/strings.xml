@@ -65,5 +65,7 @@
     <string name="name">Name</string>
     <string name="time">Time</string>
     <string name="info">Touch For more Info</string>
+    <string name="manage_time_slabs">Manage Time-Slabs</string>
+    <string name="view_appointments">View Appointments</string>
 
 </resources>

@@ -1,15 +1,17 @@
 package com.knstech.apnaopd.Patient;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+
+import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.AdapterUtil;
 import com.knstech.apnaopd.Utils.C;
@@ -97,27 +99,37 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        switch (choice)
-        {
-            case C.CARDIO:
-                UIUpdater.updateCardio(this,rootLayout,selectedCS);
-                break;
-            case C.EAR:
-                UIUpdater.updateEar(this,rootLayout,selectedCS);
-                break;
-            case C.EYE:
-                UIUpdater.updateEye(this,rootLayout,selectedCS);
-                break;
-            case C.GENITO:
-                UIUpdater.updateGenito(this,rootLayout,selectedCS);
-                break;
-            case C.NEURO:
-                UIUpdater.updateNeuro(this,rootLayout,selectedCS);
-                break;
-            default:
-                UIUpdater.updateGeneral(this,rootLayout,selectedCS);
+        String csGenUrl= AppUtils.HOST_ADDRESS+"/api/casesheets";
+        RequestGet requestGet=new RequestGet(this);
+        requestGet.getJSONObject(csGenUrl, new RequestGet.JSONObjectResponseListener() {
+            @Override
+            public void onResponse(JSONObject object) {
+                switch (choice)
+                {
+                    case C.CARDIO:
+                        UIUpdater.updateCardio(DoctorAppointmentActivity.this,rootLayout,selectedCS,object);
+                        break;
+                    case C.EAR:
+                        UIUpdater.updateEar(DoctorAppointmentActivity.this,rootLayout,selectedCS,object);
+                        break;
+                    case C.EYE:
+                        UIUpdater.updateEye(DoctorAppointmentActivity.this,rootLayout,selectedCS,object);
+                        break;
+                    case C.GENITO:
+                        UIUpdater.updateGenito(DoctorAppointmentActivity.this,rootLayout,selectedCS,object);
+                        break;
+                    case C.NEURO:
+                        UIUpdater.updateNeuro(DoctorAppointmentActivity.this,rootLayout,selectedCS,object);
+                        break;
+                    default:
+                        UIUpdater.updateGeneral(DoctorAppointmentActivity.this,rootLayout,selectedCS,object);
 
-        }
+                }
+            }
+        });
+
+
+
     }
 
 
@@ -160,5 +172,9 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
 
     public String getDepartment() {
         return String.valueOf(deptSpinner.getSelectedItemPosition());
+    }
+
+    public int getChoice() {
+        return choice;
     }
 }
