@@ -19,8 +19,6 @@ public class User {
 
     private List<Address> address = null;
 
-    private List<Casesheet> casesheet = null;
-
     private IsDoctor isDoctor;
 
     private IsRetailer isRetailer;
@@ -46,7 +44,6 @@ public class User {
                 setGid(object.getString("gid"));
 
             List<Address> addresses=Address.parseFromJson(object.getString("address"));
-            List<Casesheet> casesheets=Casesheet.parseFromJson(object.getString("casesheet"));
             IsDoctor isDoctor=IsDoctor.parseFromJson(object.getString("is_doctor"));
             IsManufacturer isManufacturer=IsManufacturer.parseFromJson(object.getString("is_manufacturer"));
             IsRetailer isRetailer=IsRetailer.parseFromJson(object.getString("is_retailer"));
@@ -54,7 +51,6 @@ public class User {
             IsWholesaler isWholesaler=IsWholesaler.parseFromJson(object.getString("is_wholesaler"));
 
             setAddress(addresses);
-            setCasesheet(casesheets);
             setIsDoctor(isDoctor);
             setIsManufacturer(isManufacturer);
             setIsRetailer(isRetailer);
@@ -109,13 +105,6 @@ public class User {
         this.address = address;
     }
 
-    public List<Casesheet> getCasesheet() {
-        return casesheet;
-    }
-
-    public void setCasesheet(List<Casesheet> casesheet) {
-        this.casesheet = casesheet;
-    }
 
     public IsDoctor getIsDoctor() {
         return isDoctor;

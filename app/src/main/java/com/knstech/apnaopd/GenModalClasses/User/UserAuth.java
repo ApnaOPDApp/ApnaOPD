@@ -60,6 +60,7 @@ public class UserAuth {
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                mUser.parseFromJson(response);
                 listener.onComplete();
             }
         }, new Response.ErrorListener() {

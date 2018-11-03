@@ -15,8 +15,8 @@
         <activity android:name=".Patient.LoginActivity" />
         <activity android:name=".Patient.DoctorViewerActivity" />
         <activity android:name=".Patient.DoctorListActivity" />
-        <activity android:name=".Patient.DoctorAppointmentActivity"></activity>
-        <activity android:name=".Patient.HomeActivity"></activity>
+        <activity android:name=".Patient.DoctorAppointmentActivity" />
+        <activity android:name=".Patient.HomeActivity" />
         <activity
             android:name=".Patient.MedicineActivity"
             android:parentActivityName=".Patient.HomeActivity" />
@@ -35,7 +35,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Doctor.DoctorHomeActivity"></activity>
+        <activity android:name=".Doctor.DoctorHomeActivity" />
+        <activity android:name=".Doctor.TimeSlotActivity"></activity>
     </application>
 
 </manifest>

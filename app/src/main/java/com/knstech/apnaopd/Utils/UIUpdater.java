@@ -546,7 +546,10 @@ public class UIUpdater {
         final DoctorAppointmentActivity activity = (DoctorAppointmentActivity) mContext;
         map.put("department",""+activity.getChoice());
         RequestPut requestPost=new RequestPut(mContext);
-        requestPost.putJSONObject(url, map, new RequestPut.JSONObjectResponseListener() {
+        Map map1=new HashMap();
+        map1.put("casesheet",map);
+        JSONObject jsonObject=new JSONObject(map1);
+        requestPost.putJSONObject(url, jsonObject, new RequestPut.JSONObjectResponseListener() {
             @Override
             public void onResponse(JSONObject object) {
 

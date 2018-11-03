@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Casesheet {
 
-
+    private String timestamp;
     private String department;
     private String pulse;
 
@@ -76,7 +76,7 @@ public class Casesheet {
         return list;
 
     }
-    
+
     public String getDepartment() {
         return department;
     }
@@ -325,4 +325,11 @@ public class Casesheet {
         this.comment = comment;
     }
 
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
 }
