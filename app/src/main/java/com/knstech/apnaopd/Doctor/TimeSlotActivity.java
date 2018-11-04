@@ -57,7 +57,7 @@ public class TimeSlotActivity extends AppCompatActivity {
                     Switch sw=view.findViewById(R.id.switchBtn);
                     TimeSlab slab=new TimeSlab();
                     map.put("available",(sw.isChecked())?"1":"0");
-                    map.put("patient_per",(!TextUtils.isEmpty(edt.getText().toString()))?edt.getText().toString():"0");
+                    map.put("patients_per",(!TextUtils.isEmpty(edt.getText().toString()))?edt.getText().toString():"0");
                     map.put("sl_no",""+i);
                     list.add(map);
                 }
@@ -109,7 +109,7 @@ public class TimeSlotActivity extends AppCompatActivity {
                         JSONObject object=jsonArray.getJSONObject(i);
                         View view=linearLayout.getChildAt(i);
                         EditText edt=view.findViewById(R.id.persons);
-                        edt.setText(object.getString("patient_per"));
+                        edt.setText(object.getString("patients_per"));
                         Switch sw=view.findViewById(R.id.switchBtn);
                         if(object.getString("available").equals("true"))
                             sw.setChecked(true);

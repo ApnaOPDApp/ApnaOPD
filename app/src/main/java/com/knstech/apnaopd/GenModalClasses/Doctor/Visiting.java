@@ -11,10 +11,8 @@ import java.util.List;
 
 public class Visiting {
 
-
-    private String patientGid;
-
-    private String casesheetUid;
+    private String Sl_no;
+    private Patient Patients;
     
     public static List<Visiting> parsefromJson(String json)
     {
@@ -33,21 +31,6 @@ public class Visiting {
         }
         return list;
     }
-    
-    public String getPatientGid() {
-        return patientGid;
-    }
 
-    public void setPatientGid(String patientGid) {
-        this.patientGid = patientGid;
-    }
-
-    public String getCasesheetUid() {
-        return casesheetUid;
-    }
-
-    public void setCasesheetUid(String casesheetUid) {
-        this.casesheetUid = casesheetUid;
-    }
 
 }

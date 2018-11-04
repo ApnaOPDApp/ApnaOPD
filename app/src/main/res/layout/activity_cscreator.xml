@@ -11,6 +11,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Title"
+                    android:id="@+id/title"
+                    />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -18,6 +31,7 @@
                 android:id="@+id/problem"
                 android:hint="@string/problem"
                 />
+            </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,12 +62,16 @@
 
             </Spinner>
         </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="3"
                 android:id="@+id/accident"
                 android:hint="@string/accident"/>
+            </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,13 +88,16 @@
 
             </Spinner>
         </LinearLayout>
-
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/fever"
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
                 android:inputType="numberDecimal"
                 android:hint="@string/fever" />
+            </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -151,10 +172,14 @@
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/comment"/>
+                    </android.support.design.widget.TextInputLayout>
                 </ScrollView>
             </LinearLayout>
             <Button

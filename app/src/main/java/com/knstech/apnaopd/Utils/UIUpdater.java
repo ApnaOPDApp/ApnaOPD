@@ -29,7 +29,7 @@ public class UIUpdater {
     private static String url= AppUtils.HOST_ADDRESS+"/api/casesheets/"+ UserAuth.getmUser().getGid();
 
     public static void updateCardio(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
-        final EditText pulse,comment;
+        final EditText pulse,comment,title;
         final Spinner neckVeins,chestPain,respiration,rhythm,bleeding,condition;
         Button fileUpload,submit;
 
@@ -45,6 +45,7 @@ public class UIUpdater {
             //init editText
             pulse=selectedCS.findViewById(R.id.pulse);
             comment=selectedCS.findViewById(R.id.comment);
+            title=selectedCS.findViewById(R.id.title);
 
             //init spinners
             neckVeins=selectedCS.findViewById(R.id.neckVeins);
@@ -82,7 +83,7 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //collect response
                     String bleedResp,rhythmResp,chestResp,respResp,neckResp,condResp;
-                    String pulseResp,commentResp;
+                    String pulseResp,commentResp,titleResp;
 
                     bleedResp=""+bleeding.getSelectedItemPosition();
                     rhythmResp=""+rhythm.getSelectedItemPosition();
@@ -93,6 +94,7 @@ public class UIUpdater {
 
                     pulseResp=pulse.getText().toString();
                     commentResp=comment.getText().toString();
+                    titleResp=title.getText().toString();
 
                     //put response in map
                     Map<String,String> map=new HashMap<>();
@@ -104,6 +106,7 @@ public class UIUpdater {
                     map.put("cardio_condition",condResp);
                     map.put("pulse",pulseResp);
                     map.put("comment",commentResp);
+                    map.put("title",titleResp);
 
                     sendResponse(map, mContext);
                 }
@@ -143,7 +146,7 @@ public class UIUpdater {
 
         final Spinner condition,other,misc;
         Button upload,submit;
-        final EditText comment;
+        final EditText comment,title;
 
         try {
 
@@ -158,6 +161,7 @@ public class UIUpdater {
 
             //init editText
             comment=selectedCS.findViewById(R.id.comment);
+            title=selectedCS.findViewById(R.id.title);
 
             //init spinner
             condition=selectedCS.findViewById(R.id.condition);
@@ -182,13 +186,14 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //collect Response
                     String condResp,otherResp,miscResp;
-                    String commentResp;
+                    String commentResp,titleResp;
 
                     condResp=""+condition.getSelectedItemPosition();
                     otherResp=""+other.getSelectedItemPosition();
                     miscResp=""+misc.getSelectedItemPosition();
 
                     commentResp=comment.getText().toString();
+                    titleResp=title.getText().toString();
 
 
                     Map<String,String> map=new HashMap<>();
@@ -196,6 +201,7 @@ public class UIUpdater {
                     map.put("ear_other",otherResp);
                     map.put("ear_misc",miscResp);
                     map.put("comment",commentResp);
+                    map.put("title",titleResp);
 
                     sendResponse(map, mContext);
                 }
@@ -214,7 +220,7 @@ public class UIUpdater {
     public static void updateEye(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
 
         final Spinner condition,other,misc;
-        final EditText comment;
+        final EditText comment,title;
         Button upload,submit;
 
 
@@ -230,6 +236,7 @@ public class UIUpdater {
 
             //init editText
             comment=selectedCS.findViewById(R.id.comment);
+            title=selectedCS.findViewById(R.id.title);
 
             //init spinner
             condition=selectedCS.findViewById(R.id.condition);
@@ -255,19 +262,21 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //collect Response
                     String condResp,otherResp,miscResp;
-                    String commentResp;
+                    String commentResp,titleResp;
 
                     condResp=""+condition.getSelectedItemPosition();
                     otherResp=""+other.getSelectedItemPosition();
                     miscResp=""+misc.getSelectedItemPosition();
 
                     commentResp=comment.getText().toString();
+                    titleResp=title.getText().toString();
 
                     Map<String,String> map=new HashMap<>();
                     map.put("eye_condition",condResp);
                     map.put("eye_other",otherResp);
                     map.put("eye_misc",miscResp);
                     map.put("comment",commentResp);
+                    map.put("title",titleResp);
 
                     sendResponse(map, mContext);
                 }
@@ -285,7 +294,7 @@ public class UIUpdater {
 
         final Spinner survey,genito,other;
         Button upload,submit;
-        final EditText comment;
+        final EditText comment,title;
 
         try {
 
@@ -300,6 +309,7 @@ public class UIUpdater {
 
             //init editText
             comment=selectedCS.findViewById(R.id.comment);
+            title=selectedCS.findViewById(R.id.title);
 
             //init spinner
             survey=selectedCS.findViewById(R.id.survey);
@@ -325,19 +335,21 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //collect response
                     String surveyResp,genitoResp,otherResp;
-                    String commentResp;
+                    String commentResp,titleResp;
 
                     surveyResp=""+survey.getSelectedItemPosition();
                     genitoResp=""+genito.getSelectedItemPosition();
                     otherResp=""+other.getSelectedItemPosition();
 
                     commentResp=comment.getText().toString();
+                    titleResp=title.getText().toString();
 
                     Map<String,String> map=new HashMap<>();
                     map.put("general_survey",surveyResp);
                     map.put("genito_urinary",genitoResp);
                     map.put("genito_other",otherResp);
                     map.put("comment",commentResp);
+                    map.put("title",titleResp);
 
                     sendResponse(map, mContext);
                 }
@@ -354,7 +366,7 @@ public class UIUpdater {
 
         final Spinner sensation,behavioural,condition,other,misc;
         Button submit;
-        final EditText comment;
+        final EditText comment,title;
 
 
         try {
@@ -371,6 +383,7 @@ public class UIUpdater {
 
             //init editText
             comment=selectedCS.findViewById(R.id.comment);
+            title=selectedCS.findViewById(R.id.title);
 
             //init spinner
             sensation=selectedCS.findViewById(R.id.sensation);
@@ -401,7 +414,7 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //Collect Response
                     String sensationResp,behaviouralResp,condResp,otherResp,miscResp;
-                    String commentResp;
+                    String commentResp,titleResp;
 
                     sensationResp=""+sensation.getSelectedItemPosition();
                     behaviouralResp=""+behavioural.getSelectedItemPosition();
@@ -410,6 +423,7 @@ public class UIUpdater {
                     miscResp=""+misc.getSelectedItemPosition();
 
                     commentResp=comment.getText().toString();
+                    titleResp=title.getText().toString();
 
                     Map<String,String> map=new HashMap<>();
                     map.put("sensation_abnormality",sensationResp);
@@ -418,6 +432,7 @@ public class UIUpdater {
                     map.put("neuro_other",otherResp);
                     map.put("neuro_misc",miscResp);
                     map.put("comment",commentResp);
+                    map.put("title",titleResp);
 
                     sendResponse(map, mContext);
                 }
@@ -434,7 +449,7 @@ public class UIUpdater {
 
     public static void updateGeneral(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
 
-        final EditText problem,accident,fever,comment;
+        final EditText problem,accident,fever,comment,title;
         final Spinner habit,habitat,emotional,pain,site,vomit;
         Button upload,submit;
 
@@ -455,6 +470,7 @@ public class UIUpdater {
             problem=selectedCS.findViewById(R.id.problem);
             accident=selectedCS.findViewById(R.id.accident);
             fever=selectedCS.findViewById(R.id.fever);
+            title=selectedCS.findViewById(R.id.title);
 
             //init button
             upload=selectedCS.findViewById(R.id.upload);
@@ -489,7 +505,7 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //collect data
                 String habitResp,habitatResp,emotionalResp,painResp,vomitResp,siteResp;
-                String commentResp,problemResp,accResp,feverResp;
+                String commentResp,problemResp,accResp,feverResp,titleResp;
 
                 habitResp=""+habit.getSelectedItemPosition();
                 habitatResp=""+habitat.getSelectedItemPosition();
@@ -497,6 +513,7 @@ public class UIUpdater {
                 painResp=""+pain.getSelectedItemPosition();
                 vomitResp=""+vomit.getSelectedItemPosition();
                 siteResp=""+site.getSelectedItemPosition();
+                titleResp=title.getText().toString();
 
                 commentResp=comment.getText().toString();
                 problemResp=problem.getText().toString();
@@ -515,6 +532,7 @@ public class UIUpdater {
                 map.put("site_of_problem",siteResp);
                 map.put("accident",accResp);
                 map.put("fever",feverResp);
+                map.put("title",titleResp);
 
                 sendResponse(map,mContext);
                 }

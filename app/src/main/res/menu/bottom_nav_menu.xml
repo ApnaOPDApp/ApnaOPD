@@ -5,7 +5,6 @@
     tools:context=".Patient.DoctorListActivity">
 
     <item android:icon="@drawable/fees" android:title="@string/fees" android:id="@+id/fee_item"/>
-    <!--item android:icon="@drawable/time" android:title="@string/time" android:id="@+id/time_item"/-->
-    <item android:id="@+id/date_item" android:icon="@drawable/date" android:title="@string/date"/>
+    <item android:icon="@drawable/time" android:title="@string/time" android:id="@+id/time_item"/>
     <item android:id="@+id/city_item" android:icon="@drawable/city" android:title="@string/city"/>
 </menu>

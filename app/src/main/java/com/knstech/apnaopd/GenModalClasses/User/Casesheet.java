@@ -15,6 +15,15 @@ public class Casesheet {
     private String department;
     private String pulse;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private String title;
     private String rhythm;
 
     private String neckveins;
