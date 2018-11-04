@@ -251,6 +251,7 @@ public class DoctorListActivity extends AppCompatActivity {
             public void onDoctorItemClick(String uid) {
                 Intent i=new Intent(DoctorListActivity.this,DoctorViewerActivity.class);
                 i.putExtra("Doctor",uid);
+                i.putExtra("cs_uid",getIntent().getStringExtra("cs_uid"));
                 startActivity(i);
 
             }

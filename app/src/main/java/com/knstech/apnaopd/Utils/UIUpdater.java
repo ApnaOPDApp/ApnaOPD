@@ -27,6 +27,8 @@ import java.util.Map;
 public class UIUpdater {
     public static final int IMG = 1;
     private static String url= AppUtils.HOST_ADDRESS+"/api/casesheets/"+ UserAuth.getmUser().getGid();
+    private static String fee;
+    private static String dept;
 
     public static void updateCardio(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
         final EditText pulse,comment,title;
@@ -560,7 +562,6 @@ public class UIUpdater {
     }
     private static void sendResponse(Map<String, String> map, final Context mContext) {
 
-        final String fee,dept;
         final DoctorAppointmentActivity activity = (DoctorAppointmentActivity) mContext;
         map.put("department",""+activity.getChoice());
         RequestPut requestPost=new RequestPut(mContext);
@@ -570,20 +571,30 @@ public class UIUpdater {
         requestPost.putJSONObject(url, jsonObject, new RequestPut.JSONObjectResponseListener() {
             @Override
             public void onResponse(JSONObject object) {
+                try {
 
+                    String cs_uid=object.getString("_id");
+                    //get filters
+                    fee=activity.getFeeStr();
+                    dept=activity.getDepartment();
+
+                    //start list activity
+                    Intent i = new Intent(activity, DoctorListActivity.class);
+                    i.putExtra("Fee",fee);
+                    i.putExtra("Department",dept);
+                    i.putExtra("cs_uid",cs_uid);
+                    activity.startActivity(i);
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
 
-        //get filters
-        fee=activity.getFeeStr();
-        dept=activity.getDepartment();
-
-        //start list activity
-        Intent i = new Intent(activity, DoctorListActivity.class);
-        i.putExtra("Fee",fee);
-        i.putExtra("Department",dept);
-        activity.startActivity(i);
 
     }
 

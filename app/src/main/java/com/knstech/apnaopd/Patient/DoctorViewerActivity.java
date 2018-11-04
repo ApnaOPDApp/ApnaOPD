@@ -10,24 +10,30 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModalClasses.Doctor.Doctor;
+import com.knstech.apnaopd.GenModalClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModalClasses.Doctor.TimeSlab;
 import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
+import com.knstech.apnaopd.Utils.Connections.RequestPut;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DoctorViewerActivity extends AppCompatActivity {
 
     private Doctor doctor;
-    private TextView name,fees;
+    private TextView name,fees,available;
     private ImageView imageView;
     private RadioGroup linearLayout;
     private String selectedSlot;
@@ -60,22 +66,33 @@ public class DoctorViewerActivity extends AppCompatActivity {
     }
 
     private void preBookCheck() {
-        if(doctor!=null) {
-            int total = Integer.parseInt(doctor.getTimeSlab().get(Integer.parseInt(selectedSlot)).getPatients_per());
-            int appointed=doctor.getVisiting().size();
-            if(total-appointed>0)
-            {
-
-            }
-            else
-            {
-                Toast.makeText(this, "Booking is full for this doctor!", Toast.LENGTH_SHORT).show();
-            }
-
+        String cs_uid=getIntent().getStringExtra("cs_uid");
+        String url=AppUtils.HOST_ADDRESS+"/api/doctors/visiting/"+uid+"/"+selectedSlot;
+        RequestPut requestPut=new RequestPut(this);
+        final Patient patient=new Patient();
+        patient.setPatient_gid(UserAuth.getmUser().getGid());
+        patient.setCasesheet_uid(cs_uid);
+        Map map= new HashMap();
+        map.put("patients",patient);
+        String jsonStr=(new Gson()).toJson(map);
+        try {
+            final JSONObject obj=new JSONObject(jsonStr);
+            requestPut.putJSONObject(url, obj, new RequestPut.JSONObjectResponseListener() {
+                @Override
+                public void onResponse(JSONObject object) {
+                    Toast.makeText(DoctorViewerActivity.this, "Done!", Toast.LENGTH_SHORT).show();
+                }
+            }, new RequestPut.JSONObjectErrorListener() {
+                @Override
+                public void onError(VolleyError error) {
+                    Toast.makeText(DoctorViewerActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
-
-
+        
 
     }
 
@@ -92,7 +109,8 @@ public class DoctorViewerActivity extends AppCompatActivity {
                         doctor = new Doctor();
                         doctor.parseFromJson(obj.toString());
                         List<TimeSlab> list= doctor.getTimeSlab();
-
+                        
+                        
                         name.setText(doctor.getName());
                         fees.append(" " + doctor.getFee());
                         Glide.with(DoctorViewerActivity.this).load(UserAuth.getmUser().getImageUrl())
@@ -101,7 +119,6 @@ public class DoctorViewerActivity extends AppCompatActivity {
                         for(int i=0;i<list.size();i++)
                         {
                             RadioButton btn=new RadioButton(DoctorViewerActivity.this);
-                            btn.setChecked(true);
                             final TimeSlab slab=list.get(i);
                             String m;
                             final int slot_no=(Integer.parseInt(slab.getSl_no())%12==0)?12:Integer.parseInt(slab.getSl_no())%12;
