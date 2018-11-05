@@ -38,7 +38,7 @@ public class RequestGet {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "Error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         RequestSingleton.getInstance(mContext).addToQueue(jsonArrayRequest);
@@ -54,7 +54,7 @@ public class RequestGet {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "Error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         RequestSingleton.getInstance(mContext).addToQueue(request);
@@ -69,7 +69,7 @@ public class RequestGet {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "Error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         RequestSingleton.getInstance(mContext).addToQueue(request);

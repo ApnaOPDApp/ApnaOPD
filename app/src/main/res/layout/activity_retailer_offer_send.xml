@@ -1,105 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Retailer.RetailerOfferSendActivity">
 
-    <include layout="@layout/app_bar_patient"
-        android:id="@+id/pat_lis_quot_app_bar"
-        />
-    <ImageView
-        android:layout_marginTop="60dp"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:elevation="6dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:src="@color/apple_green"
-        android:id="@+id/ret_offer_patient_presc"
-        />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_below="@id/ret_offer_patient_presc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        android:id="@+id/ll"
-        >
-        <EditText
-            android:gravity="center"
-            android:hint="Drug Name"
-            android:id="@+id/drug_name"
+        <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
-        <EditText
-            android:gravity="center"
-            android:hint="Price"
-           android:id="@+id/price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="numberDecimal"
-            />
-        <EditText
-            android:hint="offerPrice"
-            android:gravity="center"
-            android:inputType="numberDecimal"
-            android:id="@+id/offer_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
+            android:id="@+id/toolbar_layout"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
-    <ScrollView
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:background="@drawable/med"
+                android:fitsSystemWindows="true"
+                android:id="@+id/pres_image"
+                android:scaleType="fitCenter"
+                app:layout_collapseMode="parallax"
+                />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            >
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+               android:id="@+id/t_toolbar"
+                app:title=" "
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                />
+
+        </FrameLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--include layout @layout/content scrolling-->
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ret_scroll_view"
-        android:layout_below="@id/ll"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
-        <HorizontalScrollView
-            android:id="@+id/table_horizontal_scroll_view"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <RelativeLayout
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                >
-                <TableLayout
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:id="@+id/drug_name"
+                android:maxLines="5"
+                android:maxLength="50"
+                android:hint="Drug Name"
+                android:textColor="@color/black_app"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:id="@+id/price"
+                android:maxLines="1"
+                android:hint="Price"
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:id="@+id/offer_price"
+                android:hint="Offer Price"
+                android:inputType="number"
+                android:maxLength="10"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:id="@+id/dosage_per"
+                android:hint="Dosage per day"
+                android:inputType="number"
+                android:maxLength="3"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:id="@+id/dosage_day"
+                android:hint="Dosage for number of days"
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="2">
+
+                <Button
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/table"
-                    android:layout_centerHorizontal="true"
-                    ></TableLayout>
+                    android:id="@+id/btn_finish"
+                    android:layout_weight="1"
+                    android:text="Finish"
+                    android:background="@drawable/color2"
+                    android:layout_gravity="center_horizontal"
+                    />
 
-            </RelativeLayout>
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_navigate_next_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/next_values"
+                    />
+            </LinearLayout>
 
-        </HorizontalScrollView>
-
-
-    </ScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="17dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/google"
-        android:id="@+id/send_offer_btn"/>
-
-    <Button
-        android:id="@+id/set_val"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ret_offer_patient_presc"
-        android:layout_alignParentEnd="true"
-        android:text="Set" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    android:id="@+id/ll_show_data"
+                    ></LinearLayout>
 
 
-</RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

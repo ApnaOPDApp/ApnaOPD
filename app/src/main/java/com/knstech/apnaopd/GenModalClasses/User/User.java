@@ -44,14 +44,16 @@ public class User {
                 setGid(object.getString("gid"));
 
             List<Address> addresses=Address.parseFromJson(object.getString("address"));
+            setAddress(addresses);
             IsDoctor isDoctor=IsDoctor.parseFromJson(object.getString("is_doctor"));
+            setIsDoctor(isDoctor);
             IsManufacturer isManufacturer=IsManufacturer.parseFromJson(object.getString("is_manufacturer"));
             IsRetailer isRetailer=IsRetailer.parseFromJson(object.getString("is_retailer"));
             IsSupplier isSupplier=IsSupplier.parseFromJson(object.getString("is_supplier"));
             IsWholesaler isWholesaler=IsWholesaler.parseFromJson(object.getString("is_wholesaler"));
 
-            setAddress(addresses);
-            setIsDoctor(isDoctor);
+
+
             setIsManufacturer(isManufacturer);
             setIsRetailer(isRetailer);
             setIsSupplier(isSupplier);

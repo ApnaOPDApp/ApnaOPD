@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -32,7 +33,8 @@ public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.Ad
     Context context;
     private AddressClickedListener mListener;
     View view;
-    String url = AppUtils.HOST_ADDRESS+"/api/users/address/new/1";
+    private String url = AppUtils.HOST_ADDRESS+"/api/prescriptions";
+
 
     public AddressGetAdaptor(List<Address> addressPojoList, Context context, AddressClickedListener mListener) {
         this.addressPojoList = addressPojoList;
@@ -69,6 +71,7 @@ public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.Ad
         TextView addressSingle;
         RadioButton rb;
 
+
         public AddressGetViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -85,6 +88,7 @@ public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.Ad
                     mListener.onAddressChecked(address);
                 }
             });
+            addressSingle.setText(address.getFull_name()+address.getHouse_no()+"\n"+address.getLandmark()+address.getLocality()+"\n"+address.getCity()+address.getPincode());
         }
     }
 
