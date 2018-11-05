@@ -8,6 +8,8 @@
     android:background="#ffff"
   >
 
+    <include layout="@layout/app_bar_patient"/>
+
 
     <android.support.v7.widget.CardView
         android:layout_width="141dp"
