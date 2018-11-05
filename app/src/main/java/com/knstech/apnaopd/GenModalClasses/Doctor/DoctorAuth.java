@@ -12,7 +12,7 @@ public class DoctorAuth {
     private static Doctor mDoctor;
     private String url= AppUtils.HOST_ADDRESS+"/api/doctors/"+ UserAuth.getmUser().getGid();
 
-    public Doctor getmDoctor() {
+    public static Doctor getmDoctor() {
         return mDoctor;
     }
     public void signInDoctor(Context mContext)

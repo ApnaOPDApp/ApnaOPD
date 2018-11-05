@@ -39,7 +39,8 @@
         <activity android:name=".Profile.ProfileActivity" />
         <activity android:name=".Doctor.DoctorHomeActivity" />
         <activity android:name=".Doctor.TimeSlotActivity" />
-        <activity android:name=".Patient.ConfirmBookingActivity"></activity>
+        <activity android:name=".Patient.ConfirmBookingActivity" />
+        <activity android:name=".Doctor.DoctorSlotViewerActivity"></activity>
     </application>
 
 </manifest>

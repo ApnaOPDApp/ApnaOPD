@@ -29,6 +29,7 @@ public class UIUpdater {
     private static String url= AppUtils.HOST_ADDRESS+"/api/casesheets/"+ UserAuth.getmUser().getGid();
     private static String fee;
     private static String dept;
+    private static String commentResp;
 
     public static void updateCardio(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
         final EditText pulse,comment,title;
@@ -85,7 +86,7 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //collect response
                     String bleedResp,rhythmResp,chestResp,respResp,neckResp,condResp;
-                    String pulseResp,commentResp,titleResp;
+                    String pulseResp,titleResp;
 
                     bleedResp=""+bleeding.getSelectedItemPosition();
                     rhythmResp=""+rhythm.getSelectedItemPosition();
@@ -188,7 +189,7 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //collect Response
                     String condResp,otherResp,miscResp;
-                    String commentResp,titleResp;
+                    String titleResp;
 
                     condResp=""+condition.getSelectedItemPosition();
                     otherResp=""+other.getSelectedItemPosition();
@@ -264,7 +265,7 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //collect Response
                     String condResp,otherResp,miscResp;
-                    String commentResp,titleResp;
+                    String titleResp;
 
                     condResp=""+condition.getSelectedItemPosition();
                     otherResp=""+other.getSelectedItemPosition();
@@ -337,7 +338,7 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //collect response
                     String surveyResp,genitoResp,otherResp;
-                    String commentResp,titleResp;
+                    String titleResp;
 
                     surveyResp=""+survey.getSelectedItemPosition();
                     genitoResp=""+genito.getSelectedItemPosition();
@@ -416,7 +417,7 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //Collect Response
                     String sensationResp,behaviouralResp,condResp,otherResp,miscResp;
-                    String commentResp,titleResp;
+                    String titleResp;
 
                     sensationResp=""+sensation.getSelectedItemPosition();
                     behaviouralResp=""+behavioural.getSelectedItemPosition();
@@ -507,7 +508,7 @@ public class UIUpdater {
                 public void onClick(View v) {
                     //collect data
                 String habitResp,habitatResp,emotionalResp,painResp,vomitResp,siteResp;
-                String commentResp,problemResp,accResp,feverResp,titleResp;
+                String problemResp,accResp,feverResp,titleResp;
 
                 habitResp=""+habit.getSelectedItemPosition();
                 habitatResp=""+habitat.getSelectedItemPosition();
@@ -583,6 +584,7 @@ public class UIUpdater {
                     i.putExtra("Fee",fee);
                     i.putExtra("Department",dept);
                     i.putExtra("cs_uid",cs_uid);
+                    i.putExtra("comment",commentResp);
                     activity.startActivity(i);
 
 

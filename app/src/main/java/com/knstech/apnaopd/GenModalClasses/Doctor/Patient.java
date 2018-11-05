@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 public class Patient {
     private String Time;
+    private String comment;
 
     public String getPatient_gid() {
         return patient_gid;
@@ -39,4 +40,11 @@ public class Patient {
     }
 
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

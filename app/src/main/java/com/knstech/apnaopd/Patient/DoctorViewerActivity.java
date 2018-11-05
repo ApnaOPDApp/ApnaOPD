@@ -72,6 +72,7 @@ public class DoctorViewerActivity extends AppCompatActivity {
         final Patient patient=new Patient();
         patient.setPatient_gid(UserAuth.getmUser().getGid());
         patient.setCasesheet_uid(cs_uid);
+        patient.setComment(getIntent().getStringExtra("comment"));
         Map map= new HashMap();
         map.put("patients",patient);
         String jsonStr=(new Gson()).toJson(map);

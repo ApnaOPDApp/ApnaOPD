@@ -252,6 +252,7 @@ public class DoctorListActivity extends AppCompatActivity {
                 Intent i=new Intent(DoctorListActivity.this,DoctorViewerActivity.class);
                 i.putExtra("Doctor",uid);
                 i.putExtra("cs_uid",getIntent().getStringExtra("cs_uid"));
+                i.putExtra("comment",getIntent().getStringExtra("comment"));
                 startActivity(i);
 
             }
