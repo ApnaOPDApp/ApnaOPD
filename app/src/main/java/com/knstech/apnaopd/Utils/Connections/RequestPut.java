@@ -39,7 +39,28 @@ public class RequestPut {
         };
         RequestSingleton.getInstance(mContext).addToQueue(request);
     }
+    public void putJSONObject(String url, JSONObject jsonObject, final RequestPut.JSONObjectResponseListener mListener, final RequestPut.JSONObjectErrorListener mErrorListener)
+    {
+
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.PUT, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                mListener.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mErrorListener.onError(error);
+            }
+        }){
+
+        };
+        RequestSingleton.getInstance(mContext).addToQueue(request);
+    }
     public interface JSONObjectResponseListener {
         void onResponse(JSONObject object);
+    }
+    public interface JSONObjectErrorListener{
+        void onError(VolleyError error);
     }
 }

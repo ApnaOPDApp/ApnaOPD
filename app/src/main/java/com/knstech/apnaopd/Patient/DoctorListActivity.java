@@ -9,19 +9,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.DatePicker;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
-import com.android.volley.Request;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModalClasses.Doctor.Doctor;
 import com.knstech.apnaopd.R;
@@ -39,7 +37,7 @@ public class DoctorListActivity extends AppCompatActivity {
 
     private RecyclerView doctorsList;
     private DoctorAdapter doctorAdapter;
-    private List<Doctor> mList;
+    private List<Doctor> mList,dupList;
     private LinearLayoutManager linearLayoutManager;
     private RequestGet requestGet;
 
@@ -54,16 +52,6 @@ public class DoctorListActivity extends AppCompatActivity {
             fees="1000000000";
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        if(!date.equals(""))
-            this.date = date;
-        else
-            date=""+System.currentTimeMillis();
-    }
 
     public String getCity() {
         //set default
@@ -74,7 +62,7 @@ public class DoctorListActivity extends AppCompatActivity {
         this.city = city;
     }
 
-    private String fees,dept,date,time;
+    private String fees,dept;
     private String city;
 
     @Override
@@ -105,8 +93,8 @@ public class DoctorListActivity extends AppCompatActivity {
                     case R.id.fee_item:
                         onFee();
                         return true;
-                    case R.id.date_item:
-                        onDate();
+                    case R.id.time_item:
+                        onTime();
                         return true;
                 }
 
@@ -120,21 +108,75 @@ public class DoctorListActivity extends AppCompatActivity {
 
     }
 
-    private void onDate() {
-        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
-        View view=LayoutInflater.from(this).inflate(R.layout.date_dialog,null);
-        dialog.setView(view);
-        final DatePicker datePicker=view.findViewById(R.id.date);
-        datePicker.setMinDate(System.currentTimeMillis());
-        dialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+    private void onTime() {
+
+        final AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        View view=LayoutInflater.from(this).inflate(R.layout.time_item_layout,null);
+        final LinearLayout linearLayout=view.findViewById(R.id.checkList);
+        for(int i=0;i<24;i++)
+        {
+            String txt;
+            String m;
+            int time=(i%12==0)?12:i%12;
+            m=(i%12==0)?"AM ":"PM ";
+            txt=time+":00 "+m+" - "+time+":55 "+m;
+            CheckBox cb=new CheckBox(this);
+            cb.setChecked(true);
+            cb.setText(txt);
+            linearLayout.addView(cb);
+        }
+        Button select,clear,ok;
+        select=view.findViewById(R.id.select_all);
+        clear=view.findViewById(R.id.clear_all);
+        select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                for(int i=0;i<24;i++)
+                {
+                    CheckBox cb= (CheckBox) linearLayout.getChildAt(i);
+                    cb.setChecked(true);
+                }
+
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(int i=0;i<24;i++)
+                {
+                    CheckBox cb= (CheckBox) linearLayout.getChildAt(i);
+                    cb.setChecked(false);
+                }
+            }
+        });
+
+        dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                setDate(""+datePicker.getDayOfMonth()+"/"+datePicker.getMonth()+"/"+datePicker.getYear());
-                initRecyclerView();
+                mList.clear();
+                for(int i=0;i<24;i++)
+                {
+                    CheckBox cb= (CheckBox) linearLayout.getChildAt(i);
+                    if(cb.isChecked()) {
+                        for (int j = 0; j < dupList.size(); j++) {
+                            if (dupList.get(j).getTimeSlab().size() != 0) {
+                                String truthVal = dupList.get(j).getTimeSlab().get(i).getAvailable();
+                                if (truthVal.equals("true") && (mList.size() != 0 && !mList.get(mList.size() - 1).equals(dupList.get(j)) || mList.size() == 0)) {
+                                    mList.add(dupList.get(j));
+                                }
+                            }
+                        }
+                    }
+                }
+                doctorAdapter.notifyDataSetChanged();
             }
-        }).setNegativeButton(R.string.cancel,null);
+        });
+        dialog.setView(view);
         dialog.show();
     }
+
 
     private void onFee() {
         final AlertDialog.Builder dialog=new AlertDialog.Builder(this);
@@ -172,14 +214,18 @@ public class DoctorListActivity extends AppCompatActivity {
                 View view=LayoutInflater.from(DoctorListActivity.this).inflate(R.layout.city_dialog,null);
                 dialog.setView(view);
                 final AutoCompleteTextView city=view.findViewById(R.id.city);
-                ArrayAdapter<String> adapter=new ArrayAdapter<>(DoctorListActivity.this,R.layout.simple_text,ar);
-                city.setAdapter(adapter);
+                if(ar!=null) {
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(DoctorListActivity.this, R.layout.simple_text, ar);
+                    city.setAdapter(adapter);
+                }
                 dialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String cityStr=city.getText().toString();
-                        setCity(cityStr);
-                        initRecyclerView();
+                        for (int i = 0; i < mList.size(); i++) {
+                            if (mList.get(i).getAddress() != null && mList.get(i).getAddress().getCity()!=null &&!mList.get(i).getAddress().getCity().equalsIgnoreCase(getCity())) {
+                                mList.remove(i);
+                            }
+                        }
                     }
                 }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
@@ -199,11 +245,14 @@ public class DoctorListActivity extends AppCompatActivity {
 
         doctorsList=findViewById(R.id.doctorsList);
         mList=new ArrayList<>();
+        dupList=new ArrayList<>();
         doctorAdapter=new DoctorAdapter(this, mList, new DoctorItemClickedListener() {
             @Override
             public void onDoctorItemClick(String uid) {
                 Intent i=new Intent(DoctorListActivity.this,DoctorViewerActivity.class);
                 i.putExtra("Doctor",uid);
+                i.putExtra("cs_uid",getIntent().getStringExtra("cs_uid"));
+                i.putExtra("comment",getIntent().getStringExtra("comment"));
                 startActivity(i);
 
             }
@@ -219,7 +268,7 @@ public class DoctorListActivity extends AppCompatActivity {
         RequestGet requestGet=new RequestGet(this);
 
         //set filters
-        String url= AppUtils.HOST_ADDRESS+"/api/doctors/filter?fee="+getFees()+"&department="+dept+"&city="+getCity()+"&date="+getDate();
+        String url= AppUtils.HOST_ADDRESS+"/api/doctors/filter?fee="+getFees()+"&department="+dept+"&city="+getCity();
 
         requestGet.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
             @Override
@@ -233,6 +282,7 @@ public class DoctorListActivity extends AppCompatActivity {
                         Doctor doctor=new Doctor();
                         doctor.parseFromJson(json);
                         mList.add(doctor);
+                        dupList.add(doctor);
                         doctorAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {

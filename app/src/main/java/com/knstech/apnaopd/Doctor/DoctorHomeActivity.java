@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.knstech.apnaopd.DrawerUtil;
+import com.knstech.apnaopd.GenModalClasses.Doctor.DoctorAuth;
 import com.knstech.apnaopd.R;
 
 import butterknife.ButterKnife;
@@ -21,6 +22,10 @@ public class DoctorHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_home);
+
+        DoctorAuth auth=new DoctorAuth();
+        auth.signInDoctor(this);
+
 
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar)findViewById(R.id.p_toolbar);
@@ -44,7 +49,7 @@ public class DoctorHomeActivity extends AppCompatActivity {
         c2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(DoctorHomeActivity.this,DAppointmentViewerActivity.class));
             }
         });
     }

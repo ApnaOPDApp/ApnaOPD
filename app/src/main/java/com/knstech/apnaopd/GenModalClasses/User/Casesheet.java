@@ -14,7 +14,17 @@ public class Casesheet {
     private String timestamp;
     private String department;
     private String pulse;
+    private String uid;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private String title;
     private String rhythm;
 
     private String neckveins;
@@ -331,5 +341,13 @@ public class Casesheet {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

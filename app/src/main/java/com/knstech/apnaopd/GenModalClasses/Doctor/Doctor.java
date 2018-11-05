@@ -46,6 +46,15 @@ public class Doctor {
         return name;
     }
 
+    public boolean equals(Doctor c)
+    {
+        if(this.gid != c.gid)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public Doctor parseFromJson(String json)
     {
         try {
@@ -76,11 +85,13 @@ public class Doctor {
             if(object.has("history"))
                 histories=History.parsefromJson(object.getString("history"));
             List<TimeSlab> timeSlabs=new ArrayList<>();
-            if(object.has("office_number"))
+            if(object.has("time_slab"))
                 timeSlabs=TimeSlab.parsefromJson(object.getString("time_slab"));
             List<Visiting> visitings=new ArrayList<>();
-            if(object.has("office_number"))
+            if(object.has("visiting"))
                 visitings= Visiting.parsefromJson(object.getString("visiting"));
+            if(object.has("office_number"))
+                timeSlabs=TimeSlab.parsefromJson(object.getString("time_slab"));
             Address address=new Address();
             if(object.has("office_number"))
                 address=address.parseFromString(object.getString("address"));
