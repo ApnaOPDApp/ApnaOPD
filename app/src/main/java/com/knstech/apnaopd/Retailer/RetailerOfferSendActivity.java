@@ -10,20 +10,28 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.transition.ChangeBounds;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.R;
+import com.transitionseverywhere.ChangeImageTransform;
+import com.transitionseverywhere.TransitionManager;
+import com.transitionseverywhere.TransitionSet;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +45,11 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
     private Button finish;
     List<Map<String,String>> listOfDrugs;
     private String strPrice,strOfferPrice,strDrugName,dosagePer,dosageDay,deliveryCharge,deliveryTime;
-    private LinearLayout linearLayout;
+    private LinearLayout linearLayout,offer_list_ll;
     private int i=0;
+    private ImageView presc_img;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +62,7 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
 
         final Typeface custom_fonts = Typeface.createFromAsset(getAssets(),"font/Roboto-Black.ttf");
 
+        listOfDrugs=new ArrayList<>();
         price = (EditText)findViewById(R.id.price);
         offer_price=(EditText)findViewById(R.id.offer_price);
         dosage_day = (EditText)findViewById(R.id.dosage_day);
@@ -59,6 +71,24 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
         finish=(Button)findViewById(R.id.btn_finish);
         floatingActionButton=(FloatingActionButton)findViewById(R.id.next_values);
         linearLayout=(LinearLayout)findViewById(R.id.ll_show_data);
+        offer_list_ll=(LinearLayout)findViewById(R.id.offer_ll);
+        presc_img = (ImageView)findViewById(R.id.pres_image);
+
+        final ViewGroup tranitionContainer = (ViewGroup) findViewById(R.id.transiton_container);
+
+        TransitionManager.beginDelayedTransition(tranitionContainer,new TransitionSet()
+            .addTransition(new com.transitionseverywhere.ChangeBounds())
+                .addTransition(new ChangeImageTransform())
+        );
+
+        ViewGroup.LayoutParams params = presc_img.getLayoutParams();
+        boolean expanded = false;
+        params.height = expanded ? ViewGroup.LayoutParams.MATCH_PARENT:
+                ViewGroup.LayoutParams.WRAP_CONTENT;
+        presc_img.setLayoutParams(params);
+
+        presc_img.setScaleType(expanded ? ImageView.ScaleType.CENTER_CROP:ImageView.ScaleType.FIT_CENTER);
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,22 +106,37 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                 dosage_day.setText("");
                 dosage_per.setText("");
 
-                TextView tv1 = new TextView(RetailerOfferSendActivity.this);
+                final View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.offer_list_single_layout,null);
+                TextView tv1 = view.findViewById(R.id.offer_list_tv);
+                Button btn = view.findViewById(R.id.btn_offer_delete);
                 tv1.setTypeface(custom_fonts);
-                tv1.setBackground(getDrawable(R.drawable.edit_text_background2));
-                tv1.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 tv1.setGravity(Gravity.CENTER);
-                linearLayout.addView(tv1);
+
+                linearLayout.addView(view);
 
 
                 tv1.setText("Drug Name: "+strDrugName+"\nPrice: "+strPrice+"\nOffer Price: "+strOfferPrice+"\nDosage Per Day: "+dosagePer+"\nNo of Days: "+dosageDay+"\n");
 
                 Map<String,String> map = new HashMap<>();
+                map.put("id",i++ +"");
+                final String id=i+++"";
                 map.put("price",strPrice);
                 map.put("offered_price",strOfferPrice);
                 map.put("medicine",strDrugName);
                 map.put("dosage_per",dosagePer);
                 map.put("dosage_day",dosageDay);
+
+                listOfDrugs.add(map);
+
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        linearLayout.removeView(view);
+                        Toast.makeText(RetailerOfferSendActivity.this, id, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
 
 
             }
@@ -124,6 +169,9 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                         Map<String,String> map = new HashMap<>();
                         map.put("deliver_charge",deliveryCharge);
                         map.put("deliver_time",deliveryTime);
+
+                        listOfDrugs.add(map);
+
                         startActivity(new Intent(RetailerOfferSendActivity.this,RetailerActivity.class));
                         finish();
 

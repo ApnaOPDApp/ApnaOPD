@@ -70,7 +70,7 @@ public class ListOfPrescriptionActivity extends AppCompatActivity {
                 requestDelete.requestDelete(url, new RequestDelete.OnDeleteListener() {
                     @Override
                     public void onDelete() {
-
+                        Toast.makeText(ListOfPrescriptionActivity.this, "Prescription Deleted", Toast.LENGTH_SHORT).show();
                     }
                 });
 
