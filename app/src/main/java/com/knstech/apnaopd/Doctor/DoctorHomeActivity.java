@@ -49,7 +49,7 @@ public class DoctorHomeActivity extends AppCompatActivity {
         c2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DoctorHomeActivity.this,DAppointmentViewerActivity.class));
+                startActivity(new Intent(DoctorHomeActivity.this,DoctorSlotViewerActivity.class));
             }
         });
     }

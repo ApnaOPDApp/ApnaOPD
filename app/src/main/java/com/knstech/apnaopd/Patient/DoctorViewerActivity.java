@@ -22,7 +22,6 @@ import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -97,50 +96,40 @@ public class DoctorViewerActivity extends AppCompatActivity {
 
     }
 
-    public void getDoctor(String uid)
-    {
-        RequestGet get=new RequestGet(this);
-        String url= AppUtils.HOST_ADDRESS+"/api/doctors/"+uid;
-        get.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
+    public void getDoctor(String uid) {
+        RequestGet get = new RequestGet(this);
+        String url = AppUtils.HOST_ADDRESS + "/api/doctors/" + uid;
+        get.getJSONObject(url, new RequestGet.JSONObjectResponseListener() {
             @Override
-            public void onResponse(JSONArray jsonArray) {
+            public void onResponse(JSONObject obj) {
+                doctor = new Doctor();
+                doctor.parseFromJson(obj.toString());
+                List<TimeSlab> list = doctor.getTimeSlab();
 
-                try{
-                        JSONObject obj=jsonArray.getJSONObject(0);
-                        doctor = new Doctor();
-                        doctor.parseFromJson(obj.toString());
-                        List<TimeSlab> list= doctor.getTimeSlab();
-                        
-                        
-                        name.setText(doctor.getName());
-                        fees.append(" " + doctor.getFee());
-                        Glide.with(DoctorViewerActivity.this).load(UserAuth.getmUser().getImageUrl())
-                                .into(imageView);
-                        linearLayout.removeAllViews();
-                        for(int i=0;i<list.size();i++)
-                        {
-                            RadioButton btn=new RadioButton(DoctorViewerActivity.this);
-                            final TimeSlab slab=list.get(i);
-                            String m;
-                            final int slot_no=(Integer.parseInt(slab.getSl_no())%12==0)?12:Integer.parseInt(slab.getSl_no())%12;
-                            m=(Integer.parseInt(slab.getSl_no())/12==0)?"AM ":"PM ";
-                            btn.setText(""+slot_no+":00 "+m+" - "+slot_no+":55 "+m);
-                            btn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    selectedSlot=slab.getSl_no();
-                                }
-                            });
-                            if(slab.getAvailable().equals("true"))
-                                linearLayout.addView(btn);
 
+                name.setText(doctor.getName());
+                fees.append(" " + doctor.getFee());
+                Glide.with(DoctorViewerActivity.this).load(UserAuth.getmUser().getImageUrl())
+                        .into(imageView);
+                linearLayout.removeAllViews();
+                for (int i = 0; i < list.size(); i++) {
+                    RadioButton btn = new RadioButton(DoctorViewerActivity.this);
+                    final TimeSlab slab = list.get(i);
+                    String m;
+                    final int slot_no = (Integer.parseInt(slab.getSl_no()) % 12 == 0) ? 12 : Integer.parseInt(slab.getSl_no()) % 12;
+                    m = (Integer.parseInt(slab.getSl_no()) / 12 == 0) ? "AM " : "PM ";
+                    btn.setText("" + slot_no + ":00 " + m + " - " + slot_no + ":55 " + m);
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            selectedSlot = slab.getSl_no();
                         }
+                    });
+                    if (slab.getAvailable().equals("true"))
+                        linearLayout.addView(btn);
 
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
-            });
-        }
+            }
+        });
+    }
 }

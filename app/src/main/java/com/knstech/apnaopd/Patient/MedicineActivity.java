@@ -1,57 +1,39 @@
 package com.knstech.apnaopd.Patient;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.BitmapToString;
 import com.knstech.apnaopd.GenModalClasses.User.Address;
 import com.knstech.apnaopd.GenModalClasses.User.User;
-import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.AddressClickedListener;
 import com.knstech.apnaopd.Volley.VolleySingleton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -188,15 +170,6 @@ public class MedicineActivity extends AppCompatActivity {
             public void onResponse(JSONObject obj) {
                 User user=new User();
                 user=user.parseFromJson(obj.toString());
-                List<Address> listAddr=user.getAddress();
-                for(int i=0;i<listAddr.size();i++)
-                {
-                    if(listAddr.get(i)!=null) {
-                        addressPojoList.add(listAddr.get(i));
-                        mAdaptor.notifyDataSetChanged();
-                    }
-
-                }
 
 
             }
