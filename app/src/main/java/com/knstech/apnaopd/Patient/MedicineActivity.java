@@ -42,6 +42,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.knstech.apnaopd.GenModalClasses.User.Address.parseFromJson;
+
 public class MedicineActivity extends AppCompatActivity {
 
 
@@ -61,6 +63,9 @@ public class MedicineActivity extends AppCompatActivity {
 
     private  String url = AppUtils.HOST_ADDRESS+"/api/prescriptions";
     String url1=AppUtils.HOST_ADDRESS+"/api/users/1";
+    String addressURL = AppUtils.HOST_ADDRESS+"/api/users/address/1";
+
+
     private String cmt;
 
 
@@ -85,6 +90,8 @@ public class MedicineActivity extends AppCompatActivity {
 
 
         btn_submit=(CardView)findViewById(R.id.med_btn_submit);
+
+        //-------------UPLOAD PRESCRIPTION ------------------------------------
 
         uploadPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +156,8 @@ public class MedicineActivity extends AppCompatActivity {
 
     }
 
+
+    List<Address> listAddr;
     private void populateRecyclerView() {
 
         addressView.setHasFixedSize(true);
@@ -164,17 +173,19 @@ public class MedicineActivity extends AppCompatActivity {
         });
         addressView.setAdapter(mAdaptor);
 
+
+       listAddr= new ArrayList<>();
+/*
         RequestGet getRequest=new RequestGet(this);
-        getRequest.getJSONObject(url1, new RequestGet.JSONObjectResponseListener() {
+        getRequest.getJSONArray(addressURL, new RequestGet.JSONArrayResponseListener() {
             @Override
             public void onResponse(JSONObject obj) {
                 User user=new User();
                 user=user.parseFromJson(obj.toString());
 
-
             }
         });
-
+*/
     }
 
     @Override

@@ -47,8 +47,10 @@ public class Address {
             JSONArray array=new JSONArray(json);
             for(int i=0;i<array.length();i++)
             {
-                Address address=gson.fromJson(array.get(i).toString(),Address.class);
-                list.add(address);
+                if(array.get(i)!=null) {
+                    Address address = gson.fromJson(array.get(i).toString(), Address.class);
+                    list.add(address);
+                }
             }
 
         } catch (JSONException e) {
