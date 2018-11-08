@@ -5,18 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModalClasses.Doctor.Doctor;
 import com.knstech.apnaopd.GenModalClasses.Doctor.Patient;
-import com.knstech.apnaopd.GenModalClasses.Doctor.TimeSlab;
 import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
@@ -26,7 +23,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class DoctorViewerActivity extends AppCompatActivity {
@@ -104,7 +100,7 @@ public class DoctorViewerActivity extends AppCompatActivity {
             public void onResponse(JSONObject obj) {
                 doctor = new Doctor();
                 doctor.parseFromJson(obj.toString());
-                List<TimeSlab> list = doctor.getTimeSlab();
+                /*List<TimeSlab> list = doctor.getTimeSlab();
 
 
                 name.setText(doctor.getName());
@@ -128,7 +124,8 @@ public class DoctorViewerActivity extends AppCompatActivity {
                     if (slab.getAvailable().equals("true"))
                         linearLayout.addView(btn);
 
-                }
+
+                }*/
             }
         });
     }

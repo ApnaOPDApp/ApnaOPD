@@ -6,8 +6,6 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-
 
 public class Doctor {
 
@@ -38,7 +36,7 @@ public class Doctor {
 
     private String[] history = null;
 
-    private List<TimeSlab> timeSlab = null;
+    private String timeSlab;
 
     public String getName() {
         return name;
@@ -75,7 +73,7 @@ public class Doctor {
             if(object.has("gid"))
                 setGid(object.getString("gid"));
             if(object.has("time_slab"))
-                timeSlab=TimeSlab.parsefromJson(object.getString("time_slab"));
+                setTimeSlab(object.getString("time_slab"));
             if(object.has("history"))
             {
                 history=(new Gson()).fromJson(object.getJSONArray("history").toString(),String[].class);
@@ -179,15 +177,6 @@ public class Doctor {
     }
 
 
-
-    public List<TimeSlab> getTimeSlab() {
-        return timeSlab;
-    }
-
-    public void setTimeSlab(List<TimeSlab> timeSlab) {
-        this.timeSlab = timeSlab;
-    }
-
     public String[] getVisiting() {
         return visiting;
     }
@@ -202,5 +191,14 @@ public class Doctor {
 
     public void setHistory(String[] history) {
         this.history = history;
+    }
+
+
+    public String getTimeSlab() {
+        return timeSlab;
+    }
+
+    public void setTimeSlab(String timeSlab) {
+        this.timeSlab = timeSlab;
     }
 }
