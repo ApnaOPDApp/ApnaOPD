@@ -95,4 +95,18 @@ public class C {
             return time+":00 AM - "+time+":55 AM";
         }
     }
+    public static String[] getStringArray(String str) {
+        String ar[];
+        if(str.length()!=2)
+        {
+            String s=str.substring(2,str.length()-2);
+            ar=s.split("\",\"");
+        }
+        else
+        {
+            ar=null;
+        }
+        return ar;
+    }
+
 }

@@ -16,6 +16,7 @@ import com.knstech.apnaopd.GenModalClasses.Doctor.Doctor;
 import com.knstech.apnaopd.GenModalClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
 
@@ -34,6 +35,7 @@ public class DoctorViewerActivity extends AppCompatActivity {
     private String selectedSlot;
     private Button bookBtn;
     private String uid;
+    private String[] ar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,32 +102,10 @@ public class DoctorViewerActivity extends AppCompatActivity {
             public void onResponse(JSONObject obj) {
                 doctor = new Doctor();
                 doctor.parseFromJson(obj.toString());
-                /*List<TimeSlab> list = doctor.getTimeSlab();
 
+                ar= C.getStringArray(doctor.getTimeSlab());
+                
 
-                name.setText(doctor.getName());
-                fees.append(" " + doctor.getFee());
-                Glide.with(DoctorViewerActivity.this).load(UserAuth.getmUser().getImageUrl())
-                        .into(imageView);
-                linearLayout.removeAllViews();
-                for (int i = 0; i < list.size(); i++) {
-                    RadioButton btn = new RadioButton(DoctorViewerActivity.this);
-                    final TimeSlab slab = list.get(i);
-                    String m;
-                    final int slot_no = (Integer.parseInt(slab.getSl_no()) % 12 == 0) ? 12 : Integer.parseInt(slab.getSl_no()) % 12;
-                    m = (Integer.parseInt(slab.getSl_no()) / 12 == 0) ? "AM " : "PM ";
-                    btn.setText("" + slot_no + ":00 " + m + " - " + slot_no + ":55 " + m);
-                    btn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            selectedSlot = slab.getSl_no();
-                        }
-                    });
-                    if (slab.getAvailable().equals("true"))
-                        linearLayout.addView(btn);
-
-
-                }*/
             }
         });
     }

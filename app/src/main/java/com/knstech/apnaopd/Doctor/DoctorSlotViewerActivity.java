@@ -59,7 +59,7 @@ public class DoctorSlotViewerActivity extends AppCompatActivity {
         requestGet.getString(url, new RequestGet.StringResponseListener() {
             @Override
             public void onResponse(String response) {
-                receivedList=getStringArray(response);
+                receivedList=C.getStringArray(response);
                 selectedTime="1";
                 initRecView(r1);
                 r1.setVisibility(View.GONE);
@@ -204,19 +204,6 @@ public class DoctorSlotViewerActivity extends AppCompatActivity {
     }
 
 
-    private String[] getStringArray(String str) {
-        String ar[];
-        if(str.length()!=2)
-        {
-            String s=str.substring(2,str.length()-2);
-            ar=s.split("\",\"");
-        }
-        else
-        {
-            ar=null;
-        }
-        return ar;
-    }
 
 
 
