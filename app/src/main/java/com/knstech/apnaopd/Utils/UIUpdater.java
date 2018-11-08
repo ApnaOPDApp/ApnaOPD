@@ -88,12 +88,12 @@ public class UIUpdater {
                     String bleedResp,rhythmResp,chestResp,respResp,neckResp,condResp;
                     String pulseResp,titleResp;
 
-                    bleedResp=""+bleeding.getSelectedItemPosition();
-                    rhythmResp=""+rhythm.getSelectedItemPosition();
-                    chestResp=""+chestPain.getSelectedItemPosition();
-                    respResp=""+respiration.getSelectedItemPosition();
-                    neckResp=""+neckVeins.getSelectedItemPosition();
-                    condResp=""+condition.getSelectedItemPosition();
+                    bleedResp=""+bleeding.getSelectedItem();
+                    rhythmResp=""+rhythm.getSelectedItem();
+                    chestResp=""+chestPain.getSelectedItem();
+                    respResp=""+respiration.getSelectedItem();
+                    neckResp=""+neckVeins.getSelectedItem();
+                    condResp=""+condition.getSelectedItem();
 
                     pulseResp=pulse.getText().toString();
                     commentResp=comment.getText().toString();
@@ -191,9 +191,9 @@ public class UIUpdater {
                     String condResp,otherResp,miscResp;
                     String titleResp;
 
-                    condResp=""+condition.getSelectedItemPosition();
-                    otherResp=""+other.getSelectedItemPosition();
-                    miscResp=""+misc.getSelectedItemPosition();
+                    condResp=""+condition.getSelectedItem();
+                    otherResp=""+other.getSelectedItem();
+                    miscResp=""+misc.getSelectedItem();
 
                     commentResp=comment.getText().toString();
                     titleResp=title.getText().toString();
@@ -267,9 +267,9 @@ public class UIUpdater {
                     String condResp,otherResp,miscResp;
                     String titleResp;
 
-                    condResp=""+condition.getSelectedItemPosition();
-                    otherResp=""+other.getSelectedItemPosition();
-                    miscResp=""+misc.getSelectedItemPosition();
+                    condResp=""+condition.getSelectedItem();
+                    otherResp=""+other.getSelectedItem();
+                    miscResp=""+misc.getSelectedItem();
 
                     commentResp=comment.getText().toString();
                     titleResp=title.getText().toString();
@@ -340,9 +340,9 @@ public class UIUpdater {
                     String surveyResp,genitoResp,otherResp;
                     String titleResp;
 
-                    surveyResp=""+survey.getSelectedItemPosition();
-                    genitoResp=""+genito.getSelectedItemPosition();
-                    otherResp=""+other.getSelectedItemPosition();
+                    surveyResp=""+survey.getSelectedItem();
+                    genitoResp=""+genito.getSelectedItem();
+                    otherResp=""+other.getSelectedItem();
 
                     commentResp=comment.getText().toString();
                     titleResp=title.getText().toString();
@@ -419,11 +419,11 @@ public class UIUpdater {
                     String sensationResp,behaviouralResp,condResp,otherResp,miscResp;
                     String titleResp;
 
-                    sensationResp=""+sensation.getSelectedItemPosition();
-                    behaviouralResp=""+behavioural.getSelectedItemPosition();
-                    condResp=""+condition.getSelectedItemPosition();
-                    otherResp=""+other.getSelectedItemPosition();
-                    miscResp=""+misc.getSelectedItemPosition();
+                    sensationResp=""+sensation.getSelectedItem();
+                    behaviouralResp=""+behavioural.getSelectedItem();
+                    condResp=""+condition.getSelectedItem();
+                    otherResp=""+other.getSelectedItem();
+                    miscResp=""+misc.getSelectedItem();
 
                     commentResp=comment.getText().toString();
                     titleResp=title.getText().toString();
@@ -510,12 +510,12 @@ public class UIUpdater {
                 String habitResp,habitatResp,emotionalResp,painResp,vomitResp,siteResp;
                 String problemResp,accResp,feverResp,titleResp;
 
-                habitResp=""+habit.getSelectedItemPosition();
-                habitatResp=""+habitat.getSelectedItemPosition();
-                emotionalResp=""+emotional.getSelectedItemPosition();
-                painResp=""+pain.getSelectedItemPosition();
-                vomitResp=""+vomit.getSelectedItemPosition();
-                siteResp=""+site.getSelectedItemPosition();
+                habitResp=""+habit.getSelectedItem();
+                habitatResp=""+habitat.getSelectedItem();
+                emotionalResp=""+emotional.getSelectedItem();
+                painResp=""+pain.getSelectedItem();
+                vomitResp=""+vomit.getSelectedItem();
+                siteResp=""+site.getSelectedItem();
                 titleResp=title.getText().toString();
 
                 commentResp=comment.getText().toString();
@@ -566,9 +566,7 @@ public class UIUpdater {
         final DoctorAppointmentActivity activity = (DoctorAppointmentActivity) mContext;
         map.put("department",""+activity.getChoice());
         RequestPut requestPost=new RequestPut(mContext);
-        Map map1=new HashMap();
-        map1.put("casesheet",map);
-        JSONObject jsonObject=new JSONObject(map1);
+        JSONObject jsonObject=new JSONObject(map);
         requestPost.putJSONObject(url, jsonObject, new RequestPut.JSONObjectResponseListener() {
             @Override
             public void onResponse(JSONObject object) {

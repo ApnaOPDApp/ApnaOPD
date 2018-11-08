@@ -4,8 +4,6 @@ package com.knstech.apnaopd.GenModalClasses.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-
 public class User {
 
 
@@ -16,8 +14,6 @@ public class User {
     private String imageUrl;
 
     private String gid;
-
-    private List<Address> address = null;
 
     private IsDoctor isDoctor;
 
@@ -43,8 +39,7 @@ public class User {
             if(object.has("gid"))
                 setGid(object.getString("gid"));
 
-            List<Address> addresses=Address.parseFromJson(object.getString("address"));
-            setAddress(addresses);
+
             IsDoctor isDoctor=IsDoctor.parseFromJson(object.getString("is_doctor"));
             setIsDoctor(isDoctor);
             IsManufacturer isManufacturer=IsManufacturer.parseFromJson(object.getString("is_manufacturer"));
@@ -97,14 +92,6 @@ public class User {
 
     public void setGid(String gid) {
         this.gid = gid;
-    }
-
-    public List<Address> getAddress() {
-        return address;
-    }
-
-    public void setAddress(List<Address> address) {
-        this.address = address;
     }
 
 

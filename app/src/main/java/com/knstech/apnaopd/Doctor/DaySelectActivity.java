@@ -1,0 +1,67 @@
+package com.knstech.apnaopd.Doctor;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import com.knstech.apnaopd.GenModalClasses.Doctor.DayOfWeek;
+import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.C;
+import com.knstech.apnaopd.Utils.DaySelectAdapter;
+import com.knstech.apnaopd.Utils.Listeners.OnDayClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DaySelectActivity extends AppCompatActivity {
+
+    private RecyclerView dayList;
+    private DaySelectAdapter adapter;
+    private LinearLayoutManager linearLayoutManager;
+    private List<DayOfWeek> mList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_day_select);
+
+        dayList=findViewById(R.id.dayList);
+        initRecView();
+
+
+    }
+
+    private void initRecView() {
+
+        mList=new ArrayList<>();
+        adapter=new DaySelectAdapter(this, mList, new OnDayClickListener() {
+            @Override
+            public void onClick(DayOfWeek timeOfDay) {
+                Intent i=new Intent(DaySelectActivity.this,DoctorSlotViewerActivity.class);
+                i.putExtra("day",timeOfDay.getId());
+                startActivity(i);
+            }
+        });
+        linearLayoutManager=new LinearLayoutManager(this);
+        dayList.setHasFixedSize(true);
+        dayList.setAdapter(adapter);
+        dayList.setLayoutManager(linearLayoutManager);
+        populateRecView();
+
+    }
+
+    private void populateRecView() {
+
+        for(int i=1;i<=7;i++)
+        {
+            DayOfWeek dayOfWeek=new DayOfWeek();
+            dayOfWeek.setId(""+i);
+            dayOfWeek.setTitle(C.setDayOfWeek(i));
+            mList.add(dayOfWeek);
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+}

@@ -4,14 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Doctor.DoctorSlotViewerActivity">
-    <include layout="@layout/app_bar_patient"/>
-
+    tools:context=".Doctor.DaySelectActivity">
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/timeSlotList">
+        android:layout_height="wrap_content"
+        android:id="@+id/dayList">
 
     </android.support.v7.widget.RecyclerView>
 

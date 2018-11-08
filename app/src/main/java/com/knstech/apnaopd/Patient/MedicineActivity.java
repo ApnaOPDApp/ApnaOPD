@@ -1,19 +1,23 @@
 package com.knstech.apnaopd.Patient;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
+
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Bundle;
+
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,10 +30,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -48,8 +50,6 @@ import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -102,7 +102,7 @@ public class MedicineActivity extends AppCompatActivity {
 
         /*Configuring ION library for uploading image to server  */
 
-        Ion.getDefault(this).configure().setLogging("ion-smple",Log.DEBUG);
+        Ion.getDefault(this).configure().setLogging("ion-smple", Log.DEBUG);
 
 
         /* Linking java object with XML  */
@@ -214,10 +214,11 @@ public class MedicineActivity extends AppCompatActivity {
 
 
        listAddr= new ArrayList<>();
-
+/*
         RequestGet getRequest=new RequestGet(this);
         getRequest.getJSONArray(addressURL, new RequestGet.JSONArrayResponseListener() {
             @Override
+<<<<<<< HEAD
             public void onResponse(JSONArray obj) {
 
                        listAddr=Address.parseFromJson(obj.toString());
@@ -235,10 +236,15 @@ public class MedicineActivity extends AppCompatActivity {
                         }
 
 
+=======
+            public void onResponse(JSONObject obj) {
+                User user=new User();
+                user=user.parseFromJson(obj.toString());
+>>>>>>> b6844f00a17d8ec596f1626fd06ee929e3a4169b
 
             }
         });
-
+*/
     }
 
     @Override

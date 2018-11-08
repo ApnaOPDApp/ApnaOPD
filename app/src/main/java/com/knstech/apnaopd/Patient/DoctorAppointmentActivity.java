@@ -6,20 +6,18 @@ import android.support.annotation.Nullable;
 
 import android.support.v7.app.AppCompatActivity;
 
-
 import android.text.TextUtils;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.R;
-import com.knstech.apnaopd.Utils.AdapterUtil;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
+import com.knstech.apnaopd.Utils.Listeners.DepatmentClickListener;
 import com.knstech.apnaopd.Utils.UIUpdater;
 
 import org.json.JSONArray;
@@ -33,13 +31,14 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
     private int choice;
     private View selectedCS;
     private RelativeLayout rootLayout;
-    private Button submit;
-    private Spinner deptSpinner;
     public static int state=1;
     private String[] deptAr;
     private View deptView;
-    private EditText fee;
     private String feeStr;
+    private RecyclerView deptList;
+    private LinearLayoutManager linearLayoutManager;
+    private List<Department> mList;
+    private DepartmentAdapter adapter;
 
 
     @Override
@@ -50,24 +49,35 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
 
         deptView=LayoutInflater.from(this).inflate(R.layout.dept_select_layout,null);
         rootLayout.addView(deptView);
-        submit=deptView.findViewById(R.id.submit);
-        deptSpinner=deptView.findViewById(R.id.deptSpinner);
-        fee=deptView.findViewById(R.id.fees);
         getArrayFromServer();
 
-        //set submit functionality
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setChoice();
-                feeStr=(!TextUtils.isEmpty(fee.getText().toString()))?fee.getText().toString():"1000000000";
-                toggle();
-            }
-        });
+
+        deptList=findViewById(R.id.deptList);
+        populateRecyclerView();
 
 
 
     }
+
+    private void populateRecyclerView() {
+
+        mList=new ArrayList<>();
+        adapter=new DepartmentAdapter(mList, getApplicationContext(), new DepatmentClickListener() {
+            @Override
+            public void onClick(Department department) {
+                toggle();
+                choice=Integer.parseInt(department.getId());
+            }
+        });
+        linearLayoutManager=new LinearLayoutManager(this);
+
+        deptList.setAdapter(adapter);
+        deptList.setHasFixedSize(true);
+        deptList.setLayoutManager(linearLayoutManager);
+
+
+    }
+
     public String getFeeStr()
     {
         return feeStr;
@@ -98,10 +108,6 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
         }
     }
 
-    public void setChoice()
-    {
-        choice=deptSpinner.getSelectedItemPosition();
-    }
 
     private void updateUI() {
         String csGenUrl= AppUtils.HOST_ADDRESS+"/api/casesheets";
@@ -141,7 +147,6 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
     public void getArrayFromServer() {
 
         RequestGet requestGet=new RequestGet(getApplicationContext());
-        final List<String> list=new ArrayList<>();
         String url="https://jsonplaceholder.typicode.com/posts";
         requestGet.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
             @Override
@@ -150,15 +155,18 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
                  {
                      JSONObject obj= null;
                      try {
+
                          obj = jsonArray.getJSONObject(i);
-                         list.add(obj.getString("id"));
+                         Department dept=new Department();
+                         dept.setId(obj.getString("id"));
+                         dept.setName(obj.getString("id"));
+                         mList.add(dept);
+                         adapter.notifyDataSetChanged();
                      } catch (JSONException e) {
                          e.printStackTrace();
                      }
                  }
-                 list.add(0,"Select");
-                 deptAr=list.toArray(new String[0]);
-                 AdapterUtil.setSpinnerAdapter(deptSpinner,deptAr,DoctorAppointmentActivity.this);
+
             }
         });
 
@@ -176,7 +184,8 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
     }
 
     public String getDepartment() {
-        return String.valueOf(deptSpinner.getSelectedItemPosition());
+
+        return ""+choice;
     }
 
     public int getChoice() {

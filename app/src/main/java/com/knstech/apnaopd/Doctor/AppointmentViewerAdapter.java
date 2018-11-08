@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModalClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModalClasses.User.User;
@@ -74,11 +73,12 @@ public class AppointmentViewerAdapter extends RecyclerView.Adapter {
             });
             comment.setText(patient.getComment());
             RequestGet requestGet=new RequestGet(mContext);
-            String url= AppUtils.HOST_ADDRESS+"";
+            String url= AppUtils.HOST_ADDRESS+"/api/users/"+patient.getPatient_gid();
             requestGet.getJSONObject(url, new RequestGet.JSONObjectResponseListener() {
                 @Override
                 public void onResponse(JSONObject object) {
-                    User obj=(new Gson()).fromJson(object.toString(),User.class);
+                    User obj=new User();
+                    obj.parseFromJson(object.toString());
                     name.setText(obj.getName());
                     Glide.with(mContext).load(obj.getImageUrl()).into(pic);
 

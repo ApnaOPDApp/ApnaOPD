@@ -1,8 +1,8 @@
 package com.knstech.apnaopd.Profile;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,19 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.BitmapToString;
-import com.knstech.apnaopd.Patient.MedicineActivity;
+import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Volley.VolleySingleton;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -33,10 +29,10 @@ public class AddressActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText fullName,contactNumber,zipCode,flatNo,colony,landmark,city;
     private AppCompatSpinner state;
-
+    int lock=0;
     private String full_name1,contactNumber1,zipCode1,flatNo1,colony1,landmark1,city1,state1;
 
-    private String url = AppUtils.HOST_ADDRESS+"/api/users/address/new/1";
+    private String url = AppUtils.HOST_ADDRESS+"/api/users/address/new/"+ UserAuth.getmUser().getGid();
     private Button addbtn;
 
     @Override
@@ -76,6 +72,8 @@ public class AddressActivity extends AppCompatActivity {
                 params.put("landmark",landmark1);
                 params.put("city",city1);
                 params.put("state",state1);
+                params.put("colony",colony1);
+
 
                 Map val = new HashMap();
                 val.put("address",params);
@@ -99,7 +97,10 @@ public class AddressActivity extends AppCompatActivity {
                 );
 
                 VolleySingleton.getmInstance().addToRequestQueue(request);
-
+                if(getIntent().getIntExtra("activity",0)!=0)
+                {
+                    finish();
+                }
 
             }
         });

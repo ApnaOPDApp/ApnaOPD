@@ -41,6 +41,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/Theme.AppCompat.NoActionBar"
                 android:padding="10dp">
             <EditText
                 android:layout_width="match_parent"
@@ -49,6 +50,8 @@
                 android:maxLines="1"
                 android:maxLength="2"
                 android:inputType="number"
+                android:textColor="@color/black_app"
+                android:textColorHint="@color/colorPrimary"
                 android:id="@+id/persons"/>
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>

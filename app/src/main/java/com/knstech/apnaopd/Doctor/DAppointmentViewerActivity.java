@@ -1,5 +1,6 @@
 package com.knstech.apnaopd.Doctor;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +11,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModalClasses.Doctor.Patient;
+import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
@@ -50,32 +53,42 @@ public class DAppointmentViewerActivity extends AppCompatActivity {
                 View view= LayoutInflater.from(getApplicationContext()).inflate(R.layout.cs_viewer_layout,null);
                 final LinearLayout linearLayout=view.findViewById(R.id.list);
                 RequestGet requestGet=new RequestGet(getApplicationContext());
-                String slot=getIntent().getStringExtra("slot");
-                String url=AppUtils.HOST_ADDRESS+"";
+
+                String url=AppUtils.HOST_ADDRESS+"/api/casesheets/"+UserAuth.getmUser().getGid()+"/"+uid;
                 requestGet.getJSONObject(url, new RequestGet.JSONObjectResponseListener() {
                     @Override
                     public void onResponse(JSONObject object) {
                         for (Iterator<String> it = object.keys(); it.hasNext(); ) {
                             String key = it.next();
                             View kv=LayoutInflater.from(getApplicationContext()).inflate(R.layout.key_value,null);
-                            TextView keyTv,valueTv;
+                            TextView keyTv,valTv;
                             keyTv=kv.findViewById(R.id.key);
-                            valueTv=kv.findViewById(R.id.value);
+                            valTv=kv.findViewById(R.id.value);
                             keyTv.setText(C.getValue(key));
-                            linearLayout.addView(kv);
                             try {
-                                valueTv.setText(object.getJSONObject(key).getString("title"));
+                                valTv.setText(object.getJSONObject(key).getString("title"));
                             } catch (JSONException e) {
+                                e.printStackTrace();
                                 try {
-                                    valueTv.setText(object.getString(key));
+                                    valTv.setText(object.getString(key));
                                 } catch (JSONException e1) {
                                     e1.printStackTrace();
                                 }
                             }
+                            linearLayout.addView(kv);
 
                         }
                     }
                 });
+                dialog.setView(view);
+                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                dialog.show();
+
             }
         });
         linearLayoutManager=new LinearLayoutManager(this);
@@ -87,16 +100,36 @@ public class DAppointmentViewerActivity extends AppCompatActivity {
 
     private void populateView() {
 
-        String url= AppUtils.HOST_ADDRESS+"/api/";
-        RequestGet requestGet=new RequestGet(this);
+        String url= AppUtils.HOST_ADDRESS+"/api/doctors/visiting/"+ UserAuth.getmUser().getGid();
+        RequestGet requestGet=new RequestGet(getApplicationContext());
         requestGet.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
             @Override
             public void onResponse(JSONArray jsonArray) {
+                for(int i=0;i<jsonArray.length();i++)
+                {
+                    try {
 
+                        JSONObject obj=jsonArray.getJSONObject(i);
+                        String slot=getIntent().getStringExtra("slot");
 
+                        if(slot.equals(obj.getString("sl_no")))
+                        {
+                            JSONArray array=obj.getJSONArray("patients");
+                            for(int j=0;j<array.length();j++)
+                            {
+                                Patient patient=(new Gson()).fromJson(array.getJSONObject(j).toString(),Patient.class);
+                                mList.add(patient);
+                                adapter.notifyDataSetChanged();
 
+                            }
+                            break;
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
-
     }
 }
