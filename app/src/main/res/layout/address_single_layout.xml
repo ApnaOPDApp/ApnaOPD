@@ -12,19 +12,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:background="@drawable/chnage_color_on_click"
+            android:id="@+id/rb_select_address"
             android:layout_height="match_parent">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/rb_select_address"
-
-                />
             <TextView
+
                 android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toRightOf="@id/rb_select_address"
                 android:textColor="@color/black_app"
                 android:textSize="16dp"
                 android:id="@+id/tv_address_single_layout"

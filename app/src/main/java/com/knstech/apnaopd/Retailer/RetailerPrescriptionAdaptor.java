@@ -48,7 +48,7 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
    View view;
    List<PojoUploadPrescription> data;
     private OnDeclineClickedListener mListener;
-    String url = AppUtils.HOST_ADDRESS+"/api/prescriptions";
+    String Url = AppUtils.HOST_ADDRESS+"/api/retailers/presc_list/"+AppUtils.RET_GID;
 
 
 
@@ -115,7 +115,10 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
             offer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    activity.startActivity(new Intent(context,RetailerOfferSendActivity.class));
+                    Intent i=new Intent(context,RetailerOfferSendActivity.class);
+                    i.putExtra("image_url",pojoUploadPrescription.getPhoto_prescription_link());
+                    i.putExtra("pid",pojoUploadPrescription.getPatient_gid());
+                    activity.startActivity(i);
                     activity.finish();
                 }
             });

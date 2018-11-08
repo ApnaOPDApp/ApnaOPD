@@ -4,7 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <include layout="@layout/app_bar_patient"
+        android:id="@+id/general_cs"
+        />
+
     <ScrollView
+        android:layout_marginTop="60dp"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -18,28 +25,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Title"
+                    android:textColorHint="@color/black_app"
+                    android:textColor="@color/black_app"
+                    android:textSize="16dp"
                     android:id="@+id/title"
                     />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                >
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="3"
                 android:id="@+id/problem"
+                android:textColor="@color/black_app"
+                android:textSize="16dp"
                 android:hint="@string/problem"
                 />
             </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/habit"/>
+                android:text="@string/habit"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/habit"
@@ -49,10 +66,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="@string/habitat"/>
 
             <Spinner
@@ -64,21 +84,26 @@
         </LinearLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="3"
+                android:textColor="@color/black_app"
+                android:textSize="16dp"
                 android:id="@+id/accident"
                 android:hint="@string/accident"/>
             </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="@string/emotional_status"/>
 
             <Spinner
@@ -90,21 +115,30 @@
         </LinearLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                >
             <EditText
                 android:id="@+id/fever"
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
+                android:textColor="@color/black_app"
+                android:textSize="16dp"
                 android:inputType="numberDecimal"
                 android:hint="@string/fever" />
             </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="@string/pain"/>
 
             <Spinner
@@ -117,10 +151,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="@string/site_of_problem"/>
 
             <Spinner
@@ -133,9 +171,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
             <TextView
                 android:layout_width="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="@string/vomiting"/>
 
@@ -149,43 +190,58 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
                     android:text="@string/upload_report"/>
 
                 <Button
+                    android:layout_marginLeft="25dp"
                     android:id="@+id/upload"
                     android:layout_width="wrap_content"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_height="wrap_content"
                     android:text="@string/file_upload" />
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:text="@string/comment"/>
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
                 <EditText
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black_app"
+                    android:textSize="16dp"
                     android:id="@+id/comment"/>
                     </android.support.design.widget.TextInputLayout>
                 </ScrollView>
             </LinearLayout>
             <Button
                 android:id="@+id/submit"
+                android:layout_gravity="right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:text="@string/submit" />
         </LinearLayout>
     </ScrollView>

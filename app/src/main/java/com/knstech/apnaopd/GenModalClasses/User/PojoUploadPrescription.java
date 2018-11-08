@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class PojoUploadPrescription {
 
     private String patient_gid;
-    private String prescription_link;
+    private String photo_prescription_link;
     private String comment;
     private Address address;
     private String profile_image;
@@ -40,13 +40,6 @@ public class PojoUploadPrescription {
         this.patient_gid = patient_gid;
     }
 
-    public String getPrescription_link() {
-        return prescription_link;
-    }
-
-    public void setPrescription_link(String prescription_link) {
-        this.prescription_link = prescription_link;
-    }
 
     public String getComment() {
         return comment;
@@ -63,5 +56,13 @@ public class PojoUploadPrescription {
 
     public void setPrescription_id(String prescription_id) {
         Prescription_id = prescription_id;
+    }
+
+    public String getPhoto_prescription_link() {
+        return photo_prescription_link;
+    }
+
+    public void setPhoto_prescription_link(String photo_prescription_link) {
+        this.photo_prescription_link = photo_prescription_link;
     }
 }

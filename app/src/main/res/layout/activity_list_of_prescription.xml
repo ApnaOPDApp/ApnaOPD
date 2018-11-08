@@ -10,9 +10,11 @@
        android:id="@+id/retailer_prescription_list_app_bar"
         />
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:textColor="@color/black_app"
         android:id="@+id/display"/>
 
     <android.support.v7.widget.RecyclerView

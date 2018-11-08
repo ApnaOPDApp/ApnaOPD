@@ -73,6 +73,7 @@
         android:gravity="center"
         android:text="Deliver Status"
         android:textSize="18sp"
+        android:visibility="gone"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -81,6 +82,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:weightSum="4">
 
         <de.hdodenhof.circleimageview.CircleImageView

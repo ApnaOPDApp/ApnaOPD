@@ -32,7 +32,7 @@ public class AddressActivity extends AppCompatActivity {
     int lock=0;
     private String full_name1,contactNumber1,zipCode1,flatNo1,colony1,landmark1,city1,state1;
 
-    private String url = AppUtils.HOST_ADDRESS+"/api/users/address/new/"+ UserAuth.getmUser().getGid();
+    private String url = AppUtils.HOST_ADDRESS+"/api/users/address/new/"+AppUtils.USER_GID;
     private Button addbtn;
 
     @Override

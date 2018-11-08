@@ -3,7 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/app_bar_patient"/>
+
     <ScrollView
+        android:layout_marginTop="60dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
@@ -17,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
+                    android:textSize="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Title"
@@ -30,6 +35,9 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/condition" />
@@ -50,6 +58,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
                     android:text="@string/other" />
 
                 <Spinner
@@ -86,13 +97,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
                     android:text="@string/upload_picture" />
 
                 <Button
                     android:id="@+id/upload"
                     android:layout_width="291dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/file_upload" />
+                    android:background="@drawable/btn8" />
             </LinearLayout>
 
             <LinearLayout
@@ -101,6 +117,9 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/comment" />
@@ -109,6 +128,8 @@
                     android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/comment"
+                    android:textSize="16dp"
+                    android:inputType="textMultiLine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 </ScrollView>
@@ -116,9 +137,10 @@
 
             <Button
                 android:id="@+id/submit"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="@string/submit" />
+                android:layout_gravity="right"
+                android:background="@drawable/btn11" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
