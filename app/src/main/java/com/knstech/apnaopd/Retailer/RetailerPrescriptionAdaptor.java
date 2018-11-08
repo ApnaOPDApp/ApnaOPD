@@ -48,7 +48,7 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
    View view;
    List<PojoUploadPrescription> data;
     private OnDeclineClickedListener mListener;
-    String url = AppUtils.HOST_ADDRESS+"/api/prescriptions";
+    String Url = AppUtils.HOST_ADDRESS+"/api/retailers/presc_list/"+AppUtils.RET_GID;
 
 
 

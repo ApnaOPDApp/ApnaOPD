@@ -50,6 +50,7 @@ import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -79,8 +80,8 @@ public class MedicineActivity extends AppCompatActivity {
     private EditText comment;
     private String path;
     private String url = AppUtils.HOST_ADDRESS+"/api/orders";
-    private String url1=AppUtils.HOST_ADDRESS+"/api/users/1";
-    private String addressURL = AppUtils.HOST_ADDRESS+"/api/users/address/1";
+    private String url1=AppUtils.HOST_ADDRESS+"/api/users/"+AppUtils.USER_GID;
+    private String addressURL = AppUtils.HOST_ADDRESS+"/api/users/address/"+AppUtils.USER_GID;
     private String pic_url = AppUtils.HOST_ADDRESS+"/api/uploadPrescription";
     private String cmt;
     private List<Address> listAddr;
@@ -162,7 +163,7 @@ public class MedicineActivity extends AppCompatActivity {
                 Map params = new HashMap();
                 params.put("address",adres);
                 params.put("photo_prescription_link",prescription_image_url);
-                params.put("patient_gid","1");
+                params.put("patient_gid",AppUtils.USER_GID);
                 params.put("comment",cmt);
 
                 JSONObject obj = new JSONObject(params);
@@ -214,11 +215,11 @@ public class MedicineActivity extends AppCompatActivity {
 
 
        listAddr= new ArrayList<>();
-/*
+
         RequestGet getRequest=new RequestGet(this);
         getRequest.getJSONArray(addressURL, new RequestGet.JSONArrayResponseListener() {
             @Override
-<<<<<<< HEAD
+
             public void onResponse(JSONArray obj) {
 
                        listAddr=Address.parseFromJson(obj.toString());
@@ -232,20 +233,13 @@ public class MedicineActivity extends AppCompatActivity {
                             }
 
 
-
                         }
 
+        }
+    });
 
-=======
-            public void onResponse(JSONObject obj) {
-                User user=new User();
-                user=user.parseFromJson(obj.toString());
->>>>>>> b6844f00a17d8ec596f1626fd06ee929e3a4169b
-
-            }
-        });
-*/
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

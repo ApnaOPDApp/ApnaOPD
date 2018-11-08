@@ -70,15 +70,11 @@ public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.Ad
     class AddressGetViewHolder extends RecyclerView.ViewHolder{
 
         TextView addressSingle;
-        RelativeLayout rb;
-
 
         public AddressGetViewHolder(@NonNull View itemView) {
             super(itemView);
 
             addressSingle = (TextView)itemView.findViewById(R.id.tv_address_single_layout);
-            rb = (RelativeLayout) itemView.findViewById(R.id.rb_select_address);
-
 
         }
         public void bind(final Address address)
@@ -91,12 +87,6 @@ public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.Ad
                 }
             });
 
-            rb.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onAddressChecked(address);
-                }
-            });
             addressSingle.setText(address.getFull_name()+address.getHouse_no()+"\n"+address.getLandmark()+address.getLocality()+"\n"+address.getCity()+address.getPincode());
         }
     }

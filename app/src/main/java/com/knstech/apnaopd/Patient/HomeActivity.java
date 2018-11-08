@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.knstech.apnaopd.BecomeDoctorActivity;
 import com.knstech.apnaopd.DrawerUtil;
 import com.knstech.apnaopd.R;
 
@@ -130,13 +128,6 @@ public class HomeActivity extends AppCompatActivity {
             finish();
             return true;
         }
-
-        else if(R.id.becomeDoc==id)
-        {
-            Intent i=new Intent(HomeActivity.this, BecomeDoctorActivity.class);
-            startActivity(i);
-        }
-
 
         return super.onOptionsItemSelected(item);
     }
