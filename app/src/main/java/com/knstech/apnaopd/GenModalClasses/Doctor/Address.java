@@ -2,13 +2,41 @@
 package com.knstech.apnaopd.GenModalClasses.Doctor;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.Gson;
 
-public class Address {
+public class Address implements Parcelable {
 
 
 
     private String house_no;
+
+    private String full_name;
+
+    private String landmark;
+
+    private String locality;
+
+    private String city;
+
+    private String state;
+
+    private String pincode;
+
+    private String phoneNumber;
+
+    public Address(Parcel source) {
+        this.house_no = source.readString();
+        this.full_name = source.readString();
+        this.landmark = source.readString();
+        this.locality = source.readString();
+        this.city = source.readString();
+        this.state = source.readString();
+        this.pincode = source.readString();
+        this.phoneNumber = source.readString();
+    }
 
     public String getFull_name() {
         return full_name;
@@ -26,19 +54,7 @@ public class Address {
         this.landmark = landmark;
     }
 
-    private String full_name;
 
-    private String landmark;
-
-    private String locality;
-
-    private String city;
-
-    private String state;
-
-    private String pincode;
-
-    private String phoneNumber;
 
     public static Address parseFromString(String json)
     {
@@ -94,4 +110,42 @@ public class Address {
         this.phoneNumber = phoneNumber;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(this.house_no);
+        dest.writeString(this.pincode);
+        dest.writeString(this.full_name);
+        dest.writeString(this.locality);
+        dest.writeString(this.landmark);
+        dest.writeString(this.state);
+        dest.writeString(this.phoneNumber);
+        dest.writeString(this.city);
+    }
+    public Address()
+    {
+
+    }
+    public static final Parcelable.Creator<Address> CREATOR=new Parcelable.Creator<Address>(){
+
+        @Override
+        public Address createFromParcel(Parcel source) {
+            return new Address(source);
+        }
+
+        @Override
+        public Address[] newArray(int size) {
+            return new Address[size];
+        }
+    };
+    @Override
+    public String toString(){
+        String str=(new Gson()).toJson(this,Address.class).toString();
+        return str;
+    }
 }

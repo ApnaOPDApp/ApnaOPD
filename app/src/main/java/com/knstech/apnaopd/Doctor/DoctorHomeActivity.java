@@ -43,13 +43,13 @@ public class DoctorHomeActivity extends AppCompatActivity {
         c1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DoctorHomeActivity.this,TimeSlotActivity.class));
+                startActivity(new Intent(DoctorHomeActivity.this,DaySelectActivity.class));
             }
         });
         c2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DoctorHomeActivity.this,DoctorSlotViewerActivity.class));
+                startActivity(new Intent(DoctorHomeActivity.this,DAppointmentViewerActivity.class));
             }
         });
     }

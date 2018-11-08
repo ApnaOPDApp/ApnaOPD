@@ -1,10 +1,11 @@
 
 package com.knstech.apnaopd.GenModalClasses.Doctor;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,17 +19,14 @@ public class Doctor {
 
     private String phoneNumber;
 
-    private String officeNumber;
 
     private Address address;
 
     private String degree;
 
-    private String speciality;
 
     private String fee;
 
-    private String pin;
 
     private String regNumber;
 
@@ -36,9 +34,9 @@ public class Doctor {
 
     private String department;
 
-    private List<Visiting> visiting = null;
+    private String[] visiting = null;
 
-    private List<History> history = null;
+    private String[] history = null;
 
     private List<TimeSlab> timeSlab = null;
 
@@ -70,36 +68,28 @@ public class Doctor {
                 setFee(object.getString("fee"));
             if(object.has("reg_number"))
                 setRegNumber(object.getString("reg_number"));
-            if(object.has("speciality"))
-                setSpeciality(object.getString("speciality"));
             if(object.has("phone_number"))
                 setPhoneNumber(object.getString("phone_number"));
             if(object.has("email"))
                 setEmail(object.getString("email"));
             if(object.has("gid"))
                 setGid(object.getString("gid"));
-            if(object.has("office_number"))
-                setOfficeNumber(object.getString("office_number"));
-
-            List<History> histories=new ArrayList<>();
-            if(object.has("history"))
-                histories=History.parsefromJson(object.getString("history"));
-            List<TimeSlab> timeSlabs=new ArrayList<>();
             if(object.has("time_slab"))
-                timeSlabs=TimeSlab.parsefromJson(object.getString("time_slab"));
-            List<Visiting> visitings=new ArrayList<>();
+                timeSlab=TimeSlab.parsefromJson(object.getString("time_slab"));
+            if(object.has("history"))
+            {
+                history=(new Gson()).fromJson(object.getJSONArray("history").toString(),String[].class);
+            }
             if(object.has("visiting"))
-                visitings= Visiting.parsefromJson(object.getString("visiting"));
-            if(object.has("office_number"))
-                timeSlabs=TimeSlab.parsefromJson(object.getString("time_slab"));
+            {
+                visiting=(new Gson()).fromJson(object.getJSONArray("visiting").toString(),String[].class);
+            }
             Address address=new Address();
             if(object.has("office_number"))
                 address=address.parseFromString(object.getString("address"));
 
             setAddress(address);
-            setHistory(histories);
-            setTimeSlab(timeSlabs);
-            setVisiting(visitings);
+
 
             return this;
 
@@ -137,14 +127,6 @@ public class Doctor {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getOfficeNumber() {
-        return officeNumber;
-    }
-
-    public void setOfficeNumber(String officeNumber) {
-        this.officeNumber = officeNumber;
-    }
-
     public Address getAddress() {
         return address;
     }
@@ -161,13 +143,7 @@ public class Doctor {
         this.degree = degree;
     }
 
-    public String getSpeciality() {
-        return speciality;
-    }
 
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
-    }
 
     public String getFee() {
         return fee;
@@ -177,13 +153,6 @@ public class Doctor {
         this.fee = fee;
     }
 
-    public String getPin() {
-        return pin;
-    }
-
-    public void setPin(String pin) {
-        this.pin = pin;
-    }
 
     public String getRegNumber() {
         return regNumber;
@@ -209,21 +178,7 @@ public class Doctor {
         this.department = department;
     }
 
-    public List<Visiting> getVisiting() {
-        return visiting;
-    }
 
-    public void setVisiting(List<Visiting> visiting) {
-        this.visiting = visiting;
-    }
-
-    public List<History> getHistory() {
-        return history;
-    }
-
-    public void setHistory(List<History> history) {
-        this.history = history;
-    }
 
     public List<TimeSlab> getTimeSlab() {
         return timeSlab;
@@ -233,4 +188,19 @@ public class Doctor {
         this.timeSlab = timeSlab;
     }
 
+    public String[] getVisiting() {
+        return visiting;
+    }
+
+    public void setVisiting(String[] visiting) {
+        this.visiting = visiting;
+    }
+
+    public String[] getHistory() {
+        return history;
+    }
+
+    public void setHistory(String[] history) {
+        this.history = history;
+    }
 }

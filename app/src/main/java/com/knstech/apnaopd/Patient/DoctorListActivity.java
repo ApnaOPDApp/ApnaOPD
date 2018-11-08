@@ -72,7 +72,7 @@ public class DoctorListActivity extends AppCompatActivity {
 
         //set initial filters
         String feeStr=getIntent().getStringExtra("Fee");
-        if(!feeStr.equals(""))
+        if(feeStr!=null)
         {
             fees=feeStr;
         }
@@ -268,7 +268,7 @@ public class DoctorListActivity extends AppCompatActivity {
         RequestGet requestGet=new RequestGet(this);
 
         //set filters
-        String url= AppUtils.HOST_ADDRESS+"/api/doctors/filter?fee="+getFees()+"&department="+dept+"&city="+getCity();
+        String url= AppUtils.HOST_ADDRESS+"/api/doctors/filter?fee="+getFees()+"&department="+dept;
 
         requestGet.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
             @Override

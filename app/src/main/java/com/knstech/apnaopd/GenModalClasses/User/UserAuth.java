@@ -23,6 +23,10 @@ public class UserAuth {
     private static User mUser=new User();
 
     public static User getmUser() {
+        if(mUser==null)
+        {
+            mUser=new User();
+        }
         return mUser;
     }
 
