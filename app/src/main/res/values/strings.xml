@@ -63,15 +63,24 @@
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="name">Name</string>
-    <string name="time">Time</string>
+    <string name="ttime">Time</string>
     <string name="info">Touch For more Info</string>
     <string name="manage_time_slabs">Manage Time-Slabs</string>
-    <string name="view_appointments">View Appointments</string>
+    <string name="view_appointments">Upcoming Appointments</string>
     <string name="add">Add</string>
     <string name="set_default">Set Default</string>
     <string name="available_slots">Available Slots</string>
     <string name="select_all">Select All</string>
     <string name="clear_all">Clear All</string>
+    <string name="medicine_desc">See all your medical records and casesheets here</string>
+    <string name="order_medicine_desc">Purchase medicines from medical stores near you</string>
+    <string name="appointment_desc">Schedule appointment with APNAOPD register doctors across India</string>
+    <string name="med_presc">Recieve prescriptions from all medical buyers near you</string>
+    <string name="confirmed_orders">Confirmed Orders</string>
+    <string name="det_con_ord">Medicine orders confirmed by customers whom you offerd</string>
+    <string name="take_doctor_s_appointment">Take Doctor\'s Appointment</string>
+    <string name="order_medicine">Order Medicine</string>
+    <string name="medical_records">Medical Records</string>
 
 
     <!--  STATE   -->

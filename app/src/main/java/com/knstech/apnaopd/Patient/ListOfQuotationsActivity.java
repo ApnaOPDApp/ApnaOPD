@@ -19,14 +19,5 @@ public class ListOfQuotationsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.p_toolbar);
         toolbar.setTitle("Quotations List");
 
-        Button b= (Button)findViewById(R.id.next_layout);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(ListOfQuotationsActivity.this,PatientFinalDrugAcceptActivity.class));
-
-            }
-        });
     }
 }

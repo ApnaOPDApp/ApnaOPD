@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -20,16 +21,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.R;
-import com.transitionseverywhere.ChangeImageTransform;
-import com.transitionseverywhere.TransitionManager;
-import com.transitionseverywhere.TransitionSet;
+import com.knstech.apnaopd.Utils.Connections.RequestGet;
+import com.knstech.apnaopd.Utils.Connections.RequestPost;
+
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +52,6 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
     private LinearLayout linearLayout,offer_list_ll;
     private int i=0;
     private ImageView presc_img;
-
 
 
     @Override
@@ -71,24 +74,12 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
         finish=(Button)findViewById(R.id.btn_finish);
         floatingActionButton=(FloatingActionButton)findViewById(R.id.next_values);
         linearLayout=(LinearLayout)findViewById(R.id.ll_show_data);
-        offer_list_ll=(LinearLayout)findViewById(R.id.offer_ll);
         presc_img = (ImageView)findViewById(R.id.pres_image);
 
-        final ViewGroup tranitionContainer = (ViewGroup) findViewById(R.id.transiton_container);
-
-        TransitionManager.beginDelayedTransition(tranitionContainer,new TransitionSet()
-            .addTransition(new com.transitionseverywhere.ChangeBounds())
-                .addTransition(new ChangeImageTransform())
-        );
-
-        ViewGroup.LayoutParams params = presc_img.getLayoutParams();
-        boolean expanded = false;
-        params.height = expanded ? ViewGroup.LayoutParams.MATCH_PARENT:
-                ViewGroup.LayoutParams.WRAP_CONTENT;
-        presc_img.setLayoutParams(params);
-
-        presc_img.setScaleType(expanded ? ImageView.ScaleType.CENTER_CROP:ImageView.ScaleType.FIT_CENTER);
-
+        String image_url=getIntent().getStringExtra("image_url");
+        Uri uri = Uri.parse(image_url);
+        if(uri!=null)
+            Glide.with(getApplicationContext()).load(uri).into(presc_img);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,34 +97,30 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                 dosage_day.setText("");
                 dosage_per.setText("");
 
-                final View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.offer_list_single_layout,null);
-                TextView tv1 = view.findViewById(R.id.offer_list_tv);
-                Button btn = view.findViewById(R.id.btn_offer_delete);
-                tv1.setTypeface(custom_fonts);
-                tv1.setGravity(Gravity.CENTER);
+                final View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.offer_single_layout,null);
+                TextView medicine,price,oprice,dper,dday;
+                Button btn=view.findViewById(R.id.btn_offer_delete);
+                medicine=view.findViewById(R.id.tv_offer_single_medicine);
+                price=view.findViewById(R.id.tv_offer_single_price);
+                oprice=view.findViewById(R.id.tv_offer_single_offered_price);
+                dper=view.findViewById(R.id.tv_offer_single_dosage_per);
+                dday=view.findViewById(R.id.tv_offer_single_dosage_day);
+                medicine.setText("Medicine :"+strDrugName);
+                price.setText("Price :"+strPrice);
+                oprice.setText("Offer Price :"+strOfferPrice);
+                dper.setText("Dosage Per Day :"+dosagePer);
+                dday.setText("Dosage Days :"+dosageDay);
+
 
                 linearLayout.addView(view);
 
 
-                tv1.setText("Drug Name: "+strDrugName+"\nPrice: "+strPrice+"\nOffer Price: "+strOfferPrice+"\nDosage Per Day: "+dosagePer+"\nNo of Days: "+dosageDay+"\n");
-
-                Map<String,String> map = new HashMap<>();
-                map.put("id",i++ +"");
-                final String id=i+++"";
-                map.put("price",strPrice);
-                map.put("offered_price",strOfferPrice);
-                map.put("medicine",strDrugName);
-                map.put("dosage_per",dosagePer);
-                map.put("dosage_day",dosageDay);
-
-                listOfDrugs.add(map);
 
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                         linearLayout.removeView(view);
-                        Toast.makeText(RetailerOfferSendActivity.this, id, Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -145,6 +132,28 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                
+                //populate listOfDrugs
+                for(int i=0;i<linearLayout.getChildCount();i++)
+                {
+                    
+                     View view=  linearLayout.getChildAt(i);
+                     TextView medicine,price,oprice,dper,dday;
+                     medicine=view.findViewById(R.id.tv_offer_single_medicine);
+                     price=view.findViewById(R.id.tv_offer_single_price);
+                     oprice=view.findViewById(R.id.tv_offer_single_offered_price);
+                     dper=view.findViewById(R.id.tv_offer_single_dosage_per);
+                     dday=view.findViewById(R.id.tv_offer_single_dosage_day);
+                     Map<String,String> map=new HashMap<>();
+                     map.put("medicine",medicine.getText().toString());
+                     map.put("price",price.getText().toString());
+                     map.put("offered_price",oprice.getText().toString());
+                     map.put("dosage_per",dper.getText().toString());
+                     map.put("dosage_day",dday.getText().toString());
+                     listOfDrugs.add(map);
+                }
+                
+                
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RetailerOfferSendActivity.this);
                 builder.setTitle("Delivery Details");
@@ -166,11 +175,32 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                         dialog.dismiss();
                         deliveryCharge = deliver_Charge.getText().toString();
                         deliveryTime = delivery_Time.getText().toString();
-                        Map<String,String> map = new HashMap<>();
+                        Map map = new HashMap();
                         map.put("deliver_charge",deliveryCharge);
                         map.put("deliver_time",deliveryTime);
-
+                        map.put("retailer_gid","ret2");
+                        map.put("status","0");
+                        map.put("eoffer",listOfDrugs);
+                        Map params=new HashMap();
+                        params.put("patient_gid",getIntent().getStringExtra("pid"));
+                        params.put("offers",map);
+                        JSONObject obj=new JSONObject(params);
+                        String url=AppUtils.HOST_ADDRESS+"/api/offers/";
+                        RequestPost post=new RequestPost(getApplicationContext());
+                        post.sendJSON(url, obj, new RequestPost.PostResponseListener() {
+                            @Override
+                            public void onResponse() {
+                                Toast.makeText(RetailerOfferSendActivity.this, "Sent", Toast.LENGTH_SHORT).show();
+                            }
+                        }, new RequestPost.PostErrorListener() {
+                            @Override
+                            public void onError() {
+                                Toast.makeText(RetailerOfferSendActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        
                         listOfDrugs.add(map);
+                        
 
                         startActivity(new Intent(RetailerOfferSendActivity.this,RetailerActivity.class));
                         finish();
@@ -190,6 +220,8 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                     builder.show();
                 }
         });
+
+
 
     }
 }

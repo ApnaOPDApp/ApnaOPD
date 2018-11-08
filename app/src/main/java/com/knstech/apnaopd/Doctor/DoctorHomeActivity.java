@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.knstech.apnaopd.DrawerUtil;
 import com.knstech.apnaopd.GenModalClasses.Doctor.DoctorAuth;
@@ -16,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class DoctorHomeActivity extends AppCompatActivity {
 
-    private CardView c1,c2;
+    private RelativeLayout c1,c2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,8 @@ public class DoctorHomeActivity extends AppCompatActivity {
         DoctorAuth auth=new DoctorAuth();
         auth.signInDoctor(this);
 
-
         ButterKnife.bind(this);
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.p_toolbar);
         toolbar.setTitle("Doctor Home");
         setSupportActionBar(toolbar);

@@ -9,8 +9,19 @@
     <include layout="@layout/app_bar_patient"
         android:id="@+id/address_app_bar"
         ></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        >
+
     <TextView
-        android:layout_marginTop="61dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add a new address"
@@ -126,11 +137,12 @@
         android:text="ADD"
         android:id="@+id/add"
         android:textStyle="bold"
-        android:background="@color/colorAccent"
-        android:layout_alignEnd="@+id/state"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/state"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_marginBottom="15dp" />
+    </RelativeLayout>
 
-
-
+    </ScrollView>
 </RelativeLayout>

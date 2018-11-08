@@ -2,13 +2,21 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <include
+        layout="@layout/app_bar_patient"
+        />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
+            android:padding="10dp"
             android:layout_alignParentTop="true"
             android:orientation="vertical">
             <android.support.design.widget.TextInputLayout
@@ -18,16 +26,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Title"
+                    android:textSize="18sp"
                     android:id="@+id/title"
                     />
             </android.support.design.widget.TextInputLayout>
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="107dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black_app"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:text="@string/pulse" />
 
@@ -36,15 +49,20 @@
                     android:layout_width="337dp"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
+                    android:textSize="16dp"
                     android:hint="Enter Pulse..." />
             </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black_app"
+                android:textStyle="bold"
                 android:text="@string/rhythm"/>
 
             <Spinner
@@ -55,12 +73,16 @@
             </Spinner>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black_app"
+                android:textStyle="bold"
                 android:text="@string/neck_veins"/>
 
             <Spinner
@@ -71,12 +93,16 @@
             </Spinner>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black_app"
+                android:textStyle="bold"
                 android:text="@string/chest_pain"/>
 
             <Spinner
@@ -87,12 +113,16 @@
             </Spinner>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black_app"
+                android:textStyle="bold"
                 android:text="@string/respiration"/>
 
             <Spinner
@@ -103,12 +133,16 @@
             </Spinner>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black_app"
+                android:textStyle="bold"
                 android:text="@string/bleeding"/>
 
             <Spinner
@@ -119,12 +153,17 @@
             </Spinner>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black_app"
+                android:textStyle="bold"
+
                 android:text="@string/condition"/>
 
             <Spinner
@@ -135,6 +174,7 @@
             </Spinner>
         </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -142,21 +182,31 @@
                 <TextView
                     android:layout_width="175dp"
                     android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/black_app"
+                    android:textStyle="bold"
                     android:text="@string/upload_report" />
                 <Button
                     android:layout_width="wrap_content"
+                    android:textSize="18dp"
+                    android:background="@drawable/btn8"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:id="@+id/upload"
-                    android:text="@string/file_upload"/>
+                   />
 
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/black_app"
+                    android:textStyle="bold"
                     android:text="@string/comment"/>
                 <ScrollView
                     android:layout_width="match_parent"
@@ -168,10 +218,12 @@
                 </ScrollView>
             </LinearLayout>
             <Button
-                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/submit"
-                android:id="@+id/submit"/>
+                android:layout_gravity="right"
+                android:background="@drawable/btn11"
+              />
         </LinearLayout>
     </ScrollView>
 
