@@ -172,7 +172,12 @@ public class MedicineActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Toast.makeText(MedicineActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Toast.makeText(MedicineActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                                catch (Exception e){
+
+                                }
                             }
                         },
                         new Response.ErrorListener() {
