@@ -69,4 +69,44 @@ public class C {
             default:return "";
         }
     }
+
+    public static String getTime(String s) {
+
+        String str;
+        int i=s.charAt(1)-'0';
+        if(s.charAt(0)-'0'==1)
+        {
+            int time=i+5;
+            return time+":00 AM - "+time+":55 AM";
+        }
+        else if(s.charAt(0)-'0'==2)
+        {
+            int time=((11+i)%12==0)?12:((11+i)%12);
+            return time+":00 PM - "+time+":55 PM";
+        }
+        else if(s.charAt(0)-'0'==3)
+        {
+            int time=i+5;
+            return time+":00 PM - "+time+":55 PM";
+        }
+        else
+        {
+            int time=((11+i)%12==0)?12:((11+i)%12);
+            return time+":00 AM - "+time+":55 AM";
+        }
+    }
+    public static String[] getStringArray(String str) {
+        String ar[];
+        if(str.length()!=2)
+        {
+            String s=str.substring(2,str.length()-2);
+            ar=s.split("\",\"");
+        }
+        else
+        {
+            ar=null;
+        }
+        return ar;
+    }
+
 }

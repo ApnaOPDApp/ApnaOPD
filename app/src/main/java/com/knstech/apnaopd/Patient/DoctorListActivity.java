@@ -158,7 +158,7 @@ public class DoctorListActivity extends AppCompatActivity {
                 mList.clear();
                 for(int i=0;i<24;i++)
                 {
-                    CheckBox cb= (CheckBox) linearLayout.getChildAt(i);
+                    /*CheckBox cb= (CheckBox) linearLayout.getChildAt(i);
                     if(cb.isChecked()) {
                         for (int j = 0; j < dupList.size(); j++) {
                             if (dupList.get(j).getTimeSlab().size() != 0) {
@@ -169,6 +169,8 @@ public class DoctorListActivity extends AppCompatActivity {
                             }
                         }
                     }
+                    */
+
                 }
                 doctorAdapter.notifyDataSetChanged();
             }

@@ -6,6 +6,7 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
@@ -57,10 +58,29 @@ public class RequestPut {
         };
         RequestSingleton.getInstance(mContext).addToQueue(request);
     }
+    public void putJSONArray(String url, JSONArray array, final JSONArrayResponseListener mListener)
+    {
+        JsonArrayRequest request=new JsonArrayRequest(Request.Method.PUT, url, array, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                mListener.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestSingleton.getInstance(mContext).addToQueue(request);
+    }
     public interface JSONObjectResponseListener {
         void onResponse(JSONObject object);
     }
     public interface JSONObjectErrorListener{
         void onError(VolleyError error);
+    }
+
+    public interface OnStringPutResponseListener {
+        void onResponse(String str);
     }
 }
