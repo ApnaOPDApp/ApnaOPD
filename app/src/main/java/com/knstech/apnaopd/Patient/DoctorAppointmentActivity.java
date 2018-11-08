@@ -3,7 +3,10 @@ package com.knstech.apnaopd.Patient;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
 import android.support.v7.app.AppCompatActivity;
+
+
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +40,7 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
     private View deptView;
     private EditText fee;
     private String feeStr;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

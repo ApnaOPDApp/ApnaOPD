@@ -10,47 +10,178 @@
 
     <include layout="@layout/app_bar_patient"
         android:id="@+id/app_bar_medicine"/>
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="60dp"
-        android:padding="10dp"
         >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="@drawable/med_color"
+        android:id="@+id/des1_head"
+        android:gravity="center_horizontal"
+        >
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:text="Order medicine in 4 easy steps"
+            android:id="@+id/tv_order_med_in_4_eay_step"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            />
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:weightSum="4"
+            android:id="@+id/des1"
             android:orientation="horizontal"
-            android:id="@+id/upload_prescription"
-            android:background="@drawable/search_back"
-            android:gravity="center"
+            android:padding="5dp"
             >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/google"
-                />
-            <TextView
+            <LinearLayout
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload Prescription"
-                android:textColor="#000000"
-                android:textSize="13dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:paddingTop="40dp"
+
+                >
+
+            <ImageView
+
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/cirimg1"
                 />
+               <TextView
+                   android:layout_marginTop="5dp"
+                   android:layout_gravity="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="10dp"
+                   android:inputType="textMultiLine"
+                   android:textColor="#9f9e9e"
+                   android:text="Upload Prescription"
+                   />
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:paddingTop="40dp"
+                >
+
+                <ImageView
+
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/cirimg2"
+                    />
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10dp"
+                    android:textColor="#9f9e9e"
+                    android:inputType="textMultiLine"
+                    android:text="Receive Offers"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="40dp"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/cirimg3"
+                    />
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10dp"
+                    android:textColor="#9f9e9e"
+                    android:inputType="textMultiLine"
+                    android:text="Select best offers"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="40dp"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/cirimg1"
+                    />
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10dp"
+                    android:inputType="textMultiLine"
+                    android:textColor="#9f9e9e"
+                    android:text="Get fast home delivery"
+                    />
+
+            </LinearLayout>
         </LinearLayout>
+
+        <Button
+            android:layout_margin="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@id/des1"
+            android:id="@+id/btn_upload_prescription"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:background="@drawable/btn4"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="280dp">
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
             android:id="@+id/med_scroll"
-            android:layout_below="@id/upload_prescription"
             >
-
         </android.support.v7.widget.RecyclerView>
-
-
-
 
         <EditText
             android:hint="Short comment"
@@ -58,61 +189,40 @@
             android:gravity="top"
             android:background="@drawable/edit_text_background"
             android:id="@+id/editText_cmt"
-            android:layout_width="367dp"
-            android:layout_height="62dp"
-            android:maxLines="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="60dp"
+            android:maxLines="10"
             android:layout_below="@id/med_scroll"
             android:inputType="textMultiLine"
             />
 
-        <android.support.v7.widget.CardView
-            android:layout_width="141dp"
-            android:layout_height="45dp"
-            android:layout_alignEnd="@+id/upload_prescription"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="21dp"
-            android:elevation="15dp"
-            app:cardBackgroundColor="@color/apple_red"
-            android:id="@+id/med_btn_submit"
-            app:cardCornerRadius="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/editText_cmt"
+            android:padding="20dp"
+            android:weightSum="2"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_med_submit"
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn3"
+                android:id="@+id/med_btn_submit"/>
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:text=" SUBMIT"
-                android:textColor="#000"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="141dp"
-            android:layout_height="45dp"
-            android:layout_alignStart="@+id/upload_prescription"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="21dp"
-            android:elevation="15dp"
-            app:cardBackgroundColor="@color/apple_green"
-            android:id="@+id/med_btn_add_add"
-            app:cardCornerRadius="5dp">
-
-            <TextView
-                android:id="@+id/tv_med_add_add"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text=" Add Address"
-                android:textColor="#000"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-        </android.support.v7.widget.CardView>
-
+                android:layout_weight="1"
+                android:background="@drawable/btn2"
+                android:layout_marginLeft="25dp"
+                android:id="@+id/med_btn_add_add"
+                />
+        </LinearLayout>
 
     </RelativeLayout>
 
-
+    </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

@@ -140,12 +140,11 @@ public class DrawerUtil {
         //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
                 .withActivity(activity)
+                .withToolbar(toolbar)
                 .withHasStableIds(true)
                 .withActionBarDrawerToggle(true)
                 .withStickyHeaderShadow(true)
                 .withAccountHeader(headerResult)
-                .withActionBarDrawerToggle(true)
-                .withActionBarDrawerToggleAnimated(true)
                 .withCloseOnClick(true)
                 .withSelectedItem(-1)
                 .addDrawerItems(

@@ -40,7 +40,7 @@ public class ListOfPrescriptionActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RetailerPrescriptionAdaptor mAdaptor;
     private List<PojoUploadPrescription> data;
-    private  String url = AppUtils.HOST_ADDRESS+"/api/prescriptions/ret2/";
+    private  String url = AppUtils.HOST_ADDRESS+"/api/orders/";
     private Toolbar toolbar;
     private String json_pres_id;
 
@@ -82,10 +82,11 @@ public class ListOfPrescriptionActivity extends AppCompatActivity {
         json_pres_id = getIntent().getStringExtra("id array");
 
             try {
+
                 JSONArray pres_id = new JSONArray(json_pres_id);
                 for(int j=0;j<pres_id.length();j++){
                     JSONObject obj = pres_id.getJSONObject(j);
-                    final String pid = obj.getString("prescription_id");
+                    final String pid = obj.toString();
 
                     RequestGet request = new RequestGet(this);
                     request.getJSONObject(url+pid, new RequestGet.JSONObjectResponseListener() {

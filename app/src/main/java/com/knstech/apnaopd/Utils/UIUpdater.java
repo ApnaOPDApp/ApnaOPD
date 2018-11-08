@@ -464,7 +464,7 @@ public class UIUpdater {
 
             //update view
             rootLayout.removeView(selectedCS);
-            selectedCS= LayoutInflater.from(activity).inflate(R.layout.activity_cscreator,null);
+            selectedCS= LayoutInflater.from(activity).inflate(R.layout.general_cs,null);
             rootLayout.addView(selectedCS);
 
 

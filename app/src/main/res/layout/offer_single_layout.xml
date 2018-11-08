@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:id="@+id/offer_single_layout_ll"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Medicine"
+        android:id="@+id/tv_offer_single_medicine"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:id="@+id/tv_offer_single_price"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Offered Price"
+        android:id="@+id/tv_offer_single_offered_price"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dosage Per Day"
+        android:id="@+id/tv_offer_single_dosage_per"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No of days"
+        android:id="@+id/tv_offer_single_dosage_day"
+        android:textSize="16sp"
+        />
+
+
+</LinearLayout>
+
+    <Button
+        android:id="@+id/btn_offer_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/offer_single_layout_ll"
+        android:layout_gravity="right"
+        android:background="@drawable/color4"
+        android:fontFamily="serif-monospace"
+        android:text="Delete"
+        android:textSize="18sp" />
+</RelativeLayout>

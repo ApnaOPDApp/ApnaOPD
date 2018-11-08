@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -33,7 +34,6 @@ public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.Ad
     Context context;
     private AddressClickedListener mListener;
     View view;
-    private String url = AppUtils.HOST_ADDRESS+"/api/prescriptions";
 
 
     public AddressGetAdaptor(List<Address> addressPojoList, Context context, AddressClickedListener mListener) {
@@ -57,6 +57,7 @@ public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.Ad
     @Override
     public void onBindViewHolder(@NonNull AddressGetViewHolder addressGetViewHolder, int i) {
 
+
         (addressGetViewHolder).bind(addressPojoList.get(i));
     }
 
@@ -69,19 +70,27 @@ public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.Ad
     class AddressGetViewHolder extends RecyclerView.ViewHolder{
 
         TextView addressSingle;
-        RadioButton rb;
+        RelativeLayout rb;
 
 
         public AddressGetViewHolder(@NonNull View itemView) {
             super(itemView);
 
             addressSingle = (TextView)itemView.findViewById(R.id.tv_address_single_layout);
-            rb = (RadioButton)itemView.findViewById(R.id.rb_select_address);
+            rb = (RelativeLayout) itemView.findViewById(R.id.rb_select_address);
 
 
         }
         public void bind(final Address address)
         {
+
+            addressSingle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onAddressChecked(address);
+                }
+            });
+
             rb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
