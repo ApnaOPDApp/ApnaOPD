@@ -1,17 +1,14 @@
 package com.knstech.apnaopd.Patient;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.google.gson.JsonObject;
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.User.Address;
-import com.knstech.apnaopd.GenModalClasses.User.PatientOrdersList;
-import com.knstech.apnaopd.GenModalClasses.User.Qutotation;
+import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.OderClickedListener;

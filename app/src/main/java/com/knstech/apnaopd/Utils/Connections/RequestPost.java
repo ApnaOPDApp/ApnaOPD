@@ -71,9 +71,9 @@ public class RequestPost {
         RequestSingleton.getInstance(mContext).addToQueue(request);
 
     }
-    public void sendJSONArray(String url, JSONArray array, final ArrayResponseListener listener)
-    {
-        JsonArrayRequest arrayRequest=new JsonArrayRequest(Request.Method.POST, url, array, new Response.Listener<JSONArray>() {
+
+    public void sendJSONArray(String url, JSONArray array, final ArrayResponseListener listener) {
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.POST, url, array, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 listener.onResponse(response);
@@ -81,9 +81,31 @@ public class RequestPost {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    public void postJSONObject(String url, final JSONObject jsonObject, final RequestPut.JSONObjectResponseListener jsonObjectResponseListener) {
+
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                jsonObjectResponseListener.onResponse(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
                 Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        RequestSingleton.getInstance(mContext).addToQueue(arrayRequest);
+
+        RequestSingleton.getInstance(mContext).addToQueue(request);
+
     }
 }
+

@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.knstech.apnaopd.GenModalClasses.User.PatientOrdersList;
+import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
 import com.knstech.apnaopd.GenModalClasses.User.Qutotation;
 import com.knstech.apnaopd.R;
 

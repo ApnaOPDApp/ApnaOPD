@@ -1,7 +1,6 @@
 package com.knstech.apnaopd.Patient;
 
 import android.content.Intent;
-
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,7 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.User.Address;
+import com.knstech.apnaopd.GenModelClasses.User.Address;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
@@ -42,6 +41,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class MedicineActivity extends AppCompatActivity {
 

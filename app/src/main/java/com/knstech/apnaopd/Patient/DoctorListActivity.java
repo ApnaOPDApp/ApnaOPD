@@ -21,8 +21,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.Doctor.Doctor;
+import com.knstech.apnaopd.GenModelClasses.Doctor.Doctor;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.DoctorItemClickedListener;
 
@@ -37,13 +38,17 @@ public class DoctorListActivity extends AppCompatActivity {
 
     private RecyclerView doctorsList;
     private DoctorAdapter doctorAdapter;
-    private List<Doctor> mList,dupList;
+    private List<Doctor> mList;
     private LinearLayoutManager linearLayoutManager;
     private RequestGet requestGet;
+    private String selectedDay;
+    private String patient_name,patient_age;
 
     public String getFees() {
         return fees;
     }
+
+
 
     public void setFees(String fees) {
         if(!fees.equals(""))
@@ -76,7 +81,13 @@ public class DoctorListActivity extends AppCompatActivity {
         {
             fees=feeStr;
         }
+        else
+        {
+            fees="1000000000";
+        }
         dept=getIntent().getStringExtra("Department");
+        patient_name=getIntent().getStringExtra("patient_name");
+        patient_age=getIntent().getStringExtra("patient_age");
 
 
         //init bottom nav
@@ -93,8 +104,11 @@ public class DoctorListActivity extends AppCompatActivity {
                     case R.id.fee_item:
                         onFee();
                         return true;
-                    case R.id.time_item:
+                    /*case R.id.time_item:
                         onTime();
+                        return true;*/
+                    case R.id.day:
+                        onDay();
                         return true;
                 }
 
@@ -196,6 +210,26 @@ public class DoctorListActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void onDay()
+    {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        String ar[]={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+        dialog.setTitle("Select Day of the Week");
+        dialog.setSingleChoiceItems(ar, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectedDay=""+(which+1);
+                initRecyclerView();
+            }
+        });
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        dialog.show();
+    }
 
     private void onCity() {
         final AlertDialog.Builder dialog= new AlertDialog.Builder(this);
@@ -203,16 +237,7 @@ public class DoctorListActivity extends AppCompatActivity {
         requestGet.getString(url, new RequestGet.StringResponseListener() {
             @Override
             public void onResponse(String str) {
-                String ar[];
-                if(str.length()!=2)
-                {
-                    String s=str.substring(2,str.length()-2);
-                    ar=s.split("\",\"");
-                }
-                else
-                {
-                    ar=null;
-                }
+                String ar[]=C.getStringArray(str);
                 View view=LayoutInflater.from(DoctorListActivity.this).inflate(R.layout.city_dialog,null);
                 dialog.setView(view);
                 final AutoCompleteTextView city=view.findViewById(R.id.city);
@@ -223,11 +248,8 @@ public class DoctorListActivity extends AppCompatActivity {
                 dialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        for (int i = 0; i < mList.size(); i++) {
-                            if (mList.get(i).getAddress() != null && mList.get(i).getAddress().getCity()!=null &&!mList.get(i).getAddress().getCity().equalsIgnoreCase(getCity())) {
-                                mList.remove(i);
-                            }
-                        }
+                        setCity(city.getText().toString());
+                        initRecyclerView();
                     }
                 }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
@@ -247,14 +269,16 @@ public class DoctorListActivity extends AppCompatActivity {
 
         doctorsList=findViewById(R.id.doctorsList);
         mList=new ArrayList<>();
-        dupList=new ArrayList<>();
         doctorAdapter=new DoctorAdapter(this, mList, new DoctorItemClickedListener() {
             @Override
-            public void onDoctorItemClick(String uid) {
+            public void onDoctorItemClick(String uid,int position) {
                 Intent i=new Intent(DoctorListActivity.this,DoctorViewerActivity.class);
                 i.putExtra("Doctor",uid);
                 i.putExtra("cs_uid",getIntent().getStringExtra("cs_uid"));
                 i.putExtra("comment",getIntent().getStringExtra("comment"));
+                i.putExtra("patient_name",patient_name);
+                i.putExtra("patient_age",patient_age);
+                i.putExtra("day",position);
                 startActivity(i);
 
             }
@@ -283,8 +307,9 @@ public class DoctorListActivity extends AppCompatActivity {
                         String json=object.toString();
                         Doctor doctor=new Doctor();
                         doctor.parseFromJson(json);
-                        mList.add(doctor);
-                        dupList.add(doctor);
+                        if(checkFilters(doctor)) {
+                            mList.add(doctor);
+                        }
                         doctorAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -293,6 +318,41 @@ public class DoctorListActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private boolean checkFilters(Doctor doctor) {
+
+        boolean result=false;
+        if(selectedDay==null||isPresent(doctor.getTimeSlab())||selectedDay.equals(doctor.getTimeSlab().substring(0,1))) {
+            if (Integer.parseInt(doctor.getFee()) <= Integer.parseInt(getFees())) {
+                if (getCity()==null||(getCity()!=null&&getCity().equals(""))) {
+                    result = true;
+                } else {
+                    if (doctor.getAddress().getCity()!=null&&doctor.getAddress().getCity().equals(getCity())) {
+                        result = true;
+                    }
+                }
+            }
+        }
+
+        return result;
+
+    }
+
+    private boolean isPresent(String timeSlab) {
+        String ar[]= C.getStringArray(timeSlab);
+        boolean res=false;
+        for(int i=0;i<ar.length;i++)
+        {
+            if(ar[i].substring(0,1).equals(selectedDay))
+            {
+                res=true;
+                break;
+            }
+
+        }
+        return res;
+
     }
 
 

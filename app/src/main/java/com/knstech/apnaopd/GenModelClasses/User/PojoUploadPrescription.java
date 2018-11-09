@@ -1,12 +1,10 @@
-package com.knstech.apnaopd.GenModalClasses.User;
+package com.knstech.apnaopd.GenModelClasses.User;
 
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
+import com.knstech.apnaopd.GenModelClasses.User.Address;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 
 public class PojoUploadPrescription {
 

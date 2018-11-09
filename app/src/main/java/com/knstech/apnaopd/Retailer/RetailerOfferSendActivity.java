@@ -54,6 +54,7 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
     private LinearLayout linearLayout,offer_list_ll;
     private int i=0;
     private ImageView presc_img;
+    private double total_offer_price;
 
 
     @Override
@@ -156,6 +157,8 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                      String o = oprice.getText().toString().split(":")[1];
                      String dp= dper.getText().toString().split(":")[1];
                      String d = dday.getText().toString().split(":")[1];
+                     double op=Double.valueOf(o);
+                     total_offer_price+=op;
 
                      map.put("medicine",m);
                      map.put("price",p);
@@ -193,6 +196,7 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                         map.put("retailer_gid",AppUtils.RET_GID);
                         map.put("quotation",listOfDrugs);
                         map.put("quotation_link",null);
+                        map.put("total_price",total_offer_price+"");
                         Map params=new HashMap();
 
                         String _id = getIntent().getStringExtra("_id");

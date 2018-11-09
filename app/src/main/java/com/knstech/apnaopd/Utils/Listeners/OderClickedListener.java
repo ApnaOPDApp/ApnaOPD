@@ -1,7 +1,7 @@
 package com.knstech.apnaopd.Utils.Listeners;
 
 
-import com.knstech.apnaopd.GenModalClasses.User.PatientOrdersList;
+import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
 
 
 public interface OderClickedListener {

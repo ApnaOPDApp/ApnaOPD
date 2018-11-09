@@ -12,7 +12,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.knstech.apnaopd.ApnaOPDApp;
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.User.User;
+import com.knstech.apnaopd.GenModelClasses.User.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class UserAuth {
     public UserAuth(){}
 
 
-    public com.knstech.apnaopd.GenModalClasses.User.UserAuth getInstance(){
+    public com.knstech.apnaopd.GenModelClasses.User.UserAuth getInstance(){
          return ApnaOPDApp.getUserAuth();
     }
 

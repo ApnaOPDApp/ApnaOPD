@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.Doctor.Patient;
-import com.knstech.apnaopd.GenModalClasses.User.User;
+import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
+import com.knstech.apnaopd.GenModelClasses.User.User;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 
@@ -54,13 +54,13 @@ public class AppointmentViewerAdapter extends RecyclerView.Adapter {
     public class PatientHolder extends RecyclerView.ViewHolder{
         private final View view;
         CircleImageView pic;
-        TextView name,comment;
+        TextView name,age;
         public PatientHolder(@NonNull View itemView) {
             super(itemView);
             view=itemView;
             pic=itemView.findViewById(R.id.patientPic);
             name=itemView.findViewById(R.id.name);
-            comment=itemView.findViewById(R.id.comment);
+            age=itemView.findViewById(R.id.age);
 
         }
         public void bind(final Patient patient)
@@ -71,7 +71,7 @@ public class AppointmentViewerAdapter extends RecyclerView.Adapter {
                     mListener.onClick(patient.getCasesheet_uid());
                 }
             });
-            comment.setText(patient.getComment());
+            age.setText(patient.getPatient_age());
             RequestGet requestGet=new RequestGet(mContext);
             String url= AppUtils.HOST_ADDRESS+"/api/users/"+patient.getPatient_gid();
             requestGet.getJSONObject(url, new RequestGet.JSONObjectResponseListener() {

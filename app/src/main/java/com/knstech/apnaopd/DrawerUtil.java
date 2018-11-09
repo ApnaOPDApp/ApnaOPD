@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.knstech.apnaopd.Doctor.DoctorHomeActivity;
 import com.knstech.apnaopd.Patient.HomeActivity;
 import com.knstech.apnaopd.Patient.ListOfOrderActivity;
-import com.knstech.apnaopd.Patient.OrderActivity;
+import com.knstech.apnaopd.Patient.PAppointmentViewerActivity;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.Profile.ProfileActivity;
 import com.knstech.apnaopd.Retailer.RetailerActivity;
@@ -23,6 +23,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+
 
 public class DrawerUtil {
     public static void getDrawer(final Activity activity, Toolbar toolbar) {
@@ -167,13 +168,17 @@ public class DrawerUtil {
 
         PrimaryDrawerItem drawerQuotations = new PrimaryDrawerItem()
                 .withIdentifier(5)
-                .withName("Quotations")
+                .withName("Appointments")
                 .withIcon(R.drawable.p19).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem.getIdentifier() == 5){
-                             }
 
+
+
+                            activity.startActivity(new Intent(activity,PAppointmentViewerActivity.class));
+                            activity.finish();
+                        }
                         return false;
                     }
                 })

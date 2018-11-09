@@ -1,22 +1,24 @@
 package com.knstech.apnaopd.Retailer;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.User.PojoUploadPrescription;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestDelete;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.OnDeclineClickedListener;
+import com.knstech.apnaopd.GenModelClasses.User.PojoUploadPrescription;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ListOfPrescriptionActivity extends AppCompatActivity {
 

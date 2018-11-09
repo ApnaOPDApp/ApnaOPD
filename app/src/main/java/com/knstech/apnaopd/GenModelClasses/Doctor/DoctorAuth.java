@@ -1,9 +1,9 @@
-package com.knstech.apnaopd.GenModalClasses.Doctor;
+package com.knstech.apnaopd.GenModelClasses.Doctor;
 
 import android.content.Context;
 
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 
 import org.json.JSONObject;

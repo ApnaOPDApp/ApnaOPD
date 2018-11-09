@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.knstech.apnaopd.GenModalClasses.Retailer.Order;
+import com.knstech.apnaopd.GenModelClasses.Retailer.Order;
 import com.knstech.apnaopd.R;
 
 import org.w3c.dom.Text;

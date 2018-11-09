@@ -1,5 +1,5 @@
 
-package com.knstech.apnaopd.GenModalClasses.Doctor;
+package com.knstech.apnaopd.GenModelClasses.Doctor;
 
 
 import android.os.Parcel;

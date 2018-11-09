@@ -1,8 +1,4 @@
-package com.knstech.apnaopd.GenModalClasses.Retailer;
-
-import android.widget.ScrollView;
-
-import com.knstech.apnaopd.GenModalClasses.Doctor.Patient;
+package com.knstech.apnaopd.GenModelClasses.Retailer;
 
 import org.json.JSONException;
 import org.json.JSONObject;

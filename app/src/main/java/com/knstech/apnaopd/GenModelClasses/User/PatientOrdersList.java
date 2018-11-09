@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.GenModalClasses.User;
+package com.knstech.apnaopd.GenModelClasses.User;
 
 import com.google.gson.Gson;
 
@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.knstech.apnaopd.GenModalClasses.User.Qutotation;
 
 public class PatientOrdersList {
 
