@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.C;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class PreviousAppointmentsAdapter extends RecyclerView.Adapter {
     }
     public class PreviousViewHolder extends RecyclerView.ViewHolder{
 
-        TextView name,fee,department;
+        TextView name,fee,department,timestamp;
         Button changeStatus,cancel;
 
         public PreviousViewHolder(@NonNull View itemView) {
@@ -56,12 +57,15 @@ public class PreviousAppointmentsAdapter extends RecyclerView.Adapter {
             cancel=itemView.findViewById(R.id.cancel);
             changeStatus.setVisibility(View.GONE);
             cancel.setVisibility(View.GONE);
+            timestamp=itemView.findViewById(R.id.timestamp);
         }
         public void bind(Patient patient)
         {
-            name.setText(patient.getDoctor_name());
-            fee.setText(patient.getFee());
+            timestamp.setText("Time : "+ C.getDateAndTime(patient.getTime_slab()));
+            name.setText("Dr. "+patient.getDoctor_name());
+            fee.setText("Fee : Rs."+patient.getFee());
             department.setText(patient.getDepartment());
+
         }
     }
 }

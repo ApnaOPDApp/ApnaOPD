@@ -40,6 +40,11 @@
                     android:id="@+id/age"
                     android:text="Age"
                     android:textSize="20dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/timestamp"
+                    android:text="Time :"/>
 
                 <TextView
                     android:id="@+id/fee"

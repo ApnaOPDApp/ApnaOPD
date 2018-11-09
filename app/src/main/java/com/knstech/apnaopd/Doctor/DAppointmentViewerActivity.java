@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
@@ -121,7 +120,7 @@ public class DAppointmentViewerActivity extends AppCompatActivity {
                     try {
 
                         JSONObject obj=new JSONObject(jsonArray.getJSONObject(i).toString());
-                        Patient patient=(new Gson()).fromJson(obj.toString(),Patient.class);
+                        Patient patient=Patient.parseFromJson(obj.toString());
                         if(patient.getTime_slab().substring(0,3).equals(dayOfWeek+timeOfDay)) {
                             mList.add(patient);
                             adapter.notifyDataSetChanged();

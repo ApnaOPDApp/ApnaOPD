@@ -156,6 +156,11 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
         requestGet.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
             @Override
             public void onResponse(JSONArray jsonArray){
+
+                deptList.setBackground(null);
+
+
+
                  for(int i=0;i<jsonArray.length();i++)
                  {
                      JSONObject obj= null;
