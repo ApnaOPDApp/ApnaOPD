@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.knstech.apnaopd.GenModalClasses.Doctor.DayOfWeek;
+import com.knstech.apnaopd.GenModelClasses.Doctor.DayOfWeek;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Listeners.OnDayClickListener;
 

@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.knstech.apnaopd.GenModalClasses.Doctor.DayOfWeek;
+import com.knstech.apnaopd.GenModelClasses.Doctor.DayOfWeek;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.DaySelectAdapter;
@@ -39,7 +39,16 @@ public class DaySelectActivity extends AppCompatActivity {
         adapter=new DaySelectAdapter(this, mList, new OnDayClickListener() {
             @Override
             public void onClick(DayOfWeek timeOfDay) {
-                Intent i=new Intent(DaySelectActivity.this,DoctorSlotViewerActivity.class);
+                String calledActivity="";
+                calledActivity=getIntent().getStringExtra("activity");
+                Intent i;
+                if(calledActivity==null||calledActivity.equals("")) {
+                    i = new Intent(DaySelectActivity.this, DoctorSlotViewerActivity.class);
+                }
+                else
+                {
+                    i=new Intent(DaySelectActivity.this,TimeSlotAppointmentViewer.class);
+                }
                 i.putExtra("day",timeOfDay.getId());
                 startActivity(i);
             }

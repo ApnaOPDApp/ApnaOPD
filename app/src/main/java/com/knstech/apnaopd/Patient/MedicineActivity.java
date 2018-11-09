@@ -2,14 +2,9 @@ package com.knstech.apnaopd.Patient;
 
 import android.content.Intent;
 
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Environment;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.provider.MediaStore;
@@ -18,7 +13,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -28,7 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -38,9 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.BitmapToString;
-import com.knstech.apnaopd.GenModalClasses.User.Address;
-import com.knstech.apnaopd.GenModalClasses.User.User;
+import com.knstech.apnaopd.GenModelClasses.User.Address;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
@@ -58,8 +49,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.knstech.apnaopd.GenModalClasses.User.Address.parseFromJson;
 
 public class MedicineActivity extends AppCompatActivity {
 

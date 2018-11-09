@@ -1,6 +1,6 @@
 package com.knstech.apnaopd;
 
-import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 
 /**
  * Created by Pankaj Vaghela on 25-10-2018.

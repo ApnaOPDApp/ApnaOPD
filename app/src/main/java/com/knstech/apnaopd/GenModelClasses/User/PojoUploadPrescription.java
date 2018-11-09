@@ -1,8 +1,4 @@
-package com.knstech.apnaopd.GenModalClasses.User;
-
-import org.json.JSONArray;
-
-import java.io.Serializable;
+package com.knstech.apnaopd.GenModelClasses.User;
 
 public class PojoUploadPrescription {
 

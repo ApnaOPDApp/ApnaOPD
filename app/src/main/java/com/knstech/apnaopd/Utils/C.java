@@ -72,7 +72,6 @@ public class C {
 
     public static String getTime(String s) {
 
-        String str;
         int i=s.charAt(1)-'0';
         if(s.charAt(0)-'0'==1)
         {
@@ -109,4 +108,35 @@ public class C {
         return ar;
     }
 
+    public static String getTimeCode(String string) {
+
+        String res="";
+        String time=string.substring(0,string.indexOf(":"));
+        int isAm=string.indexOf("AM");
+        int timeVal=Integer.parseInt(time);
+        if(timeVal>=6&&timeVal<12)
+        {
+            if(isAm!=-1)
+            {
+                res="1"+(timeVal-5);
+            }
+            else
+            {
+                res="3"+(timeVal-5);
+            }
+        }
+        else
+        {
+            if(isAm!=-1)
+            {
+                res="4"+((timeVal)%12+1);
+            }
+            else
+            {
+                res="2"+((timeVal)%12+1);
+            }
+        }
+        return res;
+
+    }
 }

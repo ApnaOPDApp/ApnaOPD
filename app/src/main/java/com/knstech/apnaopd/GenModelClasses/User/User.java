@@ -1,5 +1,5 @@
 
-package com.knstech.apnaopd.GenModalClasses.User;
+package com.knstech.apnaopd.GenModelClasses.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;

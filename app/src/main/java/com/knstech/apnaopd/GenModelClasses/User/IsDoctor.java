@@ -1,20 +1,20 @@
 
-package com.knstech.apnaopd.GenModalClasses.User;
+package com.knstech.apnaopd.GenModelClasses.User;
 
 
 import com.google.gson.Gson;
 
-public class IsManufacturer {
+public class IsDoctor {
 
 
     private String type;
 
     private String _default;
 
-    public static IsManufacturer parseFromJson(String json)
+    public static IsDoctor parseFromJson(String json)
     {
         Gson gson=new Gson();
-        return gson.fromJson(json,IsManufacturer.class);
+        return gson.fromJson(json,IsDoctor.class);
     }
     
     public String getType() {

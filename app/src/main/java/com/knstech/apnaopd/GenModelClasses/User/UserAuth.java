@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.GenModalClasses.User;
+package com.knstech.apnaopd.GenModelClasses.User;
 
 import android.content.Context;
 import android.widget.Toast;

@@ -10,31 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.User.Address;
-import com.knstech.apnaopd.GenModalClasses.User.PojoUploadPrescription;
-import com.knstech.apnaopd.GenModalClasses.User.User;
+import com.knstech.apnaopd.GenModelClasses.User.PojoUploadPrescription;
 import com.knstech.apnaopd.R;
-import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.OnDeclineClickedListener;
-import com.knstech.apnaopd.Volley.NetworkJSONLoader;
-import com.knstech.apnaopd.Volley.NetworkStringLoader;
-import com.knstech.apnaopd.Volley.VolleySingleton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Method;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;

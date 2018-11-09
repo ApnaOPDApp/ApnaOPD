@@ -1,5 +1,5 @@
 
-package com.knstech.apnaopd.GenModalClasses.Doctor;
+package com.knstech.apnaopd.GenModelClasses.Doctor;
 
 import com.google.gson.Gson;
 
@@ -22,6 +22,7 @@ public class Doctor {
 
     private String degree;
 
+    private String doctor_image;
 
     private String fee;
 
@@ -200,5 +201,13 @@ public class Doctor {
 
     public void setTimeSlab(String timeSlab) {
         this.timeSlab = timeSlab;
+    }
+
+    public String getDoctor_image() {
+        return doctor_image;
+    }
+
+    public void setDoctor_image(String doctor_image) {
+        this.doctor_image = doctor_image;
     }
 }

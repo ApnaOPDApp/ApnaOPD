@@ -1,5 +1,5 @@
 
-package com.knstech.apnaopd.GenModalClasses.User;
+package com.knstech.apnaopd.GenModelClasses.User;
 
 import com.google.gson.Gson;
 

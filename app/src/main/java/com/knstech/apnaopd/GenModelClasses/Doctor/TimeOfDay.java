@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.GenModalClasses.Doctor;
+package com.knstech.apnaopd.GenModelClasses.Doctor;
 
 public class TimeOfDay {
     private String id;

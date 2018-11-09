@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.Doctor.Patient;
-import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
+import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
@@ -32,13 +32,16 @@ public class DAppointmentViewerActivity extends AppCompatActivity {
     private RecyclerView appList;
     private AppointmentViewerAdapter adapter;
     private List<Patient> mList;
+    private String dayOfWeek;
     private LinearLayoutManager linearLayoutManager;
+    private String timeOfDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dappointment_viewer);
-
+        dayOfWeek=getIntent().getStringExtra("day");
+        timeOfDay=getIntent().getStringExtra("time");
         initRecyclerView();
     }
 
@@ -53,29 +56,37 @@ public class DAppointmentViewerActivity extends AppCompatActivity {
                 View view= LayoutInflater.from(getApplicationContext()).inflate(R.layout.cs_viewer_layout,null);
                 final LinearLayout linearLayout=view.findViewById(R.id.list);
                 RequestGet requestGet=new RequestGet(getApplicationContext());
-
-                String url=AppUtils.HOST_ADDRESS+"/api/casesheets/"+UserAuth.getmUser().getGid()+"/"+uid;
+                String url=AppUtils.HOST_ADDRESS+"/api/casesheets/"+uid;
                 requestGet.getJSONObject(url, new RequestGet.JSONObjectResponseListener() {
                     @Override
                     public void onResponse(JSONObject object) {
                         for (Iterator<String> it = object.keys(); it.hasNext(); ) {
                             String key = it.next();
-                            View kv=LayoutInflater.from(getApplicationContext()).inflate(R.layout.key_value,null);
-                            TextView keyTv,valTv;
-                            keyTv=kv.findViewById(R.id.key);
-                            valTv=kv.findViewById(R.id.value);
-                            keyTv.setText(C.getValue(key));
-                            try {
-                                valTv.setText(object.getJSONObject(key).getString("title"));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                            if(!key.equals("_id")) {
+                                View kv = LayoutInflater.from(getApplicationContext()).inflate(R.layout.key_value, null);
+                                TextView keyTv, valTv;
+                                int p = 20;
+                                keyTv = kv.findViewById(R.id.key);
+                                valTv = kv.findViewById(R.id.value);
+                                keyTv.setPadding(p, p, p, p);
+                                valTv.setPadding(p, p, p, p);
+                                keyTv.setTextSize(18);
+                                valTv.setTextSize(18);
+
+
+                                keyTv.setText(C.getValue(key));
                                 try {
-                                    valTv.setText(object.getString(key));
-                                } catch (JSONException e1) {
-                                    e1.printStackTrace();
+                                    valTv.setText(object.getJSONObject(key).getString("title"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    try {
+                                        valTv.setText(object.getString(key));
+                                    } catch (JSONException e1) {
+                                        e1.printStackTrace();
+                                    }
                                 }
+                                linearLayout.addView(kv);
                             }
-                            linearLayout.addView(kv);
 
                         }
                     }
@@ -100,7 +111,7 @@ public class DAppointmentViewerActivity extends AppCompatActivity {
 
     private void populateView() {
 
-        String url= AppUtils.HOST_ADDRESS+"/api/doctors/visiting/"+ UserAuth.getmUser().getGid();
+        String url= AppUtils.HOST_ADDRESS+"/api/appointments/doctor/visiting/"+ UserAuth.getmUser().getGid();
         RequestGet requestGet=new RequestGet(getApplicationContext());
         requestGet.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
             @Override
@@ -109,20 +120,11 @@ public class DAppointmentViewerActivity extends AppCompatActivity {
                 {
                     try {
 
-                        JSONObject obj=jsonArray.getJSONObject(i);
-                        String slot=getIntent().getStringExtra("slot");
-
-                        if(slot.equals(obj.getString("sl_no")))
-                        {
-                            JSONArray array=obj.getJSONArray("patients");
-                            for(int j=0;j<array.length();j++)
-                            {
-                                Patient patient=(new Gson()).fromJson(array.getJSONObject(j).toString(),Patient.class);
-                                mList.add(patient);
-                                adapter.notifyDataSetChanged();
-
-                            }
-                            break;
+                        JSONObject obj=new JSONObject(jsonArray.getJSONObject(i).toString());
+                        Patient patient=(new Gson()).fromJson(obj.toString(),Patient.class);
+                        if(patient.getTime_slab().substring(0,3).equals(dayOfWeek+timeOfDay)) {
+                            mList.add(patient);
+                            adapter.notifyDataSetChanged();
                         }
 
                     } catch (JSONException e) {

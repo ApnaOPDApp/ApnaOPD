@@ -64,4 +64,20 @@ public class RequestPost {
         RequestSingleton.getInstance(mContext).addToQueue(request);
 
     }
+    public void postJSONObject(String url, final JSONObject jsonObject, final RequestPut.JSONObjectResponseListener jsonObjectResponseListener) {
+
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                jsonObjectResponseListener.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestSingleton.getInstance(mContext).addToQueue(request);
+
+    }
 }

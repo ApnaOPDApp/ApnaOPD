@@ -13,7 +13,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
+import com.knstech.apnaopd.GenModelClasses.Doctor.DoctorAuth;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
@@ -157,8 +158,14 @@ public class DoctorSlotViewerActivity extends AppCompatActivity {
                             {
                                 persons="0"+persons;
                             }
-                            selectedList.add(dayOfWeek+selectedTime+(j+1)+persons);
+                            selectedList.add(dayOfWeek+selectedTime+(j+1)+persons+"00");
                         }
+                    }
+                }
+                for(int j=0;j<receivedList.length;j++)
+                {
+                    if(receivedList[j].charAt(0)-'0'!=Integer.parseInt(dayOfWeek)) {
+                        selectedList.add(receivedList[j]);
                     }
                 }
                 RequestPut put=new RequestPut(getApplicationContext());
@@ -167,7 +174,8 @@ public class DoctorSlotViewerActivity extends AppCompatActivity {
                 put.putJSONArray(url, obj, new RequestPut.JSONArrayResponseListener() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {
-
+                        String str=selectedList.toArray().toString();
+                        DoctorAuth.getmDoctor().setTimeSlab(str);
                     }
                 });
                 finish();
@@ -194,7 +202,7 @@ public class DoctorSlotViewerActivity extends AppCompatActivity {
                     if(receivedList[j].substring(0,3).equals(dayOfWeek+selectedTime+i))
                     {
                         sw.setChecked(true);
-                        edt.setText(receivedList[j].substring(3));
+                        edt.setText(receivedList[j].substring(3,5));
                     }
                 }
             }

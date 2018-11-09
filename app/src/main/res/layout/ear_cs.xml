@@ -28,6 +28,27 @@
                     android:id="@+id/title"
                     />
             </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    android:id="@+id/name"
+                    />
+            </android.support.design.widget.TextInputLayout><android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Age"
+                android:id="@+id/age"
+                />
+        </android.support.design.widget.TextInputLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,7 +66,7 @@
                 <Spinner
                     android:id="@+id/condition"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp">
+                    android:layout_height="wrap_content">
 
                 </Spinner>
             </LinearLayout>
@@ -66,7 +87,7 @@
                 <Spinner
                     android:id="@+id/other"
                     android:layout_width="match_parent"
-                    android:layout_height="34dp">
+                    android:layout_height="wrap_content">
 
                 </Spinner>
             </LinearLayout>
@@ -92,7 +113,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -105,9 +126,9 @@
                 <Button
                     android:id="@+id/upload"
                     android:layout_width="291dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_height="wrap_content"
                     android:background="@drawable/btn8" />
             </LinearLayout>
 

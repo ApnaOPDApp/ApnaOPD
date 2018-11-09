@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.knstech.apnaopd.Doctor.DoctorHomeActivity;
 import com.knstech.apnaopd.Patient.HomeActivity;
 import com.knstech.apnaopd.Patient.ListOfQuotationsActivity;
+import com.knstech.apnaopd.Patient.PAppointmentViewerActivity;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.Profile.ProfileActivity;
 import com.knstech.apnaopd.Retailer.RetailerActivity;
@@ -164,12 +165,12 @@ public class DrawerUtil {
 
         PrimaryDrawerItem drawerQuotations = new PrimaryDrawerItem()
                 .withIdentifier(5)
-                .withName("Quotations")
+                .withName("Appointments")
                 .withIcon(R.drawable.p19).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem.getIdentifier() == 5){
-                            activity.startActivity(new Intent(activity,ListOfQuotationsActivity.class));
+                            activity.startActivity(new Intent(activity,PAppointmentViewerActivity.class));
                             activity.finish();
                         }
 

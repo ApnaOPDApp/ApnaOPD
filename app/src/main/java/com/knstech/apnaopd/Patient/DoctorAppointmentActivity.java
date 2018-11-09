@@ -1,12 +1,11 @@
 package com.knstech.apnaopd.Patient;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import android.support.v7.app.AppCompatActivity;
-
-import android.text.TextUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -70,6 +69,12 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
             }
         });
         linearLayoutManager=new LinearLayoutManager(this);
+        ConnectivityManager cm= (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo info=cm.getActiveNetworkInfo();
+        if(info.isConnected())
+        {
+            deptList.setBackground(getResources().getDrawable(R.drawable.surajsir));
+        }
 
         deptList.setAdapter(adapter);
         deptList.setHasFixedSize(true);

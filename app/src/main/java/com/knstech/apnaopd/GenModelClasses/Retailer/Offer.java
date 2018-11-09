@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.GenModalClasses.Retailer;
+package com.knstech.apnaopd.GenModelClasses.Retailer;
 
 public class Offer {
     public String getPatient_gid() {

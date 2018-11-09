@@ -11,10 +11,11 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.User.UserAuth;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Patient.DoctorAppointmentActivity;
 import com.knstech.apnaopd.Patient.DoctorListActivity;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.Connections.RequestPost;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
 
 import org.json.JSONArray;
@@ -29,7 +30,8 @@ public class UIUpdater {
     private static String url= AppUtils.HOST_ADDRESS+"/api/casesheets/"+ UserAuth.getmUser().getGid();
     private static String fee;
     private static String dept;
-    private static String commentResp;
+    private static String commentResp,nameResp,ageResp;
+    private static EditText name,age;
 
     public static void updateCardio(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
         final EditText pulse,comment,title;
@@ -49,6 +51,8 @@ public class UIUpdater {
             pulse=selectedCS.findViewById(R.id.pulse);
             comment=selectedCS.findViewById(R.id.comment);
             title=selectedCS.findViewById(R.id.title);
+            name=selectedCS.findViewById(R.id.name);
+            age=selectedCS.findViewById(R.id.age);
 
             //init spinners
             neckVeins=selectedCS.findViewById(R.id.neckVeins);
@@ -98,6 +102,7 @@ public class UIUpdater {
                     pulseResp=pulse.getText().toString();
                     commentResp=comment.getText().toString();
                     titleResp=title.getText().toString();
+
 
                     //put response in map
                     Map<String,String> map=new HashMap<>();
@@ -165,6 +170,8 @@ public class UIUpdater {
             //init editText
             comment=selectedCS.findViewById(R.id.comment);
             title=selectedCS.findViewById(R.id.title);
+            name=selectedCS.findViewById(R.id.name);
+            age=selectedCS.findViewById(R.id.age);
 
             //init spinner
             condition=selectedCS.findViewById(R.id.condition);
@@ -240,6 +247,8 @@ public class UIUpdater {
             //init editText
             comment=selectedCS.findViewById(R.id.comment);
             title=selectedCS.findViewById(R.id.title);
+            name=selectedCS.findViewById(R.id.name);
+            age=selectedCS.findViewById(R.id.age);
 
             //init spinner
             condition=selectedCS.findViewById(R.id.condition);
@@ -313,6 +322,8 @@ public class UIUpdater {
             //init editText
             comment=selectedCS.findViewById(R.id.comment);
             title=selectedCS.findViewById(R.id.title);
+            name=selectedCS.findViewById(R.id.name);
+            age=selectedCS.findViewById(R.id.age);
 
             //init spinner
             survey=selectedCS.findViewById(R.id.survey);
@@ -387,6 +398,8 @@ public class UIUpdater {
             //init editText
             comment=selectedCS.findViewById(R.id.comment);
             title=selectedCS.findViewById(R.id.title);
+            name=selectedCS.findViewById(R.id.name);
+            age=selectedCS.findViewById(R.id.age);
 
             //init spinner
             sensation=selectedCS.findViewById(R.id.sensation);
@@ -474,6 +487,8 @@ public class UIUpdater {
             accident=selectedCS.findViewById(R.id.accident);
             fever=selectedCS.findViewById(R.id.fever);
             title=selectedCS.findViewById(R.id.title);
+            name=selectedCS.findViewById(R.id.name);
+            age=selectedCS.findViewById(R.id.age);
 
             //init button
             upload=selectedCS.findViewById(R.id.upload);
@@ -563,11 +578,17 @@ public class UIUpdater {
     }
     private static void sendResponse(Map<String, String> map, final Context mContext) {
 
+        nameResp=name.getText().toString();
+        ageResp=age.getText().toString();
+
+        map.put("patient_name",nameResp);
+        map.put("patient_age",ageResp);
+
         final DoctorAppointmentActivity activity = (DoctorAppointmentActivity) mContext;
         map.put("department",""+activity.getChoice());
-        RequestPut requestPost=new RequestPut(mContext);
+        RequestPost requestPost=new RequestPost(mContext);
         JSONObject jsonObject=new JSONObject(map);
-        requestPost.putJSONObject(url, jsonObject, new RequestPut.JSONObjectResponseListener() {
+        requestPost.postJSONObject(url, jsonObject, new RequestPut.JSONObjectResponseListener() {
             @Override
             public void onResponse(JSONObject object) {
                 try {
@@ -583,6 +604,8 @@ public class UIUpdater {
                     i.putExtra("Department",dept);
                     i.putExtra("cs_uid",cs_uid);
                     i.putExtra("comment",commentResp);
+                    i.putExtra("patient_name",nameResp);
+                    i.putExtra("patient_age",ageResp);
                     activity.startActivity(i);
 
 

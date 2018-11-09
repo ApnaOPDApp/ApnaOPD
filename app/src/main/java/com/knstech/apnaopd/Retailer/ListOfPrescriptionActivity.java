@@ -6,26 +6,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.telephony.gsm.GsmCellLocation;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.User.Address;
-import com.knstech.apnaopd.GenModalClasses.User.PojoUploadPrescription;
+import com.knstech.apnaopd.GenModelClasses.User.PojoUploadPrescription;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestDelete;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.OnDeclineClickedListener;
-import com.knstech.apnaopd.Volley.NetworkJSONLoader;
-import com.knstech.apnaopd.Volley.VolleySingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
