@@ -2,63 +2,63 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/edit_text_background"
     android:padding="10dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/m1"
-        android:id="@+id/retailer_list_prescr_patient_pic"
-        />
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="18dp"
-        android:layout_toRightOf="@id/retailer_list_prescr_patient_pic"
-        android:layout_marginLeft="10dp"
-        android:text="Display Name"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:id="@+id/retailer_list_prescr_patient_name"
-        />
-    <TextView
-        android:layout_marginTop="2dp"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/retailer_list_prescr_patient_name"
-        android:layout_toRightOf="@id/retailer_list_prescr_patient_pic"
-        android:layout_marginLeft="10dp"
-        android:inputType="textMultiLine"
-        android:id="@+id/retailer_list_prescr_address"
-        android:text="Address of patient"
-        />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="2"
-        android:layout_toRightOf="@id/retailer_list_prescr_address"
-        >
-        <Button
+    <RelativeLayout
+        android:layout_marginBottom="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="5dp"
+        android:background="#9ae1dfdf"
+        android:id="@+id/pres_single_cv1">
+
+        <ImageView
+            android:id="@+id/retailer_list_prescr_patient_pic"
+            android:layout_width="85dp"
+            android:layout_height="86dp"
+            android:padding="5dp"
+            android:src="@drawable/p1" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="offer"
+            android:id="@+id/retailer_list_prescr_patient_name"
+            android:textColor="@color/primary"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/retailer_list_prescr_patient_pic"
+            android:layout_marginLeft="25dp"
+            android:text="Patient Name" />
+
+        <TextView
+            android:clickable="true"
+            android:id="@+id/retailer_list_prescr_address"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/retailer_list_prescr_patient_name"
+            android:layout_marginLeft="33dp"
+            android:layout_toRightOf="@id/retailer_list_prescr_patient_pic"
+            android:layout_marginTop="10dp"
+            android:textColor="#807f7f"
+            android:inputType="textMultiLine"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores assumenda." />
+
+        <ImageView
             android:id="@+id/retailer_list_prescr_offer"
-            android:background="@color/apple_green"
-            />
-        <Button
-            android:layout_marginTop="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Decline"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/navigate_next" />
+
+        <ImageView
             android:id="@+id/retailer_list_prescr_decline"
-            android:background="@color/apple_red"
-            />
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/btn12" />
 
-
-    </LinearLayout>
-
+    </RelativeLayout>
 
 </RelativeLayout>

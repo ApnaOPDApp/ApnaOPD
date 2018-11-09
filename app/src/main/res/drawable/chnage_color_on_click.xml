@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- default -->
+
+   <item
+        android:state_pressed="false"
+        android:state_focused="false"
+        android:drawable="@color/grey_material" />
+  <!-- focused -->
 
     <item
-        android:state_pressed="true"
         android:state_focused="true"
-        android:drawable="@color/primary" />
-    <item
-        android:state_focused="false"
-        android:state_pressed="true"
-        android:drawable="@color/primary"
+        android:state_pressed="false"
+        android:drawable="@color/apple_green_trans"
         />
+
+  <!-- pressed -->
+
+  <item
+      android:state_focused="false"
+      android:state_pressed="true"
+      android:drawable="@color/apple_green"
+      />
+
 </selector>

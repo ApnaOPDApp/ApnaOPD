@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
 public class RetailerActivity extends AppCompatActivity {
 
     private RelativeLayout list_of_prescription,confirmed_orders;
-    String Url = AppUtils.HOST_ADDRESS+"/api/retailers/presc_list/ret2";
+    String Url = AppUtils.HOST_ADDRESS+"/api/retailers/orders/"+AppUtils.RET_GID;
 
 
     @Override
@@ -68,7 +69,7 @@ public class RetailerActivity extends AppCompatActivity {
                        new Response.ErrorListener() {
                            @Override
                            public void onErrorResponse(VolleyError error) {
-
+                               Toast.makeText(RetailerActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                            }
                        }
                );

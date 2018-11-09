@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.knstech.apnaopd.Doctor.DoctorHomeActivity;
 import com.knstech.apnaopd.Patient.HomeActivity;
-import com.knstech.apnaopd.Patient.ListOfQuotationsActivity;
+import com.knstech.apnaopd.Patient.ListOfOrderActivity;
 import com.knstech.apnaopd.Patient.PAppointmentViewerActivity;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.Profile.ProfileActivity;
@@ -23,6 +23,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+
 
 public class DrawerUtil {
     public static void getDrawer(final Activity activity, Toolbar toolbar) {
@@ -156,7 +157,9 @@ public class DrawerUtil {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem.getIdentifier() == 4){
-                            Toast.makeText(activity, "This page is under maintainance.Please check for updates", Toast.LENGTH_LONG).show();;
+                            activity.startActivity(new Intent(activity,ListOfOrderActivity.class));
+                            activity.finish();
+
                         }
 
                         return false;
@@ -170,10 +173,12 @@ public class DrawerUtil {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem.getIdentifier() == 5){
+
+
+
                             activity.startActivity(new Intent(activity,PAppointmentViewerActivity.class));
                             activity.finish();
                         }
-
                         return false;
                     }
                 })
@@ -185,8 +190,7 @@ public class DrawerUtil {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem.getIdentifier() == 6){
-                            activity.startActivity(new Intent(activity,ListOfQuotationsActivity.class));
-                            activity.finish();
+                            Toast.makeText(activity, "This page is under maintainance.Please check for updates", Toast.LENGTH_LONG).show();;
                         }
 
                         return false;
