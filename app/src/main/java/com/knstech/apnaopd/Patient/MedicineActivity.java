@@ -2,23 +2,15 @@ package com.knstech.apnaopd.Patient;
 
 import android.content.Intent;
 
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Environment;
-
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -28,24 +20,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.BitmapToString;
 import com.knstech.apnaopd.GenModalClasses.User.Address;
-import com.knstech.apnaopd.GenModalClasses.User.User;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
+import com.knstech.apnaopd.Utils.Connections.RequestPost;
 import com.knstech.apnaopd.Utils.Listeners.AddressClickedListener;
-import com.knstech.apnaopd.Volley.VolleySingleton;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -58,8 +42,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.knstech.apnaopd.GenModalClasses.User.Address.parseFromJson;
 
 public class MedicineActivity extends AppCompatActivity {
 
@@ -74,16 +56,18 @@ public class MedicineActivity extends AppCompatActivity {
     private RecyclerView addressView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter mAdaptor;
+
     private List<Address> addressPojoList;
-    private List<Address> usersDetails;
+
     private Address selectedAddress;
     private EditText comment;
     private String path;
-    private String url = AppUtils.HOST_ADDRESS+"/api/orders";
+    private String url = AppUtils.HOST_ADDRESS+"/api/orders/0";
     private String url1=AppUtils.HOST_ADDRESS+"/api/users/"+AppUtils.USER_GID;
     private String addressURL = AppUtils.HOST_ADDRESS+"/api/users/address/"+AppUtils.USER_GID;
     private String pic_url = AppUtils.HOST_ADDRESS+"/api/uploadPrescription";
     private String cmt;
+
     private List<Address> listAddr;
 
 
@@ -167,28 +151,18 @@ public class MedicineActivity extends AppCompatActivity {
                 params.put("comment",cmt);
 
                 JSONObject obj = new JSONObject(params);
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,
-                        obj,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                try {
-                                    Toast.makeText(MedicineActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-                                }
-                                catch (Exception e){
+                JSONArray array=new JSONArray();
+                array.put(obj);
+                RequestPost request = new RequestPost(getApplicationContext());
 
-                                }
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(MedicineActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                            }
+                    request.sendJSONArray(url,array, new RequestPost.ArrayResponseListener() {
+                        @Override
+                        public void onResponse(JSONArray array) {
+                            Toast.makeText(MedicineActivity.this, array.toString(), Toast.LENGTH_SHORT).show();
                         }
-                );
+                    });
 
-                VolleySingleton.getmInstance().addToRequestQueue(request);
+
                 Snackbar snackbar=Snackbar.make(med_activity_layout,"Check Your Quotations for more information about the retailers near you",Snackbar.LENGTH_LONG);
                 snackbar.show();
             }
@@ -260,7 +234,7 @@ public class MedicineActivity extends AppCompatActivity {
                     Future uploading = Ion.with(MedicineActivity.this)
                             .load(pic_url)
                             .setMultipartFile("prescription",file)
-                            .setMultipartParameter("gid","1")
+                            .setMultipartParameter("gid",AppUtils.USER_GID)
                             .asString()
                             .withResponse()
                             .setCallback(new FutureCallback<com.koushikdutta.ion.Response<String>>() {

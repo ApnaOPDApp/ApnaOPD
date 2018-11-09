@@ -6,31 +6,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.telephony.gsm.GsmCellLocation;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModalClasses.User.Address;
 import com.knstech.apnaopd.GenModalClasses.User.PojoUploadPrescription;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestDelete;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.OnDeclineClickedListener;
-import com.knstech.apnaopd.Volley.NetworkJSONLoader;
-import com.knstech.apnaopd.Volley.VolleySingleton;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,12 +49,12 @@ public class ListOfPrescriptionActivity extends AppCompatActivity {
         mAdaptor = new RetailerPrescriptionAdaptor(getApplicationContext(), data, this, new OnDeclineClickedListener() {
             @Override
             public void onDecline(String id) {
-                String url=AppUtils.HOST_ADDRESS+"/api/retailers/presc_list/ret2/"+id;
+                String url=AppUtils.HOST_ADDRESS+"/api/retailers/orders/"+AppUtils.RET_GID+"/"+id;
                 RequestDelete requestDelete=new RequestDelete(ListOfPrescriptionActivity.this);
                 requestDelete.requestDelete(url, new RequestDelete.OnDeleteListener() {
                     @Override
                     public void onDelete() {
-                        Toast.makeText(ListOfPrescriptionActivity.this, "Prescription Deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListOfPrescriptionActivity.this, "Prescription Deleted Successful!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -81,29 +65,39 @@ public class ListOfPrescriptionActivity extends AppCompatActivity {
 
         json_pres_id = getIntent().getStringExtra("id array");
 
+
+
             try {
 
-                JSONArray pres_id = new JSONArray(json_pres_id);
-                for(int j=0;j<pres_id.length();j++){
-                    JSONObject obj = pres_id.getJSONObject(j);
-                    final String pid = obj.toString();
+                String pres_id[]= C.getStringArray(json_pres_id);
+
+                for(int j=0;j<pres_id.length;j++){
+
+                    final String pid = pres_id[j];
 
                     RequestGet request = new RequestGet(this);
                     request.getJSONObject(url+pid, new RequestGet.JSONObjectResponseListener() {
                         @Override
                         public void onResponse(JSONObject jsonObject) {
 
-                            Gson gson = new Gson();
-                            PojoUploadPrescription uploadPrescription = gson.fromJson(jsonObject.toString(), PojoUploadPrescription.class);
-                            uploadPrescription.setPrescription_id(pid);
-                            data.add(uploadPrescription);
-                            mAdaptor.notifyDataSetChanged();
+                            try{
+                                PojoUploadPrescription uploadPrescription = PojoUploadPrescription.parseFromJson(jsonObject);
+                                uploadPrescription.setEprescription_id(pid);
+                                uploadPrescription.set_id(pid);
+                                data.add(uploadPrescription);
+                                mAdaptor.notifyDataSetChanged();
+
+                            }
+                            catch (Exception e){
+                                Toast.makeText(ListOfPrescriptionActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     });
                 }
 
 
-            } catch (JSONException e1) {
+            } catch (Exception e1) {
                 e1.printStackTrace();
             }
 

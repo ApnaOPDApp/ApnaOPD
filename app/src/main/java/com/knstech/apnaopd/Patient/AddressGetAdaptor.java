@@ -6,27 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModalClasses.User.Address;
 import com.knstech.apnaopd.R;
-import com.knstech.apnaopd.Retailer.RetailerPrescriptionAdaptor;
-import com.knstech.apnaopd.Utils.Connections.RequestPost;
-import com.knstech.apnaopd.Utils.Listeners.AddressClickedListener;
-import com.knstech.apnaopd.Volley.VolleySingleton;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
+import com.knstech.apnaopd.Utils.Listeners.AddressClickedListener;
+
 import java.util.List;
-import java.util.Map;
+
 
 public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.AddressGetViewHolder> {
 
@@ -87,7 +76,7 @@ public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.Ad
                 }
             });
 
-            addressSingle.setText(address.getFull_name()+address.getHouse_no()+"\n"+address.getLandmark()+address.getLocality()+"\n"+address.getCity()+address.getPincode());
+            addressSingle.setText(address.getFull_name()+"\n"+address.getHouse_no()+"\n"+address.getLandmark()+address.getLocality()+"\n"+address.getCity()+address.getPincode());
         }
     }
 

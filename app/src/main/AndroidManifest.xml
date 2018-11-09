@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".Volley.VolleySingleton"
@@ -14,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Patient.LoginActivity"></activity>
+        <activity android:name=".Patient.LoginActivity" />
         <activity android:name=".Patient.DoctorViewerActivity" />
         <activity android:name=".Patient.DoctorListActivity" />
         <activity android:name=".Patient.DoctorAppointmentActivity" />
@@ -34,33 +35,30 @@
         <activity
             android:name=".Retailer.ListOfPrescriptionActivity"
             android:parentActivityName=".Retailer.RetailerActivity" />
-
-        <activity android:name=".Doctor.DAppointmentViewerActivity"
-
-            />
-        <activity android:name=".Patient.ListOfQuotationsActivity"
-            android:parentActivityName=".Patient.HomeActivity"
-            />
-        <activity android:name=".Retailer.RetailerOfferSendActivity"
-            android:parentActivityName=".Retailer.RetailerActivity"
-            />
+        <activity android:name=".Doctor.DAppointmentViewerActivity" />
+        <activity
+            android:name=".Retailer.RetailerOfferSendActivity"
+            android:parentActivityName=".Retailer.RetailerActivity" />
         <activity android:name=".Patient.PatientFinalDrugAcceptActivity" />
         <activity android:name=".SplashActivity" />
-        <activity android:name=".Profile.AddressActivity"
-            android:parentActivityName=".Patient.HomeActivity"
-            />
-        <activity android:name=".Profile.ProfileActivity"
-            android:parentActivityName=".Patient.HomeActivity"
-            />
-        <activity android:name=".Doctor.DoctorHomeActivity"
-            android:parentActivityName=".Patient.HomeActivity"
-            />
+        <activity
+            android:name=".Profile.AddressActivity"
+            android:parentActivityName=".Patient.HomeActivity" />
+        <activity
+            android:name=".Profile.ProfileActivity"
+            android:parentActivityName=".Patient.HomeActivity" />
+        <activity
+            android:name=".Doctor.DoctorHomeActivity"
+            android:parentActivityName=".Patient.HomeActivity" />
         <activity android:name=".Patient.ConfirmBookingActivity" />
         <activity android:name=".Doctor.DoctorSlotViewerActivity" />
         <activity android:name=".Doctor.DaySelectActivity" />
-        <activity android:name=".AddNewProfileActivity"
-            android:parentActivityName=".Patient.HomeActivity"
-            ></activity>
+        <activity
+            android:name=".AddNewProfileActivity"
+            android:parentActivityName=".Patient.HomeActivity" />
+        <activity android:name=".Patient.OrderActivity" />
+        <activity android:name=".Patient.ShowDetailsOfOfferActivity" />
+        <activity android:name=".Patient.ListOfOrderActivity"></activity>
     </application>
 
 </manifest>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
-
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    >
     <RelativeLayout
         android:layout_marginBottom="2dp"
         android:layout_width="match_parent"
@@ -12,47 +12,39 @@
         android:background="#9ae1dfdf"
         android:id="@+id/pres_single_cv1">
 
-        <ImageView
-
-            android:layout_width="85dp"
-            android:layout_height="86dp"
-            android:padding="5dp"
-            android:id="@+id/patient_quoat_list_retailer_pic"
-            android:src="@drawable/p1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/patient_quoat_list_retailer_name"
+            android:id="@+id/order_status"
             android:textColor="@color/primary"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:layout_toRightOf="@id/patient_quoat_list_retailer_pic"
             android:layout_marginLeft="25dp"
-            android:text="Retailer Shop Name" />
+            android:text="Order Status" />
 
         <TextView
             android:clickable="true"
-            android:id="@+id/patient_quoat_list_delivertime"
+            android:id="@+id/order_comment"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/patient_quoat_list_retailer_name"
+            android:layout_below="@id/order_status"
             android:layout_marginLeft="33dp"
-            android:layout_toRightOf="@id/patient_quoat_list_retailer_pic"
             android:layout_marginTop="10dp"
             android:textColor="#807f7f"
             android:inputType="textMultiLine"
-            android:text="Deliver Time and Deliver date" />
+            android:text="Comment" />
 
         <ImageView
             android:layout_width="125dp"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/quot_list_prescr_offer"
+            android:id="@+id/order_show_offer"
             android:src="@drawable/navigate_next" />
 
 
     </RelativeLayout>
+
 
 </RelativeLayout>

@@ -25,12 +25,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
+import com.knstech.apnaopd.Utils.Connections.RequestPut;
 
 
 import org.json.JSONObject;
@@ -76,8 +78,11 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
         linearLayout=(LinearLayout)findViewById(R.id.ll_show_data);
         presc_img = (ImageView)findViewById(R.id.pres_image);
 
-        String image_url=getIntent().getStringExtra("image_url");
+        String image_url=AppUtils.HOST_ADDRESS+getIntent().getStringExtra("image_url");
+
+
         Uri uri = Uri.parse(image_url);
+
         if(uri!=null)
             Glide.with(getApplicationContext()).load(uri).into(presc_img);
 
@@ -145,11 +150,18 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                      dper=view.findViewById(R.id.tv_offer_single_dosage_per);
                      dday=view.findViewById(R.id.tv_offer_single_dosage_day);
                      Map<String,String> map=new HashMap<>();
-                     map.put("medicine",medicine.getText().toString());
-                     map.put("price",price.getText().toString());
-                     map.put("offered_price",oprice.getText().toString());
-                     map.put("dosage_per",dper.getText().toString());
-                     map.put("dosage_day",dday.getText().toString());
+
+                     String m = medicine.getText().toString().split(":")[1];
+                     String p = price.getText().toString().split(":")[1];
+                     String o = oprice.getText().toString().split(":")[1];
+                     String dp= dper.getText().toString().split(":")[1];
+                     String d = dday.getText().toString().split(":")[1];
+
+                     map.put("medicine",m);
+                     map.put("price",p);
+                     map.put("offered_price",o);
+                     map.put("dosage_per",dp);
+                     map.put("dosage_day",d);
                      listOfDrugs.add(map);
                 }
                 
@@ -176,29 +188,33 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                         deliveryCharge = deliver_Charge.getText().toString();
                         deliveryTime = delivery_Time.getText().toString();
                         Map map = new HashMap();
-                        map.put("deliver_charge",deliveryCharge);
-                        map.put("deliver_time",deliveryTime);
-                        map.put("retailer_gid","ret2");
-                        map.put("status","0");
-                        map.put("eoffer",listOfDrugs);
+                        map.put("delivery_charge",deliveryCharge);
+                        map.put("delivery_time",deliveryTime);
+                        map.put("retailer_gid",AppUtils.RET_GID);
+                        map.put("quotation",listOfDrugs);
+                        map.put("quotation_link",null);
                         Map params=new HashMap();
-                        params.put("patient_gid",getIntent().getStringExtra("pid"));
+
+                        String _id = getIntent().getStringExtra("_id");
+                //        params.put("patient_gid",getIntent().getStringExtra("pid"));
                         params.put("offers",map);
                         JSONObject obj=new JSONObject(params);
-                        String url=AppUtils.HOST_ADDRESS+"/api/offers/";
-                        RequestPost post=new RequestPost(getApplicationContext());
-                        post.sendJSON(url, obj, new RequestPost.PostResponseListener() {
-                            @Override
-                            public void onResponse() {
-                                Toast.makeText(RetailerOfferSendActivity.this, "Sent", Toast.LENGTH_SHORT).show();
-                            }
-                        }, new RequestPost.PostErrorListener() {
-                            @Override
-                            public void onError() {
-                                Toast.makeText(RetailerOfferSendActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        
+
+                        String url=AppUtils.HOST_ADDRESS+"/api/orders/"+_id;
+                        RequestPut put=new RequestPut(getApplicationContext());
+                        put.putJSONObject(url, obj, new RequestPut.JSONObjectResponseListener() {
+                                    @Override
+                                    public void onResponse(JSONObject object) {
+                                        Toast.makeText(RetailerOfferSendActivity.this, object.toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                },
+                                new RequestPut.JSONObjectErrorListener() {
+                                    @Override
+                                    public void onError(VolleyError error) {
+                                        Toast.makeText(RetailerOfferSendActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                        );
                         listOfDrugs.add(map);
                         
 

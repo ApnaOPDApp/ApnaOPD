@@ -1,12 +1,15 @@
 package com.knstech.apnaopd.Utils.Connections;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -21,6 +24,10 @@ public class RequestPost {
     public interface PostResponseListener
     {
         public void onResponse();
+
+    }
+    public interface ArrayResponseListener{
+        void onResponse(JSONArray array);
     }
     public  interface PostErrorListener{
         public void onError();
@@ -63,5 +70,20 @@ public class RequestPost {
 
         RequestSingleton.getInstance(mContext).addToQueue(request);
 
+    }
+    public void sendJSONArray(String url, JSONArray array, final ArrayResponseListener listener)
+    {
+        JsonArrayRequest arrayRequest=new JsonArrayRequest(Request.Method.POST, url, array, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                listener.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestSingleton.getInstance(mContext).addToQueue(arrayRequest);
     }
 }

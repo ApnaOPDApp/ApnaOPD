@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +49,7 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
    View view;
    List<PojoUploadPrescription> data;
     private OnDeclineClickedListener mListener;
-    String Url = AppUtils.HOST_ADDRESS+"/api/retailers/presc_list/"+AppUtils.RET_GID;
+    String Url = AppUtils.HOST_ADDRESS+"/api/retailers/orders/"+AppUtils.RET_GID;// /order _id
 
 
 
@@ -56,8 +57,7 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
        this.context=context;
        this.activity =activity;
        this.data = data;
-
-        this.mListener = mListener;
+       this.mListener = mListener;
     }
 
     @NonNull
@@ -86,19 +86,19 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
 
     public class RetailerPrescriptionViewHolder extends RecyclerView.ViewHolder{
 
-        CircleImageView propic;
+        ImageView propic;
         TextView displayName;
         TextView displayAdd;
-        Button offer, decline;
+        ImageView offer, decline;
 
         public RetailerPrescriptionViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            propic = (CircleImageView)itemView.findViewById(R.id.retailer_list_prescr_patient_pic);
+            propic = (ImageView)itemView.findViewById(R.id.retailer_list_prescr_patient_pic);
             displayName = (TextView)itemView.findViewById(R.id.retailer_list_prescr_patient_name);
             displayAdd=(TextView)itemView.findViewById(R.id.retailer_list_prescr_address);
-            offer = (Button)itemView.findViewById(R.id.retailer_list_prescr_offer);
-            decline = (Button)itemView.findViewById(R.id.retailer_list_prescr_decline);
+            offer = (ImageView) itemView.findViewById(R.id.retailer_list_prescr_offer);
+            decline = (ImageView) itemView.findViewById(R.id.retailer_list_prescr_decline);
 
         }
         public void onBind(final PojoUploadPrescription pojoUploadPrescription){
@@ -118,6 +118,7 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
                     Intent i=new Intent(context,RetailerOfferSendActivity.class);
                     i.putExtra("image_url",pojoUploadPrescription.getPhoto_prescription_link());
                     i.putExtra("pid",pojoUploadPrescription.getPatient_gid());
+                    i.putExtra("_id",pojoUploadPrescription.get_id());
                     activity.startActivity(i);
                     activity.finish();
                 }
@@ -126,7 +127,7 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
            decline.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-                   mListener.onDecline(pojoUploadPrescription.getPrescription_id());
+                   mListener.onDecline(pojoUploadPrescription.get_id());
                }
            });
 

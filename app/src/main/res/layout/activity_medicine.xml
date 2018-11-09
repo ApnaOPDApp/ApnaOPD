@@ -13,7 +13,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="58dp"
         >
 
     <RelativeLayout
@@ -22,7 +22,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="250dp"
         android:background="@drawable/med_color"
         android:id="@+id/des1_head"
         android:gravity="center_horizontal"
@@ -174,16 +174,18 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="280dp">
+            android:layout_marginTop="250dp">
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
+            android:background="@color/apple_tealBlue_trans"
             android:id="@+id/med_scroll"
             >
         </android.support.v7.widget.RecyclerView>
 
         <EditText
+            android:layout_marginTop="5dp"
             android:hint="Short comment"
             android:padding="5dp"
             android:gravity="top"
@@ -215,6 +217,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+
                 android:background="@drawable/btn2"
                 android:layout_marginLeft="25dp"
                 android:id="@+id/med_btn_add_add"
