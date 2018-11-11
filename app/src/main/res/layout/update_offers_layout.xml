@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/update_offer"
+    tools:context=".Retailer.ConfirmedOrdersActivity">
+
+    <include layout="@layout/app_bar_patient"
+        />
+
+    <ScrollView
+        android:layout_marginTop="58dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/update_order_rv"
+            android:layout_height="350dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Total Price"
+             android:id="@+id/upload_total_price"
+             android:layout_marginTop="5dp"
+             android:textSize="16dp"
+             android:textColor="@color/colorPrimaryDark"
+             android:inputType="textMultiLine"
+             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="delivery_time and delivery"
+            android:id="@+id/upload_delivery_time"
+            android:layout_marginTop="5dp"
+            android:textSize="16dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:inputType="textMultiLine"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:id="@+id/upload_address_show"
+            android:layout_marginTop="5dp"
+            android:textSize="16dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:inputType="textMultiLine"
+            />
+
+         <TextView
+             android:layout_marginTop="5dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Update Status : "
+             android:textSize="18dp"
+             android:textColor="@color/black_app"
+             />
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:orientation="horizontal"
+             android:weightSum="4"
+             android:layout_marginTop="5dp"
+             android:layout_height="wrap_content">
+                <Button
+                 android:layout_weight="1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Confirmed"
+                    android:id="@+id/status1"
+                 android:background="@color/apple_red"
+                 style="@style/Widget.AppCompat.Button.Colored"
+                 />
+                <Button
+                 android:layout_weight="1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Packed"
+                    android:id="@+id/status2"
+                 android:background="@color/apple_orange"
+                 style="@style/Widget.AppCompat.Button.Colored"
+                 />
+                <Button
+                 android:layout_weight="1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Shipped"
+                    android:id="@+id/status3"
+                 android:background="@color/apple_yellow"
+                 style="@style/Widget.AppCompat.Button.Colored"
+                 />
+                 <Button
+                 android:layout_weight="1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Delivered"
+                     android:id="@+id/status4"
+                 android:background="@color/apple_green"
+                 style="@style/Widget.AppCompat.Button.Colored"
+                 />
+
+             </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -5,5 +5,5 @@ import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
 
 
 public interface OderClickedListener {
-    void onOrderClicked(PatientOrdersList quotation);
+    void onOrderClicked(PatientOrdersList quotation,String _id);
 }

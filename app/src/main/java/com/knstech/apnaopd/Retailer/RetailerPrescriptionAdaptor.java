@@ -89,7 +89,10 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
 
             }
             displayName.setText(pojoUploadPrescription.getAddress().getFull_name());
-            displayAdd.setText(pojoUploadPrescription.getAddress().getPincode());
+            displayAdd.setText(pojoUploadPrescription.getAddress().getPincode()
+                +"\n"+pojoUploadPrescription.getAddress().getFull_name()
+                    +"\n"+pojoUploadPrescription.getAddress().getPhone_number()
+            );
 
             offer.setOnClickListener(new View.OnClickListener() {
                 @Override

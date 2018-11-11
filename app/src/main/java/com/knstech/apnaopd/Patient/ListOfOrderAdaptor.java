@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.knstech.apnaopd.GenModelClasses.Retailer.Order;
@@ -51,25 +52,34 @@ public class ListOfOrderAdaptor extends RecyclerView.Adapter<ListOfOrderAdaptor.
 
         TextView comment,status;
         ImageView imageView;
+
         public ListOfOrderViewHolder(@NonNull View itemView) {
             super(itemView);
             comment=itemView.findViewById(R.id.order_comment);
             status=itemView.findViewById(R.id.order_status);
             imageView=itemView.findViewById(R.id.order_show_offer);
+
         }
         void bind(final Order order)
         {
+
+
+
             int stat=Integer.parseInt(order.getStatus());
             String commentStr;
             switch(stat)
             {
                 case 0: commentStr= "Offers sent to you. Please accept the offers.";
+
                 break;
                 case 1: commentStr= "Item Packed!";
+
                 break;
                 case 2: commentStr= "Item Shipped.";
+
                 break;
                 default:commentStr="Item Delivered";
+
             }
             status.setText(commentStr);
             comment.setText(order.getComment());

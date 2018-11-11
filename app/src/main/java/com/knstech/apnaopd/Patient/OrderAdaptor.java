@@ -9,10 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
-import com.knstech.apnaopd.GenModalClasses.User.Qutotation;
+import com.knstech.apnaopd.GenModelClasses.User.Qutotation;
 import com.knstech.apnaopd.R;
 
 import com.knstech.apnaopd.Utils.Listeners.OderClickedListener;
@@ -92,12 +91,13 @@ public class OrderAdaptor extends RecyclerView.Adapter<OrderAdaptor.OrderAdaptor
                 next.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mListener.onOrderClicked(order);
+                        mListener.onOrderClicked(order,order.get_id());
                     }
                 });
 
+
                 delivery_time.setText("Delivery Charge: "+ order.getDelivery_charge()
-                +"\n DeliverTime: "+order.getDelivery_time()
+                +"\n DeliverTime: "+order.getDelivery_time()+"\n Total Price: "+order.getTotal_price()
                 );
 
 

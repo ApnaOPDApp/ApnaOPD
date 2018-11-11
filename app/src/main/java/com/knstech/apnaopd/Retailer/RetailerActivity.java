@@ -47,35 +47,28 @@ public class RetailerActivity extends AppCompatActivity {
 
         DrawerUtil.getDrawer(this,toolbar);
 
+        
+
        list_of_prescription = (RelativeLayout) findViewById(R.id.retailer_cv1);
        confirmed_orders = (RelativeLayout) findViewById(R.id.retailer_cv2);
+
+
+
+
        list_of_prescription.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
 
-               StringRequest stringRequest = new StringRequest(Request.Method.GET, Url,
-                       new Response.Listener<String>() {
-                           @Override
-                           public void onResponse(String response) {
 
+               Intent intent = new Intent(RetailerActivity.this, ListOfPrescriptionActivity.class);
+               startActivity(intent);
+           }
+       });
 
-                               Intent intent =   new Intent(RetailerActivity.this,ListOfPrescriptionActivity.class);
-                               intent.putExtra("id array",response);
-                               startActivity(intent);
-
-
-                           }
-                       },
-                       new Response.ErrorListener() {
-                           @Override
-                           public void onErrorResponse(VolleyError error) {
-                               Toast.makeText(RetailerActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                           }
-                       }
-               );
-
-               VolleySingleton.getmInstance().addToRequestQueue(stringRequest);
-
+       confirmed_orders.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startActivity(new Intent(RetailerActivity.this,ConfirmedOrdersActivity.class));
            }
        });
 

@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/signout"
+        android:id="@+id/upload_bill"
         android:orderInCategory="100"
-        android:title="Sign Out"
-        app:showAsAction="never" />
+        android:title="Upload Bill"
+        android:icon="@drawable/ic_file_upload_black_24dp"
+        app:showAsAction="always" />
 </menu>

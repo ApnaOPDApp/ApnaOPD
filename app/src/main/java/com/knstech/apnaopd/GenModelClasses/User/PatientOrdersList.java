@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.knstech.apnaopd.GenModalClasses.User.Qutotation;
+import com.knstech.apnaopd.GenModelClasses.User.Qutotation;
 
 public class PatientOrdersList {
 
@@ -16,6 +16,24 @@ public class PatientOrdersList {
     private String quotation_link;
     private String delivery_time;
     private String delivery_charge;
+    private String total_price;
+    private String _id;
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public String getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(String total_price) {
+        this.total_price = total_price;
+    }
 
     public List<Qutotation> getQutotation() {
         return qutotation;
@@ -59,6 +77,14 @@ public class PatientOrdersList {
             {
                 pup.setDelivery_charge(json.getString("delivery_charge"));
             }
+            if(json.has("total_price"))
+            {
+                pup.setDelivery_charge(json.getString("total_price"));
+            }
+            if(json.has("_id")){
+                pup.set_id(json.getString("_id"));
+            }
+
 
         } catch (JSONException e) {
             e.printStackTrace();

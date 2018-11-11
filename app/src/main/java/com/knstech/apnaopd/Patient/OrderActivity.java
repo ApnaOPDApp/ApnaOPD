@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.google.gson.Gson;
 import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
 import com.knstech.apnaopd.R;
@@ -62,8 +63,13 @@ public class OrderActivity extends AppCompatActivity {
         mAdaptor = new OrderAdaptor(patientOrdersList, getApplicationContext(), new OderClickedListener() {
 
             @Override
-            public void onOrderClicked(PatientOrdersList quotation) {
-                    startActivity(new Intent(OrderActivity.this,ShowDetailsOfOfferActivity.class));
+            public void onOrderClicked(PatientOrdersList quotation,String _id) {
+                Intent i=new Intent(OrderActivity.this,ShowDetailsOfOfferActivity.class);
+                String obj=(new Gson()).toJson(quotation,PatientOrdersList.class);
+                i.putExtra("quotation",obj);
+                i.putExtra("order_id",order_id);
+                i.putExtra("offer_id",_id);
+                startActivity(i);
             }
         });
 

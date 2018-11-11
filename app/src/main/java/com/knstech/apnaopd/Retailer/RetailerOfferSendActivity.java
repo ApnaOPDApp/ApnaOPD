@@ -2,10 +2,14 @@ package com.knstech.apnaopd.Retailer;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.CursorLoader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +19,8 @@ import android.transition.ChangeBounds;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,15 +34,26 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.Patient.HomeActivity;
+import com.knstech.apnaopd.Patient.LoginActivity;
+import com.knstech.apnaopd.Patient.MedicineActivity;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
+import com.koushikdutta.async.future.Future;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.Response;
 
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +72,11 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
     private int i=0;
     private ImageView presc_img;
     private double total_offer_price;
+    private int IMG_REQUEST = 1;
+    private String path;
+    private String pic_url = AppUtils.HOST_ADDRESS+"/api/uploadQuotation";
+    private String prescription_image_url = null;
+
 
 
     @Override
@@ -195,7 +217,7 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                         map.put("delivery_time",deliveryTime);
                         map.put("retailer_gid",AppUtils.RET_GID);
                         map.put("quotation",listOfDrugs);
-                        map.put("quotation_link",null);
+                        map.put("quotation_link",prescription_image_url);
                         map.put("total_price",total_offer_price+"");
                         Map params=new HashMap();
 
@@ -209,7 +231,7 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                         put.putJSONObject(url, obj, new RequestPut.JSONObjectResponseListener() {
                                     @Override
                                     public void onResponse(JSONObject object) {
-                                        Toast.makeText(RetailerOfferSendActivity.this, object.toString(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RetailerOfferSendActivity.this, object.toString(), Toast.LENGTH_LONG).show();
                                     }
                                 },
                                 new RequestPut.JSONObjectErrorListener() {
@@ -244,4 +266,84 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_patient_drawer,menu);
+        return true;
+    }
+
+    /* Inflating signout button in menu of home activity  */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.upload_bill) {
+
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intent,IMG_REQUEST);
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == IMG_REQUEST && resultCode == RESULT_OK && data!=null) {
+
+            Uri uri = data.getData();
+
+            try {
+
+                path= (String) getPathFromURI(data.getData());
+                File file = new File(path);
+                Future uploading = Ion.with(RetailerOfferSendActivity.this)
+                        .load(pic_url)
+                        .setMultipartFile("prescription",file)
+                        .setMultipartParameter("gid",AppUtils.USER_GID)
+                        .asString()
+                        .withResponse()
+                        .setCallback(new FutureCallback<Response<String>>() {
+                            @Override
+                            public void onCompleted(Exception e, com.koushikdutta.ion.Response<String> result) {
+
+                                try {
+                                    prescription_image_url = result.getResult();
+
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
+
+                            }
+                        });
+
+            } catch (Exception e) {
+                Toast.makeText(this, "Null Value", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private String getPathFromURI(Uri contentUri){
+
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(getApplicationContext(),contentUri,proj,null,null,null);
+        Cursor cursor = loader.loadInBackground();
+        int coloumn_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String s = cursor.getString(coloumn_index);
+        return cursor.getString(coloumn_index);
+    }
+
+
+
 }

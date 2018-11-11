@@ -52,9 +52,11 @@ public class PojoUploadPrescription {
                 }
                 if(json.has("eprescription_id"))
                 {
-                    pup.setEprescription_id("eprescription_id");
+                    pup.setEprescription_id(json.getString("eprescription_id"));
                 }
-
+                if(json.has("_id")){
+                    pup.set_id(json.getString("_id"));
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
