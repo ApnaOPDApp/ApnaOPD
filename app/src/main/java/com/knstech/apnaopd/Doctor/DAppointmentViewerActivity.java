@@ -29,7 +29,17 @@ import java.util.List;
 public class DAppointmentViewerActivity extends AppCompatActivity {
 
     private RecyclerView appList;
+
+    public AppointmentViewerAdapter getAdapter() {
+        return adapter;
+    }
+
     private AppointmentViewerAdapter adapter;
+
+    public List<Patient> getmList() {
+        return mList;
+    }
+
     private List<Patient> mList;
     private String dayOfWeek;
     private LinearLayoutManager linearLayoutManager;
@@ -122,7 +132,7 @@ public class DAppointmentViewerActivity extends AppCompatActivity {
                         JSONObject obj=new JSONObject(jsonArray.getJSONObject(i).toString());
                         Patient patient=Patient.parseFromJson(obj.toString());
                         if(patient.getTime_slab().substring(0,3).equals(dayOfWeek+timeOfDay)) {
-                            mList.add(patient);
+                            mList.add(0,patient);
                             adapter.notifyDataSetChanged();
                         }
 

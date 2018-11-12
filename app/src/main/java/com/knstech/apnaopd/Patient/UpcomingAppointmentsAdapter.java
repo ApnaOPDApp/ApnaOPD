@@ -71,9 +71,9 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter {
         {
             name.setText(patient.getFee());
             department.setText(patient.getDepartment());
-            name.setText("Dr. "+patient.getDoctor_name());
+            name.setText("Dr. "+patient.getDoctor_name()+"\n");
             Glide.with(mContext).load(patient.getDoctor_image()).into(propic);
-            fee.setText("Fee : Rs."+patient.getFee());
+            fee.setText("For - "+patient.getPatient_name()+"\nFee : Rs."+patient.getFee());
             if(patient.getStatus().equals("0"))
             {
                 changeStatus.setText("Arrived");

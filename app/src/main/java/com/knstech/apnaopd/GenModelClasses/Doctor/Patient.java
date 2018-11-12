@@ -30,6 +30,7 @@ public class Patient {
     private String doctor_name;
     private String doctor_image;
     private String department;
+    private String eprescription_id;
     private String fee;
     private String status;
     private String appointment_id;
@@ -70,6 +71,10 @@ public class Patient {
             if(obj.has("patient_gid"))
             {
                 patient.setPatient_gid(obj.getString("patient_gid"));
+            }
+            if(obj.has("eprescription_id"))
+            {
+                patient.setEprescription_id(obj.getString("eprescription_id"));
             }
             if(obj.has("doctor_gid"))
             {
@@ -173,5 +178,13 @@ public class Patient {
 
     public void setAppointment_id(String appointment_id) {
         this.appointment_id = appointment_id;
+    }
+
+    public String getEprescription_id() {
+        return eprescription_id;
+    }
+
+    public void setEprescription_id(String eprescription_id) {
+        this.eprescription_id = eprescription_id;
     }
 }
