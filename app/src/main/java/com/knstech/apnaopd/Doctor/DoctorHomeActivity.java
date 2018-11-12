@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.knstech.apnaopd.DrawerUtil;
+import com.knstech.apnaopd.DrawersUtil.DrawerUtil;
 import com.knstech.apnaopd.GenModelClasses.Doctor.DoctorAuth;
 import com.knstech.apnaopd.R;
 

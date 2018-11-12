@@ -20,9 +20,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.Patient.ADAPTORS.AddressGetAdaptor;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.Address;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.R;
@@ -56,18 +58,17 @@ public class MedicineActivity extends AppCompatActivity {
     private RecyclerView addressView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter mAdaptor;
-
     private List<Address> addressPojoList;
-
     private Address selectedAddress;
     private EditText comment;
     private String path;
-    private String url = AppUtils.HOST_ADDRESS+"/api/orders/0";
-    private String url1=AppUtils.HOST_ADDRESS+"/api/users/"+AppUtils.USER_GID;
+    private String filter = "0";
+    private String url = AppUtils.HOST_ADDRESS+"/api/orders/"+filter;
+   // private String url1=AppUtils.HOST_ADDRESS+"/api/users/"+AppUtils.USER_GID;
     private String addressURL = AppUtils.HOST_ADDRESS+"/api/users/address/"+AppUtils.USER_GID;
     private String pic_url = AppUtils.HOST_ADDRESS+"/api/uploadPrescription";
     private String cmt;
-
+    private Spinner e_prescription;
     private List<Address> listAddr;
 
 
@@ -98,6 +99,7 @@ public class MedicineActivity extends AppCompatActivity {
         comment = (EditText)findViewById(R.id.editText_cmt);
         btn_submit=(Button)findViewById(R.id.med_btn_submit);
         add_address = (Button)findViewById(R.id.med_btn_add_add);
+        e_prescription=(Spinner)findViewById(R.id.e_prescription);
 
         /*Adding address button if address is not alreay present */
 
@@ -143,7 +145,6 @@ public class MedicineActivity extends AppCompatActivity {
                 adres.put("state",selectedAddress.getState());
                 adres.put("pincode",selectedAddress.getPincode());
                 adres.put("phone_number",selectedAddress.getPhone_number());
-
                 Map params = new HashMap();
                 params.put("address",adres);
                 params.put("photo_prescription_link",prescription_image_url);
@@ -261,7 +262,7 @@ public class MedicineActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.medicine_menu,menu);
+        getMenuInflater().inflate(R.menu.filter,menu);
         return true;
     }
 
@@ -269,6 +270,16 @@ public class MedicineActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
+        switch(id){
+
+            case 1 :
+                        filter = "0";
+                break;
+            case 2:
+                        filter = "1";
+                break;
+
+        }
 
 
         return super.onOptionsItemSelected(item);

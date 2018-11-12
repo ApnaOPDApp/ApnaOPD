@@ -14,7 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Volley.VolleySingleton;
 

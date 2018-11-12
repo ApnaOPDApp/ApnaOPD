@@ -4,25 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.DrawerUtil;
+import com.knstech.apnaopd.Utils.AppUtils;
+import com.knstech.apnaopd.DrawersUtil.DrawerUtil;
 import com.knstech.apnaopd.R;
-import com.knstech.apnaopd.Volley.VolleySingleton;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 import butterknife.ButterKnife;
 

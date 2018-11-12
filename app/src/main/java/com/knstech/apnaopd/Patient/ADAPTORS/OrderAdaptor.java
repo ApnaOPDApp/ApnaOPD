@@ -1,7 +1,6 @@
-package com.knstech.apnaopd.Patient;
+package com.knstech.apnaopd.Patient.ADAPTORS;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,9 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
+
 import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
-import com.knstech.apnaopd.GenModelClasses.User.Qutotation;
 import com.knstech.apnaopd.R;
 
 import com.knstech.apnaopd.Utils.Listeners.OderClickedListener;

@@ -11,12 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.knstech.apnaopd.AppUtils;
-import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
+import com.knstech.apnaopd.Patient.ADAPTORS.OfferDetailAdapter;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.Qutotation;
 import com.knstech.apnaopd.R;
-import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
 
 import org.json.JSONArray;

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.PojoUploadPrescription;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Listeners.OnDeclineClickedListener;

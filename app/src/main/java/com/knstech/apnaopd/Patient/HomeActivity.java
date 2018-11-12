@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.knstech.apnaopd.DrawerUtil;
+import com.knstech.apnaopd.DrawersUtil.DrawerUtil;
 import com.knstech.apnaopd.R;
 
 import butterknife.ButterKnife;

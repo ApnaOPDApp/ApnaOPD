@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.Patient;
+package com.knstech.apnaopd.Patient.ADAPTORS;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,13 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.knstech.apnaopd.GenModelClasses.Retailer.Order;
+import com.knstech.apnaopd.Patient.ListOfOrderActivity;
+import com.knstech.apnaopd.Patient.OrderActivity;
 import com.knstech.apnaopd.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

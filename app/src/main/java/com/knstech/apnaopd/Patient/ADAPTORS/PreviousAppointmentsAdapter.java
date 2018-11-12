@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.Patient;
+package com.knstech.apnaopd.Patient.ADAPTORS;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

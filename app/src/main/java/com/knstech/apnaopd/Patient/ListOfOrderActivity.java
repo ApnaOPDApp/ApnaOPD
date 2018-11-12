@@ -1,13 +1,15 @@
 package com.knstech.apnaopd.Patient;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
-import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.Patient.ADAPTORS.ListOfOrderAdaptor;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.Retailer.Order;
-import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 
@@ -21,19 +23,38 @@ import java.util.List;
 public class ListOfOrderActivity extends AppCompatActivity {
 
     private RecyclerView list_rv;
-    private RecyclerView.LayoutManager layoutManager;
+    private LinearLayoutManager layoutManager;
     private List<Order> mList;
     private String URL = AppUtils.HOST_ADDRESS+"/api/orders/patient/"+AppUtils.USER_GID;
     private ListOfOrderAdaptor adapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_order);
+
+        toolbar = findViewById(R.id.p_toolbar);
+        toolbar.setTitle("Order Status");
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+
         mList = new ArrayList<>();
         list_rv=(RecyclerView)findViewById(R.id.list_of_order_rv);
+
+        /*  Please Check and Verify it */
+
         layoutManager= new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+
+        /* ------------------------------*/
         list_rv.setLayoutManager(layoutManager);
+
+        list_rv.setHasFixedSize(true);
+
         adapter = new ListOfOrderAdaptor(ListOfOrderActivity.this, mList);
         list_rv.setAdapter(adapter);
 

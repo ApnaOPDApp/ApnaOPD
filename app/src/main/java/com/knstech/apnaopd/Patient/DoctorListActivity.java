@@ -20,7 +20,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.Patient.ADAPTORS.DoctorAdapter;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Doctor;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;

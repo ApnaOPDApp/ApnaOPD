@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.Patient;
+package com.knstech.apnaopd.GenModelClasses.User;
 
 public class Department {
     private String name;

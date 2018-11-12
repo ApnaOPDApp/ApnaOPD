@@ -8,7 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.google.gson.Gson;
-import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.Patient.ADAPTORS.OrderAdaptor;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
