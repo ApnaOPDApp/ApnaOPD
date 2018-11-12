@@ -139,4 +139,13 @@ public class C {
         return res;
 
     }
+
+    public static String getDateAndTime(String time_slab) {
+
+        int day=time_slab.charAt(0)-'0';
+        String time=time_slab.substring(1,3);
+
+        return setDayOfWeek(day)+"\n"+getTime(time);
+
+    }
 }

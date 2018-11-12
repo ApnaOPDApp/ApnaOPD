@@ -194,8 +194,8 @@ public class DoctorViewerActivity extends AppCompatActivity {
 
                 doctor = new Doctor();
                 doctor.parseFromJson(obj.toString());
-                name.setText(doctor.getName());
-                fees.setText("Rs."+doctor.getFee());
+                name.setText("Dr. "+doctor.getName());
+                fees.setText("Rs. "+doctor.getFee());
 
                 department=doctor.getDepartment();
                 fee=doctor.getFee();

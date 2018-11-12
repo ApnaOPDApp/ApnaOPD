@@ -51,6 +51,10 @@ public class Patient {
             {
                 patient.setAppointment_id(obj.getString("_id"));
             }
+            if(obj.has("time_slab"))
+            {
+                patient.setTime_slab(obj.getString("time_slab"));
+            }
             if(obj.has("status"))
             {
                 patient.setStatus(obj.getString("status"));
