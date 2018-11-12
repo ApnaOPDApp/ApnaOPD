@@ -18,10 +18,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
-import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModelClasses.User.Medicine;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
 
@@ -118,7 +118,7 @@ public class EprescFragment extends DialogFragment{
                 }
                 EditText comment=view.findViewById(R.id.comment);
                 String commentStr=comment.getText().toString();
-                String url=AppUtils.HOST_ADDRESS+"/api/appointments/status/doctor/"+appointment_id+"/"+doctor_gid;
+                String url= AppUtils.HOST_ADDRESS+"/api/appointments/status/doctor/"+appointment_id+"/"+doctor_gid;
                 Map map=new HashMap();
                 List<Map> array=new ArrayList<>();
                 for(int i=0;i<list.size();i++)

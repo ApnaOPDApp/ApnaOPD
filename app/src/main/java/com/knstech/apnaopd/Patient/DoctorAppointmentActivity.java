@@ -5,14 +5,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.GenModelClasses.User.Department;
+import com.knstech.apnaopd.Patient.ADAPTORS.DepartmentAdapter;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
@@ -39,11 +43,23 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
     private List<Department> mList;
     private DepartmentAdapter adapter;
 
+    private Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_appointment);
+
+        toolbar = (Toolbar)findViewById(R.id.p_toolbar);
+        toolbar.setTitle("Select Department");
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+
+
+
         rootLayout=findViewById(R.id.rootLayout);
 
         deptView=LayoutInflater.from(this).inflate(R.layout.dept_select_layout,null);

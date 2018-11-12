@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.Patient;
+package com.knstech.apnaopd.Patient.ADAPTORS;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,10 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.Doctor.EPresc;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 

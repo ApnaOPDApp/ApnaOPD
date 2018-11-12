@@ -27,7 +27,6 @@
         <activity android:name=".Patient.DoctorAppointmentActivity" />
         <activity android:name=".Patient.HomeActivity">
 
-
         </activity>
         <activity
             android:name=".Patient.MedicineActivity"
@@ -39,11 +38,9 @@
             android:name=".Retailer.ListOfPrescriptionActivity"
             android:parentActivityName=".Retailer.RetailerActivity" />
         <activity android:name=".Doctor.DAppointmentViewerActivity" />
-
         <activity
             android:name=".Retailer.RetailerOfferSendActivity"
             android:parentActivityName=".Retailer.RetailerActivity" />
-        <activity android:name=".Patient.PatientFinalDrugAcceptActivity" />
         <activity android:name=".SplashActivity" />
         <activity
             android:name=".Profile.AddressActivity"
@@ -60,13 +57,13 @@
         <activity
             android:name=".AddNewProfileActivity"
             android:parentActivityName=".Patient.HomeActivity" />
-
         <activity android:name=".Patient.OrderActivity" />
         <activity android:name=".Patient.ShowDetailsOfOfferActivity" />
-        <activity android:name=".Patient.ListOfOrderActivity"></activity>
-
+        <activity android:name=".Patient.ListOfOrderActivity" />
         <activity android:name=".Doctor.TimeSlotAppointmentViewer" />
-        <activity android:name=".Patient.PAppointmentViewerActivity"></activity>
+        <activity android:name=".Patient.PAppointmentViewerActivity" />
+        <activity android:name=".Retailer.ConfirmedOrdersActivity" />
+        <activity android:name=".Retailer.UpdateOrderStatusActivity"></activity>
     </application>
 
 </manifest>

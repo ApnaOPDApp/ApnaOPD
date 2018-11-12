@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.GenModalClasses.User;
+package com.knstech.apnaopd.GenModelClasses.User;
 
 import com.google.gson.Gson;
 
@@ -15,6 +15,7 @@ public class Qutotation {
     private String offered_price;
     private String dosage_per;
     private String dosage_day;
+
 
 
 

@@ -1,9 +1,12 @@
-package com.knstech.apnaopd.Patient;
+package com.knstech.apnaopd.Patient.ADAPTORS;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.knstech.apnaopd.Patient.PreviousAppointmentsFragment;
+import com.knstech.apnaopd.Patient.UpcomingAppointmentsFragment;
 
 public class AppointmentPagerAdapter extends FragmentPagerAdapter{
     public AppointmentPagerAdapter(FragmentManager fm) {

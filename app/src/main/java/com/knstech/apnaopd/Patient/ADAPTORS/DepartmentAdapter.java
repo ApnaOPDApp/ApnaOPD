@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.Patient;
+package com.knstech.apnaopd.Patient.ADAPTORS;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.knstech.apnaopd.GenModelClasses.User.Department;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Listeners.DepatmentClickListener;
 

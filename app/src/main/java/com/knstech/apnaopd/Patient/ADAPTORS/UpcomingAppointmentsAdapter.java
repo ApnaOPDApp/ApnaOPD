@@ -1,4 +1,4 @@
-package com.knstech.apnaopd.Patient;
+package com.knstech.apnaopd.Patient.ADAPTORS;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.knstech.apnaopd.AppUtils;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;

@@ -1,9 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Patient.ShowDetailsOfOfferActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/app_bar_patient"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        >
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_show_details"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rv_show_details"
+        android:orientation="vertical">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:weightSum="2"
+           >
+           <TextView
+               android:textSize="18sp"
+               android:textColor="@color/colorPrimaryDark"
+               android:gravity="center_horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Total Price:"
+               android:layout_weight="1"
+               android:textStyle="bold"
+               />
+           <TextView
+              android:textColor="@color/black_app"
+               android:layout_weight="1"
+               android:gravity="center"
+               android:text="$1500"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/price"/>
+
+       </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <TextView
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Offered Price:"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:textColor="@color/black_app"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="$1450"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/offeredPrice"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/accept"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Accept offer"
+            android:textColor="#fff"
+            android:padding="20dp"
+            style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+            android:background="@drawable/button_design"
+            />
+
+    </LinearLayout>
+    </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

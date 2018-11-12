@@ -8,6 +8,7 @@ public class Order {
     private String comment;
     private String orderId;
 
+
     public static Order parseFromJson(String jsonStr)
     {
         Order order=new Order();

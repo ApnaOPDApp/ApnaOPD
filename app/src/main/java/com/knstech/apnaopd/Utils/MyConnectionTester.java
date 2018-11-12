@@ -1,4 +1,4 @@
-package com.knstech.apnaopd;
+package com.knstech.apnaopd.Utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

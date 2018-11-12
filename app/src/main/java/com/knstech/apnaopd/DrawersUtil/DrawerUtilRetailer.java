@@ -1,4 +1,4 @@
-package com.knstech.apnaopd;
+package com.knstech.apnaopd.DrawersUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,13 +6,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
+import com.knstech.apnaopd.AddNewProfileActivity;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Doctor.DoctorHomeActivity;
 import com.knstech.apnaopd.Patient.HomeActivity;
 import com.knstech.apnaopd.Patient.ListOfOrderActivity;
 import com.knstech.apnaopd.Patient.PAppointmentViewerActivity;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.Profile.ProfileActivity;
+import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Retailer.RetailerActivity;
+import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -20,49 +24,98 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class DrawerUtil {
-    public static void getDrawer(final Activity activity, Toolbar toolbar) {
+import java.util.ArrayList;
+import java.util.List;
 
-        AccountHeader headerResult = new AccountHeaderBuilder()
+
+public class DrawerUtilRetailer {
+
+    private static Boolean isDoctor = false;
+    private static Boolean isRetailer = false;
+    private static Boolean isPathologist = false;
+
+      public static void getDrawer(final Activity activity, Toolbar toolbar) {
+
+          String URL = AppUtils.HOST_ADDRESS+"/api/users/"+AppUtils.USER_GID;
+          RequestGet request = new RequestGet(activity);
+          request.getJSONObject(URL, new RequestGet.JSONObjectResponseListener() {
+              @Override
+              public void onResponse(JSONObject object) {
+                  try {
+
+                      isDoctor= object.getBoolean("isDoctor");
+                      isRetailer = object.getBoolean("isRetailer");
+                      isPathologist = object.getBoolean("isPathologist");
+
+                  } catch (JSONException e) {
+                      e.printStackTrace();
+                  }
+
+              }
+          });
+
+
+          IProfile patient =  new ProfileDrawerItem()
+                  .withName("Patient")
+                  .withEmail("patient@apnaopd")
+                  .withIcon(R.drawable.p)
+                  .withIdentifier(101);
+
+          IProfile doctor =  new ProfileDrawerItem()
+                  .withName("Doctor")
+                  .withEmail("doctor@apnaopd")
+                  .withIcon(R.drawable.d)
+                  .withIdentifier(103);
+
+          IProfile retailer =   new ProfileDrawerItem()
+                  .withName("Retailer")
+                  .withEmail("retailer@apnaopd")
+                  .withIcon(R.drawable.r)
+                  .withIdentifier(104);
+
+          IProfile pathologist =  new ProfileDrawerItem()
+                  .withName("Pathologist")
+                  .withEmail("pathologist@apnaopd")
+                  .withIcon(R.drawable.pt)
+                  .withIdentifier(105);
+
+          IProfile addNewProfile = new ProfileSettingDrawerItem()
+                  .withName("Add New Profile")
+                  .withIcon(R.drawable.ic_add_black_24dp);
+
+
+          List<IProfile> iProfiles= new ArrayList<>();
+
+          iProfiles.add(retailer);
+          iProfiles.add(patient);
+
+          if(isDoctor)
+            iProfiles.add(doctor);
+
+          if(isPathologist)
+              iProfiles.add(pathologist);
+
+          if(!(isDoctor && isRetailer && isPathologist))
+              iProfiles.add(addNewProfile);
+
+          IProfile[] iProfiles1 = new IProfile[iProfiles.size()];
+          for(int i=0;i< iProfiles.size();i++)
+              iProfiles1[i] = iProfiles.get(i);
+
+          AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
                 .withHeaderBackground(R.color.colorAccentLight)
-
                 .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName("Patient")
-                                .withEmail("patient@gmail.com")
-                                .withIcon(R.drawable.p)
-                                .withIdentifier(101)
-
+                           iProfiles1
                 )
-                .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName("Doctor")
-                                .withEmail("doctor@gmail.com")
-                                .withIcon(R.drawable.d)
-                                .withIdentifier(103)
-                )
-                .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName("Retailer")
-                                .withEmail("retailer@gmail.com")
-                                .withIcon(R.drawable.r)
-                                .withIdentifier(104)
-                )
-
-
-                .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName("Add new profile")
-                                .withIcon(R.drawable.ic_add_black_24dp)
-                                .withIdentifier(102)
-                )
-
 
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
@@ -92,7 +145,6 @@ public class DrawerUtil {
                     }
                 })
                 .build();
-
 
         //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem drawerEmptyItem= new PrimaryDrawerItem().withIdentifier(0).withName("");

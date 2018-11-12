@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.knstech.apnaopd.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Patient.DoctorAppointmentActivity;
 import com.knstech.apnaopd.Patient.DoctorListActivity;

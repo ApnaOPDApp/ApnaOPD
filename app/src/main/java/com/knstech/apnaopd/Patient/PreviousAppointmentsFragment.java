@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
+import com.knstech.apnaopd.Patient.ADAPTORS.PreviousAppointmentsAdapter;
 import com.knstech.apnaopd.R;
 
 import java.util.ArrayList;
