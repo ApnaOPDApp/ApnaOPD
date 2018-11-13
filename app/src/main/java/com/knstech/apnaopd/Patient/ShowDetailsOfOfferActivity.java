@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Patient.ADAPTORS.OfferDetailAdapter;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.Qutotation;
@@ -86,7 +87,7 @@ public class ShowDetailsOfOfferActivity extends AppCompatActivity {
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String url= AppUtils.HOST_ADDRESS+"/api/orders/"+order_id+"/"+AppUtils.USER_GID+"/"+offer_id;
+                    String url= AppUtils.HOST_ADDRESS+"/api/orders/"+order_id+"/"+ UserAuth.getmUser(ShowDetailsOfOfferActivity.this).getGid()+"/"+offer_id;
                     RequestPut put=new RequestPut(ShowDetailsOfOfferActivity.this);
                     put.putJSONObject(url, null, new RequestPut.JSONObjectResponseListener() {
                         @Override

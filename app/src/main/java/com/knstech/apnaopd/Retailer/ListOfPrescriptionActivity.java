@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
+
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestDelete;
@@ -28,8 +30,7 @@ public class ListOfPrescriptionActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RetailerPrescriptionAdaptor mAdaptor;
     private List<PojoUploadPrescription> data;
-    private  String url = AppUtils.HOST_ADDRESS+"/api/retailers/orders/"+AppUtils.RET_GID;
-    private Toolbar toolbar;
+     private Toolbar toolbar;
  //   private String json_pres_id;
 
     @Override
@@ -37,6 +38,7 @@ public class ListOfPrescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_prescription);
 
+        String url = AppUtils.HOST_ADDRESS+"/api/retailers/orders/"+ UserAuth.getmUser(ListOfPrescriptionActivity.this).getGid();
 
         toolbar = (Toolbar)findViewById(R.id.p_toolbar);
         toolbar.setTitle("List of Prescriptions");
@@ -53,7 +55,7 @@ public class ListOfPrescriptionActivity extends AppCompatActivity {
         mAdaptor = new RetailerPrescriptionAdaptor(getApplicationContext(), data, this, new OnDeclineClickedListener() {
             @Override
             public void onDecline(String id) {
-                String url=AppUtils.HOST_ADDRESS+"/api/retailers/orders/"+AppUtils.RET_GID;
+                String url=AppUtils.HOST_ADDRESS+"/api/retailers/orders/"+UserAuth.getmUser(ListOfPrescriptionActivity.this).getGid();
                 RequestDelete requestDelete=new RequestDelete(ListOfPrescriptionActivity.this);
                 requestDelete.requestDelete(url, new RequestDelete.OnDeleteListener() {
                     @Override
