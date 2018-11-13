@@ -45,11 +45,7 @@
                 android:text="Fees :"
                 android:padding="8dp"
                 android:textSize="19dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Address :"
-                android:textStyle="bold"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,10 +53,12 @@
                 android:id="@+id/addressLL">
 
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sitting Schedule :"/>
+                android:text="Sitting Schedule :"
+                android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

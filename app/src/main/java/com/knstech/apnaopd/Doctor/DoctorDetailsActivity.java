@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.knstech.apnaopd.GenModelClasses.Doctor.Address;
+import com.knstech.apnaopd.GenModelClasses.Doctor.Doctor;
+import com.knstech.apnaopd.GenModelClasses.Doctor.DoctorAuth;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.R;
@@ -45,6 +47,12 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         phone=findViewById(R.id.phone_number);
         comment=findViewById(R.id.comment);
 
+        Doctor doc= DoctorAuth.getmDoctor(DoctorDetailsActivity.this);
+        dept.setText(doc.getDepartment());
+        fee.setText(doc.getFee());
+        phone.setText(doc.getPhoneNumber());
+        comment.setText(doc.getComment());
+
         addressLL=findViewById(R.id.addressLL);
 
         addBtn=findViewById(R.id.addBtn);
@@ -64,6 +72,12 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                 map.put("comment",comment.getText().toString());
                 map.put("address",mList.get(selected));
                 JSONObject obj=new JSONObject(map);
+
+                Doctor doc=DoctorAuth.getmDoctor(DoctorDetailsActivity.this);
+                doc.setComment(comment.getText().toString());
+                doc.setDepartment(dept.getText().toString());
+                doc.setFee(fee.getText().toString());
+                doc.setPhoneNumber(phone.getText().toString());
 
                 put.putJSONObject(url, obj, new RequestPut.JSONObjectResponseListener() {
                     @Override
