@@ -106,11 +106,11 @@ public class EprescFragment extends DialogFragment{
                     dday=view.findViewById(R.id.dday);
                     if(!TextUtils.isEmpty(edt.getText())) {
                         Medicine med=new Medicine();
-                        med.setName(edt.getText().toString());
-                        med.setDday(dday.getText().toString());
-                        med.setDper(dper.getText().toString());
+                        med.setMedicine_name(edt.getText().toString());
+                        med.setDosage_day(dday.getText().toString());
+                        med.setDosage_per(dper.getText().toString());
                         med.setType(type.getText().toString());
-                        med.setBefor_after(before_after_str);
+                        med.setBefor_after_meal(before_after_str);
                         list.add(med);
                     }
 
@@ -124,11 +124,11 @@ public class EprescFragment extends DialogFragment{
                 for(int i=0;i<list.size();i++)
                 {
                     Map medMap=new HashMap();
-                    medMap.put("medicine_name",list.get(i).getName());
-                    medMap.put("dosage_day",list.get(i).getDday());
-                    medMap.put("dosage_per",list.get(i).getDper());
+                    medMap.put("medicine_name",list.get(i).getMedicine_name());
+                    medMap.put("dosage_day",list.get(i).getDosage_day());
+                    medMap.put("dosage_per",list.get(i).getDosage_per());
                     medMap.put("type",list.get(i).getType());
-                    medMap.put("before_after_meal",list.get(i).getBefor_after());
+                    medMap.put("before_after_meal",list.get(i).getBefor_after_meal());
                     array.add(medMap);
                 }
                 map.put("medicines",array);

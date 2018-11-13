@@ -24,35 +24,52 @@ public class DoctorHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_home);
 
         DoctorAuth auth=new DoctorAuth();
-        auth.signInDoctor(this);
-
-        ButterKnife.bind(this);
-
-        Toolbar toolbar = (Toolbar)findViewById(R.id.p_toolbar);
-        toolbar.setTitle("Doctor Home");
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowCustomEnabled(true);
-
-        DrawerUtil.getDrawer(this,toolbar);
-
-        c1=findViewById(R.id.doctor_c1);
-        c2=findViewById(R.id.doctor_c2);
-
-        c1.setOnClickListener(new View.OnClickListener() {
+        auth.signInDoctor(this, new DoctorAuth.OnSignInListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DoctorHomeActivity.this,DaySelectActivity.class));
+            public void onSignIn() {
+                ButterKnife.bind(DoctorHomeActivity.this);
+
+                Toolbar toolbar = (Toolbar)findViewById(R.id.p_toolbar);
+                toolbar.setTitle("Doctor Home");
+                setSupportActionBar(toolbar);
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setDisplayShowCustomEnabled(true);
+
+                c1=findViewById(R.id.doctor_c1);
+                c2=findViewById(R.id.doctor_c2);
+
+                DrawerUtil.getDrawer(DoctorHomeActivity.this,toolbar);
+                if(DoctorAuth.getmDoctor(DoctorHomeActivity.this).getTimeSlab()==null)
+                {
+                    c1.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    c1.setVisibility(View.GONE);
+                }
+
+
+
+
+
+                c1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(DoctorHomeActivity.this,DaySelectActivity.class));
+                    }
+                });
+                c2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i=new Intent(DoctorHomeActivity.this,DaySelectActivity.class);
+                        i.putExtra("activity","1");
+                        startActivity(i);
+                    }
+                });
             }
         });
-        c2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(DoctorHomeActivity.this,DaySelectActivity.class);
-                i.putExtra("activity","1");
-                startActivity(i);
-            }
-        });
+
+
     }
 }

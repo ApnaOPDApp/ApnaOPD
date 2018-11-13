@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.knstech.apnaopd.GenModelClasses.Doctor.DayOfWeek;
 import com.knstech.apnaopd.R;
@@ -29,6 +30,9 @@ public class DaySelectActivity extends AppCompatActivity {
 
         dayList=findViewById(R.id.dayList);
         initRecView();
+
+        Toolbar toolbar=findViewById(R.id.p_toolbar);
+        toolbar.setTitle("Select Day");
 
 
     }

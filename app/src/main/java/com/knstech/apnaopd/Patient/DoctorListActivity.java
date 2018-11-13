@@ -329,7 +329,7 @@ public class DoctorListActivity extends AppCompatActivity {
                 if (getCity()==null||(getCity()!=null&&getCity().equals(""))) {
                     result = true;
                 } else {
-                    if (doctor.getAddress().getCity()!=null&&doctor.getAddress().getCity().equals(getCity())) {
+                    if (doctor.getAddress()!=null&&doctor.getAddress().get(0).getCity()!=null&&doctor.getAddress().get(0).getCity().equals(getCity())) {
                         result = true;
                     }
                 }

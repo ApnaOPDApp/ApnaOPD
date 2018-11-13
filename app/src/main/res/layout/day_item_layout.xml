@@ -10,13 +10,14 @@
         android:layout_marginTop="5dp"
 
         app:cardElevation="10dp"
-        android:padding="5dp"
+        android:padding="10dp"
         android:translationZ="-5dp"
         android:translationX="5dp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/day"
+        android:padding="10dp"
         android:textSize="20dp"
 
         />

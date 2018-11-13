@@ -120,7 +120,7 @@ public class DAppointmentViewerActivity extends AppCompatActivity {
 
     private void populateView() {
 
-        String url= AppUtils.HOST_ADDRESS+"/api/appointments/doctor/visiting/"+ UserAuth.getmUser().getGid();
+        String url= AppUtils.HOST_ADDRESS+"/api/appointments/doctor/visiting/"+ UserAuth.getmUser(DAppointmentViewerActivity.this).getGid();
         RequestGet requestGet=new RequestGet(getApplicationContext());
         requestGet.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
             @Override

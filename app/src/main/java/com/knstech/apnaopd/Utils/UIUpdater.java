@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class UIUpdater {
     public static final int IMG = 1;
-    private static String url= AppUtils.HOST_ADDRESS+"/api/casesheets/"+ UserAuth.getmUser().getGid();
+
     private static String fee;
     private static String dept;
     private static String commentResp,nameResp,ageResp;
@@ -587,6 +587,7 @@ public class UIUpdater {
         map.put("department",""+activity.getChoice());
         RequestPost requestPost=new RequestPost(mContext);
         JSONObject jsonObject=new JSONObject(map);
+        String url=AppUtils.HOST_ADDRESS+"/api/casesheets/"+ UserAuth.getmUser(mContext).getGid();
         requestPost.postJSONObject(url, jsonObject, new RequestPut.JSONObjectResponseListener() {
             @Override
             public void onResponse(JSONObject object) {

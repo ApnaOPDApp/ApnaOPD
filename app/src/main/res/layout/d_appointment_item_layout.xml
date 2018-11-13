@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/diagnosed"
-                    android:text="Diagnosed"/>
+                    android:text="Diagnose"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

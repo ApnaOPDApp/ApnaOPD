@@ -30,7 +30,7 @@ public class PAppointmentViewerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pappointment_viewer);
 
         RequestGet requestGet=new RequestGet(getApplicationContext());
-        String url= AppUtils.HOST_ADDRESS+"/api/appointments/patient/"+ UserAuth.getmUser().getGid();
+        String url= AppUtils.HOST_ADDRESS+"/api/appointments/patient/"+ UserAuth.getmUser(PAppointmentViewerActivity.this).getGid();
         mList=new ArrayList<>();
 
         requestGet.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {

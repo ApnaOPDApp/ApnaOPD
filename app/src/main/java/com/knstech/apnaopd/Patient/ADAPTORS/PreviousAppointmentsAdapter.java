@@ -94,7 +94,7 @@ public class PreviousAppointmentsAdapter extends RecyclerView.Adapter {
                                     RadioButton after, before;
 
                                     medName = medView.findViewById(R.id.medicine);
-                                    medName.setText("Medicine : " + ePresc.getMedicineList().get(i).getName());
+                                    medName.setText("Medicine : " + ePresc.getMedicineList().get(i).getMedicine_name());
                                     medName.setEnabled(false);
 
                                     medType = medView.findViewById(R.id.type);
@@ -102,16 +102,16 @@ public class PreviousAppointmentsAdapter extends RecyclerView.Adapter {
                                     medType.setEnabled(false);
 
                                     medDday = medView.findViewById(R.id.dday);
-                                    medDday.setText("Day : " + ePresc.getMedicineList().get(i).getDday());
+                                    medDday.setText("Day : " + ePresc.getMedicineList().get(i).getDosage_day());
                                     medDday.setEnabled(false);
 
                                     medDper = medView.findViewById(R.id.dper);
-                                    medDper.setText("Dosage/Day : " + ePresc.getMedicineList().get(i).getDper());
+                                    medDper.setText("Dosage/Day : " + ePresc.getMedicineList().get(i).getDosage_per());
                                     medDper.setEnabled(false);
 
                                     after = medView.findViewById(R.id.after);
                                     before = medView.findViewById(R.id.before);
-                                    if ((ePresc.getMedicineList().get(i).getBefor_after().equals("1"))) {
+                                    if ((ePresc.getMedicineList().get(i).getBefor_after_meal().equals("1"))) {
                                         after.setChecked(true);
                                     } else {
                                         before.setChecked(true);

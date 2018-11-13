@@ -70,25 +70,23 @@ public class DoctorAdapter extends RecyclerView.Adapter{
                 int lock=0;
                 View v=linearlayout.getChildAt(i-1);
                 String ar[]= C.getStringArray(doctor.getTimeSlab());
-                for(int j=0;j<ar.length;j++)
-                {
-                    if(ar[j].charAt(0)-'0'==i)
-                    {
-                        lock=1;
-                    }
-                }
-                if(lock!=0) {
-                    final int finalI = i;
-                    v.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            listener.onDoctorItemClick(doctor.getGid(), finalI);
+                if(ar!=null) {
+                    for (int j = 0; j < ar.length; j++) {
+                        if (ar[j].charAt(0) - '0' == i) {
+                            lock = 1;
                         }
-                    });
-                }
-                else
-                {
-                    v.setEnabled(false);
+                    }
+                    if (lock != 0) {
+                        final int finalI = i;
+                        v.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                listener.onDoctorItemClick(doctor.getGid(), finalI);
+                            }
+                        });
+                    } else {
+                        v.setEnabled(false);
+                    }
                 }
             }
         }

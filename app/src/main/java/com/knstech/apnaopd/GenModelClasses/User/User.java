@@ -40,19 +40,34 @@ public class User {
                 setGid(object.getString("gid"));
 
 
-            IsDoctor isDoctor=IsDoctor.parseFromJson(object.getString("is_doctor"));
-            setIsDoctor(isDoctor);
-            IsManufacturer isManufacturer=IsManufacturer.parseFromJson(object.getString("is_manufacturer"));
-            IsRetailer isRetailer=IsRetailer.parseFromJson(object.getString("is_retailer"));
-            IsSupplier isSupplier=IsSupplier.parseFromJson(object.getString("is_supplier"));
-            IsWholesaler isWholesaler=IsWholesaler.parseFromJson(object.getString("is_wholesaler"));
+            if(object.has("is_doctor")) {
+                IsDoctor isDoctor = IsDoctor.parseFromJson(object.getString("is_doctor"));
+                setIsDoctor(isDoctor);
+            }
+            if(object.has("is_manufacturer")) {
+                IsManufacturer isManufacturer = IsManufacturer.parseFromJson(object.getString("is_manufacturer"));
+                setIsManufacturer(isManufacturer);
+            }
+            if(object.has("is_retailer")) {
+                IsRetailer isRetailer = IsRetailer.parseFromJson(object.getString("is_retailer"));
+                setIsRetailer(isRetailer);
+            }
+            if(object.has("is_supplier") ){
+                IsSupplier isSupplier = IsSupplier.parseFromJson(object.getString("is_supplier"));
+                setIsSupplier(isSupplier);
+            }
+            if(object.has("is_wholesaler"))
+            {
+                IsWholesaler isWholesaler=IsWholesaler.parseFromJson(object.getString("is_wholesaler"));
+                setIsWholesaler(isWholesaler);
+            }
 
 
 
-            setIsManufacturer(isManufacturer);
-            setIsRetailer(isRetailer);
-            setIsSupplier(isSupplier);
-            setIsWholesaler(isWholesaler);
+
+
+
+
 
 
 

@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 
 public class Doctor {
 
@@ -18,7 +20,7 @@ public class Doctor {
     private String phoneNumber;
 
 
-    private Address address;
+    private List<Address> address;
 
     private String degree;
 
@@ -83,12 +85,10 @@ public class Doctor {
             {
                 visiting=(new Gson()).fromJson(object.getJSONArray("visiting").toString(),String[].class);
             }
-            Address address=new Address();
-            if(object.has("office_number"))
-                address=address.parseFromString(object.getString("address"));
-
-            setAddress(address);
-
+            if(object.has("address"))
+            {
+                address=Address.parseFromJson(object.getJSONArray("address").toString());
+            }
 
             return this;
 
@@ -126,13 +126,7 @@ public class Doctor {
         this.phoneNumber = phoneNumber;
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
     public String getDegree() {
         return degree;
@@ -209,5 +203,13 @@ public class Doctor {
 
     public void setDoctor_image(String doctor_image) {
         this.doctor_image = doctor_image;
+    }
+
+    public List<Address> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
     }
 }
