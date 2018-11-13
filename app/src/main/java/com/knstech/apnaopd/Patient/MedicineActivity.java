@@ -26,6 +26,8 @@ import android.widget.Toast;
 
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModelClasses.User.Address;
+import com.knstech.apnaopd.GenModelClasses.User.Medicine;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Patient.ADAPTORS.AddressGetAdaptor;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.R;
@@ -69,7 +71,7 @@ public class MedicineActivity extends AppCompatActivity {
     private String filter = "0";
     private String url = AppUtils.HOST_ADDRESS+"/api/orders/"+filter;
    // private String url1=AppUtils.HOST_ADDRESS+"/api/users/"+AppUtils.USER_GID;
-    private String addressURL = AppUtils.HOST_ADDRESS+"/api/users/address/"+AppUtils.USER_GID;
+
     private String pic_url = AppUtils.HOST_ADDRESS+"/api/uploadPrescription";
     private String cmt;
     private Spinner e_prescription;
@@ -161,7 +163,7 @@ public class MedicineActivity extends AppCompatActivity {
                 Map params = new HashMap();
                 params.put("address",adres);
                 params.put("photo_prescription_link",prescription_image_url);
-                params.put("patient_gid",AppUtils.USER_GID);
+                params.put("patient_gid", UserAuth.getmUser(MedicineActivity.this).getGid());
                 params.put("comment",cmt);
 
                 JSONObject obj = new JSONObject(params);
@@ -193,7 +195,7 @@ public class MedicineActivity extends AppCompatActivity {
 
     private void initSpinner() {
 
-        String url=AppUtils.HOST_ADDRESS+"/api/appointments/patient/"+AppUtils.USER_GID;
+        String url=AppUtils.HOST_ADDRESS+"/api/appointments/patient/"+UserAuth.getmUser(MedicineActivity.this).getGid();
         RequestGet get=new RequestGet(this);
         get.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
             @Override
@@ -246,7 +248,7 @@ public class MedicineActivity extends AppCompatActivity {
        listAddr= new ArrayList<>();
 
         RequestGet getRequest=new RequestGet(this);
-        getRequest.getJSONArray(addressURL, new RequestGet.JSONArrayResponseListener() {
+        getRequest.getJSONArray( AppUtils.HOST_ADDRESS+"/api/users/address/"+UserAuth.getmUser(MedicineActivity.this).getGid(), new RequestGet.JSONArrayResponseListener() {
             @Override
 
             public void onResponse(JSONArray obj) {
@@ -284,7 +286,7 @@ public class MedicineActivity extends AppCompatActivity {
                     Future uploading = Ion.with(MedicineActivity.this)
                             .load(pic_url)
                             .setMultipartFile("prescription",file)
-                            .setMultipartParameter("gid",AppUtils.USER_GID)
+                            .setMultipartParameter("gid",UserAuth.getmUser(MedicineActivity.this).getGid())
                             .asString()
                             .withResponse()
                             .setCallback(new FutureCallback<com.koushikdutta.ion.Response<String>>() {

@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
 public class RetailerActivity extends AppCompatActivity {
 
     private RelativeLayout list_of_prescription,confirmed_orders;
-    String Url = AppUtils.HOST_ADDRESS+"/api/retailers/orders/"+AppUtils.RET_GID;
 
 
     @Override

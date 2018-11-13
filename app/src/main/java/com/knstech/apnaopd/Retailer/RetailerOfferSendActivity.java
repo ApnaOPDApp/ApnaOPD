@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
@@ -208,7 +209,7 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                         Map map = new HashMap();
                         map.put("delivery_charge",deliveryCharge);
                         map.put("delivery_time",deliveryTime);
-                        map.put("retailer_gid",AppUtils.RET_GID);
+                        map.put("retailer_gid", UserAuth.getmUser(RetailerOfferSendActivity.this).getGid());
                         map.put("quotation",listOfDrugs);
                         map.put("quotation_link",prescription_image_url);
                         map.put("total_price",total_offer_price+"");
@@ -301,7 +302,7 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                 Future uploading = Ion.with(RetailerOfferSendActivity.this)
                         .load(pic_url)
                         .setMultipartFile("prescription",file)
-                        .setMultipartParameter("gid",AppUtils.USER_GID)
+                        .setMultipartParameter("gid",UserAuth.getmUser(RetailerOfferSendActivity.this).getGid())
                         .asString()
                         .withResponse()
                         .setCallback(new FutureCallback<Response<String>>() {

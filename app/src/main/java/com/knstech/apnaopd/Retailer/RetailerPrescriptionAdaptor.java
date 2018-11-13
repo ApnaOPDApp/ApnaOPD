@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.PojoUploadPrescription;
 import com.knstech.apnaopd.R;
@@ -28,7 +29,6 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
    View view;
    List<PojoUploadPrescription> data;
     private OnDeclineClickedListener mListener;
-    String Url = AppUtils.HOST_ADDRESS+"/api/retailers/orders/"+AppUtils.RET_GID;// /order _id
 
 
 

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Patient.ADAPTORS.ListOfOrderAdaptor;
 import com.knstech.apnaopd.Retailer.RetailerActivity;
 import com.knstech.apnaopd.Utils.AppUtils;
@@ -28,7 +29,6 @@ public class ListOfOrderActivity extends AppCompatActivity {
     private RecyclerView list_rv;
     private LinearLayoutManager layoutManager;
     private List<Order> mList;
-    private String URL = AppUtils.HOST_ADDRESS+"/api/orders/patient/"+AppUtils.USER_GID;
     private ListOfOrderAdaptor adapter;
     private Toolbar toolbar;
 
@@ -70,7 +70,8 @@ public class ListOfOrderActivity extends AppCompatActivity {
 
 
         RequestGet getRequest=new RequestGet(this);
-        getRequest.getJSONArray(URL, new RequestGet.JSONArrayResponseListener() {
+        getRequest.getJSONArray(  AppUtils.HOST_ADDRESS+"/api/orders/patient/"+ UserAuth.getmUser(ListOfOrderActivity.this).getGid()
+   , new RequestGet.JSONArrayResponseListener() {
             @Override
 
             public void onResponse(JSONArray obj) {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.Retailer.PojoConfirmedOrder;
 import com.knstech.apnaopd.R;
@@ -19,7 +20,6 @@ import java.util.List;
 
 public class ConfirmedOrdersActivity extends AppCompatActivity {
 
-    private String URL = AppUtils.HOST_ADDRESS+"/api/orders/retailer/"+AppUtils.RET_GID;
     private List<PojoConfirmedOrder> data;
     private RecyclerView  confirmed_list_rv;
     private ConfirmedOrderAdaptor mAdaptor;
@@ -43,7 +43,8 @@ public class ConfirmedOrdersActivity extends AppCompatActivity {
         confirmed_list_rv.setHasFixedSize(true);
 
         RequestGet request = new RequestGet(this);
-        request.getJSONArray(URL, new RequestGet.JSONArrayResponseListener() {
+        request.getJSONArray(AppUtils.HOST_ADDRESS+"/api/orders/retailer/"+ UserAuth.getmUser(ConfirmedOrdersActivity.this).getGid()
+  , new RequestGet.JSONArrayResponseListener() {
             @Override
             public void onResponse(JSONArray jsonArray) {
                 for(int i=0;i<jsonArray.length();i++){

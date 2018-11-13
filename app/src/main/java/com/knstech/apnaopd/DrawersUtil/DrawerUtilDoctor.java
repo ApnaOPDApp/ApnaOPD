@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.knstech.apnaopd.AddNewProfileActivity;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Doctor.DoctorHomeActivity;
 import com.knstech.apnaopd.Patient.HomeActivity;
@@ -44,7 +45,7 @@ public class DrawerUtilDoctor {
 
       public static void getDrawer(final Activity activity, Toolbar toolbar) {
 
-          String URL = AppUtils.HOST_ADDRESS+"/api/users/"+AppUtils.USER_GID;
+          String URL = AppUtils.HOST_ADDRESS+"/api/users/"+ UserAuth.getmUser(activity).getGid();
           RequestGet request = new RequestGet(activity);
           request.getJSONObject(URL, new RequestGet.JSONObjectResponseListener() {
               @Override

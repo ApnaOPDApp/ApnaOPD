@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Volley.VolleySingleton;
@@ -31,13 +32,15 @@ public class AddressActivity extends AppCompatActivity {
     int lock=0;
     private String full_name1,contactNumber1,zipCode1,flatNo1,colony1,landmark1,city1,state1;
 
-    private String url = AppUtils.HOST_ADDRESS+"/api/users/address/new/"+AppUtils.USER_GID;
+
     private Button addbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
+
+        final String url = AppUtils.HOST_ADDRESS+"/api/users/address/new/"+ UserAuth.getmUser(AddressActivity.this).getGid();
 
         toolbar = (Toolbar)findViewById(R.id.p_toolbar);
         toolbar.setTitle("Address");

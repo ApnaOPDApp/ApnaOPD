@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.Qutotation;
 import com.knstech.apnaopd.R;
@@ -69,7 +70,7 @@ public class UpdateOrderStatusActivity extends AppCompatActivity {
         if(house_no == null) house_no ="NOT Provided";
         String status = getIntent().getStringExtra("status");
         order_id = getIntent().getStringExtra("_id");
-        URL = URL+order_id+"/"+AppUtils.RET_GID;
+        URL = URL+order_id+"/"+ UserAuth.getmUser(UpdateOrderStatusActivity.this).getGid();
 
         int stat = Integer.parseInt(status);
         switch(stat){
