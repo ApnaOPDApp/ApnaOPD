@@ -77,37 +77,31 @@
                  android:layout_weight="1"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="Confirmed"
-                    android:id="@+id/status1"
+                 android:text="Confirmed" android:id="@+id/status1"
                  android:background="@color/apple_red"
-                 style="@style/Widget.AppCompat.Button.Colored"
                  />
                 <Button
                  android:layout_weight="1"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="Packed"
-                    android:id="@+id/status2"
+                 android:text="Packed" android:id="@+id/status2"
                  android:background="@color/apple_orange"
-                 style="@style/Widget.AppCompat.Button.Colored"
+
                  />
                 <Button
                  android:layout_weight="1"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="Shipped"
-                    android:id="@+id/status3"
+                 android:text="Shipped" android:id="@+id/status3"
                  android:background="@color/apple_yellow"
-                 style="@style/Widget.AppCompat.Button.Colored"
+
                  />
                  <Button
                  android:layout_weight="1"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="Delivered"
-                     android:id="@+id/status4"
+                 android:text="Delivered" android:id="@+id/status4"
                  android:background="@color/apple_green"
-                 style="@style/Widget.AppCompat.Button.Colored"
                  />
 
              </LinearLayout>

@@ -11,6 +11,7 @@ import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +29,13 @@ public class PAppointmentViewerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pappointment_viewer);
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(PAppointmentViewerActivity.this)){
+            connnection.buildDialog(PAppointmentViewerActivity.this).show();
+        }
+
 
         RequestGet requestGet=new RequestGet(getApplicationContext());
         String url= AppUtils.HOST_ADDRESS+"/api/appointments/patient/"+ UserAuth.getmUser(PAppointmentViewerActivity.this).getGid();

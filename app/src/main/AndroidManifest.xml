@@ -6,28 +6,23 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".Volley.VolleySingleton"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Patient.LoginActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Patient.LoginActivity" />
         <activity android:name=".Patient.DoctorViewerActivity" />
         <activity android:name=".Patient.DoctorListActivity" />
         <activity android:name=".Patient.DoctorAppointmentActivity" />
-        <activity android:name=".Patient.HomeActivity">
+        <activity android:name=".Patient.HomeActivity"/>
 
-        </activity>
         <activity
             android:name=".Patient.MedicineActivity"
             android:parentActivityName=".Patient.HomeActivity" />
@@ -41,7 +36,15 @@
         <activity
             android:name=".Retailer.RetailerOfferSendActivity"
             android:parentActivityName=".Retailer.RetailerActivity" />
-        <activity android:name=".SplashActivity" />
+        <activity android:name=".SplashActivity" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".Profile.AddressActivity"
             android:parentActivityName=".Patient.HomeActivity" />
@@ -63,7 +66,8 @@
         <activity android:name=".Doctor.TimeSlotAppointmentViewer" />
         <activity android:name=".Patient.PAppointmentViewerActivity" />
         <activity android:name=".Retailer.ConfirmedOrdersActivity" />
-        <activity android:name=".Retailer.UpdateOrderStatusActivity"></activity>
-    </application>
+        <activity android:name=".Retailer.UpdateOrderStatusActivity" />
+
+        </application>
 
 </manifest>

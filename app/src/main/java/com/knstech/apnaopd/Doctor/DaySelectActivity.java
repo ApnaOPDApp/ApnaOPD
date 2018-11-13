@@ -8,10 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.knstech.apnaopd.GenModelClasses.Doctor.DayOfWeek;
+import com.knstech.apnaopd.Patient.ShowDetailsOfOfferActivity;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.DaySelectAdapter;
 import com.knstech.apnaopd.Utils.Listeners.OnDayClickListener;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,14 @@ public class DaySelectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_select);
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(DaySelectActivity.this)){
+            connnection.buildDialog(DaySelectActivity.this).show();
+        }
+
+
 
         dayList=findViewById(R.id.dayList);
         initRecView();

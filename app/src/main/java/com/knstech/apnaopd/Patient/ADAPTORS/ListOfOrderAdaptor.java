@@ -89,6 +89,7 @@ public class ListOfOrderAdaptor extends RecyclerView.Adapter<ListOfOrderAdaptor.
                     Intent i=new Intent(activity,OrderActivity.class);
                     i.putExtra("_id",order.getOrderId());
                     activity.startActivity(i);
+                    activity.finish();
                 }
             });
         }

@@ -1,5 +1,6 @@
 package com.knstech.apnaopd.Patient;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.Qutotation;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +38,14 @@ public class ShowDetailsOfOfferActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_details_of_offer);
+
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(ShowDetailsOfOfferActivity.this)){
+            connnection.buildDialog(ShowDetailsOfOfferActivity.this).show();
+        }
+
 
         mList=new ArrayList<>();
         adapter=new OfferDetailAdapter(mList,this);
@@ -81,11 +91,6 @@ public class ShowDetailsOfOfferActivity extends AppCompatActivity {
                     put.putJSONObject(url, null, new RequestPut.JSONObjectResponseListener() {
                         @Override
                         public void onResponse(JSONObject object) {
-                            try {
-                                Toast.makeText(ShowDetailsOfOfferActivity.this, object.getString("message").toString(), Toast.LENGTH_SHORT).show();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
                             finish();
                         }
                     });
@@ -98,5 +103,11 @@ public class ShowDetailsOfOfferActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ShowDetailsOfOfferActivity.this,OrderActivity.class));
+        finish();
     }
 }

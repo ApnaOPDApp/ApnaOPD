@@ -11,12 +11,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.knstech.apnaopd.Patient.ShowDetailsOfOfferActivity;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,6 +51,14 @@ public class DAppointmentViewerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dappointment_viewer);
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(DAppointmentViewerActivity.this)){
+            connnection.buildDialog(DAppointmentViewerActivity.this).show();
+        }
+
+
         dayOfWeek=getIntent().getStringExtra("day");
         timeOfDay=getIntent().getStringExtra("time");
         initRecyclerView();

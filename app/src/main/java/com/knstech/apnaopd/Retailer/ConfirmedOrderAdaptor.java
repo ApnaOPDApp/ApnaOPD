@@ -2,6 +2,7 @@ package com.knstech.apnaopd.Retailer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -61,6 +62,8 @@ public class ConfirmedOrderAdaptor extends RecyclerView.Adapter<ConfirmedOrderAd
 
     class ConfirmedOrderViewHolder extends RecyclerView.ViewHolder{
 
+        final Typeface custom_fonts = Typeface.createFromAsset(context.getAssets(),"font/Roboto-Black.ttf");
+
         ImageView proPic,next;
         TextView name,address;
         RelativeLayout updateOffer;
@@ -74,6 +77,8 @@ public class ConfirmedOrderAdaptor extends RecyclerView.Adapter<ConfirmedOrderAd
             name = (TextView)itemView.findViewById(R.id.confirm_order_patient_name);
             address = (TextView)itemView.findViewById(R.id.confirm_order_address);
             updateOffer = (RelativeLayout)itemView.findViewById(R.id.update_offer);
+            name.setTypeface(custom_fonts);
+            address.setTypeface(custom_fonts);
         }
 
         public void onBind(final PojoConfirmedOrder pojoConfirmedOrder, final int i){

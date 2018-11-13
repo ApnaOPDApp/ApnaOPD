@@ -19,6 +19,8 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
+
 /**
  * Created by Shubham Kumar on 25-10-2018.
  */
@@ -36,6 +38,8 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        final MyConnectionTester connnection = new MyConnectionTester();
+
         toolbar = (Toolbar)findViewById(R.id.p_toolbar);
         toolbar.setTitle("Login");
         setSupportActionBar(toolbar);
@@ -45,7 +49,11 @@ public class LoginActivity extends AppCompatActivity{
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn();
+                if(connnection.isConnected(LoginActivity.this)){
+                    signIn();
+                }
+                else
+                    connnection.buildDialog(LoginActivity.this);
             }
         });
 

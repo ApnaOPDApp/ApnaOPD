@@ -1,5 +1,6 @@
 package com.knstech.apnaopd.Patient;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.knstech.apnaopd.Patient.ADAPTORS.ListOfOrderAdaptor;
+import com.knstech.apnaopd.Retailer.RetailerActivity;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.Retailer.Order;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +36,13 @@ public class ListOfOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_order);
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(ListOfOrderActivity.this)){
+            connnection.buildDialog(ListOfOrderActivity.this).show();
+        }
+
 
         toolbar = findViewById(R.id.p_toolbar);
         toolbar.setTitle("Order Status");
@@ -84,9 +94,12 @@ public class ListOfOrderActivity extends AppCompatActivity {
             }
         });
 
+    }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ListOfOrderActivity.this, RetailerActivity.class));
+        finish();
     }
 }

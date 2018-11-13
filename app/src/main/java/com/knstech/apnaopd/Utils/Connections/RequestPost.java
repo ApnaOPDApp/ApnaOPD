@@ -8,6 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -82,7 +83,7 @@ public class RequestPost {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+                new MyConnectionTester().buildDialog2(mContext);
 
             }
         });
@@ -99,8 +100,7 @@ public class RequestPost {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+                new MyConnectionTester().buildDialog2(mContext);
             }
         });
 

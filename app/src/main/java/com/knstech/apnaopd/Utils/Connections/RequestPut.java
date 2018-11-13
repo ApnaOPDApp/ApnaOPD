@@ -8,6 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,7 +35,9 @@ public class RequestPut {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("CASE_SHEET","Chutiyap ho gya");
+                new MyConnectionTester().buildDialog2(mContext);
+
+
             }
         }){
 

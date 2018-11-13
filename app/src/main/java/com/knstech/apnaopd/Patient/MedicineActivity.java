@@ -33,6 +33,7 @@ import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
 import com.knstech.apnaopd.Utils.Listeners.AddressClickedListener;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -89,6 +90,13 @@ public class MedicineActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(MedicineActivity.this)){
+            connnection.buildDialog(MedicineActivity.this).show();
+        }
+
 
         /*Configuring ION library for uploading image to server  */
 
@@ -294,7 +302,7 @@ public class MedicineActivity extends AppCompatActivity {
                             });
 
                 } catch (Exception e) {
-                    Toast.makeText(this, "Null Value", Toast.LENGTH_SHORT).show();
+
                     e.printStackTrace();
                 }
             }
@@ -339,5 +347,9 @@ public class MedicineActivity extends AppCompatActivity {
         return cursor.getString(coloumn_index);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(MedicineActivity.this,HomeActivity.class));
+        finish();
+    }
 }
