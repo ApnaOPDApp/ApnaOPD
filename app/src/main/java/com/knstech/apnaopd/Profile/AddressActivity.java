@@ -14,8 +14,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Volley.VolleySingleton;
 
 import org.json.JSONObject;
@@ -84,6 +84,10 @@ public class AddressActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
+                                if(getIntent().getIntExtra("activity",0)!=0)
+                                {
+                                    finish();
+                                }
                                 Toast.makeText(AddressActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
                             }
                         },
@@ -96,10 +100,7 @@ public class AddressActivity extends AppCompatActivity {
                 );
 
                 VolleySingleton.getmInstance().addToRequestQueue(request);
-                if(getIntent().getIntExtra("activity",0)!=0)
-                {
-                    finish();
-                }
+
 
             }
         });

@@ -6,7 +6,10 @@
     android:id="@+id/become_retailer_form"
     >
 
-    <include layout="@layout/app_bar_patient"></include>
+    <include
+        layout="@layout/app_bar_patient"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"></include>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_marginTop="58dp"
@@ -18,23 +21,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="193dp"
-                    android:layout_height="160dp"
-                    android:id="@+id/shop_img"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/p1" />
 
-                <ImageView
-                    android:id="@+id/selct_img"
-                    android:layout_width="45dp"
-                    android:layout_height="44dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="13dp"
-                    android:layout_marginEnd="87dp"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:src="@drawable/camera" />
             </RelativeLayout>
 
             <LinearLayout
@@ -89,27 +76,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/dept"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Shop Name/ Clinic Name " />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bDoctor"
+                        android:text="Doctor"/>
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bRetailer"
+                        android:text="Retailer"/>
+
+                </RadioGroup>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Address :"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -117,41 +114,39 @@
                     android:padding="5dp"
                     app:cardElevation="5dp">
 
-                    <LinearLayout
+                    <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical"
+                        android:id="@+id/addressLL">
 
-                        <ImageView
-                            android:id="@+id/addBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_add_black_24dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="Add Address"
-                            android:textSize="18dp" />
-                    </LinearLayout>
+                    </RadioGroup>
                 </android.support.v7.widget.CardView>
 
-                <RadioGroup
-                    android:id="@+id/radioGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                </RadioGroup>
             </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Upload Documents"
                 android:id="@+id/upload_documents"
+                android:background="@color/colorAccent"
+                android:layout_gravity="right"
+                android:padding="10dp"
+                />
+            <Button
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:id="@+id/submit"
                 android:background="@color/colorAccent"
                 android:layout_gravity="right"
                 android:padding="10dp"

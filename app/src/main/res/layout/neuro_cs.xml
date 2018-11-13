@@ -2,7 +2,12 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <include layout="@layout/app_bar_patient"/>
+
     <ScrollView
+        android:layout_marginTop="60dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -43,10 +48,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
                     android:text="@string/condition"/>
                 <Spinner
                     android:layout_width="match_parent"
@@ -56,12 +65,16 @@
                 </Spinner>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
                     android:text="@string/behavioural_abnormality"/>
 
                 <Spinner
@@ -72,12 +85,16 @@
                 </Spinner>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
                     android:text="@string/sensational_abnormality"/>
                 <Spinner
                     android:layout_width="match_parent"
@@ -87,11 +104,15 @@
                 </Spinner>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:text="@string/other"/>
                 <Spinner
@@ -102,11 +123,15 @@
                 </Spinner>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:text="@string/miscellaneous"/>
                 <Spinner
@@ -117,12 +142,16 @@
                 </Spinner>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
                     android:text="@string/comment"/>
                 <ScrollView
                     android:layout_width="match_parent"
@@ -134,10 +163,13 @@
                 </ScrollView>
             </LinearLayout>
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
                 android:id="@+id/submit"
-                android:text="@string/submit"/>
+                android:background="@drawable/btn11"
+                />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

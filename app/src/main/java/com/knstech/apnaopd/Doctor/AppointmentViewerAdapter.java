@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,6 @@ import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestDelete;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
-import com.knstech.apnaopd.Utils.Connections.RequestPut;
 
 import org.json.JSONObject;
 
@@ -90,7 +90,7 @@ public class AppointmentViewerAdapter extends RecyclerView.Adapter {
                 public void onResponse(JSONObject object) {
                     User obj=new User();
                     obj.parseFromJson(object.toString());
-                    name.setText("Dr. "+obj.getName());
+                    name.setText(patient.getPatient_name());
                     Glide.with(mContext).load(obj.getImageUrl()).into(pic);
 
                 }
@@ -136,15 +136,17 @@ public class AppointmentViewerAdapter extends RecyclerView.Adapter {
                 changeStatus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url=AppUtils.HOST_ADDRESS+"/api/appointments/status/doctor/"+patient.getAppointment_id()+"/"+patient.getDoctor_gid();
-                        RequestPut put=new RequestPut(mContext);
-                        put.putJSONObject(url, null, new RequestPut.JSONObjectResponseListener() {
-                            @Override
-                            public void onResponse(JSONObject object) {
-                                mList.remove(patient);
-                                notifyDataSetChanged();
-                            }
-                        });
+                        EprescFragment dialog=new EprescFragment();
+                        dialog.setDoctor_gid(patient.getDoctor_gid());
+                        dialog.setPatient_gid(patient.getPatient_gid());
+                        dialog.setCasesheet_uid(patient.getCasesheet_uid());
+                        dialog.setDoctor_name(patient.getDoctor_name());
+                        dialog.setAppointment_id(patient.getAppointment_id());
+                        dialog.setRemoveView(patient);
+                        dialog.setmList(mList);
+                        dialog.setAdapter(AppointmentViewerAdapter.this);
+                        dialog.show(((AppCompatActivity)mContext).getSupportFragmentManager(),"EPresc");
+
                     }
                 });
             }

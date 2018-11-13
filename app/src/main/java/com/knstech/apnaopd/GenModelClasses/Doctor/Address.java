@@ -7,6 +7,12 @@ import android.os.Parcelable;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Address implements Parcelable {
 
 
@@ -56,10 +62,20 @@ public class Address implements Parcelable {
 
 
 
-    public static Address parseFromString(String json)
+    public static List<Address> parseFromJson(String json)
     {
-        Gson gson=new Gson();
-        return gson.fromJson(json,Address.class);
+        List<Address> list=new ArrayList<>();
+        try {
+            JSONArray array=new JSONArray(json);
+            for(int i=0;i<array.length();i++)
+            {
+                Address address=(new Gson()).fromJson(array.getJSONObject(i).toString(),Address.class);
+                list.add(address);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public String getHouseLane() {

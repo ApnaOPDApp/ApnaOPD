@@ -6,7 +6,7 @@
     android:padding="10dp">
 
     <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="15dp">
 
@@ -37,11 +37,7 @@
                 android:layout_marginTop="10dp" />
         </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.AppCompat.NoActionBar"
-                android:padding="10dp">
+
             <EditText
                 android:layout_width="match_parent"
                 android:hint="Patients/Hour"
@@ -50,9 +46,8 @@
                 android:maxLength="2"
                 android:inputType="number"
                 android:textColor="@color/black_app"
-                android:textColorHint="@color/colorPrimary"
                 android:id="@+id/persons"/>
-            </android.support.design.widget.TextInputLayout>
+
         </LinearLayout>
 
 

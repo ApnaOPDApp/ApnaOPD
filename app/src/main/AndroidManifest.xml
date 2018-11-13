@@ -16,12 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".Patient.LoginActivity" />
         <activity android:name=".Patient.DoctorViewerActivity" />
         <activity android:name=".Patient.DoctorListActivity" />
         <activity android:name=".Patient.DoctorAppointmentActivity" />
-        <activity android:name=".Patient.HomeActivity">
-        </activity>
+        <activity android:name=".Patient.HomeActivity"/>
+
         <activity
             android:name=".Patient.MedicineActivity"
             android:parentActivityName=".Patient.HomeActivity" />

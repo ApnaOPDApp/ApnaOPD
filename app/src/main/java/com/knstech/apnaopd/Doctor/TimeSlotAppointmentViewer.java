@@ -20,12 +20,17 @@ public class TimeSlotAppointmentViewer extends AppCompatActivity {
         setContentView(R.layout.activity_time_slot_appointment_viewer);
         dayOfWeek=getIntent().getStringExtra("day");
         linearLayout=findViewById(R.id.linearLayout);
-        final String ar[]= C.getStringArray(DoctorAuth.getmDoctor().getTimeSlab());
+        final String ar[]= C.getStringArray(DoctorAuth.getmDoctor(TimeSlotAppointmentViewer.this).getTimeSlab());
         for(int i=0;i<ar.length;i++)
         {
+            if(i==0)
+            {
+                linearLayout.removeAllViews();
+            }
             if(ar[i].substring(0,1).equals(dayOfWeek)) {
                 TextView tv = new TextView(this);
-                int p=10;
+                int p=20;
+                tv.setBackgroundColor(getResources().getColor(R.color.md_white_1000));
                 tv.setPadding(p,p,p,p);
                 tv.setTextSize(18);
                 tv.setText(C.getTime(ar[i].substring(1, 3)));

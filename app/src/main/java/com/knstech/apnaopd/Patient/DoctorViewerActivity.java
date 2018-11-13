@@ -16,10 +16,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.knstech.apnaopd.Utils.AppUtils;
+import com.knstech.apnaopd.GenModelClasses.Doctor.Address;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Doctor;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class DoctorViewerActivity extends AppCompatActivity {
@@ -40,6 +42,7 @@ public class DoctorViewerActivity extends AppCompatActivity {
     private ImageView imageView;
     private RadioGroup linearLayout;
     private String selectedSlot;
+    private LinearLayout addressLL;
     private Button bookBtn;
     private String uid;
     private String[] ar;
@@ -58,6 +61,8 @@ public class DoctorViewerActivity extends AppCompatActivity {
             connnection.buildDialog(DoctorViewerActivity.this).show();
         }
 
+
+        addressLL=findViewById(R.id.addressLL);
 
 
         name=findViewById(R.id.doctorName);
@@ -88,7 +93,7 @@ public class DoctorViewerActivity extends AppCompatActivity {
         patient_age=getIntent().getStringExtra("patient_age");
         patient_name=getIntent().getStringExtra("patient_name");
         Map map= new HashMap();
-        map.put("patient_gid",UserAuth.getmUser().getGid());
+        map.put("patient_gid",UserAuth.getmUser(DoctorViewerActivity.this).getGid());
         map.put("patient_age",patient_age);
         map.put("doctor_gid",uid);
         map.put("casesheet_uid",cs_uid);
@@ -204,6 +209,16 @@ public class DoctorViewerActivity extends AppCompatActivity {
                 name.setText("Dr. "+doctor.getName());
                 fees.setText("Rs. "+doctor.getFee());
 
+                List<com.knstech.apnaopd.GenModelClasses.Doctor.Address> addresses=doctor.getAddress();
+                addressLL.removeAllViews();
+                if(addresses!=null) {
+                    for (int i = 0; i < addresses.size(); i++) {
+                        Address address = addresses.get(i);
+                        TextView tv = new TextView(DoctorViewerActivity.this);
+                        tv.setText(address.getFull_name() + "," + address.getHouseLane() + "\n" + address.getLandmark() + "," + address.getLocality() + "\n" + address.getCity() + ", PIN - " + address.getPincode());
+                        addressLL.addView(tv);
+                    }
+                }
                 department=doctor.getDepartment();
                 fee=doctor.getFee();
                 doctor_name=doctor.getName();

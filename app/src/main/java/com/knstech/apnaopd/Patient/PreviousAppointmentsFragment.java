@@ -64,7 +64,7 @@ public class PreviousAppointmentsFragment extends Fragment {
             Patient patient=suList.get(i);
             if(patient.getStatus().equals("2"))
             {
-                mList.add(patient);
+                mList.add(0,patient);
                 adapter.notifyDataSetChanged();
             }
         }

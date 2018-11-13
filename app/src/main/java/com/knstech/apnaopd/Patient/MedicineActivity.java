@@ -17,17 +17,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.knstech.apnaopd.Patient.ADAPTORS.AddressGetAdaptor;
-import com.knstech.apnaopd.Utils.AppUtils;
+import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModelClasses.User.Address;
+import com.knstech.apnaopd.Patient.ADAPTORS.AddressGetAdaptor;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
 import com.knstech.apnaopd.Utils.Listeners.AddressClickedListener;
@@ -37,6 +39,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -71,6 +74,7 @@ public class MedicineActivity extends AppCompatActivity {
     private String cmt;
     private Spinner e_prescription;
     private List<Address> listAddr;
+    private String[][] ar;
 
 
     @Override
@@ -153,6 +157,7 @@ public class MedicineActivity extends AppCompatActivity {
                 adres.put("state",selectedAddress.getState());
                 adres.put("pincode",selectedAddress.getPincode());
                 adres.put("phone_number",selectedAddress.getPhone_number());
+                adres.put("eprescription_id",ar[1][(int)e_prescription.getSelectedItemId()]);
                 Map params = new HashMap();
                 params.put("address",adres);
                 params.put("photo_prescription_link",prescription_image_url);
@@ -181,8 +186,44 @@ public class MedicineActivity extends AppCompatActivity {
         /* Method to populate the Medical Activity Layout  */
         populateRecyclerView();
 
+        /*get data for spinner*/
+        initSpinner();
 
    }
+
+    private void initSpinner() {
+
+        String url=AppUtils.HOST_ADDRESS+"/api/appointments/patient/"+AppUtils.USER_GID;
+        RequestGet get=new RequestGet(this);
+        get.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+
+                ar=new String[jsonArray.length()][jsonArray.length()];
+
+                for(int i=0;i<jsonArray.length();i++)
+                {
+                    try {
+
+                        Patient patient=Patient.parseFromJson(jsonArray.getJSONObject(i).toString());
+                        ar[0][i]=patient.getDoctor_name()+"\n"+patient.getTime_slab();
+                        ar[1][i]=patient.getAppointment_id();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+                ArrayAdapter<String> adapter=new ArrayAdapter<>(MedicineActivity.this,R.layout.simple_text,ar[0]);
+                adapter.setDropDownViewResource(R.layout.simple_text);
+                e_prescription.setAdapter(adapter);
+
+            }
+        });
+
+
+    }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

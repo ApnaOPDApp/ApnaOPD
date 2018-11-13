@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.Doctor.DoctorAuth;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
@@ -27,7 +28,6 @@ import java.util.List;
 
 public class DoctorSlotViewerActivity extends AppCompatActivity {
     private LinearLayout r1,r2,r3,r4;
-    private String url= AppUtils.HOST_ADDRESS+"/api/doctors/time_slab/"+ UserAuth.getmUser().getGid();
     private String dayOfWeek;
     private String[] receivedList;
     private List<String> selectedList;
@@ -40,6 +40,9 @@ public class DoctorSlotViewerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_slot_viewer);
+
+        Toolbar toolbar=findViewById(R.id.p_toolbar);
+        toolbar.setTitle("Choose Slots");
 
         selectedList=new ArrayList<>();
 
@@ -55,7 +58,7 @@ public class DoctorSlotViewerActivity extends AppCompatActivity {
 
 
 
-
+        String url=AppUtils.HOST_ADDRESS+"/api/doctors/time_slab/"+ UserAuth.getmUser(DoctorSlotViewerActivity.this).getGid();
         RequestGet requestGet=new RequestGet(getApplicationContext());
         requestGet.getString(url, new RequestGet.StringResponseListener() {
             @Override
@@ -170,12 +173,12 @@ public class DoctorSlotViewerActivity extends AppCompatActivity {
                 }
                 RequestPut put=new RequestPut(getApplicationContext());
                 JSONArray obj=new JSONArray(selectedList);
-                String url=AppUtils.HOST_ADDRESS+"/api/doctors/time_slab/"+UserAuth.getmUser().getGid();
+                String url=AppUtils.HOST_ADDRESS+"/api/doctors/time_slab/"+UserAuth.getmUser(getApplicationContext()).getGid();
                 put.putJSONArray(url, obj, new RequestPut.JSONArrayResponseListener() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {
                         String str=selectedList.toArray().toString();
-                        DoctorAuth.getmDoctor().setTimeSlab(str);
+                        DoctorAuth.getmDoctor(DoctorSlotViewerActivity.this).setTimeSlab(str);
                     }
                 });
                 finish();

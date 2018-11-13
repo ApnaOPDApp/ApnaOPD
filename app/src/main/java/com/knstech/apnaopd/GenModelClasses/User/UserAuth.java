@@ -1,6 +1,7 @@
 package com.knstech.apnaopd.GenModelClasses.User;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,11 +23,11 @@ public class UserAuth {
     }
     private static User mUser=new User();
 
-    public static User getmUser() {
-        if(mUser==null)
-        {
-            mUser=new User();
-        }
+    public static User getmUser(Context mContext) {
+        mUser=new User();
+        SharedPreferences sharedPreferences=mContext.getSharedPreferences("Users",Context.MODE_PRIVATE);
+        String json=sharedPreferences.getString("user_json","");
+        mUser.parseFromJson(json);
         return mUser;
     }
 
@@ -47,6 +48,11 @@ public class UserAuth {
                 else
                 {
                     mUser.parseFromJson(response);
+                    SharedPreferences sharedPreferences=mContext.getSharedPreferences("Users",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("user_json",response.toString());
+                    editor.commit();
+
                     listener.onComplete();
                 }
             }
