@@ -77,7 +77,7 @@ public class PreviousAppointmentsAdapter extends RecyclerView.Adapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder dialog=new AlertDialog.Builder(mContext);
+                    final AlertDialog.Builder dialog=new AlertDialog.Builder(mContext);
                     final View viewerLayout=LayoutInflater.from(mContext).inflate(R.layout.epresc_viewer_layout,null);
                     RequestGet get=new RequestGet(mContext);
                     String url= AppUtils.HOST_ADDRESS+"/api/eprescriptions/"+patient.getEprescription_id();
@@ -92,6 +92,10 @@ public class PreviousAppointmentsAdapter extends RecyclerView.Adapter {
                                     View medView = LayoutInflater.from(mContext).inflate(R.layout.medicine_item_layout, null);
                                     EditText medName, medType, medDday, medDper;
                                     RadioButton after, before;
+                                    Button btn;
+
+                                    btn=medView.findViewById(R.id.minus);
+                                    btn.setVisibility(View.GONE);
 
                                     medName = medView.findViewById(R.id.medicine);
                                     medName.setText("Medicine : " + ePresc.getMedicineList().get(i).getMedicine_name());
@@ -122,10 +126,14 @@ public class PreviousAppointmentsAdapter extends RecyclerView.Adapter {
                                 }
                             }
                             textView.setText(ePresc.getComment());
+                            dialog.setView(viewerLayout);
+                            dialog.show();
                         }
                     });
+
                 }
             });
+
         }
     }
 }

@@ -71,6 +71,10 @@ public class UserAuth {
             @Override
             public void onResponse(String response) {
                 mUser.parseFromJson(response);
+                SharedPreferences sharedPreferences=mContext.getSharedPreferences("Users",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putString("user_json",response.toString());
+                editor.commit();
                 listener.onComplete();
             }
         }, new Response.ErrorListener() {

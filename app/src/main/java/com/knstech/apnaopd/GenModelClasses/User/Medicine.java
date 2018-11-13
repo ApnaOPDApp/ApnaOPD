@@ -8,8 +8,8 @@ public class Medicine {
     private String dosage_per;
     private String dosage_day;
     private String _id;
-    private String befor_after_meal;
-    private String type;
+    private String before_after_meal;
+    private String types;
 
     public static Medicine parseFromJson(String json)
     {
@@ -17,11 +17,11 @@ public class Medicine {
     }
 
     public String getType() {
-        return type;
+        return types;
     }
 
     public void setType(String type) {
-        this.type = type;
+        this.types = type;
     }
 
 
@@ -58,10 +58,10 @@ public class Medicine {
     }
 
     public String getBefor_after_meal() {
-        return befor_after_meal;
+        return before_after_meal;
     }
 
     public void setBefor_after_meal(String befor_after_meal) {
-        this.befor_after_meal = befor_after_meal;
+        this.before_after_meal = befor_after_meal;
     }
 }

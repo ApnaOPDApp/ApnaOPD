@@ -127,7 +127,7 @@ public class EprescFragment extends DialogFragment{
                     medMap.put("medicine_name",list.get(i).getMedicine_name());
                     medMap.put("dosage_day",list.get(i).getDosage_day());
                     medMap.put("dosage_per",list.get(i).getDosage_per());
-                    medMap.put("type",list.get(i).getType());
+                    medMap.put("types",list.get(i).getType());
                     medMap.put("before_after_meal",list.get(i).getBefor_after_meal());
                     array.add(medMap);
                 }
