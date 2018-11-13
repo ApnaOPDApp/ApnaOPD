@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModelClasses.User.Address;
-import com.knstech.apnaopd.GenModelClasses.User.Medicine;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Patient.ADAPTORS.AddressGetAdaptor;
 import com.knstech.apnaopd.Profile.AddressActivity;
@@ -217,9 +216,11 @@ public class MedicineActivity extends AppCompatActivity {
 
 
                 }
-                ArrayAdapter<String> adapter=new ArrayAdapter<>(MedicineActivity.this,R.layout.simple_text,ar[0]);
-                adapter.setDropDownViewResource(R.layout.simple_text);
-                e_prescription.setAdapter(adapter);
+                if(ar.length!=0) {
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MedicineActivity.this, R.layout.simple_text, ar[0]);
+                    adapter.setDropDownViewResource(R.layout.simple_text);
+                    e_prescription.setAdapter(adapter);
+                }
 
             }
         });

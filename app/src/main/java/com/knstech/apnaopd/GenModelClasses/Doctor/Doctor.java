@@ -28,6 +28,8 @@ public class Doctor {
 
     private String fee;
 
+    private String comment;
+
 
     private String regNumber;
 
@@ -75,6 +77,10 @@ public class Doctor {
                 setEmail(object.getString("email"));
             if(object.has("gid"))
                 setGid(object.getString("gid"));
+            if(object.has("comment"))
+            {
+                setComment(object.getString("comment"));
+            }
             if(object.has("time_slab"))
                 setTimeSlab(object.getString("time_slab"));
             if(object.has("history"))
@@ -211,5 +217,13 @@ public class Doctor {
 
     public void setAddress(List<Address> address) {
         this.address = address;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

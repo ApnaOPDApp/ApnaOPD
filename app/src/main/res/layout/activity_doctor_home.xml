@@ -93,17 +93,17 @@
                     android:text="View Appointments" />
 
                 <TextView
-                    android:clickable="true"
                     android:id="@+id/doc_desc_2"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/doc_tv_2"
                     android:layout_marginLeft="25dp"
-                    android:layout_toRightOf="@id/doc_iv_2"
                     android:layout_marginTop="10dp"
-                    android:textColor="#807f7f"
+                    android:layout_toRightOf="@id/doc_iv_2"
+                    android:clickable="true"
                     android:inputType="textMultiLine"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit." />
+                    android:text="View all your upcoming appointments."
+                    android:textColor="#807f7f" />
 
                 <ImageView
                     android:layout_width="85dp"
@@ -112,6 +112,51 @@
                     android:layout_alignParentEnd="true"
                     android:src="@drawable/navigate_next"
                     android:id="@+id/doc_iv_nav_2" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/doctor_c3"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="#9ae1dfdf">
+
+                <ImageView
+                    android:layout_width="85dp"
+                    android:padding="15dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/profile"
+                    android:id="@+id/doc_iv_3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/doc_tv_3"
+                    android:textColor="@color/primary"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@id/doc_iv_3"
+                    android:layout_marginLeft="25dp"
+                    android:text="Your Profile" />
+
+                <TextView
+                    android:id="@+id/doc_desc_3"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/doc_tv_3"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/doc_iv_3"
+                    android:clickable="true"
+                    android:inputType="textMultiLine"
+                    android:text="Set details like fees and departments."
+                    android:textColor="#807f7f" />
+
+                <ImageView
+                    android:layout_width="85dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/navigate_next"
+                    android:id="@+id/doc_iv_nav_3" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

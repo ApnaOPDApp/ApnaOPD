@@ -17,7 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.AppUtils;
-import com.knstech.apnaopd.Volley.VolleySingleton;
+import com.knstech.apnaopd.Utils.Connections.RequestSingleton;
 
 import org.json.JSONObject;
 
@@ -102,7 +102,7 @@ public class AddressActivity extends AppCompatActivity {
                         }
                 );
 
-                VolleySingleton.getmInstance().addToRequestQueue(request);
+                RequestSingleton.getInstance(AddressActivity.this).addToQueue(request);
 
 
             }

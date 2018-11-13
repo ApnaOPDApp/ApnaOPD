@@ -165,7 +165,7 @@ public class DoctorSlotViewerActivity extends AppCompatActivity {
                         }
                     }
                 }
-                for(int j=0;j<receivedList.length;j++)
+                for(int j=0;receivedList!=null&&j<receivedList.length;j++)
                 {
                     if(receivedList[j].charAt(0)-'0'!=Integer.parseInt(dayOfWeek)) {
                         selectedList.add(receivedList[j]);
