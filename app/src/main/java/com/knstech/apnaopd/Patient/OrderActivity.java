@@ -112,5 +112,10 @@ public class OrderActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
 
+        startActivity(new Intent(OrderActivity.this,HomeActivity.class));
+        finish();
+    }
 }

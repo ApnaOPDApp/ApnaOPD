@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.knstech.apnaopd.DrawersUtil.DrawerUtilRetailer;
+import com.knstech.apnaopd.Patient.HomeActivity;
 import com.knstech.apnaopd.Patient.ShowDetailsOfOfferActivity;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.DrawersUtil.DrawerUtil;
@@ -72,5 +73,11 @@ public class RetailerActivity extends AppCompatActivity {
            }
        });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(RetailerActivity.this,HomeActivity.class));
+        finish();
     }
 }

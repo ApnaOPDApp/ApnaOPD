@@ -1,5 +1,6 @@
 package com.knstech.apnaopd.Patient;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -90,11 +91,6 @@ public class ShowDetailsOfOfferActivity extends AppCompatActivity {
                     put.putJSONObject(url, null, new RequestPut.JSONObjectResponseListener() {
                         @Override
                         public void onResponse(JSONObject object) {
-                            try {
-                                Toast.makeText(ShowDetailsOfOfferActivity.this, object.getString("message").toString(), Toast.LENGTH_SHORT).show();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
                             finish();
                         }
                     });
@@ -107,5 +103,11 @@ public class ShowDetailsOfOfferActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ShowDetailsOfOfferActivity.this,OrderActivity.class));
+        finish();
     }
 }

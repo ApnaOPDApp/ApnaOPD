@@ -306,5 +306,9 @@ public class MedicineActivity extends AppCompatActivity {
         return cursor.getString(coloumn_index);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(MedicineActivity.this,HomeActivity.class));
+        finish();
+    }
 }
