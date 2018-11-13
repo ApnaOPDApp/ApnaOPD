@@ -107,7 +107,6 @@
         android:id="@+id/edit_profile"
         android:text="Edit Profile"
         android:layout_alignParentBottom="true"
-        style="@style/Widget.AppCompat.Button.Colored"
         />
 
 </RelativeLayout>

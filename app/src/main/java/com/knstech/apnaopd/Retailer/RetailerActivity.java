@@ -8,9 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.knstech.apnaopd.DrawersUtil.DrawerUtilRetailer;
+import com.knstech.apnaopd.Patient.ShowDetailsOfOfferActivity;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.DrawersUtil.DrawerUtil;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import butterknife.ButterKnife;
 
@@ -25,6 +28,15 @@ public class RetailerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retailer);
 
+        overridePendingTransition(0,0);
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(RetailerActivity.this)){
+            connnection.buildDialog(RetailerActivity.this).show();
+        }
+
+
+
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar)findViewById(R.id.p_toolbar);
         toolbar.setTitle("Retailer Home");
@@ -33,7 +45,7 @@ public class RetailerActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
 
-        DrawerUtil.getDrawer(this,toolbar);
+        DrawerUtilRetailer.getDrawer(this,toolbar);
 
         
 

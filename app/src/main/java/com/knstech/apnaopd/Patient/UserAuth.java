@@ -13,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.knstech.apnaopd.ApnaOPDApp;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.User;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,14 +82,17 @@ public class UserAuth {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(context,response,Toast.LENGTH_LONG).show();
                         listener.onComplete();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
+                        final MyConnectionTester connnection = new MyConnectionTester();
+
+                        connnection.buildDialog2(context);
+
+
                     }
                 }) {
             @Override

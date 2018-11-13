@@ -12,6 +12,7 @@ import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.Retailer.Order;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,13 @@ public class ListOfOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_order);
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(ListOfOrderActivity.this)){
+            connnection.buildDialog(ListOfOrderActivity.this).show();
+        }
+
 
         toolbar = findViewById(R.id.p_toolbar);
         toolbar.setTitle("Order Status");

@@ -52,7 +52,7 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
     private EditText price,offer_price,drug_name,dosage_per,dosage_day;
     private Toolbar toolbar;
     private Button finish;
-    List<Map<String,String>> listOfDrugs;
+    private List<Map<String,String>> listOfDrugs;
     private String strPrice,strOfferPrice,strDrugName,dosagePer,dosageDay,deliveryCharge,deliveryTime;
     private LinearLayout linearLayout,offer_list_ll;
     private int i=0;
@@ -70,13 +70,14 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retailer_offer_send);
 
-       toolbar = (Toolbar) findViewById(R.id.t_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.t_toolbar);
         toolbar.setTitle("Send Offer");
         setSupportActionBar(toolbar);
 
         final Typeface custom_fonts = Typeface.createFromAsset(getAssets(),"font/Roboto-Black.ttf");
 
         listOfDrugs=new ArrayList<>();
+
         price = (EditText)findViewById(R.id.price);
         offer_price=(EditText)findViewById(R.id.offer_price);
         dosage_day = (EditText)findViewById(R.id.dosage_day);
@@ -88,6 +89,12 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
         presc_img = (ImageView)findViewById(R.id.pres_image);
 
         String image_url=AppUtils.HOST_ADDRESS+getIntent().getStringExtra("image_url");
+
+        String comment = getIntent().getStringExtra("comment");
+
+        TextView comnt = (TextView)findViewById(R.id.pat_comment);
+        comnt.setTypeface(custom_fonts);
+        comnt.setText(comment);
 
 
         Uri uri = Uri.parse(image_url);
@@ -312,7 +319,7 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
                         });
 
             } catch (Exception e) {
-                Toast.makeText(this, "Null Value", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Null Value ! Please Check Storage Permission", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }

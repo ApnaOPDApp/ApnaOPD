@@ -21,6 +21,7 @@ import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.DepatmentClickListener;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 import com.knstech.apnaopd.Utils.UIUpdater;
 
 import org.json.JSONArray;
@@ -57,6 +58,12 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(DoctorAppointmentActivity.this)){
+            connnection.buildDialog(DoctorAppointmentActivity.this).show();
+        }
 
 
 

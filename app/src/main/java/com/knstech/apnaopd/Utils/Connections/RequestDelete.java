@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import java.lang.reflect.Method;
 
@@ -23,12 +24,15 @@ public class RequestDelete {
         StringRequest request=new StringRequest(Request.Method.DELETE, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(mContext, "Success!", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(mContext, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+
+                new MyConnectionTester().buildDialog2(mContext);
             }
         });
         RequestSingleton.getInstance(mContext).addToQueue(request);

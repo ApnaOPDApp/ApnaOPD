@@ -27,6 +27,7 @@ import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.DoctorItemClickedListener;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,6 +76,13 @@ public class DoctorListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_list);
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(DoctorListActivity.this)){
+            connnection.buildDialog(DoctorListActivity.this).show();
+        }
+
 
         //set initial filters
         String feeStr=getIntent().getStringExtra("Fee");

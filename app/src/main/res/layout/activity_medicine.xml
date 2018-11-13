@@ -162,9 +162,9 @@
 
         <Button
             android:id="@+id/btn_upload_prescription"
-            style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
             android:background="@color/apple_blue"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -244,16 +244,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Submit"
+                android:layout_marginRight="5dp"
                 android:background="@color/apple_pink"
-                style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:id="@+id/med_btn_submit"/>
             <Button
+                android:layout_marginLeft="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/apple_green"
-                style="@style/Base.Widget.AppCompat.Button.Colored"
-               android:text="+ Address"
+                android:text="+ Address"
                 android:id="@+id/med_btn_add_add"
                 />
         </LinearLayout>

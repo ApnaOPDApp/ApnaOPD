@@ -14,6 +14,7 @@ import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.OderClickedListener;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +47,13 @@ public class OrderActivity extends AppCompatActivity {
 
 
 */
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(OrderActivity.this)){
+            connnection.buildDialog(OrderActivity.this).show();
+        }
+
+
         order_id= getIntent().getStringExtra("_id");
         URL= URL+order_id;
         populateView();

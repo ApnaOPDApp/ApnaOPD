@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.knstech.apnaopd.DrawersUtil.DrawerUtil;
+import com.knstech.apnaopd.DrawersUtil.DrawerUtilDoctor;
 import com.knstech.apnaopd.GenModelClasses.Doctor.DoctorAuth;
 import com.knstech.apnaopd.R;
 
@@ -35,7 +36,7 @@ public class DoctorHomeActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
 
-        DrawerUtil.getDrawer(this,toolbar);
+        DrawerUtilDoctor.getDrawer(this,toolbar);
 
         c1=findViewById(R.id.doctor_c1);
         c2=findViewById(R.id.doctor_c2);

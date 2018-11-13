@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.knstech.apnaopd.DrawersUtil.DrawerUtil;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import butterknife.ButterKnife;
 
@@ -32,8 +33,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);     // Using butter knife to bind views
+        overridePendingTransition(0,0);
 
-       /*  Intregating toolbar into the Activity */
+        /*  Intregating toolbar into the Activity */
 
         toolbar = (Toolbar)findViewById(R.id.p_toolbar);
         toolbar.setTitle("APNAOPD Home");
@@ -41,6 +43,14 @@ public class HomeActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
+
+/* This */
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(HomeActivity.this)){
+            connnection.buildDialog(HomeActivity.this).show();
+        }
 
         /* Intregating Drawer in the Home Activity  */
 
@@ -131,4 +141,5 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

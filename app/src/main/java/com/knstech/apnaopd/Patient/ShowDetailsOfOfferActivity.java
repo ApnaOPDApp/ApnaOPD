@@ -16,6 +16,7 @@ import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.GenModelClasses.User.Qutotation;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,14 @@ public class ShowDetailsOfOfferActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_details_of_offer);
+
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(ShowDetailsOfOfferActivity.this)){
+            connnection.buildDialog(ShowDetailsOfOfferActivity.this).show();
+        }
+
 
         mList=new ArrayList<>();
         adapter=new OfferDetailAdapter(mList,this);

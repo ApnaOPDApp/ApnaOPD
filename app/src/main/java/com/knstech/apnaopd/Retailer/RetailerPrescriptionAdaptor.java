@@ -101,6 +101,7 @@ public class RetailerPrescriptionAdaptor extends RecyclerView.Adapter<RetailerPr
                     i.putExtra("image_url",pojoUploadPrescription.getPhoto_prescription_link());
                     i.putExtra("pid",pojoUploadPrescription.getPatient_gid());
                     i.putExtra("_id",pojoUploadPrescription.get_id());
+                    i.putExtra("comment",pojoUploadPrescription.getComment());
                     activity.startActivity(i);
                     activity.finish();
                 }

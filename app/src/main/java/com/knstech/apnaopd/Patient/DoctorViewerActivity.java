@@ -24,6 +24,7 @@ import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +51,12 @@ public class DoctorViewerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_viewer);
+
+        final MyConnectionTester connnection = new MyConnectionTester();
+
+        if(!connnection.isConnected(DoctorViewerActivity.this)){
+            connnection.buildDialog(DoctorViewerActivity.this).show();
+        }
 
 
 
