@@ -53,10 +53,10 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_appointment);
 
         toolbar = (Toolbar)findViewById(R.id.p_toolbar);
-        toolbar.setTitle("Select Department");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setTitle("Select Department");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
 
         final MyConnectionTester connnection = new MyConnectionTester();
@@ -114,12 +114,14 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
         if(state==1)
         {
             state=2;
+            getSupportActionBar().setTitle("Fill Details");
             rootLayout.removeAllViews();
             updateUI();
         }
         else
         {
             state=1;
+            getSupportActionBar().setTitle("Departments");
             rootLayout.removeAllViews();
             rootLayout.addView(deptView);
         }

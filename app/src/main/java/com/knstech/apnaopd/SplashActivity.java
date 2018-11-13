@@ -17,15 +17,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.knstech.apnaopd.Patient.LoginActivity;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class SplashActivity extends Activity implements Animation.AnimationListener{
 
-    private CircleImageView img;
+    private ImageView img;
     private static final int PERMISSION_CALLBACK_CONSTANT = 100;
     private static final int REQUEST_PERMISSION_CONSTANT = 101;
     String[] permissionRequired = new String[]{
@@ -139,7 +138,7 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
             decorView.setSystemUiVisibility(uiOptions);
         }
 
-        img = (CircleImageView) findViewById(R.id.img_splash);
+        img =  findViewById(R.id.img_splash);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.myanimation);
         animation.setAnimationListener(this);
         img.setAnimation(animation);
