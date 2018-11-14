@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModelClasses.User.Address;
-import com.knstech.apnaopd.GenModelClasses.User.Medicine;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Patient.ADAPTORS.AddressGetAdaptor;
 import com.knstech.apnaopd.Profile.AddressActivity;
@@ -210,7 +209,7 @@ public class MedicineActivity extends AppCompatActivity {
                     try {
 
                         Patient patient= Patient.parseFromJson(jsonArray.getJSONObject(i).toString());
-                        ar[0][i]=patient.getDoctor_name()+"\n"+patient.getTime_slab();
+                        ar[0][i]=patient.getDoctor_name()+"\nBooked-"+patient.getTime().substring(0,10);
                         ar[1][i]=patient.getAppointment_id();
 
                     } catch (JSONException e) {

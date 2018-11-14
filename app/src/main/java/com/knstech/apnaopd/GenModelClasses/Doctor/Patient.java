@@ -34,6 +34,7 @@ public class Patient {
     private String fee;
     private String status;
     private String appointment_id;
+    private String time;
 
     public static Patient parseFromJson(String json)
     {
@@ -91,6 +92,10 @@ public class Patient {
             if(obj.has("doctor_image"))
             {
                 patient.setDoctor_image(obj.getString("doctor_image"));
+            }
+            if(obj.has("time"))
+            {
+                patient.setTime(obj.getString("time"));
             }
             return patient;
 
@@ -186,5 +191,13 @@ public class Patient {
 
     public void setEprescription_id(String eprescription_id) {
         this.eprescription_id = eprescription_id;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
