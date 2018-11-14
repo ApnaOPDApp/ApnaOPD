@@ -80,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:background="#9ae1dfdf"
+            android:layout_marginBottom="2dp"
             >
 
             <ImageView
@@ -127,6 +128,7 @@
                 android:id="@+id/retailer_cv3"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
+               
                 android:background="#9ae1dfdf"
                 >
 

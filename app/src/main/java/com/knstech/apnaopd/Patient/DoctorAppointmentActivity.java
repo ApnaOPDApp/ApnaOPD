@@ -1,8 +1,13 @@
 package com.knstech.apnaopd.Patient;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.CursorLoader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +18,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.knstech.apnaopd.GenModelClasses.User.Department;
+import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Patient.ADAPTORS.DepartmentAdapter;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.AppUtils;
@@ -21,15 +27,21 @@ import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.DepatmentClickListener;
 import com.knstech.apnaopd.Utils.MyConnectionTester;
 import com.knstech.apnaopd.Utils.UIUpdater;
+import com.koushikdutta.async.future.Future;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorAppointmentActivity extends AppCompatActivity {
+    public static final int IMG_REQUEST =2 ;
     private int choice;
     private View selectedCS;
     private RelativeLayout rootLayout;
@@ -43,7 +55,6 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
     private DepartmentAdapter adapter;
 
     private Toolbar toolbar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +212,10 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
 
     }
 
+    private String path;
+    private String upload_url=AppUtils.HOST_ADDRESS+"/api/uploadReport";
+    private String response_url;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode==UIUpdater.IMG)
@@ -210,12 +225,68 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
 
             }
         }
+
+
+        if(requestCode == IMG_REQUEST && resultCode == RESULT_OK && data!=null) {
+
+            Uri uri = data.getData();
+
+            try {
+                final ProgressDialog mProgress=new ProgressDialog(DoctorAppointmentActivity.this);
+                mProgress.setTitle("Uploading");
+                mProgress.setMessage("Please wait while the picture is being uploaded");
+                mProgress.setCanceledOnTouchOutside(false);
+                mProgress.show();
+                path= (String) getPathFromURI(data.getData());
+                File file = new File(path);
+                Future uploading = Ion.with(DoctorAppointmentActivity.this)
+                        .load(upload_url)
+                        .setMultipartFile("report",file)
+                        .setMultipartParameter("gid", UserAuth.getmUser(DoctorAppointmentActivity.this).getGid())
+                        .asString()
+                        .withResponse()
+                        .setCallback(new FutureCallback<Response<String>>() {
+                            @Override
+                            public void onCompleted(Exception e, com.koushikdutta.ion.Response<String> result) {
+
+                                try {
+                                    mProgress.dismiss();
+                                    response_url = result.getResult();
+                                    UIUpdater.setUrl(response_url);
+
+                                } catch (Exception e1) {
+                                    mProgress.dismiss();
+                                    e1.printStackTrace();
+                                }
+
+                            }
+                        });
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private String getPathFromURI(Uri contentUri){
+
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(getApplicationContext(),contentUri,proj,null,null,null);
+        Cursor cursor = loader.loadInBackground();
+        int coloumn_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String s = cursor.getString(coloumn_index);
+        return cursor.getString(coloumn_index);
     }
 
     public String getDepartment() {
 
         return ""+choice;
     }
+
+
 
     public int getChoice() {
         return choice;

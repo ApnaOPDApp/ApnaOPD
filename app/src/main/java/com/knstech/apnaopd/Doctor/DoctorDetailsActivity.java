@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Address;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Doctor;
 import com.knstech.apnaopd.GenModelClasses.Doctor.DoctorAuth;
@@ -38,7 +39,8 @@ public class DoctorDetailsActivity extends AppCompatActivity {
     private RadioGroup addressLL;
     private Button submit;
     private ImageView addBtn;
-    private List<Address> mList;
+    private List<Map> mList;
+    private List<Address> addresses;
     private int selected;
     private String[] ar;
 
@@ -136,28 +138,38 @@ public class DoctorDetailsActivity extends AppCompatActivity {
             public void onResponse(JSONArray jsonArray) {
                 mList=new ArrayList<>();
                 addressLL.removeAllViews();
-                mList=Address.parseFromJson(jsonArray.toString());
-                for(int i=0;i<mList.size();i++)
+                addresses=Address.parseFromJson(jsonArray.toString());
+                for(int i=0;i<addresses.size();i++)
                 {
-                    Address address=mList.get(i);
-                    RadioButton rb=new RadioButton(DoctorDetailsActivity.this);
-                    final int finalI = i;
-                    rb.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            selected= finalI;
-                        }
-                    });
-                    rb.setText("\n"+address.getFull_name()+","+address.getHouseLane()
-                    +"\n"+address.getLandmark()+","+address.getLocality()+
-                    "\n"+address.getCity()+", PIN- "+address.getPincode());
-                    addressLL.addView(rb);
+                    try {
+                        Map map=(new Gson()).fromJson(jsonArray.getJSONObject(i).toString(),Map.class);
+                        Address address=addresses.get(i);
+                        RadioButton rb=new RadioButton(DoctorDetailsActivity.this);
+                        final int finalI = i;
+                        rb.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                selected= finalI;
+                            }
+                        });
+                        rb.setText("\n"+address.getFull_name()+","+address.getHouseLane()
+                                +"\n"+address.getLandmark()+","+address.getLocality()+
+                                "\n"+address.getCity()+", PIN- "+address.getPincode());
+                        addressLL.addView(rb);
+                        mList.add(map);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         });
 
 
     }
+
+
 
     @Override
     protected void onResume() {

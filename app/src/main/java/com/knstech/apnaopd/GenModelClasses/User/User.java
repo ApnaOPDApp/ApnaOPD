@@ -15,15 +15,55 @@ public class User {
 
     private String gid;
 
-    private IsDoctor isDoctor;
+    public boolean isDoctor() {
+        return isDoctor;
+    }
 
-    private IsRetailer isRetailer;
+    public void setDoctor(boolean doctor) {
+        isDoctor = doctor;
+    }
 
-    private IsWholesaler isWholesaler;
+    public boolean isRetailer() {
+        return isRetailer;
+    }
 
-    private IsManufacturer isManufacturer;
+    public void setRetailer(boolean retailer) {
+        isRetailer = retailer;
+    }
 
-    private IsSupplier isSupplier;
+    public boolean isWholesaler() {
+        return isWholesaler;
+    }
+
+    public void setWholesaler(boolean wholesaler) {
+        isWholesaler = wholesaler;
+    }
+
+    public boolean isManufacturer() {
+        return isManufacturer;
+    }
+
+    public void setManufacturer(boolean manufacturer) {
+        isManufacturer = manufacturer;
+    }
+
+    public boolean isSupplier() {
+        return isSupplier;
+    }
+
+    public void setSupplier(boolean supplier) {
+        isSupplier = supplier;
+    }
+
+    private boolean isDoctor;
+
+    private boolean isRetailer;
+
+    private boolean isWholesaler;
+
+    private boolean isManufacturer;
+
+    private boolean isSupplier;
 
     public User parseFromJson(String json)
     {
@@ -40,26 +80,26 @@ public class User {
                 setGid(object.getString("gid"));
 
 
-            if(object.has("is_doctor")) {
-                IsDoctor isDoctor = IsDoctor.parseFromJson(object.getString("is_doctor"));
-                setIsDoctor(isDoctor);
+            if(object.has("isDoctor")) {
+                boolean isDoctor = Boolean.parseBoolean(object.getString("isDoctor"));
+                setDoctor(isDoctor);
             }
-            if(object.has("is_manufacturer")) {
-                IsManufacturer isManufacturer = IsManufacturer.parseFromJson(object.getString("is_manufacturer"));
-                setIsManufacturer(isManufacturer);
+            if(object.has("isManufacturer")) {
+                boolean isManufacturer = Boolean.parseBoolean(object.getString("isManufacturer"));
+                setManufacturer(isManufacturer);
             }
-            if(object.has("is_retailer")) {
-                IsRetailer isRetailer = IsRetailer.parseFromJson(object.getString("is_retailer"));
-                setIsRetailer(isRetailer);
+            if(object.has("isRetaiIsWholesaler.parseFromJson(ler")) {
+                boolean isRetailer = Boolean.parseBoolean(object.getString("isRetailer"));
+                setRetailer(isRetailer);
             }
-            if(object.has("is_supplier") ){
-                IsSupplier isSupplier = IsSupplier.parseFromJson(object.getString("is_supplier"));
-                setIsSupplier(isSupplier);
+            if(object.has("isSupplier") ){
+                boolean isSupplier = Boolean.parseBoolean(object.getString("isSupplier"));
+                setSupplier(isSupplier);
             }
-            if(object.has("is_wholesaler"))
+            if(object.has("isWholesaler"))
             {
-                IsWholesaler isWholesaler=IsWholesaler.parseFromJson(object.getString("is_wholesaler"));
-                setIsWholesaler(isWholesaler);
+                boolean isWholesaler= Boolean.parseBoolean(object.getString("isWholesaler"));
+                setWholesaler(isWholesaler);
             }
 
 
@@ -109,45 +149,5 @@ public class User {
         this.gid = gid;
     }
 
-
-    public IsDoctor getIsDoctor() {
-        return isDoctor;
-    }
-
-    public void setIsDoctor(IsDoctor isDoctor) {
-        this.isDoctor = isDoctor;
-    }
-
-    public IsRetailer getIsRetailer() {
-        return isRetailer;
-    }
-
-    public void setIsRetailer(IsRetailer isRetailer) {
-        this.isRetailer = isRetailer;
-    }
-
-    public IsWholesaler getIsWholesaler() {
-        return isWholesaler;
-    }
-
-    public void setIsWholesaler(IsWholesaler isWholesaler) {
-        this.isWholesaler = isWholesaler;
-    }
-
-    public IsManufacturer getIsManufacturer() {
-        return isManufacturer;
-    }
-
-    public void setIsManufacturer(IsManufacturer isManufacturer) {
-        this.isManufacturer = isManufacturer;
-    }
-
-    public IsSupplier getIsSupplier() {
-        return isSupplier;
-    }
-
-    public void setIsSupplier(IsSupplier isSupplier) {
-        this.isSupplier = isSupplier;
-    }
 
 }
