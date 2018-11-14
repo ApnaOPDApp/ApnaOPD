@@ -212,7 +212,6 @@
                     android:textSize="18dp"
                     android:background="@drawable/btn8"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:id="@+id/upload"
                    />
 

@@ -153,7 +153,7 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
     @Override
     public void onAnimationEnd(Animation animation) {
 
-        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+        startActivity(new Intent(SplashActivity.this, WelcomeActivity.class));
         this.finish();
     }
 

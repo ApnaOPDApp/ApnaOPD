@@ -180,7 +180,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selct your address :"
+            android:text="Select your address :"
             android:textColor="@color/black_app"
             android:textStyle="bold"
             android:textSize="16dp"
