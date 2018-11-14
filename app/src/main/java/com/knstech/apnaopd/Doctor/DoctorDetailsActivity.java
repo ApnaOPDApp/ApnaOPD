@@ -159,6 +159,8 @@ public class DoctorDetailsActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();

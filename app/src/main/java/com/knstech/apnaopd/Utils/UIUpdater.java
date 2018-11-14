@@ -31,6 +31,8 @@ public class UIUpdater {
     private static String dept;
     private static String commentResp,nameResp,ageResp;
     private static EditText name,age;
+    private static String url;
+
 
     public static void updateCardio(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
         final EditText pulse,comment,title;
@@ -120,7 +122,12 @@ public class UIUpdater {
             });
 
 
-
+            fileUpload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uploadFile(mContext);
+                }
+            });
 
 
         } catch (JSONException e) {
@@ -217,6 +224,15 @@ public class UIUpdater {
             });
 
 
+            upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uploadFile(mContext);
+                }
+
+            });
+
+
 
 
         } catch (JSONException e) {
@@ -225,6 +241,22 @@ public class UIUpdater {
 
 
     }
+
+
+    private static void uploadFile(Context mContext) {
+
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        AppCompatActivity activity= (AppCompatActivity) mContext;
+        activity.startActivityForResult(intent,DoctorAppointmentActivity.IMG_REQUEST);
+
+    }
+
+    // method to get path of image from Uri
+
+
 
     public static void updateEye(final Context mContext, RelativeLayout rootLayout, View selectedCS, JSONObject object) {
 
@@ -290,6 +322,13 @@ public class UIUpdater {
                     map.put("title",titleResp);
 
                     sendResponse(map, mContext);
+                }
+            });
+
+            upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uploadFile(mContext);
                 }
             });
 
@@ -365,6 +404,12 @@ public class UIUpdater {
                     map.put("title",titleResp);
 
                     sendResponse(map, mContext);
+                }
+            });
+            upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uploadFile(mContext);
                 }
             });
 
@@ -453,6 +498,7 @@ public class UIUpdater {
                 }
             });
 
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -466,7 +512,7 @@ public class UIUpdater {
 
         final EditText problem,accident,fever,comment,title;
         final Spinner habit,habitat,emotional,pain,site,vomit;
-        Button upload,submit;
+        final Button upload,submit;
 
         try {
 
@@ -555,6 +601,14 @@ public class UIUpdater {
                 }
             });
 
+            upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uploadFile(mContext);
+                }
+            });
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -562,7 +616,15 @@ public class UIUpdater {
 
 
 
+
+
+
     }
+
+    public static void setUrl(String url) {
+        UIUpdater.url = url;
+    }
+
     public void uploadReport(Button upload, final AppCompatActivity activity)
     {
         upload.setOnClickListener(new View.OnClickListener() {
@@ -582,6 +644,7 @@ public class UIUpdater {
 
         map.put("patient_name",nameResp);
         map.put("patient_age",ageResp);
+        map.put("report",UIUpdater.url);
 
         final DoctorAppointmentActivity activity = (DoctorAppointmentActivity) mContext;
         map.put("department",""+activity.getChoice());

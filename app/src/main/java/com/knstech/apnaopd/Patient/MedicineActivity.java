@@ -1,5 +1,6 @@
 package com.knstech.apnaopd.Patient;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.knstech.apnaopd.GenModelClasses.Doctor.Patient;
 import com.knstech.apnaopd.GenModelClasses.User.Address;
+import com.knstech.apnaopd.GenModelClasses.User.Medicine;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Patient.ADAPTORS.AddressGetAdaptor;
 import com.knstech.apnaopd.Profile.AddressActivity;
@@ -282,6 +284,11 @@ public class MedicineActivity extends AppCompatActivity {
         if(requestCode == IMG_REQUEST && resultCode == RESULT_OK && data!=null) {
 
             Uri uri = data.getData();
+            final ProgressDialog mProgress=new ProgressDialog(MedicineActivity.this);
+            mProgress.setTitle("Uploading");
+            mProgress.setMessage("Please wait while the picture is being uploaded");
+            mProgress.setCanceledOnTouchOutside(false);
+            mProgress.show();
 
                 try {
                   path= (String) getPathFromURI(data.getData());
@@ -297,6 +304,7 @@ public class MedicineActivity extends AppCompatActivity {
                                 public void onCompleted(Exception e, com.koushikdutta.ion.Response<String> result) {
 
                                     try {
+                                        mProgress.dismiss();
                                         prescription_image_url = result.getResult();
 
                                     } catch (Exception e1) {
@@ -310,6 +318,7 @@ public class MedicineActivity extends AppCompatActivity {
 
                     e.printStackTrace();
                 }
+                mProgress.dismiss();
             }
 
     }
