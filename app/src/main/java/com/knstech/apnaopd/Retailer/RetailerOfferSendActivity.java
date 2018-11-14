@@ -5,39 +5,41 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
-import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.AppUtils;
+import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 
-
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -50,7 +52,8 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
 
 
     private FloatingActionButton floatingActionButton;
-    private EditText price,offer_price,drug_name,dosage_per,dosage_day;
+    private EditText price,offer_price,dosage_per,dosage_day;
+    private AutoCompleteTextView drug_name;
     private Toolbar toolbar;
     private Button finish;
     private List<Map<String,String>> listOfDrugs;
@@ -63,7 +66,7 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
     private String path;
     private String pic_url = AppUtils.HOST_ADDRESS+"/api/uploadQuotation";
     private String prescription_image_url = null;
-
+    private String[] ar;
 
 
     @Override
@@ -83,7 +86,35 @@ public class RetailerOfferSendActivity extends AppCompatActivity {
         offer_price=(EditText)findViewById(R.id.offer_price);
         dosage_day = (EditText)findViewById(R.id.dosage_day);
         dosage_per=(EditText)findViewById(R.id.dosage_per);
-        drug_name=(EditText)findViewById(R.id.drug_name);
+
+        drug_name=findViewById(R.id.drug_name);
+        String url=AppUtils.HOST_ADDRESS+"/api/medicines/";
+        RequestGet get=new RequestGet(RetailerOfferSendActivity.this);
+        get.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                ar=new String[jsonArray.length()];
+                for(int i=0;i<jsonArray.length();i++)
+                {
+                    try {
+                        JSONObject obj=jsonArray.getJSONObject(i);
+                        ar[i]=obj.getString("brand_name");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                ArrayAdapter<String> adapter=new ArrayAdapter<>(RetailerOfferSendActivity.this,R.layout.simple_text,ar);
+                adapter.setDropDownViewResource(R.layout.simple_text);
+                drug_name.setAdapter(adapter);
+
+            }
+        });
+
+
+
+
+
         finish=(Button)findViewById(R.id.btn_finish);
         floatingActionButton=(FloatingActionButton)findViewById(R.id.next_values);
         linearLayout=(LinearLayout)findViewById(R.id.ll_show_data);

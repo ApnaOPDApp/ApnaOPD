@@ -73,7 +73,7 @@ public class AddressGetAdaptor extends RecyclerView.Adapter<AddressGetAdaptor.Ad
                 }
             });
 
-            addressSingle.setText(address.getFull_name()+"\n"+address.getHouse_no()+"\n"+address.getLandmark()+address.getLocality()+"\n"+address.getCity()+address.getPincode());
+            addressSingle.setText(address.getFull_name()+"\n"+address.getHouse_no()+"\n"+address.getLandmark()+"\n"+address.getCity()+"\n"+address.getPincode()+"\n"+address.getState());
         }
     }
 

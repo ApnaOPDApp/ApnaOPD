@@ -1,7 +1,6 @@
 package com.knstech.apnaopd.Utils.Connections;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -87,6 +86,7 @@ public class RequestPost {
 
             }
         });
+        RequestSingleton.getInstance(mContext).addToQueue(arrayRequest);
     }
 
     public void postJSONObject(String url, final JSONObject jsonObject, final RequestPut.JSONObjectResponseListener jsonObjectResponseListener) {

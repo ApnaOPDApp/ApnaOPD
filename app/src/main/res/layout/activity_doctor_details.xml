@@ -23,15 +23,12 @@
                     android:id="@+id/fee"
                     android:hint="Fee"/>
             </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+            <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dept"
-                    android:hint="Department"/>
-            </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:id="@+id/dept">
+
+            </Spinner>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.knstech.apnaopd.GenModelClasses.Doctor.Address;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Doctor;
@@ -21,6 +23,7 @@ import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -30,12 +33,14 @@ import java.util.Map;
 
 public class DoctorDetailsActivity extends AppCompatActivity {
 
-    private EditText dept,fee,phone,comment;
+    private EditText fee,phone,comment;
+    private Spinner dept;
     private RadioGroup addressLL;
     private Button submit;
     private ImageView addBtn;
     private List<Address> mList;
     private int selected;
+    private String[] ar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +53,31 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         comment=findViewById(R.id.comment);
 
         Doctor doc= DoctorAuth.getmDoctor(DoctorDetailsActivity.this);
-        dept.setText(doc.getDepartment());
         fee.setText(doc.getFee());
         phone.setText(doc.getPhoneNumber());
         comment.setText(doc.getComment());
+        
+        String url=AppUtils.HOST_ADDRESS+"/api/casesheets/departments/";
+        RequestGet get=new RequestGet(DoctorDetailsActivity.this);
+        get.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                ar=new String[jsonArray.length()];
+                for(int i=0;i<jsonArray.length();i++)
+                {
+                    try {
+                        JSONObject obj=jsonArray.getJSONObject(i);
+                        ar[i]=obj.getString("name");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
+                }
+                ArrayAdapter<String> adapter=new ArrayAdapter<>(DoctorDetailsActivity.this,R.layout.spinner_item,ar);
+                dept.setAdapter(adapter);
+            }
+        });
+        
         addressLL=findViewById(R.id.addressLL);
 
         addBtn=findViewById(R.id.addBtn);
@@ -67,7 +92,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
 
                 Map map=new HashMap();
                 map.put("fee",fee.getText().toString());
-                map.put("department",dept.getText().toString());
+                map.put("department",dept.getSelectedItem());
                 map.put("phone_number",phone.getText().toString());
                 map.put("comment",comment.getText().toString());
                 map.put("address",mList.get(selected));
@@ -75,7 +100,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
 
                 Doctor doc=DoctorAuth.getmDoctor(DoctorDetailsActivity.this);
                 doc.setComment(comment.getText().toString());
-                doc.setDepartment(dept.getText().toString());
+                doc.setDepartment(dept.getSelectedItem().toString());
                 doc.setFee(fee.getText().toString());
                 doc.setPhoneNumber(phone.getText().toString());
 

@@ -1,5 +1,6 @@
 package com.knstech.apnaopd.Profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +16,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
+import com.knstech.apnaopd.Patient.HomeActivity;
 import com.knstech.apnaopd.R;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Utils.Connections.RequestSingleton;
+import com.knstech.apnaopd.Utils.MyConnectionTester;
 
 import org.json.JSONObject;
 
@@ -91,13 +94,14 @@ public class AddressActivity extends AppCompatActivity {
                                 {
                                     finish();
                                 }
-                                Toast.makeText(AddressActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddressActivity.this,"Successfully Added", Toast.LENGTH_SHORT).show();
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(AddressActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+
+                                new MyConnectionTester().buildDialog2(AddressActivity.this);
                             }
                         }
                 );
@@ -122,5 +126,11 @@ public class AddressActivity extends AppCompatActivity {
 
         state1 = state.getSelectedItem().toString();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AddressActivity.this, HomeActivity.class));
+        finish();
     }
 }

@@ -158,7 +158,7 @@ public class MedicineActivity extends AppCompatActivity {
                 adres.put("state",selectedAddress.getState());
                 adres.put("pincode",selectedAddress.getPincode());
                 adres.put("phone_number",selectedAddress.getPhone_number());
-                adres.put("eprescription_id",ar[1][(int)e_prescription.getSelectedItemId()]);
+//                adres.put("eprescription_id",ar[1][(int)e_prescription.getSelectedItemId()]);
                 Map params = new HashMap();
                 params.put("address",adres);
                 params.put("photo_prescription_link",prescription_image_url);
@@ -173,7 +173,8 @@ public class MedicineActivity extends AppCompatActivity {
                     request.sendJSONArray(url,array, new RequestPost.ArrayResponseListener() {
                         @Override
                         public void onResponse(JSONArray array) {
-                            Toast.makeText(MedicineActivity.this, array.toString(), Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(MedicineActivity.this, "Send", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -188,7 +189,7 @@ public class MedicineActivity extends AppCompatActivity {
         populateRecyclerView();
 
         /*get data for spinner*/
-        initSpinner();
+       initSpinner();
 
    }
 
@@ -200,13 +201,13 @@ public class MedicineActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray jsonArray) {
 
-                ar=new String[jsonArray.length()][jsonArray.length()];
+                ar=new String[2][jsonArray.length()];
 
                 for(int i=0;i<jsonArray.length();i++)
                 {
                     try {
 
-                        Patient patient=Patient.parseFromJson(jsonArray.getJSONObject(i).toString());
+                        Patient patient= Patient.parseFromJson(jsonArray.getJSONObject(i).toString());
                         ar[0][i]=patient.getDoctor_name()+"\n"+patient.getTime_slab();
                         ar[1][i]=patient.getAppointment_id();
 
@@ -227,6 +228,7 @@ public class MedicineActivity extends AppCompatActivity {
 
 
     }
+
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

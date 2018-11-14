@@ -66,7 +66,7 @@ public class DepartmentAdapter extends RecyclerView.Adapter{
         {
             name.setText(department.getName());
             desc.setText(department.getDescription());
-            if(department.getImage_link()!=null) {
+            if(department.getImage_link()!=null&&!department.getImage_link().equals("")) {
                 Glide.with(mContext).load(department.getImage_link()).into(propic);
             }
         }

@@ -81,12 +81,13 @@
                 android:id="@+id/pat_comment"
                 android:textSize="16sp"
                 />
-            <EditText
+            <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:id="@+id/drug_name"
                 android:maxLines="5"
+                android:inputType="textAutoComplete"
                 android:maxLength="50"
                 android:hint="Drug Name"
                 android:textColor="@color/black_app"

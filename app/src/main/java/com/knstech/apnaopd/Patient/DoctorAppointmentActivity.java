@@ -1,8 +1,6 @@
 package com.knstech.apnaopd.Patient;
 
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -16,8 +14,8 @@ import android.widget.RelativeLayout;
 
 import com.knstech.apnaopd.GenModelClasses.User.Department;
 import com.knstech.apnaopd.Patient.ADAPTORS.DepartmentAdapter;
-import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Utils.C;
 import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.DepatmentClickListener;
@@ -92,12 +90,6 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
             }
         });
         linearLayoutManager=new LinearLayoutManager(this);
-        ConnectivityManager cm= (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo info=cm.getActiveNetworkInfo();
-        if(info.isConnected())
-        {
-            deptList.setBackground(getResources().getDrawable(R.drawable.surajsir));
-        }
 
         deptList.setAdapter(adapter);
         deptList.setHasFixedSize(true);
@@ -177,7 +169,7 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
     public void getArrayFromServer() {
 
         RequestGet requestGet=new RequestGet(getApplicationContext());
-        String url="https://jsonplaceholder.typicode.com/posts";
+        String url=AppUtils.HOST_ADDRESS+"/api/casesheets/departments";
         requestGet.getJSONArray(url, new RequestGet.JSONArrayResponseListener() {
             @Override
             public void onResponse(JSONArray jsonArray){
@@ -194,7 +186,9 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
                          obj = jsonArray.getJSONObject(i);
                          Department dept=new Department();
                          dept.setId(obj.getString("id"));
-                         dept.setName(obj.getString("id"));
+                         dept.setName(obj.getString("name"));
+                         dept.setDescription(obj.getString("desc"));
+                         dept.setImage_link(obj.getString("image_link"));
                          mList.add(dept);
                          adapter.notifyDataSetChanged();
                      } catch (JSONException e) {
