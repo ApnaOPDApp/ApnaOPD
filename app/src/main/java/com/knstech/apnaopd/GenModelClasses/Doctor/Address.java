@@ -17,21 +17,21 @@ public class Address implements Parcelable {
 
 
 
-    private String house_no;
+    private String house_no="";
 
-    private String full_name;
+    private String full_name="";
 
-    private String landmark;
+    private String landmark="";
 
-    private String locality;
+    private String locality="";
 
-    private String city;
+    private String city="";
 
-    private String state;
+    private String state="";
 
-    private String pincode;
+    private String pincode="";
 
-    private String phoneNumber;
+    private String phoneNumber="";
 
     public Address(Parcel source) {
         this.house_no = source.readString();

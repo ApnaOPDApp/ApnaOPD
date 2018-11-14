@@ -1,15 +1,12 @@
 package com.knstech.apnaopd.Utils.Connections;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.knstech.apnaopd.Utils.MyConnectionTester;
-
-import java.lang.reflect.Method;
 
 public class RequestDelete {
     private Context mContext;
@@ -25,7 +22,8 @@ public class RequestDelete {
             @Override
             public void onResponse(String response) {
 
-                Toast.makeText(mContext, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                mListener.onDelete();
 
             }
         }, new Response.ErrorListener() {

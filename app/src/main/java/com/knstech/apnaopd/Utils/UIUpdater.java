@@ -647,7 +647,7 @@ public class UIUpdater {
         map.put("report",UIUpdater.url);
 
         final DoctorAppointmentActivity activity = (DoctorAppointmentActivity) mContext;
-        map.put("department",""+activity.getChoice());
+        map.put("department",""+activity.getDepartment());
         RequestPost requestPost=new RequestPost(mContext);
         JSONObject jsonObject=new JSONObject(map);
         String url=AppUtils.HOST_ADDRESS+"/api/casesheets/"+ UserAuth.getmUser(mContext).getGid();

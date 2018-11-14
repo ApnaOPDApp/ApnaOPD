@@ -283,7 +283,7 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
 
     public String getDepartment() {
 
-        return ""+choice;
+        return ""+mList.get(choice).getName();
     }
 
 

@@ -56,7 +56,7 @@
                     android:layout_toRightOf="@id/doctor_iv_1"
                     android:clickable="true"
                     android:inputType="textMultiLine"
-                    android:text="@string/med_presc"
+                    android:text="Set your timings"
                     android:textColor="#807f7f" />
 
                 <ImageView

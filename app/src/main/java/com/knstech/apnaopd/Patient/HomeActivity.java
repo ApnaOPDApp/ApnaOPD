@@ -12,24 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.knstech.apnaopd.AddNewProfileActivity;
 import com.knstech.apnaopd.DrawersUtil.DrawerUtil;
-import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
-import com.knstech.apnaopd.Utils.AppUtils;
-import com.knstech.apnaopd.Utils.Connections.RequestPost;
 import com.knstech.apnaopd.Utils.MyConnectionTester;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.ButterKnife;
 
@@ -47,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        String url = AppUtils.HOST_ADDRESS+"/api/devices";
+        /*String url = AppUtils.HOST_ADDRESS+"/api/devices";
         try{
             String token = FirebaseInstanceId.getInstance().getToken();
             Map<String,String> map = new HashMap<>();
@@ -70,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
         catch (Exception e){
             e.printStackTrace();
         }
-
+*/
         ButterKnife.bind(this);     // Using butter knife to bind views
         overridePendingTransition(0,0);
 
@@ -208,7 +198,6 @@ public class HomeActivity extends AppCompatActivity {
                             home.addCategory(Intent.CATEGORY_HOME);
                             home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(home);
-
                     }
                 }).create().show();
     }
