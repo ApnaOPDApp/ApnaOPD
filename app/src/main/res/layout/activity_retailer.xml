@@ -122,6 +122,54 @@
                 />
 
         </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/retailer_cv3"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="#9ae1dfdf"
+                >
+
+                <ImageView
+                    android:layout_width="85dp"
+                    android:padding="5dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_local_hospital_black_24dp"
+                    android:id="@+id/iv_3"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_3"
+                    android:textColor="@color/primary"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@id/iv_3"
+                    android:layout_marginLeft="25dp"
+                    android:text="Edit your Profile"
+                    />
+                <TextView
+                    android:clickable="true"
+                    android:id="@+id/desc_3"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_3"
+                    android:layout_marginLeft="25dp"
+                    android:layout_toRightOf="@id/iv_3"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#807f7f"
+                    android:inputType="textMultiLine"
+                    android:text="Edit your retailers profile and provide the address of your shop" />
+                <ImageView
+                    android:layout_width="85dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/navigate_next"
+                    android:id="@+id/iv_nav_3"
+                    />
+
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 
