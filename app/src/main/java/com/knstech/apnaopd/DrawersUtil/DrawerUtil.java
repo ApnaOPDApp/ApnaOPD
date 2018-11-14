@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.knstech.apnaopd.AddNewProfileActivity;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
+import com.knstech.apnaopd.Pathologist.PathologistActivity;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Doctor.DoctorHomeActivity;
 import com.knstech.apnaopd.Patient.HomeActivity;
@@ -90,7 +91,8 @@ public class DrawerUtil {
 
           IProfile addNewProfile = new ProfileSettingDrawerItem()
                   .withName("Add New Profile")
-                  .withIcon(R.drawable.ic_add_black_24dp);
+                  .withIcon(R.drawable.ic_add_black_24dp)
+                  .withIdentifier(102);
 
 
           List<IProfile> iProfiles= new ArrayList<>();
@@ -135,6 +137,10 @@ public class DrawerUtil {
                         else if(profile.getIdentifier()==104)
                         {
                             activity.startActivity(new Intent(activity,RetailerActivity.class));
+                        }
+                        else if(profile.getIdentifier()==105)
+                        {
+                            activity.startActivity(new Intent(activity,PathologistActivity.class));
                         }
 
 
@@ -209,7 +215,7 @@ public class DrawerUtil {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem.getIdentifier() == 4){
                             activity.startActivity(new Intent(activity,ListOfOrderActivity.class));
-                            activity.finish();
+
 
                         }
 
@@ -228,7 +234,7 @@ public class DrawerUtil {
 
 
                             activity.startActivity(new Intent(activity,PAppointmentViewerActivity.class));
-                            activity.finish();
+
                         }
                         return false;
                     }
@@ -241,7 +247,9 @@ public class DrawerUtil {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem.getIdentifier() == 6){
-                            Toast.makeText(activity, "This page is under maintainance.Please check for updates", Toast.LENGTH_LONG).show();;
+
+                            activity.startActivity(new Intent(activity,PAppointmentViewerActivity.class));
+
                         }
 
                         return false;
