@@ -16,7 +16,6 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
-import com.knstech.apnaopd.Patient.MedicineActivity;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
@@ -52,14 +51,22 @@ public class AddNewProfileActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
 
-        become_email=findViewById(R.id.become_email);
-        become_name=findViewById(R.id.become_name);
-        become_regNo=findViewById(R.id.become_regNo);
+        become_email = findViewById(R.id.become_email);
+        become_name = findViewById(R.id.become_name);
+        become_regNo = findViewById(R.id.become_regNo);
 
 
-        bDoctor=findViewById(R.id.bDoctor);
+        bDoctor = findViewById(R.id.bDoctor);
+        if (UserAuth.getmUser(AddNewProfileActivity.this).isDoctor()){
+            bDoctor.setVisibility(View.GONE);
+        }
         bRetailer=findViewById(R.id.bRetailer);
+        if(UserAuth.getmUser(this).isRetailer())
+        {
+            bRetailer.setVisibility(View.GONE);
+        }
         bPathologist=findViewById(R.id.bPathologist);
+        
 
         submit=findViewById(R.id.submit);
         uploadDoc = findViewById(R.id.upload_documents);
