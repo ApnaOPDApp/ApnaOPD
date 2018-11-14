@@ -1,21 +1,16 @@
 package com.knstech.apnaopd.Retailer;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 
-import com.knstech.apnaopd.Doctor.DoctorDetailsActivity;
-import com.knstech.apnaopd.GenModelClasses.Doctor.Address;
-import com.knstech.apnaopd.GenModelClasses.Doctor.Doctor;
-import com.knstech.apnaopd.GenModelClasses.Doctor.DoctorAuth;
+import com.google.gson.Gson;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.Profile.AddressActivity;
 import com.knstech.apnaopd.R;
@@ -39,7 +34,8 @@ public class EditRetailerProfileActivity extends AppCompatActivity {
     private RadioGroup addressLL;
     private Button submit;
     private ImageView addBtn;
-    private List<Address> mList;
+    private List<Map> mList;
+    private List<com.knstech.apnaopd.GenModelClasses.Doctor.Address> addresses;
     private int selected;
 
     @Override
@@ -98,21 +94,29 @@ public class EditRetailerProfileActivity extends AppCompatActivity {
             public void onResponse(JSONArray jsonArray) {
                 mList = new ArrayList<>();
                 addressLL.removeAllViews();
-                mList = Address.parseFromJson(jsonArray.toString());
-                for (int i = 0; i < mList.size(); i++) {
-                    Address address = mList.get(i);
-                    RadioButton rb = new RadioButton(EditRetailerProfileActivity.this);
-                    final int finalI = i;
-                    rb.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            selected = finalI;
-                        }
-                    });
-                    rb.setText("\n" + address.getFull_name() + "," + address.getHouseLane()
-                            + "\n" + address.getLandmark() + "," + address.getLocality() +
-                            "\n" + address.getCity() + ", PIN- " + address.getPincode());
-                    addressLL.addView(rb);
+                addresses= com.knstech.apnaopd.GenModelClasses.Doctor.Address.parseFromJson(jsonArray.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    try {
+                        Map map=(new Gson()).fromJson(jsonArray.getJSONObject(i).toString(),Map.class);
+                        RadioButton rb = new RadioButton(EditRetailerProfileActivity.this);
+                        com.knstech.apnaopd.GenModelClasses.Doctor.Address address=addresses.get(i);
+                        final int finalI = i;
+                        rb.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                selected = finalI;
+                            }
+                        });
+                        rb.setText("\n" + address.getFull_name() + "," + address.getHouseLane()
+                                + "\n" + address.getLandmark() + "," + address.getLocality() +
+                                "\n" + address.getCity() + ", PIN- " + address.getPincode());
+                        addressLL.addView(rb);
+                        mList.add(map);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         });
