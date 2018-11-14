@@ -43,83 +43,94 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        permissionStatus = getSharedPreferences("permissionStatus",MODE_PRIVATE);
-        if(ActivityCompat.checkSelfPermission(SplashActivity.this,permissionRequired[0])!= PackageManager.PERMISSION_GRANTED ||
-              ActivityCompat.checkSelfPermission(SplashActivity.this,permissionRequired[1])!= PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(SplashActivity.this,permissionRequired[2])!= PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(SplashActivity.this,permissionRequired[3])!= PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(SplashActivity.this,permissionRequired[4])!= PackageManager.PERMISSION_GRANTED
-                ){
+
+        if(Build.VERSION.SDK_INT >=android.os.Build.VERSION_CODES.N) {
+
+            permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
+            if (ActivityCompat.checkSelfPermission(SplashActivity.this, permissionRequired[0]) != PackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(SplashActivity.this, permissionRequired[1]) != PackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(SplashActivity.this, permissionRequired[2]) != PackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(SplashActivity.this, permissionRequired[3]) != PackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(SplashActivity.this, permissionRequired[4]) != PackageManager.PERMISSION_GRANTED
+                    ) {
 
 
-            if(ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this,this.permissionRequired[0])||
-            ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this,this.permissionRequired[1])||
-            ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this,this.permissionRequired[2])||
-            ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this,this.permissionRequired[3])||
-            ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this,this.permissionRequired[4])
-            ){
-                AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
-                builder.setTitle("Need Multiple Permission");
-                builder.setTitle("This app needs Storage, Internet and wifi permissions ");
-                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        ActivityCompat.requestPermissions(SplashActivity.this,permissionRequired,PERMISSION_CALLBACK_CONSTANT);
-                    }
-                });
+                if (ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this, this.permissionRequired[0]) ||
+                        ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this, this.permissionRequired[1]) ||
+                        ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this, this.permissionRequired[2]) ||
+                        ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this, this.permissionRequired[3]) ||
+                        ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this, this.permissionRequired[4])
+                        ) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
+                    builder.setTitle("Need Multiple Permission");
+                    builder.setTitle("This app needs Storage, Internet and wifi permissions ");
+                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            ActivityCompat.requestPermissions(SplashActivity.this, permissionRequired, PERMISSION_CALLBACK_CONSTANT);
+                        }
+                    });
 
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        Toast.makeText(SplashActivity.this, "Application won't run properly!!! you must grant permission", Toast.LENGTH_LONG).show();
-                    }
-                });
-                builder.show();
-            }
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            Toast.makeText(SplashActivity.this, "Application won't run properly!!! you must grant permission", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    builder.show();
+                } else if (permissionStatus.getBoolean(permissionRequired[0], false)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
+                    builder.setTitle("Need Multiple Permission");
+                    builder.setTitle("This app needs Storage, Internet and wifi permissions ");
+                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
 
-            else if(permissionStatus.getBoolean(permissionRequired[0],false)){
-                AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
-                builder.setTitle("Need Multiple Permission");
-                builder.setTitle("This app needs Storage, Internet and wifi permissions ");
-                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-
-                        sentToSettings = true;
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri= Uri.fromParts("package",getPackageName(),null);
-                        intent.setData(uri);
-                        startActivityForResult(intent,REQUEST_PERMISSION_CONSTANT);
+                            sentToSettings = true;
+                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                            intent.setData(uri);
+                            startActivityForResult(intent, REQUEST_PERMISSION_CONSTANT);
 
                         }
-                });
+                    });
 
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                           }
-                });
-                builder.show();
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
 
+                } else {
+                    ActivityCompat.requestPermissions(SplashActivity.this, permissionRequired, PERMISSION_CALLBACK_CONSTANT);
+
+                }
+
+                SharedPreferences.Editor editor = permissionStatus.edit();
+                editor.putBoolean(permissionRequired[0], true);
+                editor.commit();
+            } else {
+
+                // you already have permissions
+                proceedAfterPermission();
             }
-            else{
-                ActivityCompat.requestPermissions(SplashActivity.this,permissionRequired,PERMISSION_CALLBACK_CONSTANT);
-
-            }
-
-            SharedPreferences.Editor editor = permissionStatus.edit();
-            editor.putBoolean(permissionRequired[0],true);
-            editor.commit();
         }
 
-        else{
-
-            // you already have permissions
-            proceedAfterPermission();
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
+            builder.setTitle("Compatibility Issue");
+            builder.setTitle("This app is compatible for api version 25 and above. Please wait for the new Update.");
+            builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
         }
 
 

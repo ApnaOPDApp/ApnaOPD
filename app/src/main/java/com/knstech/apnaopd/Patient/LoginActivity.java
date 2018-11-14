@@ -139,29 +139,6 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onComplete() {
 
-                String url = AppUtils.HOST_ADDRESS+"/api/devices";
-                try{
-                    String token = FirebaseInstanceId.getInstance().getToken();
-                    Map<String,String> map = new HashMap<>();
-                    map.put("deviceId",token);
-                    JSONObject obj = new JSONObject(map);
-                    RequestPost request = new RequestPost(LoginActivity.this);
-                    request.sendJSON(url, obj, new RequestPost.PostResponseListener() {
-                        @Override
-                        public void onResponse() {
-
-                        }
-                    }, new RequestPost.PostErrorListener() {
-                        @Override
-                        public void onError() {
-                            Toast.makeText(LoginActivity.this, "Device Token Not Sent !", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-
                 startActivity(new Intent(LoginActivity.this,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
                 finish();
             }
