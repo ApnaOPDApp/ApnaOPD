@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class RetailerActivity extends AppCompatActivity {
 
-    private RelativeLayout list_of_prescription,confirmed_orders;
+    private RelativeLayout list_of_prescription,confirmed_orders,edit_profile;
 
 
     @Override
@@ -51,6 +51,7 @@ public class RetailerActivity extends AppCompatActivity {
 
        list_of_prescription = (RelativeLayout) findViewById(R.id.retailer_cv1);
        confirmed_orders = (RelativeLayout) findViewById(R.id.retailer_cv2);
+       edit_profile=(RelativeLayout)findViewById(R.id.retailer_cv3);
 
 
 
@@ -71,6 +72,17 @@ public class RetailerActivity extends AppCompatActivity {
                startActivity(new Intent(RetailerActivity.this,ConfirmedOrdersActivity.class));
            }
        });
+
+
+        list_of_prescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(RetailerActivity.this, RetailerProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
