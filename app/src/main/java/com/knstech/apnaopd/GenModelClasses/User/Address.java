@@ -12,19 +12,19 @@ import java.util.List;
 public class Address {
 
 
-    private String full_name;
+    private String full_name="";
 
-    private String house_no;
-    private String locality;
+    private String house_no="";
+    private String locality="";
 
-    private String city;
-    private String landmark;
+    private String city="";
+    private String landmark="";
 
-    private String state;
+    private String state="";
 
-    private String pincode;
+    private String pincode="";
 
-    private String phone_number;
+    private String phone_number="";
 
     public String getFull_name() {
         return full_name;

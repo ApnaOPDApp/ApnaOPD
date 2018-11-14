@@ -1,6 +1,7 @@
 package com.knstech.apnaopd.Patient;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -126,6 +127,7 @@ public class DoctorViewerActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject object) {
                                 finish();
+                                startActivity(new Intent(DoctorViewerActivity.this,HomeActivity.class));
                                 Toast.makeText(DoctorViewerActivity.this, "Booked Appointment!", Toast.LENGTH_SHORT).show();
                             }
                         });

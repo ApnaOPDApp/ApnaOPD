@@ -121,7 +121,7 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter {
                                 @Override
                                 public void onDelete() {
                                     mList.remove(patient);
-                                    notifyDataSetChanged();
+                                    UpcomingAppointmentsAdapter.this.notifyDataSetChanged();
                                     Toast.makeText(mContext, "Successfully cancelled Appointment!", Toast.LENGTH_SHORT).show();
                                 }
                             });

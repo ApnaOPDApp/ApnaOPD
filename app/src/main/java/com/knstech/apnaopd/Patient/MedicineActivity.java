@@ -133,7 +133,7 @@ public class MedicineActivity extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 intent.setType("image/*");
-                intent.setAction(Intent.CATEGORY_OPENABLE);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent,IMG_REQUEST);
 
             }

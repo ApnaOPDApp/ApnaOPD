@@ -21,7 +21,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/fee"
-                    android:hint="Fee"/>
+                    android:hint="Fee"
+                    android:inputType="number"/>
             </android.support.design.widget.TextInputLayout>
             <Spinner
                 android:layout_width="match_parent"
@@ -36,7 +37,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/phone_number"
-                    android:hint="Phone Number"/>
+                    android:hint="Phone Number"
+                    android:inputType="number"/>
             </android.support.design.widget.TextInputLayout>
             <LinearLayout
                 android:layout_width="match_parent"

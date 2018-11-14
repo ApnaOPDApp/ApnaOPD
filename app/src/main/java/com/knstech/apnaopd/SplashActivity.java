@@ -20,8 +20,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.knstech.apnaopd.Patient.LoginActivity;
-
 public class SplashActivity extends Activity implements Animation.AnimationListener{
 
     private ImageView img;
@@ -43,8 +41,6 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-
-        if(Build.VERSION.SDK_INT >=android.os.Build.VERSION_CODES.N) {
 
             permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
             if (ActivityCompat.checkSelfPermission(SplashActivity.this, permissionRequired[0]) != PackageManager.PERMISSION_GRANTED ||
@@ -119,9 +115,11 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
                 // you already have permissions
                 proceedAfterPermission();
             }
-        }
 
-        else {
+
+        if(!(Build.VERSION.SDK_INT >=android.os.Build.VERSION_CODES.N))
+
+        {
             AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
             builder.setTitle("Compatibility Issue");
             builder.setTitle("This app is compatible for api version 25 and above. Please wait for the new Update.");

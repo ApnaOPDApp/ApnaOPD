@@ -1,5 +1,6 @@
 package com.knstech.apnaopd;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
+import com.knstech.apnaopd.Patient.HomeActivity;
 import com.knstech.apnaopd.Utils.AppUtils;
 import com.knstech.apnaopd.Utils.Connections.RequestPost;
 import com.knstech.apnaopd.Utils.Connections.RequestPut;
@@ -66,7 +68,7 @@ public class AddNewProfileActivity extends AppCompatActivity {
             bRetailer.setVisibility(View.GONE);
         }
         bPathologist=findViewById(R.id.bPathologist);
-        
+
 
         submit=findViewById(R.id.submit);
         uploadDoc = findViewById(R.id.upload_documents);
@@ -101,7 +103,7 @@ public class AddNewProfileActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject object) {
                             Toast.makeText(AddNewProfileActivity.this, "Your response has been submitted. Please wait for 24 hours for confirmation from admin.", Toast.LENGTH_LONG).show();
-
+                            startActivity(new Intent(AddNewProfileActivity.this, HomeActivity.class));
                             finish();
                         }
                     });
@@ -115,8 +117,8 @@ public class AddNewProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent();
-                intent.setType("image/*,application/*");
-                intent.setAction(Intent.CATEGORY_OPENABLE);
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent,IMG_REQUEST);
 
             }
@@ -133,6 +135,11 @@ public class AddNewProfileActivity extends AppCompatActivity {
         if(requestCode == IMG_REQUEST && resultCode == RESULT_OK && data!=null) {
 
             Uri uri = data.getData();
+            final ProgressDialog mProgress=new ProgressDialog(AddNewProfileActivity.this);
+            mProgress.setTitle("Uploading");
+            mProgress.setMessage("Please wait while the picture is being uploaded");
+            mProgress.setCanceledOnTouchOutside(false);
+            mProgress.show();
 
             try {
                 path= (String) getPathFromURI(data.getData());
@@ -148,10 +155,12 @@ public class AddNewProfileActivity extends AppCompatActivity {
                             public void onCompleted(Exception e, com.koushikdutta.ion.Response<String> result) {
 
                                 try {
+                                    mProgress.dismiss();
                                     response = result.getResult();
 
                                 } catch (Exception e1) {
                                     e1.printStackTrace();
+                                    mProgress.hide();
                                 }
 
                             }
@@ -161,6 +170,7 @@ public class AddNewProfileActivity extends AppCompatActivity {
 
                 e.printStackTrace();
             }
+            mProgress.dismiss();
         }
 
     }
