@@ -9,10 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.knstech.apnaopd.GenModelClasses.User.PatientOrdersList;
 import com.knstech.apnaopd.R;
 
+import com.knstech.apnaopd.Utils.AppUtils;
+import com.knstech.apnaopd.Utils.Connections.RequestGet;
 import com.knstech.apnaopd.Utils.Listeners.OderClickedListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -61,8 +67,6 @@ public class OrderAdaptor extends RecyclerView.Adapter<OrderAdaptor.OrderAdaptor
         TextView shop_name, delivery_time;
 
 
-     //   TextView med_name,med_price,med_offer_price,med_dosage_per,med_dosage_day;
-
         public OrderAdaptorViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -71,13 +75,7 @@ public class OrderAdaptor extends RecyclerView.Adapter<OrderAdaptor.OrderAdaptor
             shop_name=(TextView)itemView.findViewById(R.id.patient_quoat_list_retailer_name);
             delivery_time=(TextView)itemView.findViewById(R.id.patient_quoat_list_delivertime);
 
-        /*        med_name=(TextView)itemView.findViewById(R.id.med_name1);
-            med_price=(TextView)itemView.findViewById(R.id.med_price1);
-            med_offer_price=(TextView)itemView.findViewById(R.id.med_offer_price1);
-            med_dosage_per=(TextView)itemView.findViewById(R.id.dosage_per1);
-            med_dosage_day=(TextView)itemView.findViewById(R.id.dosage_day1);
 
-         */
         }
 
 
@@ -85,6 +83,18 @@ public class OrderAdaptor extends RecyclerView.Adapter<OrderAdaptor.OrderAdaptor
             public void bind(final PatientOrdersList order)
             {
 
+                String url = AppUtils.HOST_ADDRESS+"/api/retailers/"+order.getRetailer_gid();
+                RequestGet request = new RequestGet(context);
+                request.getJSONObject(url, new RequestGet.JSONObjectResponseListener() {
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+                            shop_name.setText(object.getString("shop_name"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
 
                 next.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -99,12 +109,6 @@ public class OrderAdaptor extends RecyclerView.Adapter<OrderAdaptor.OrderAdaptor
                 );
 
 
-                /*     med_name.setText(quotation.getMedicine());
-                    med_price.setText(quotation.getPrice());
-                    med_offer_price.setText(quotation.getOffered_price());
-                    med_dosage_per.setText(quotation.getDosage_per());
-                    med_dosage_day.setText(quotation.getDosage_day());
-           */
             }
 
 
