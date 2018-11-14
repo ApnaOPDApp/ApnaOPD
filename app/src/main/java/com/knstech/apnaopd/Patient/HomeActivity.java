@@ -203,7 +203,12 @@ public class HomeActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                            HomeActivity.super.onBackPressed();
+
+                            Intent home = new Intent(Intent.ACTION_MAIN);
+                            home.addCategory(Intent.CATEGORY_HOME);
+                            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(home);
+
                     }
                 }).create().show();
     }

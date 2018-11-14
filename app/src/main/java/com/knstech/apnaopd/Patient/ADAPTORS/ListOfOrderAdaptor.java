@@ -68,13 +68,13 @@ public class ListOfOrderAdaptor extends RecyclerView.Adapter<ListOfOrderAdaptor.
             String commentStr;
             switch(stat)
             {
-                case 0: commentStr= "Offers sent to you. Please accept the offers.";
+                case 1: commentStr= "Offers sent to you. Please accept the offers.";
 
                 break;
-                case 1: commentStr= "Item Packed!";
+                case 2: commentStr= "Item Packed!";
 
                 break;
-                case 2: commentStr= "Item Shipped.";
+                case 3: commentStr= "Item Shipped.";
 
                 break;
                 default:commentStr="Item Delivered";
