@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.knstech.apnaopd.GenModelClasses.Doctor.Address;
 import com.knstech.apnaopd.GenModelClasses.Doctor.Doctor;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
@@ -32,13 +31,12 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class DoctorViewerActivity extends AppCompatActivity {
 
     private Doctor doctor;
-    private TextView name,fees,available;
+    private TextView name,fees,comment;
     private ImageView imageView;
     private RadioGroup linearLayout;
     private String selectedSlot;
@@ -47,7 +45,7 @@ public class DoctorViewerActivity extends AppCompatActivity {
     private String uid;
     private String[] ar;
     private String patient_age,patient_name,dayOfWeek;
-    private String department,doctor_name,doctor_image,fee;
+    private String department,doctor_name,doctor_image,fee,commentStr;
     private String cs_uid;
 
     @Override
@@ -82,6 +80,7 @@ public class DoctorViewerActivity extends AppCompatActivity {
         cs_uid=getIntent().getStringExtra("cs_uid");
 
         uid=getIntent().getStringExtra("Doctor");
+        comment=findViewById(R.id.comment);
 
         getDoctor(uid);
 
@@ -154,7 +153,7 @@ public class DoctorViewerActivity extends AppCompatActivity {
             public void onResponse(JSONObject object) {
                 for (Iterator<String> it = object.keys(); it.hasNext(); ) {
                     String key = it.next();
-                    if(!key.equals("_id")) {
+                    if(!key.equals("_id")&&!key.equals("__v")&&!key.equals("diagnosis_report")) {
                         View kv = LayoutInflater.from(getApplicationContext()).inflate(R.layout.key_value, null);
                         TextView keyTv, valTv;
                         int p = 20;
@@ -209,18 +208,10 @@ public class DoctorViewerActivity extends AppCompatActivity {
                 name.setText("Dr. "+doctor.getName());
                 fees.setText("Rs. "+doctor.getFee());
 
-                List<com.knstech.apnaopd.GenModelClasses.Doctor.Address> addresses=doctor.getAddress();
-                addressLL.removeAllViews();
-                if(addresses!=null) {
-                    for (int i = 0; i < addresses.size(); i++) {
-                        Address address = addresses.get(i);
-                        TextView tv = new TextView(DoctorViewerActivity.this);
-                        tv.setText(address.getFull_name() + "," + address.getHouseLane() + "\n" + address.getLandmark() + "," + address.getLocality() + "\n" + address.getCity() + ", PIN - " + address.getPincode());
-                        addressLL.addView(tv);
-                    }
-                }
                 department=doctor.getDepartment();
                 fee=doctor.getFee();
+                commentStr=doctor.getComment();
+                comment.setText(commentStr);
                 doctor_name=doctor.getName();
                 doctor_image=doctor.getDoctor_image();
                 if(doctor.getDoctor_image()!=null&&!doctor.getDoctor_image().equals(""))

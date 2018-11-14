@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 public class DoctorHomeActivity extends AppCompatActivity {
 
     private RelativeLayout c1,c2;
+    private View c3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +40,13 @@ public class DoctorHomeActivity extends AppCompatActivity {
 
                 c1=findViewById(R.id.doctor_c1);
                 c2=findViewById(R.id.doctor_c2);
+                c3=findViewById(R.id.doctor_c3);
 
 
         DrawerUtilDoctor.getDrawer(DoctorHomeActivity.this,toolbar);
 
                 DrawerUtil.getDrawer(DoctorHomeActivity.this,toolbar);
-                if(DoctorAuth.getmDoctor(DoctorHomeActivity.this).getTimeSlab()==null)
+                if(DoctorAuth.getmDoctor(DoctorHomeActivity.this).getTimeSlab()==null||DoctorAuth.getmDoctor(DoctorHomeActivity.this).getTimeSlab().equals("[]"))
                 {
                     c1.setVisibility(View.VISIBLE);
                 }
@@ -52,10 +54,6 @@ public class DoctorHomeActivity extends AppCompatActivity {
                 {
                     c1.setVisibility(View.GONE);
                 }
-
-
-
-
 
 
                 c1.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +67,13 @@ public class DoctorHomeActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i=new Intent(DoctorHomeActivity.this,DaySelectActivity.class);
                         i.putExtra("activity","1");
+                        startActivity(i);
+                    }
+                });
+                c3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i=new Intent(DoctorHomeActivity.this,DoctorDetailsActivity.class);
                         startActivity(i);
                     }
                 });

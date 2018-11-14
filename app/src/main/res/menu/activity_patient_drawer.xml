@@ -8,4 +8,8 @@
         android:title="Upload Bill"
         android:icon="@drawable/ic_file_upload_black_24dp"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/view_bill"
+        android:title="View Prescription"
+        />
 </menu>
