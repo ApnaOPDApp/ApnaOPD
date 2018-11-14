@@ -67,7 +67,8 @@
         <activity android:name=".Retailer.RetailerProfileActivity" />
         <activity android:name=".Doctor.DoctorDetailsActivity" />
         <activity android:name=".Retailer.EditRetailerProfileActivity" />
-        <activity android:name=".Pathologist.PathologistActivity"></activity>
+        <activity android:name=".Pathologist.PathologistActivity" />
+        <activity android:name=".Retailer.MyOrderHistoryAactivity"></activity>
     </application>
 
 </manifest>

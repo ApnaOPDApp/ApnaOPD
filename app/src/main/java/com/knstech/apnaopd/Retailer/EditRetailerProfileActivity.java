@@ -30,7 +30,7 @@ import java.util.Map;
 public class EditRetailerProfileActivity extends AppCompatActivity {
 
 
-    private EditText phone;
+    private EditText phone,shop_name;
     private RadioGroup addressLL;
     private Button submit;
     private ImageView addBtn;
@@ -44,6 +44,7 @@ public class EditRetailerProfileActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_edit_retailer_profile);
         phone = findViewById(R.id.phone_number);
+        shop_name = findViewById(R.id.shop_name);
 
         addressLL = findViewById(R.id.addressLL);
 
@@ -60,6 +61,7 @@ public class EditRetailerProfileActivity extends AppCompatActivity {
 
                 Map map = new HashMap();
                 map.put("phone_number", phone.getText().toString());
+                map.put("shop_name",phone.getText().toString());
                 map.put("address", mList.get(selected));
                 JSONObject obj = new JSONObject(map);
                 put.putJSONObject(url, obj, new RequestPut.JSONObjectResponseListener() {
