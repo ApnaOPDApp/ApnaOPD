@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -17,9 +18,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.JsonObject;
 import com.knstech.apnaopd.GenModelClasses.User.UserAuth;
 import com.knstech.apnaopd.R;
+import com.knstech.apnaopd.Utils.AppUtils;
+import com.knstech.apnaopd.Utils.Connections.RequestPost;
 import com.knstech.apnaopd.Utils.MyConnectionTester;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Shubham Kumar on 25-10-2018.
@@ -86,6 +96,8 @@ public class LoginActivity extends AppCompatActivity{
 
     private void signIn() {
 
+
+
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
 
@@ -126,6 +138,30 @@ public class LoginActivity extends AppCompatActivity{
         auth.signInGoogle(this, account, new UserAuth.SignInCompleteListener() {
             @Override
             public void onComplete() {
+
+                String url = AppUtils.HOST_ADDRESS+"/api/devices";
+                try{
+                    String token = FirebaseInstanceId.getInstance().getToken();
+                    Map<String,String> map = new HashMap<>();
+                    map.put("deviceId",token);
+                    JSONObject obj = new JSONObject(map);
+                    RequestPost request = new RequestPost(LoginActivity.this);
+                    request.sendJSON(url, obj, new RequestPost.PostResponseListener() {
+                        @Override
+                        public void onResponse() {
+
+                        }
+                    }, new RequestPost.PostErrorListener() {
+                        @Override
+                        public void onError() {
+                            Toast.makeText(LoginActivity.this, "Device Token Not Sent !", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
                 startActivity(new Intent(LoginActivity.this,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
                 finish();
             }

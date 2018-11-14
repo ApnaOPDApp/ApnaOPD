@@ -7,17 +7,19 @@
     >
 
     <include
-        layout="@layout/app_bar_patient"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"></include>
+        layout="@layout/app_bar_patient"></include>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginTop="58dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -33,7 +35,6 @@
                 android:padding="10dp">
 
 
-
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -43,9 +44,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Name"
-                        android:maxLines="1"
                         android:maxLength="50"
-                        />
+                        android:maxLines="1" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -86,23 +86,32 @@
             </LinearLayout>
 
 
-                <RadioGroup
-                    android:id="@+id/radioGroup"
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/bDoctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/bDoctor"
-                        android:text="Doctor"/>
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/bRetailer"
-                        android:text="Retailer"/>
+                    android:text="Doctor" />
 
-                </RadioGroup>
+                <RadioButton
+                    android:id="@+id/bRetailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Retailer" />
+
+                <RadioButton
+                    android:id="@+id/bPathologist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pathologist" />
+
+            </RadioGroup>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,17 +124,18 @@
                     app:cardElevation="5dp">
 
                     <RadioGroup
+                        android:id="@+id/addressLL"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:orientation="vertical"
-                        android:id="@+id/addressLL">
+                        android:orientation="vertical">
 
                     </RadioGroup>
                 </android.support.v7.widget.CardView>
 
 
             </LinearLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -133,24 +143,24 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upload Documents"
                 android:id="@+id/upload_documents"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:background="@color/colorAccent"
-                android:layout_gravity="right"
                 android:padding="10dp"
-                />
+                android:text="Upload Documents" />
+
             <Button
-                android:layout_margin="5dp"
+                android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/submit"
-                android:id="@+id/submit"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
                 android:background="@color/colorAccent"
-                android:layout_gravity="right"
                 android:padding="10dp"
-                />
+                android:text="@string/submit" />
         </LinearLayout>
 
     </ScrollView>

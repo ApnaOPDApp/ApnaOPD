@@ -20,7 +20,7 @@
         <activity android:name=".Patient.DoctorViewerActivity" />
         <activity android:name=".Patient.DoctorListActivity" />
         <activity android:name=".Patient.DoctorAppointmentActivity" />
-        <activity android:name=".Patient.HomeActivity"></activity>
+        <activity android:name=".Patient.HomeActivity" />
         <activity
             android:name=".Patient.MedicineActivity"
             android:parentActivityName=".Patient.HomeActivity" />
@@ -66,7 +66,8 @@
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".Retailer.RetailerProfileActivity" />
         <activity android:name=".Doctor.DoctorDetailsActivity" />
-        <activity android:name=".Retailer.EditRetailerProfileActivity"></activity>
+        <activity android:name=".Retailer.EditRetailerProfileActivity" />
+        <activity android:name=".Pathologist.PathologistActivity"></activity>
     </application>
 
 </manifest>
